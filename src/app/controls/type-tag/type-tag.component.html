@@ -1,0 +1,11 @@
+<a
+	class="type-tag {{ type.toLowerCase() }}"
+	[routerLink]="typeTag.route && typeTag.route"
+>
+	<img
+		src="https://duiker101.github.io/pokemon-type-svg-icons/icons/{{
+			type.toLowerCase()
+		}}.svg"
+	/>
+	<span>{{ type }}</span>
+</a>

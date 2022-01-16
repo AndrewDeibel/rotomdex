@@ -1,0 +1,81 @@
+@import "settings";
+
+.logo {
+	h1 {
+		font-family: $font-family;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		font-weight: normal;
+		color: white;
+	}
+}
+
+.card {
+	border-radius: $border-radius-card;
+	overflow: hidden;
+	box-shadow: $shadow;
+	display: block;
+}
+
+.section {
+	padding: $spacing * 14 $spacing * 2;
+	background: $main-bg;
+	overflow: hidden;
+	&:not(:last-child) {
+		border-bottom: $border;
+	}
+}
+
+#dev-alert {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	width: calc(100% - #{$spacing * 4});
+	max-width: 816px;
+	text-align: center;
+	z-index: 2;
+}
+
+#expansion-logos,
+#cards,
+#pokemon {
+	position: relative;
+	&:before {
+		content: "";
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		background: radial-gradient(rgba(white, 0.2) 0%, transparent 50%);
+		width: 200%;
+		height: 200%;
+		pointer-events: none;
+	}
+}
+
+#pokemon {
+	.pokemon-link {
+		position: relative;
+		display: block;
+		img {
+			transition: $transition;
+			display: block;
+		}
+		.sprite-animated {
+			position: absolute;
+			opacity: 0;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		&:hover {
+			.sprite-default {
+				opacity: 0;
+			}
+			.sprite-animated {
+				opacity: 1;
+				transform: translate(-50%, -50%) scale(1.5);
+			}
+		}
+	}
+}

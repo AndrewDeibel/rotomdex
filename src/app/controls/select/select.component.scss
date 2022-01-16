@@ -1,0 +1,144 @@
+@import "settings";
+
+.select {
+	position: relative;
+	color: $font-color;
+	fa-icon {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		right: $spacing;
+		pointer-events: none;
+	}
+	&.dark {
+		select {
+			border: $border-strong;
+		}
+	}
+}
+select {
+	height: 40px;
+	appearance: none;
+	border: $border;
+	padding: $spacing ($spacing * 1.5);
+	padding-right: 24px;
+	border-radius: $border-radius;
+	transition: $transition;
+	width: 100%;
+	font-size: $font-size;
+	color: $font-color;
+	outline: 0 !important;
+	background: $input-bg;
+	cursor: pointer;
+	option,
+	optgroup {
+		color: $font-color;
+	}
+	&:focus {
+		box-shadow: $shadow-focus, $shadow-focus-inset;
+		outline: 0 !important;
+		border-color: $primary-color;
+	}
+	&:hover {
+		border-color: $primary-color;
+	}
+	&:active {
+		outline: 0 !important;
+	}
+	&.small {
+		height: 28px;
+		padding: 0 12px;
+	}
+}
+.select-advanced {
+	min-height: 40px;
+	border: $border;
+	border-radius: $border-radius;
+	position: relative;
+	cursor: pointer;
+	background: $input-bg;
+	user-select: none;
+	&:hover {
+		border-color: $primary-color;
+	}
+	&:focus {
+		border-color: $primary-color;
+		box-shadow: $shadow-focus, $shadow-focus-inset;
+	}
+	> fa-icon {
+		position: absolute;
+		top: 50%;
+		right: 16px;
+		transform: translateY(-50%);
+	}
+	.placeholder {
+		line-height: 38px;
+		padding: 0 16px;
+		opacity: 0.5;
+	}
+	.selected-options {
+		display: flex;
+		flex-wrap: wrap;
+		padding: 3px 32px 0 3px;
+		.select-option {
+			padding: 6px 10px;
+			border-radius: $border-radius;
+			background: $input-bg;
+			margin-right: 3px;
+			margin-bottom: 3px;
+			.text {
+				padding-right: 8px;
+			}
+			[icon="times"] {
+				height: 14px;
+				&:hover {
+					color: $primary-color;
+				}
+			}
+		}
+	}
+	.available-options {
+		position: absolute;
+		top: 100%;
+		left: -1px;
+		right: -1px;
+		background: $main-bg;
+		box-shadow: $shadow;
+		border-radius: $border-radius;
+		overflow: hidden;
+		max-height: 300px;
+		border: $border;
+		.select-option {
+			padding: 8px 16px;
+			background: $input-bg;
+			&:hover {
+				background: $primary-color;
+			}
+		}
+	}
+	.search-options {
+		padding: 8px 0;
+		&::ng-deep .textbox {
+			border: 0;
+			background: transparent;
+			outline: 0 !important;
+			box-shadow: none !important;
+		}
+	}
+	.select-option {
+		display: flex;
+		align-items: center;
+		transition: $transition;
+		cursor: pointer;
+		&:hover {
+			background: $primary-color;
+		}
+		.text {
+			flex: 1;
+			padding-left: 8px;
+		}
+		fa-icon {
+			width: 16px;
+		}
+	}
+}

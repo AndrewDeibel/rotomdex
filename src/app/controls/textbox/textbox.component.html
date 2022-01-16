@@ -1,0 +1,71 @@
+<div
+  (click)="click($event)"
+  *ngIf="textbox"
+  class="textbox-wrapper {{ textbox.wrapperClasses }} {{ textbox.size }}"
+  [class.dark]="textbox.dark"
+>
+  <label *ngIf="textbox.label" class="label">
+    {{ textbox.label }}
+  </label>
+
+  <!-- Not color picker -->
+  <input
+    (click)="click($event)"
+    *ngIf="!textbox.colorPicker"
+    #textboxEl
+    [style.width]="textbox.width ? textbox.width + 'px' : null"
+    placeholder="{{ textbox.placeholder ? textbox.placeholder : null }}"
+    type="{{ textbox.type }}"
+    class="textbox {{ textbox.classes }}"
+    (keyup)="keyup()"
+    (keydown)="keydown()"
+    (keydown.enter)="keydownEnter()"
+    [readOnly]="textbox.readOnly"
+    [value]="value"
+    (change)="change()"
+    [min]="textbox.min"
+    [max]="textbox.max"
+    [autocomplete]="textbox.autoComplete"
+    [disabled]="textbox.disabled"
+    [(ngModel)]="value"
+  />
+
+  <!-- Color picker -->
+  <input
+    *ngIf="textbox.colorPicker"
+    [style.width]="textbox.width ? textbox.width + 'px' : null"
+    placeholder="{{ textbox.placeholder ? textbox.placeholder : null }}"
+    type="{{ textbox.type }}"
+    class="textbox {{ textbox.classes }}"
+    (keyup)="keyup()"
+    (keydown)="keydown()"
+    (keydown.enter)="keydownEnter()"
+    (change)="change()"
+    [min]="textbox.min"
+    [max]="textbox.max"
+    [autocomplete]="textbox.autoComplete"
+    [disabled]="textbox.disabled"
+    [(ngModel)]="value"
+    [(colorPicker)]="textbox.value"
+    (colorPickerChange)="colorPickerChange($event)"
+    [cpOutputFormat]="'hex'"
+  />
+
+  <!-- Icon -->
+  <fa-icon
+    (click)="clickIcon()"
+    *ngIf="textbox.icon && (!textbox.clearable || !textbox.value.length)"
+    [icon]="textbox.icon"
+  >
+  </fa-icon>
+
+  <!-- Clear -->
+  <fa-icon
+    (click)="clickClear()"
+    *ngIf="textbox.clearable && textbox.value.length"
+    icon="times"
+  >
+  </fa-icon>
+</div>
+
+<mb-alert *ngIf="alert" [alert]="alert"></mb-alert>

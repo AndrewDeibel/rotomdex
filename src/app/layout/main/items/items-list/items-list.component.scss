@@ -1,0 +1,26 @@
+@import "settings",
+		"scaffold/typography";
+
+.items-list {
+    > ul {
+        > li {
+            position: relative;
+            @for $i from 1 through 100 {
+                &:nth-child(#{$i}) {
+                    z-index: 100 - $i;
+                }
+			}
+			border-bottom: $border;
+			&:last-child {
+				border-bottom: 0;
+			}
+        }
+    }
+}
+.pager {
+    display: flex;
+    justify-content: center;
+    > * {
+        margin: 4px;
+    }
+}

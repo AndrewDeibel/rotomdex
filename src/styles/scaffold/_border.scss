@@ -1,0 +1,104 @@
+@import "settings";
+
+// Borders
+.border {
+	border: $border;
+}
+.dark {
+	border-color: $border-color-strong;
+}
+.border-primary {
+	border: 1px solid rgba($primary-color, 0.4);
+}
+@each $side in $sides {
+	.border-#{$side} {
+		border-#{$side}: $border;
+	}
+	.border-dark-#{$side} {
+		border-#{$side}: $border;
+	}
+}
+
+// Border radius
+.circle {
+	border-radius: 50% !important;
+}
+.round-small {
+	border-radius: 4px !important;
+}
+.round {
+	border-radius: $border-radius !important;
+}
+.round-top {
+	border-top-left-radius: $border-radius !important;
+	border-top-right-radius: $border-radius !important;
+}
+.round-right {
+	border-top-right-radius: $border-radius !important;
+	border-bottom-right-radius: $border-radius !important;
+}
+.round-bottom {
+	border-bottom-right-radius: $border-radius !important;
+	border-bottom-left-radius: $border-radius !important;
+}
+.round-left {
+	border-bottom-left-radius: $border-radius !important;
+	border-top-left-radius: $border-radius !important;
+}
+.round-top-left {
+	border-top-left-radius: $border-radius !important;
+}
+.round-top-right {
+	border-top-right-radius: $border-radius !important;
+}
+.round-bottom-right {
+	border-bottom-right-radius: $border-radius !important;
+}
+.round-bottom-left {
+	border-bottom-left-radius: $border-radius !important;
+}
+.rounded {
+	border-radius: 9999px !important;
+}
+.square {
+	border-radius: 0 !important;
+}
+.square-top {
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+}
+.square-right {
+	border-top-right-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+.square-bottom {
+	border-bottom-right-radius: 0 !important;
+	border-bottom-left-radius: 0 !important;
+}
+.square-left {
+	border-top-left-radius: 0 !important;
+	border-bottom-left-radius: 0 !important;
+}
+
+// Medium
+@media (max-width: $screen-medium) {
+	.medium-round {
+		border-radius: $border-radius !important;
+	}
+	.medium-square {
+		border-radius: 0 !important;
+		&:after {
+			border-radius: 0 !important;
+		}
+	}
+}
+
+// Small
+@media (max-width: $screen-small) {
+	.small-round {
+		border-radius: $border-radius !important;
+	}
+	.small-square {
+		border-radius: 0 !important;
+	}
+}

@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+// Styles
+@import // Settings
+  "styles/settings",
+  // Thirdparty
+  "styles/thirdparty/animate",
+  "styles/thirdparty/ckeditor", "styles/thirdparty/color-picker",
+  // Scaffold
+  "styles/scaffold/variables",
+  "styles/scaffold/reset", "styles/scaffold/base", "styles/scaffold/icons",
+  "styles/scaffold/typography", "styles/scaffold/spacing",
+  "styles/scaffold/flex", "styles/scaffold/input", "styles/scaffold/border",
+  // Custom
+  "styles/custom";

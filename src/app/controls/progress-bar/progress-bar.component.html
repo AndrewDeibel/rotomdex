@@ -1,0 +1,7 @@
+<div class="progress" *ngIf="progressBar" [class.complete]="isComplete()">
+	<div class="progress-bar" [style.width]="getWidth()"></div>
+	<div class="progress-value">
+		{{getWidth()}}
+		({{progressBar.value}}/{{progressBar.total}})
+	</div>
+</div>

@@ -1,0 +1,23 @@
+<form
+  class="padding-y-8 flex vertical flex-center"
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+>
+  <div class="flex vertical padded-2" style="max-width: 400px">
+    <div>
+      <h1>Forgot Password?</h1>
+    </div>
+    <div>
+      <p>
+        If you forgot your password, enter your email below and we will send you
+        instructions on how to reset it.
+      </p>
+    </div>
+    <div>
+      <mb-textbox [textbox]="textboxEmail"></mb-textbox>
+    </div>
+    <div>
+      <mb-button [button]="buttonSubmit"></mb-button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,141 @@
+<!-- Hero -->
+<hero></hero>
+
+<!-- Under development -->
+<mb-alert [alert]="alert" id="dev-alert" *ngIf="false"></mb-alert>
+
+<!-- Expansions -->
+<div class="section dark" *ngIf="featured && featured.expansions">
+	<div class="max">
+		<div class="flex flex-center padded-8">
+			<div class="width-6 small-12 small-order-2">
+				<div id="expansion-logos">
+					<div class="flex padded relative">
+						<div
+							class="width-3 small-2"
+							*ngFor="let expansion of featured.expansions"
+						>
+							<a [routerLink]="expansion.route">
+								<img
+									class="hover-zoom-large shadow hover-z-1"
+									src="{{ expansion.logo }}"
+								/>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="width-6 small-12 small-order-1">
+				<h2>Expansions</h2>
+				<p>
+					Explore the most recent expansions, vintage expansions, and
+					everything in-between. RotomDex provides the latest card and
+					set data for both English and Japanese (coming soon).
+				</p>
+				<mb-button [button]="expansionButton"></mb-button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Cards -->
+<div class="section dark" *ngIf="featured && featured.cards">
+	<div class="max">
+		<div class="flex flex-center padded-8">
+			<div class="width-6 small-12">
+				<h2>Cards</h2>
+				<p>
+					Everyone has a favorite card but with over 9,000 English
+					cards and many more unique Japanese cards, there is always
+					new cards to find and appreciate.
+				</p>
+				<mb-button [button]="cardsButton"></mb-button>
+			</div>
+			<div class="width-6 small-12">
+				<div id="cards">
+					<div class="flex padded relative">
+						<div
+							class="width-2 small-2"
+							*ngFor="let card of featured.cards"
+						>
+							<a [routerLink]="card.route">
+								<img
+									class="card hover-zoom-large hover-z-1"
+									src="{{ card.image }}"
+								/>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Pokemon -->
+<div class="section dark" *ngIf="featured && featured.pokemon">
+	<div class="max">
+		<div class="flex flex-center padded-8">
+			<div class="width-6 small-12 small-order-2">
+				<div id="pokemon">
+					<div class="flex padded relative">
+						<div
+							class="width-2 small-2"
+							*ngFor="let pokemon of featured.pokemon"
+						>
+							<a
+								[routerLink]="pokemon.route"
+								class="pokemon-link"
+							>
+								<img
+									class="sprite-default shadow"
+									src="{{ pokemon.sprites.default }}"
+								/>
+								<img
+									class="sprite-animated shadow z-1"
+									src="{{
+										pokemon.sprites.animated ||
+											pokemon.sprites.default
+									}}"
+								/>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="width-6 small-12 small-order-1">
+				<h2>Pokemon</h2>
+				<p>
+					View all the cards featuring your favorite Pokemon and
+					explore the ever-growing Pokedex. With nearly 1,000 Pokemon
+					species there is always a new Pokemon to learn about.
+				</p>
+				<mb-button [button]="pokemonButton"></mb-button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Collection -->
+<div class="section dark">
+	<div class="max">
+		<div class="flex flex-center padded-8">
+			<div class="width-6 small-12 small-order-1">
+				<h2>Collection</h2>
+				<p>
+					Manage your entire Pokemon card collection, including card
+					metadata such as condition, graded condition, and unique
+					printings. Organize cards using binders, decks, and other
+					grouping categories. View and share your collection stats
+					and history.
+				</p>
+				<mb-button [button]="collectionButton"></mb-button>
+			</div>
+			<div class="width-6 small-12 small-order-2">
+				<div id="pokemon">
+					<div class="flex padded relative"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

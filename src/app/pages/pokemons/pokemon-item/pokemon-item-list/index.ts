@@ -1,0 +1,1 @@
+export * from './pokemon-item-list.component';

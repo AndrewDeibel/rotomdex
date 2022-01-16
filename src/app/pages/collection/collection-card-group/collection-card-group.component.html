@@ -1,0 +1,39 @@
+<div class="flex justify-center">
+  <form
+    class="padding-4"
+    style="width: 500px; max-width: 100%"
+    [formGroup]="form"
+    (ngSubmit)="submit()"
+  >
+    <div class="flex vertical padded-2">
+      <div>
+        <h1>Add Group</h1>
+      </div>
+      <div>
+        <mb-textbox [textbox]="textboxName"></mb-textbox>
+      </div>
+      <div class="relative z-3">
+        <mb-select [select]="selectType"> </mb-select>
+      </div>
+      <div class="relative z-2">
+        <mb-select [select]="selectIcon"> </mb-select>
+      </div>
+      <div class="relative z-1">
+        <mb-textarea [textarea]="textareaDescription"> </mb-textarea>
+      </div>
+      <div class="relative z-1">
+        <mb-toggle [toggle]="togglePublic"></mb-toggle>
+      </div>
+      <div>
+        <div class="flex">
+          <div class="box">
+            <mb-button [button]="buttonCancel"></mb-button>
+          </div>
+          <div>
+            <mb-button [button]="buttonSave"></mb-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

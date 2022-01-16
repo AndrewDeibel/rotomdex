@@ -1,0 +1,148 @@
+// Padding
+.padding {
+    padding: $spacing;
+}
+.padding-x {
+	padding-left: $spacing;
+	padding-right: $spacing;
+}
+.padding-y {
+	padding-top: $spacing;
+	padding-bottom: $spacing;
+}
+
+// Sizes
+@for $i from 1 through 10 {
+	.padding-#{$i} {
+		padding: $spacing * $i;
+	}
+	.padding-x-#{$i} {
+		padding-left: $spacing * $i;
+		padding-right: $spacing * $i;
+	}
+	.padding-y-#{$i} {
+		padding-top: $spacing * $i;
+		padding-bottom: $spacing * $i;
+	}
+}
+
+// Sides
+@each $side in $sides {
+	.padding-#{$side} {
+		padding-#{$side}: $spacing;
+	}
+	.padding-#{$side}-none {
+		padding-#{$side}: 0 !important;
+	}
+	.margin-#{$side} {
+		margin-#{$side}: $spacing;
+	}
+	.margin-#{$side}-none {
+		margin-#{$side}: 0 !important;
+	}
+
+	// Sizes
+	@for $i from 1 through 10 {
+		.padding-#{$side}-#{$i} {
+			padding-#{$side}: $spacing * $i;
+		}
+		.margin-#{$side}-#{$i} {
+			margin-#{$side}: $spacing * $i;
+		}
+	}
+}
+
+// Screen small
+@media (max-width: $screen-small) {
+	.small-padding {
+		padding: $spacing;
+	}
+}
+
+// Margin
+.margin {
+    margin: $spacing;
+}
+.margin-x {
+	margin-left: $spacing;
+	margin-right: $spacing;
+}
+.margin-y {
+	margin-top: $spacing;
+	margin-bottom: $spacing;
+}
+
+@for $i from 1 through 10 {
+	.margin-#{$i} {
+		margin: $spacing * $i;
+	}
+	.margin-x-#{$i} {
+		margin-left: $spacing * $i;
+		margin-right: $spacing * $i;
+	}
+	.margin-y-#{$i} {
+		margin-top: $spacing * $i;
+		margin-bottom: $spacing * $i;
+	}
+}
+
+// Alignment
+.auto-margin {
+    margin: auto;
+}
+.center {
+    margin: 0 auto;
+}
+
+// Layout padding
+.padded {
+    margin-top: -$spacing;
+    margin-left: -$spacing;
+    > * {
+        padding-top: $spacing;
+        padding-left: $spacing;
+    }
+}
+.padded-small {
+	margin-top: -$spacing / 2;
+	margin-left: -$spacing / 2;
+    > * {
+        padding-top: $spacing / 2;
+        padding-left: $spacing / 2;
+    }
+}
+.padded-x {
+	margin-left: -$spacing;
+	> * {
+		padding-left: $spacing;
+	}
+}
+.padded-y {
+	margin-top: -$spacing;
+	> * {
+		padding-top: $spacing;
+	}
+}
+// Sizes
+@for $i from 1 through 10 {
+	.padded-#{$i} {
+		margin-top: -$spacing * $i;
+		margin-left: -$spacing * $i;
+		> * {
+			padding-top: $spacing * $i;
+			padding-left: $spacing * $i;
+		}
+	}
+	.padded-x-#{$i} {
+		margin-left: -$spacing * $i;
+		> * {
+			padding-left: $spacing * $i;
+		}
+	}
+	.padded-y-#{$i} {
+		margin-top: -$spacing * $i;
+		> * {
+			padding-top: $spacing * $i;
+		}
+	}
+}

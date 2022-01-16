@@ -1,0 +1,11 @@
+@import "settings";
+
+.item-group {
+	border-bottom: $border;
+	&:last-child {
+		border-bottom: 0;
+	}
+	h2 {
+		margin-top: $spacing * 2;
+	}
+}

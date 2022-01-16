@@ -1,0 +1,23 @@
+<button
+	*ngIf="button"
+	class="button {{ button.classes }} {{ button.size }}"
+	[type]="button.type"
+	[style.width]="button.width"
+	[disabled]="button.disabled || disabled ? true : null"
+	[routerLink]="button.route"
+	(click)="button.click ? button.click() : null"
+>
+	<span class="icon" *ngIf="button.icon">
+		<fa-icon [icon]="button.icon"></fa-icon>
+	</span>
+
+	<span class="symbol" *ngIf="button.symbol">
+		<img [src]="button.symbol" />
+	</span>
+
+	<span class="text" *ngIf="button.text" [innerHTML]="button.text"> </span>
+
+	<span class="money-tag" *ngIf="button.price">
+		{{ button.price | currency }}
+	</span>
+</button>

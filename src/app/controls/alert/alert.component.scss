@@ -1,0 +1,10 @@
+@import "settings";
+
+.alert {
+	padding: $spacing ($spacing * 2);
+	border: $border;
+	border-radius: $border-radius-small;
+	background: rgba($grey, 0.5);
+	box-shadow: $shadow-sheen;
+	color: rgba(black, 0.6);
+}

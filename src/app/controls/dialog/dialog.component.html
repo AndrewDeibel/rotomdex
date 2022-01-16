@@ -1,0 +1,38 @@
+<div
+	class="overlay pointer"
+	[class.active]="dialog && dialog.active"
+	(click)="dialog.close()"
+>
+	<div class="max relative">
+		<div *ngIf="dialog" class="dialog" (click)="$event.stopPropagation()">
+			<div class="dialog-header">
+				<div class="flex padded flex-center">
+					<div class="box min-0 ellipsis">
+						<div class="dialog-title">
+							<h4>{{ dialog.title }}</h4>
+						</div>
+					</div>
+					<div>
+						<div class="dialog-close" (click)="dialog.close()">
+							<fa-icon icon="times"></fa-icon>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div
+				class="dialog-content"
+				[innerHtml]="dialog.content"
+				*ngIf="dialog.content"
+			></div>
+			<mb-form *ngIf="dialog.form" [form]="dialog.form"></mb-form>
+			<div class="dialog-footer" *ngIf="dialog.buttons.length">
+				<div class="flex padded">
+					<div *ngFor="let button of dialog.buttons">
+						<mb-button [button]="button"></mb-button>
+					</div>
+				</div>
+			</div>
+			<mb-loader [active]="loading"></mb-loader>
+		</div>
+	</div>
+</div>

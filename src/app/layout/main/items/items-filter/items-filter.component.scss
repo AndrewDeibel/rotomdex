@@ -1,0 +1,36 @@
+@import "settings";
+
+@media (max-width: $screen-small) {
+	.col-display {
+		> div {
+			width: 100%;
+			display: block;
+		}
+		mb-menu {
+			width: 100%;
+			display: block;
+			ul {
+				display: flex;
+				li {
+					flex: 1;
+					a {
+						justify-content: center;
+						.text {
+							flex: initial !important;
+						}
+					}
+				}
+			}
+		}
+	}
+	.col-sort {
+		.col-sort-by {
+			position: relative;
+			z-index: 1;
+		}
+		.col-sort-direction {
+			position: relative;
+			z-index: 1;
+		}
+	}
+}

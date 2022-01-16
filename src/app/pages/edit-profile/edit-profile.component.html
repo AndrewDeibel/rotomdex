@@ -1,0 +1,35 @@
+<form
+  class="padding-8 flex justify-center"
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+>
+  <div class="max-100" style="width: 400px">
+    <div class="flex vertical padded">
+      <div>
+        <h1>Edit Profile</h1>
+      </div>
+      <div>
+        <mb-textbox [textbox]="textboxEmail"></mb-textbox>
+      </div>
+      <div>
+        <mb-textbox [textbox]="textboxUsername"></mb-textbox>
+      </div>
+      <div>
+        <mb-select [select]="selectFavoritePokemon"></mb-select>
+      </div>
+      <div>
+        <mb-select [select]="selectUserIcon"></mb-select>
+      </div>
+      <div>
+        <mb-toggle [toggle]="togglePublic"></mb-toggle>
+      </div>
+      <div>
+        <mb-button [button]="buttonChangePassword"></mb-button>
+      </div>
+      <div class="flex padded">
+        <mb-button [button]="buttonCancel"></mb-button>
+        <mb-button [button]="buttonSubmit"></mb-button>
+      </div>
+    </div>
+  </div>
+</form>

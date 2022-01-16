@@ -1,0 +1,29 @@
+<div class="items-grid flex padded" *ngIf="items.length">
+	<div class="item-grid {{itemClasses}}" *ngFor="let item of items">
+
+		<!-- Expansion -->
+		<mb-expansion-item-grid
+			*ngIf="isExpansion(item)"
+			[expansion]="item">
+		</mb-expansion-item-grid>
+
+		<!-- Card -->
+		<mb-card-item-grid
+			*ngIf="isCard(item)"
+			[card]="item">
+		</mb-card-item-grid>
+
+		<!-- Pokemon -->
+		<!-- <mb-pokemon-item-grid
+			*ngIf="isPokemon(item)"
+			[pokemon]="item">
+		</mb-pokemon-item-grid> -->
+
+		<!-- Pokemon variant -->
+		<mb-pokemon-item-grid
+			*ngIf="isPokemonVariant(item)"
+			[pokemonVariant]="item">
+		</mb-pokemon-item-grid>
+
+	</div>
+</div>

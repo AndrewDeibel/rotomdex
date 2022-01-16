@@ -1,0 +1,142 @@
+@import "variables";
+
+// Headings
+$heading-divisor: 4;
+@for $i from 1 through 6 {
+	h#{$i} {
+		line-height: 1.1;
+		font-family: $heading-font-family;
+		color: $heading-font-color;
+		margin-bottom: $spacing;
+		margin-top: $spacing * 2;
+		font-size: $font-size * (1 + ((6 - $i) / $heading-divisor));
+		&:first-child {
+			margin-top: 0;
+		}
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	.h#{$i} {
+		line-height: 1.1;
+		font-family: $heading-font-family;
+		color: $heading-font-color;
+		font-size: $font-size * (1 + ((6 - $i) / $heading-divisor));
+	}
+}
+
+// Links
+a,
+.link {
+	cursor: pointer;
+	text-decoration: none;
+	color: $primary-color;
+	transition: $transition;
+	outline: none;
+	&:hover,
+	&:focus,
+	&:active {
+		outline: none;
+	}
+	&:focus {
+		border-color: $primary-color !important;
+		box-shadow: $shadow-focus !important;
+		outline: 0 !important;
+	}
+}
+.link {
+	&:hover {
+		border-color: $primary-color !important;
+		box-shadow: $shadow-focus !important;
+		outline: 0 !important;
+	}
+}
+
+// Paragraph
+p {
+	&:first-child {
+		margin-top: 0;
+	}
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+// Lists
+ul,
+ol,
+li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.unordered-list {
+	padding-left: 24px;
+	li {
+		list-style: disc;
+	}
+}
+
+// Subheading
+.subheading {
+	font-size: 11px;
+	text-transform: uppercase;
+	//letter-spacing: 2px;
+	font-weight: bold;
+}
+
+// Helpers
+.align-left {
+	text-align: left;
+}
+.align-center {
+	text-align: center;
+}
+.align-right {
+	text-align: right;
+}
+.bold {
+	font-weight: bold;
+}
+.italic {
+	font-style: italic;
+}
+.uppercase {
+	text-transform: uppercase;
+}
+.ellipsis {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.word-break {
+	word-break: break-word;
+}
+.wrap {
+	text-wrap: wrap;
+}
+.nowrap {
+	text-wrap: nowrap;
+}
+
+// HR
+hr {
+	border-top: 0;
+	border-bottom: $border;
+	margin: 8px 0;
+}
+
+@each $color-name, $color-value in $colors {
+	.highlight-#{$color-name} {
+		background: $color-value;
+		padding: ($spacing / 2) $spacing;
+	}
+}
+
+.color {
+	color: $font-color;
+}
+
+.color-dark {
+	color: darken($font-color, 50%);
+}

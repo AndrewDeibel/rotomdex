@@ -1,0 +1,47 @@
+@import "settings";
+
+.checkbox {
+	display: flex;
+	align-items: center;
+	input[type="checkbox"] {
+		appearance: none;
+		width: 24px;
+		height: 24px;
+		border-radius: $border-radius-small;
+		box-shadow: $shadow-inset;
+		border: $border;
+		background: $input-bg;
+		position: relative;
+		margin: 0;
+		transition: $transition;
+		cursor: pointer;
+		&:after {
+			content: "";
+			width: 8px;
+			height: 14px;
+			border-bottom: 3px solid $primary-color;
+			border-right: 3px solid $primary-color;
+			margin-top: -1px;
+			opacity: 0;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%) rotate(45deg);
+			transition: $transition;
+		}
+		&:checked {
+			&:after {
+				opacity: 1;
+			}
+		}
+		&:focus {
+			box-shadow: $shadow-focus-inset, $shadow-focus;
+			border-color: $primary-color;
+		}
+	}
+	label {
+		margin-bottom: 0;
+		padding-left: $spacing;
+		cursor: pointer;
+	}
+}

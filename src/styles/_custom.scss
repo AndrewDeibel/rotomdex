@@ -1,0 +1,105 @@
+$poke-normal: #c5c5c5;
+$poke-fighting: #d85f4f;
+$poke-flying: #A1BBEC;
+$poke-poison: #b162c7;
+$poke-ground: #cc753b;
+$poke-rock: #C9BBA4;
+$poke-bug: #92BC2C;
+$poke-ghost: #5F6DBC;
+$poke-steel: #94a6b1;
+$poke-fire: #e03b26;
+$poke-water: #539DDF;
+$poke-grass: #5FBD58;
+$poke-electric: #FFB400;
+$poke-psychic: #c734a2;
+$poke-ice: #6bc5b6;
+$poke-dragon: #ad9a66;
+$poke-dark: #426075;
+$poke-fairy: #e496dd;
+
+$poke-types: (
+	'colorless': $poke-normal,
+	'normal': $poke-normal,
+	'fighting': $poke-fighting,
+	'flying': $poke-flying,
+	'poison': $poke-poison,
+	'ground': $poke-ground,
+	'rock': $poke-rock,
+	'bug': $poke-bug,
+	'ghost': $poke-ghost,
+	'metal': $poke-steel,
+	'steel': $poke-steel,
+	'fire': $poke-fire,
+	'water': $poke-water,
+	'grass': $poke-grass,
+	'lightning': $poke-electric,
+	'electric': $poke-electric,
+	'psychic': $poke-psychic,
+	'ice': $poke-ice,
+	'dragon': $poke-dragon,
+	'darkness': $poke-dark,
+	'dark': $poke-dark,
+	'fairy': $poke-fairy,
+);
+
+// Card
+.border-radius-card {
+	border-radius: $border-radius-card !important;
+}
+
+.money {
+	color: $green;
+}
+
+.money-tag {
+	color: $green;
+	background: lighten(black, 5%);
+	display: inline-block;
+	padding: 4px 8px;
+	display: inline-block;
+	border-radius: $border-radius;
+	font-weight: bold;
+	font-size: 12px;
+	position: relative;
+	height: 22px;
+	line-height: 1;
+	box-shadow: $shadow-sheen;
+	border: $border;
+}
+
+.button {
+	&.small {
+		.money-tag {
+			margin-right: -8px;
+		}
+	}
+	.money-tag {
+		margin: -4px 0;
+		margin-right: -4px;
+		margin-left: $spacing;
+	}
+}
+
+.card-image {
+	border-radius: $border-radius-card;
+	overflow: hidden;
+	box-shadow: $shadow;
+	position: relative;
+	img {
+		display: block;
+	}
+	&:after {
+		border: $border;
+		pointer-events: none;
+		content: '';
+		border-radius: $border-radius-card;
+		width: 100%;
+		height: 100%;
+		box-shadow: $shadow-sheen;
+		z-index: 10;
+		position: absolute;
+		border: $border;
+		top: 0;
+		left: 0;
+	}
+}

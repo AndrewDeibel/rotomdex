@@ -1,0 +1,79 @@
+@import "settings";
+
+:host {
+	display: flex;
+	flex: 1;
+	width: 100%;
+}
+
+.item-grid-expansion {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: $border-radius-small;
+	width: 100%;
+	transition: $transition;
+	overflow: hidden;
+	position: relative;
+	&:after {
+		content: "";
+		border-radius: $border-radius-small;
+		width: 100%;
+		height: 100%;
+		box-shadow: $shadow-sheen;
+		z-index: 10;
+		position: absolute;
+		border: $border;
+	}
+	&:hover {
+		border-color: $primary-color;
+		box-shadow: $shadow-focus;
+		&:after {
+			border-color: $primary-color;
+		}
+	}
+
+	&.small {
+		.expansion-logo {
+			.expansion-logo-inner {
+				height: 80px;
+				img:not(.symbol) {
+					padding: $spacing * 2;
+					max-width: 80%;
+				}
+			}
+		}
+	}
+
+	.expansion-logo {
+		display: block;
+		width: 100%;
+		position: relative;
+		background: $panel-bg;
+		.expansion-logo-inner {
+			position: relative;
+			height: 160px;
+		}
+		img:not(.symbol) {
+			padding: $spacing * 4;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			max-height: 80%;
+			max-width: 100%;
+		}
+
+		.symbol {
+			height: 24px;
+			margin: $spacing;
+		}
+	}
+	.expansion-info {
+		width: 100%;
+		padding: $spacing;
+		background: $main-bg;
+		color: white;
+	}
+}

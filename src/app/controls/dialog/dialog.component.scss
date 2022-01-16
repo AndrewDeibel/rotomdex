@@ -1,0 +1,45 @@
+@import "settings";
+
+.dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  background: $panel-bg;
+  box-shadow: $shadow-large;
+  border-radius: $border-radius-small;
+  max-width: calc(100% - #{$spacing * 4});
+  max-height: calc(100% - #{$spacing * 4});
+  overflow: hidden;
+  @media (max-width: $screen-small) {
+    width: calc(100% - #{$spacing * 4});
+  }
+  cursor: default;
+  .dialog-header {
+    padding: $spacing * 2;
+    border-bottom: $border;
+    .dialog-close {
+      cursor: pointer;
+      fa-icon {
+        width: 28px;
+        height: 28px;
+        padding: calc($spacing / 2);
+        transition: $transition;
+        border-radius: $border-radius-small;
+        &:hover {
+          box-shadow: $shadow-focus;
+        }
+      }
+    }
+  }
+  .dialog-content {
+    padding: $spacing * 2;
+    flex: 1;
+    overflow-y: auto;
+  }
+  .dialog-footer {
+  }
+}

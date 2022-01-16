@@ -1,0 +1,19 @@
+<div class="search relative">
+	<!-- <input
+		#textboxEl
+		type="text"
+		placeholder="Search..."
+		[(ngModel)]="query"
+		(keydown.enter)="search()" />
+	<fa-icon
+		*ngIf="!query.length"
+		icon="search"
+		(click)="search()">
+	</fa-icon>
+	<fa-icon 
+		*ngIf="query.length"
+		icon="times"
+		(click)="clear(textboxEl)">
+	</fa-icon> -->
+	<mb-textbox [textbox]="textbox"></mb-textbox>
+</div>

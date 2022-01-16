@@ -1,0 +1,59 @@
+<div class="padding-2 border-bottom">
+  <div class="max">
+    <div class="flex padded flex-center">
+      <div class="box">
+        <h2><a [routerLink]="">Collection</a></h2>
+      </div>
+      <div>
+        <mb-checkbox [checkbox]="checkboxWishList"></mb-checkbox>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="padding-y padding-x-2 padding-bottom-4">
+  <div class="max">
+    <div class="flex padded vertical">
+      <div class="width-12 subheading" *ngIf="userCards.length">
+        <div class="flex">
+          <div class="box">
+            <div class="flex">
+              <div class="box">
+                <div class="flex">
+                  <div class="width-3 small-4">Condition</div>
+                  <div class="width-3 small-none">Graded By</div>
+                  <div class="width-3 small-none">Printing</div>
+                  <div class="width-3 small-4">Group</div>
+                </div>
+              </div>
+              <div style="height: 0">
+                <mb-button class="hidden" [button]="buttonNotes"></mb-button>
+              </div>
+            </div>
+          </div>
+          <div style="height: 0">
+            <mb-button class="hidden" [button]="buttonDelete"></mb-button>
+          </div>
+        </div>
+      </div>
+      <mb-card-collection-item
+        class="box"
+        *ngFor="let userCard of userCards"
+        [item]="userCard"
+        (deleted)="deleteItem(userCard)"
+        (updated)="updateItem(userCard)"
+      >
+      </mb-card-collection-item>
+      <mb-empty *ngIf="userCards.length === 0" [empty]="empty"></mb-empty>
+      <div class="width-12" *ngIf="userCards.length">
+        <div class="border-top padding-top">
+          <div class="flex padded flex-center">
+            <div class="box"></div>
+            <div>
+              <mb-button [button]="buttonAdd"></mb-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

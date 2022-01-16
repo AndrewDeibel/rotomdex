@@ -1,0 +1,25 @@
+@import "settings",
+		"scaffold/typography";
+
+.item {
+    transition: $transition;
+    cursor: pointer;
+    &:hover {
+		background: rgba(black, .05);
+    }
+    &:active {
+		border-color: $primary-color!important;
+		box-shadow: $shadow-focus !important;
+		outline: 0 !important;
+    }
+    .card-image {
+        &.placeholder img {
+            transform: translate(-50%, -50%) scale(1.4);    
+        }
+    }
+    @for $i from 1 through 50 {
+        &:nth-child(#{50 - $i}) {
+            z-index: $i;
+        }
+    }
+}
