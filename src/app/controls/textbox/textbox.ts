@@ -21,6 +21,7 @@ export class Textbox {
   autoComplete: boolean;
   dark: boolean;
   size: Size;
+  formControlName: string;
 
   keyup: (value: string) => void;
   keydown: (value: string) => void;

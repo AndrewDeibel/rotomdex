@@ -8,17 +8,17 @@
       <h1>Sign In</h1>
     </div>
     <div>
-      <textbox [textbox]="textboxEmail"></textbox>
+      <textbox
+        [textbox]="textboxEmail"
+        formControlName="emailControl"
+      ></textbox>
     </div>
     <div>
-      <textbox [textbox]="textboxPassword"></textbox>
+      <textbox
+        [textbox]="textboxPassword"
+        formControlName="passwordControl"
+      ></textbox>
     </div>
-    <!-- <div>
-			<checkbox
-				[formControl]="form.controls.rememberMeControl"
-				[checkbox]="rememberMeCheckbox"
-			></checkbox>
-		</div> -->
     <div>
       <div class="flex padded flex-center">
         <div>

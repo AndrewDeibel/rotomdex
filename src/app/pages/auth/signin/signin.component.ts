@@ -6,7 +6,12 @@ import { Checkbox } from '@app/controls/checkbox';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
-import { NotificationsService, Notification, AlertType } from '@app/controls';
+import {
+  NotificationsService,
+  Notification,
+  AlertType,
+  FormControl,
+} from '@app/controls';
 
 @Component({
   selector: 'signin',
@@ -38,14 +43,16 @@ export class SignInComponent implements OnInit {
     this.form = this.formBuilder.group({
       emailControl: ['', Validators.required],
       passwordControl: ['', Validators.required],
-      rememberMeControl: [''],
+      //rememberMeControl: [''],
     });
     this.textboxEmail = new Textbox({
       label: 'Email',
+      formControlName: 'emailControl',
     });
     this.textboxPassword = new Textbox({
       label: 'Password',
       type: 'password',
+      formControlName: 'passwordControl',
     });
     this.rememberMeCheckbox = new Checkbox({
       text: 'Remember Me',
@@ -65,23 +72,22 @@ export class SignInComponent implements OnInit {
       return;
     }
 
+    this.authenticationService.currentUserObservable().subscribe((user) => {
+      if (user) {
+        this.router.navigateByUrl(this.returnUrl);
+        this.notificationService.addNotifications([
+          new Notification({
+            alertType: AlertType.success,
+            message: 'Successfully signed in',
+          }),
+        ]);
+      }
+    });
+
     this.loading = true;
-    this.authenticationService
-      .login(this.textboxEmail.value, this.textboxPassword.value)
-      .pipe(first())
-      .subscribe(
-        (data) => {
-          this.router.navigateByUrl(this.returnUrl);
-          this.notificationService.addNotifications([
-            new Notification({
-              alertType: AlertType.success,
-              message: 'Successfully signed in',
-            }),
-          ]);
-        },
-        (error) => {
-          this.loading = false;
-        }
-      );
+    this.authenticationService.login(
+      this.textboxEmail.value,
+      this.textboxPassword.value
+    );
   }
 }

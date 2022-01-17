@@ -40,9 +40,9 @@ export class TextboxComponent implements ControlValueAccessor {
   get value() {
     return this.textbox.value;
   }
-  set value(_value) {
-    this.textbox.value = _value;
-    this.onChange(_value);
+  set value(value) {
+    this.textbox.value = value;
+    this.onChange(value);
     this.onTouched();
   }
 

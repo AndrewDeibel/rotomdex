@@ -7,16 +7,16 @@ import { User } from '@app/models/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-  private currentUserSubject: BehaviorSubject<User | null>;
-  public currentUserObservable: Observable<User | null>;
-
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
+  currentUserObservable() {
+    return this.currentUserSubject.asObservable();
+  }
   constructor(private http: HttpClient) {
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
       this.currentUserSubject = new BehaviorSubject<User | null>(
         new User(JSON.parse(currentUser))
       );
-      this.currentUserObservable = this.currentUserSubject.asObservable();
     }
   }
 
@@ -25,8 +25,9 @@ export class AuthenticationService {
   }
 
   login(email: string, password: string) {
-    return this.http.post<any>(buildUrl('login'), { email, password }).pipe(
-      map((res) => {
+    return this.http
+      .post<any>(buildUrl('login'), { email, password })
+      .subscribe((res) => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         const user: User = new User({
           ...res.data.user,
@@ -35,9 +36,7 @@ export class AuthenticationService {
         });
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);
-        return user;
-      })
-    );
+      });
   }
 
   logout() {
