@@ -1,22 +1,23 @@
+import { PokedexEntryDialogComponent } from './pokedex-entry-dialog.component';
 import { Component, Input, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppSettings } from '@app/app';
 import {
   Button,
+  DialogConfig,
   DialogService,
   LoaderService,
-  Tag,
-  Select,
-  SelectOptionGroup,
-  SelectOption,
   ProgressBar,
-  Dialog,
+  Select,
+  SelectOption,
+  SelectOptionGroup,
+  Tag,
 } from '@app/controls';
 import { ItemGroup, Items } from '@app/layout/main';
-import { SetSortByPokemon, PokemonVariant } from './pokemon';
-import { PokemonService } from './pokemon.service';
-import { Title } from '@angular/platform-browser';
-import { AppSettings } from '@app/app';
 import { APIGetPaged, Size, Symbols } from '@app/models';
+import { PokemonVariant, SetSortByPokemon } from './pokemon';
+import { PokemonService } from './pokemon.service';
 
 @Component({
   selector: 'pokemon',
@@ -69,12 +70,13 @@ export class PokemonComponent implements OnInit {
             text: 'Pokédex Entry',
             size: Size.small,
             click: () => {
-              // this.dialogService.setDialog(
-              //   new Dialog({
-              //     title: 'Pokédex Entry',
-              //     content: this.pokemonVariant.pokemon.flavor_texts,
-              //   })
-              // );
+              this.dialogService.open(
+                PokedexEntryDialogComponent,
+                new DialogConfig({
+                  title: 'Pokédex Entry',
+                  data: this.pokemonVariant.pokemon.flavor_texts,
+                })
+              );
             },
           });
 

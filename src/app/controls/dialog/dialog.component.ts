@@ -12,6 +12,7 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { DialogRef } from './dialog';
+import { DialogConfig } from '.';
 
 @Component({
   templateUrl: './dialog.component.html',
@@ -24,6 +25,7 @@ export class DialogComponent implements AfterViewInit, OnDestroy {
   @ViewChild(InsertionDirective) insertionPoint: InsertionDirective;
   private readonly _onClose = new Subject<any>();
   public onClose = this._onClose.asObservable();
+  public config: DialogConfig;
 
   // Close on escape key
   @HostListener('window:keyup', ['$event'])
@@ -49,6 +51,10 @@ export class DialogComponent implements AfterViewInit, OnDestroy {
   }
 
   onOverlayClicked(): void {
+    this.dialogRef.close();
+  }
+
+  onCloseClicked(): void {
     this.dialogRef.close();
   }
 

@@ -1,9 +1,4 @@
-<div
-	class="tag {{tag.classes}}" 
-	[routerLink]="tag.route">
-	<fa-icon
-		*ngIf="tag.icon"
-		[icon]="tag.icon">
-	</fa-icon>
-	<span>{{tag.text}}</span>
+<div *ngIf="tag" class="tag {{ tag.classes }}" [routerLink]="tag.route">
+  <fa-icon *ngIf="tag.icon" [icon]="tag.icon"> </fa-icon>
+  <span>{{ tag.text }}</span>
 </div>

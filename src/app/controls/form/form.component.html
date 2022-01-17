@@ -5,8 +5,8 @@
 >
   <h2 *ngIf="form.title">{{ form.title }}</h2>
   <div class="flex padded vertical">
-    <div *ngFor="let formGroup of form.groups">
-      <form-group [mbFormGroup]="formGroup"></form-group>
+    <div *ngFor="let formControlGroup of form.groups">
+      <form-group [formControlGroup]="formControlGroup"></form-group>
     </div>
   </div>
 </form>

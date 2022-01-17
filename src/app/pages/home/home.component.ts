@@ -1,13 +1,13 @@
-import { Featured } from './featured';
-import { FeaturedService } from './featured.service';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Alert, AlertType, Button, Dialog, DialogService } from '@app/controls';
+import { Alert, AlertType, Button, DialogService } from '@app/controls';
 import { Icons } from '@app/models';
 import {
   ReleaseNote,
   ReleaseNotesServices,
 } from '@app/pages/home/release-notes.services';
+import { Featured } from './featured';
+import { FeaturedService } from './featured.service';
 
 @Component({
   selector: 'home',
@@ -57,18 +57,5 @@ export class HomeComponent implements OnInit {
       if (featured) this.featured = featured;
     });
     this.featuredService.getFeatured();
-  }
-
-  createDialogReleaseNote(releaseNote: ReleaseNote) {
-    // this.dialogService.setDialog(
-    //   new Dialog({
-    //     title: releaseNote.title,
-    //     content: `
-    // 		<p>${releaseNote.content}</p>
-    // 		<div class="subheading">v${releaseNote.version} - ${this.datePipe.transform(
-    //       releaseNote.date
-    //     )}</div>`,
-    //   })
-    // );
   }
 }

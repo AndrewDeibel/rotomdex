@@ -1,24 +1,24 @@
-import { UserCard, UserCardsService } from '@app/pages/collection';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { Card, SetSortByCards } from './card';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { CardService } from './card.service';
-import '@app/helpers/string.extensions';
-import { Icons, Symbols } from '@app/models/icons';
+import { AppSettings } from '@app/app';
 import {
   Button,
-  Dialog,
+  DialogConfig,
   DialogService,
   LoaderService,
   Tag,
 } from '@app/controls';
-import { CardsService } from '../cards.service';
+import '@app/helpers/string.extensions';
 import { ItemGroup, Items } from '@app/layout/main';
+import { APIGetPaged } from '@app/models';
+import { Icons, Symbols } from '@app/models/icons';
+import { UserCard, UserCardsService } from '@app/pages/collection';
 import { ExpansionService } from '@app/pages/expansions/expansion/expansion.service';
 import { PokemonService } from '@app/pages/pokemons';
-import { Title } from '@angular/platform-browser';
-import { AppSettings } from '@app/app';
-import { APIGetPaged } from '@app/models';
+import { Card, SetSortByCards } from './card';
+import { CardImageDialogComponent } from './card-image-dialog.component';
+import { CardService } from './card.service';
 
 @Component({
   selector: 'card',
@@ -99,12 +99,15 @@ export class CardComponent implements OnInit {
 
   createDialogCardImage() {
     if (this.card) {
-      // this.dialogService.setDialog(
-      //   new Dialog({
-      //     title: `${this.card.name} - ${this.card.expansion.name}`,
-      //     content: `<div class="card-image"><img src="${this.card.image_high_res}" /></div>`,
-      //   })
-      // );
+      this.dialogService.open(
+        CardImageDialogComponent,
+        new DialogConfig({
+          title: `${this.card.name} - ${this.card.expansion.name}`,
+          data: {
+            image: this.card.image_high_res,
+          },
+        })
+      );
     }
   }
 

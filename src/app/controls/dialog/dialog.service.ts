@@ -53,6 +53,7 @@ export class DialogService {
     document.body.appendChild(domElem);
     // Refs
     this.dialogComponentRef = componentRef;
+    this.dialogComponentRef.instance.config = config;
     this.dialogComponentRef.instance.onClose.subscribe(() => {
       this.removeDialogComponentFromBody();
     });
@@ -62,5 +63,9 @@ export class DialogService {
   private removeDialogComponentFromBody(): void {
     this.appRef.detachView(this.dialogComponentRef.hostView);
     this.dialogComponentRef.destroy();
+  }
+
+  public closeAll(): void {
+    this.removeDialogComponentFromBody();
   }
 }

@@ -6,7 +6,7 @@ import { FormControlGroup } from './form-group';
   templateUrl: 'form-group.component.html',
 })
 export class FormGroupComponent implements OnInit {
-  @Input() mbFormGroup: FormControlGroup;
+  @Input() formControlGroup: FormControlGroup;
 
   constructor() {}
 

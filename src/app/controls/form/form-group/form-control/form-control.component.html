@@ -1,32 +1,32 @@
-<div *ngIf="mbFormControl">
+<div *ngIf="appFormControl">
   <textbox
     *ngIf="isTextbox()"
-    [textbox]="mbFormControl.control"
-    [formControl]="mbFormControl.formControl"
+    [textbox]="appFormControl.control"
+    [formControlName]="appFormControl.formControlName"
   ></textbox>
   <app-textarea
     *ngIf="isTextarea()"
-    [textarea]="mbFormControl.control"
-    [formControl]="mbFormControl.formControl"
+    [textarea]="appFormControl.control"
+    [formControlName]="appFormControl.formControlName"
   ></app-textarea>
   <app-select
     *ngIf="isSelect()"
-    [select]="mbFormControl.control"
-    [formControl]="mbFormControl.formControl"
+    [select]="appFormControl.control"
+    [formControlName]="appFormControl.formControlName"
   ></app-select>
   <editor
     *ngIf="isEditor()"
-    [editor]="mbFormControl.control"
-    [formControl]="mbFormControl.formControl"
+    [editor]="appFormControl.control"
+    [formControlName]="appFormControl.formControlName"
   ></editor>
   <checkbox
     *ngIf="isCheckbox()"
-    [checkbox]="mbFormControl.control"
-    [formControl]="mbFormControl.formControl"
+    [checkbox]="appFormControl.control"
+    [formControlName]="appFormControl.formControlName"
   ></checkbox>
   <toggle
     *ngIf="isToggle()"
-    [toggle]="mbFormControl.control"
-    [formControl]="mbFormControl.formControl"
+    [toggle]="appFormControl.control"
+    [formControlName]="appFormControl.formControlName"
   ></toggle>
 </div>

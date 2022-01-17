@@ -1,5 +1,7 @@
-import { UserCardGroup } from './../../../cards/card/card';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Button } from '@app/controls/button';
+import { DialogConfig, DialogService } from '@app/controls/dialog';
+import { Select, SelectOption, SelectOptionGroup } from '@app/controls/select';
 import {
   Condition,
   ConditionGraded,
@@ -7,13 +9,9 @@ import {
   Icons,
   Printings,
 } from '@app/models';
-import { Dialog, FormControl, FormControlGroup, Textarea } from '@app/controls';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Select, SelectOption, SelectOptionGroup } from '@app/controls/select';
-import { Button } from '@app/controls/button';
+import { UserCardGroup } from './../../../cards/card/card';
 import { UserCard } from './user-card';
-import { DialogService } from '@app/controls/dialog';
-import { Form } from '@app/controls/form';
+import { UserCardNotesDialogComponent } from './user-card-notes-dialog.component';
 
 @Component({
   selector: 'user-card',
@@ -32,23 +30,14 @@ export class UserCardComponent implements OnInit {
   buttonNotes: Button;
   buttonAdd: Button;
   buttonRemove: Button;
-  formNotes: FormGroup;
 
-  constructor(
-    private dialogService: DialogService,
-    private formBuilder: FormBuilder
-  ) {}
+  constructor(private dialogService: DialogService) {}
 
   ngOnInit(): void {
     this.buildControls();
   }
 
   buildControls() {
-    // Notes
-    this.formNotes = this.formBuilder.group({
-      notesControl: [''],
-    });
-
     // Condition
     this.selectCondition = new Select({
       value: this.item.condition,
@@ -153,24 +142,12 @@ export class UserCardComponent implements OnInit {
       classes: 'square secondary',
       width: '100%',
       click: () => {
-        // this.dialogService.setDialog(
-        //   new Dialog({
-        //     title: 'Notes',
-        //     form: new Form({
-        //       formGroup: this.formNotes,
-        //       groups: [
-        //         new FormControlGroup({
-        //           controls: [
-        //             new FormControl({
-        //               //formControl: this.formNotes.controls.notesControl,
-        //               control: new Textarea({}),
-        //             }),
-        //           ],
-        //         }),
-        //       ],
-        //     }),
-        //   })
-        // );
+        this.dialogService.open(
+          UserCardNotesDialogComponent,
+          new DialogConfig({
+            title: 'Notes',
+          })
+        );
       },
     });
 

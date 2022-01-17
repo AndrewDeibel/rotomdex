@@ -73,6 +73,8 @@ import {
   UserCardsComponent,
   UserCardComponent,
   EditProfileComponent,
+  CardImageDialogComponent,
+  UserCardNotesDialogComponent,
 } from './pages';
 
 // Page
@@ -272,6 +274,8 @@ import {
     ItemsGroupsComponent,
     UserCardGroupComponent,
     DashboardComponent,
+    CardImageDialogComponent,
+    UserCardNotesDialogComponent,
 
     // Pages
     // ====================

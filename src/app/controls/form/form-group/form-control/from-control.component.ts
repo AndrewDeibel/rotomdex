@@ -12,28 +12,28 @@ import { Toggle } from '@app/controls/toggle';
   templateUrl: 'form-control.component.html',
 })
 export class FormControlComponent implements OnInit {
-  @Input() mbFormControl: FormControl;
+  @Input() appFormControl: FormControl;
 
   constructor() {}
 
   ngOnInit() {}
 
   isTextbox() {
-    return this.mbFormControl.control instanceof Textbox;
+    return this.appFormControl.control instanceof Textbox;
   }
   isTextarea() {
-    return this.mbFormControl.control instanceof Textarea;
+    return this.appFormControl.control instanceof Textarea;
   }
   isSelect() {
-    return this.mbFormControl.control instanceof Select;
+    return this.appFormControl.control instanceof Select;
   }
   isEditor() {
-    return this.mbFormControl.control instanceof Editor;
+    return this.appFormControl.control instanceof Editor;
   }
   isCheckbox() {
-    return this.mbFormControl.control instanceof Checkbox;
+    return this.appFormControl.control instanceof Checkbox;
   }
   isToggle() {
-    return this.mbFormControl.control instanceof Toggle;
+    return this.appFormControl.control instanceof Toggle;
   }
 }
