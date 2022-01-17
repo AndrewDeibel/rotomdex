@@ -1,5 +1,5 @@
-import { CardCollectionItem } from './../../../components/card-collection/card-collection-item/card-collection-item';
-import { UserCardsService } from './../../../components/card-collection/card-collection.service';
+import { UserCard } from '@app/components/user-cards/user-card';
+import { UserCardsService } from '@app/components/user-cards/user-cards.service';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Card, SetSortByCards } from './card';
 import { ActivatedRoute } from '@angular/router';
@@ -31,7 +31,7 @@ import { AppSettings } from '@app/app';
 })
 export class CardComponent implements OnInit {
   @Input() card: Card | null;
-  userCards: CardCollectionItem[] = [];
+  userCards: UserCard[] = [];
   relatedCards: Items = new Items();
   expansionCards: Items = new Items();
   cardImageHover: boolean = false;

@@ -45,11 +45,8 @@ import {
   HeroComponent,
 } from './controls';
 
-// Components
-import {
-  CardCollectionComponent,
-  CardCollectionItemComponent,
-} from './components';
+// User cards
+import { UserCardsComponent, UserCardComponent } from './components';
 
 // Pages
 import {
@@ -262,11 +259,6 @@ import {
     EmptyComponent,
     HeroComponent,
 
-    // Components
-    // ====================
-    CardCollectionComponent,
-    CardCollectionItemComponent,
-
     // Page
     // ====================
     HeaderComponent,
@@ -304,10 +296,16 @@ import {
     PokmeonItemListComponent,
     PokemonComponent,
     ProfileComponent,
+    UserCardComponent,
+    UserCardsComponent,
     CollectionComponent,
     ScannerComponent,
     ScannerListsComponent,
-    ScannerListComponent,
+
+    // User cards
+    // ====================
+    UserCardsComponent,
+    UserCardComponent,
   ],
   imports: [
     BrowserModule,

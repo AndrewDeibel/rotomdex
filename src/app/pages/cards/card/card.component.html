@@ -1,205 +1,167 @@
 <div *ngIf="card">
-	<!-- Card -->
-	<article
-		class="card-detail {{
-			card.types.length ? card.types[0].toLowerCase() : ''
-		}} flex z-2 padding-y-4 padding-x-2 relative flex-wrap flex-start"
-		*ngIf="card"
-	>
-		<!-- Pokeball -->
-		<img class="pokeball" src="/assets/pokeball.png" />
+  <!-- Card -->
+  <article
+    class="card-detail {{
+      card.types.length ? card.types[0].toLowerCase() : ''
+    }} flex z-2 padding-y-4 padding-x-2 relative flex-wrap flex-start"
+    *ngIf="card"
+  >
+    <!-- Pokeball -->
+    <img class="pokeball" src="/assets/pokeball.png" />
 
-		<div class="max flex width-12 z-3 relative">
-			<div class="flex padded-2 box justify-center small-vertical">
-				<!-- Card image -->
-				<div class="relative z-2 flex justify-center">
-					<figure
-						class="card-image-wrapper"
-						[class.active]="cardImageHover"
-					>
-						<div class="card-image link">
-							<img
-								src="{{ card.image }}"
-								class="img-card-image border-radius-card shadow transition"
-								(click)="createDialogCardImage()"
-							/>
-							<img
-								src="{{ this.card.image_high_res }}"
-								style="display: none"
-							/>
-						</div>
-					</figure>
-				</div>
+    <div class="max flex width-12 z-3 relative">
+      <div class="flex padded-2 box justify-center small-vertical">
+        <!-- Card image -->
+        <div class="relative z-2 flex justify-center">
+          <figure class="card-image-wrapper" [class.active]="cardImageHover">
+            <div class="card-image link">
+              <img
+                src="{{ card.image }}"
+                class="img-card-image border-radius-card shadow transition"
+                (click)="createDialogCardImage()"
+              />
+              <img src="{{ this.card.image_high_res }}" style="display: none" />
+            </div>
+          </figure>
+        </div>
 
-				<div class="relative z-1 flex medium-12 justify-center">
-					<div
-						class="panel medium-12 medium-square"
-						style="min-width: 320px"
-					>
-						<div class="flex padded-small vertical">
-							<!-- Card header -->
-							<div class="card-header">
-								<div
-									class="flex flex-center flex-nowrap padded"
-								>
-									<div class="card-name ellipsis box">
-										<h2>{{ card.name }}</h2>
-									</div>
-									<div
-										class="flex padded flex-center flex-nowrap"
-										*ngIf="card.hp"
-									>
-										<div class="card-hp bold h2">
-											<span class="subheading">HP</span
-											>{{ card.hp }}
-										</div>
-										<div
-											class="card-energies flex flex-nowrap padded"
-										>
-											<div
-												*ngFor="let type of card.types"
-											>
-												<a
-													class="card-energy {{
-														type.toLowerCase()
-													}}"
-													[routerLink]="
-														'/cards/types/' +
-														type
-															.toLowerCase()
-															.replace(' ', '-')
-													"
-												>
-													<div
-														class="card-energy-inner"
-													>
-														<img
-															[src]="
-																getTypeImage(
-																	type
-																)
-															"
-														/>
-													</div>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+        <div class="relative z-1 flex medium-12 justify-center">
+          <div class="panel medium-12 medium-square" style="min-width: 320px">
+            <div class="flex padded-small vertical">
+              <!-- Card header -->
+              <div class="card-header">
+                <div class="flex flex-center flex-nowrap padded">
+                  <div class="card-name ellipsis box">
+                    <h2>{{ card.name }}</h2>
+                  </div>
+                  <div
+                    class="flex padded flex-center flex-nowrap"
+                    *ngIf="card.hp"
+                  >
+                    <div class="card-hp bold h2">
+                      <span class="subheading">HP</span>{{ card.hp }}
+                    </div>
+                    <div class="card-energies flex flex-nowrap padded">
+                      <div *ngFor="let type of card.types">
+                        <a
+                          class="card-energy {{ type.toLowerCase() }}"
+                          [routerLink]="
+                            '/cards/types/' +
+                            type.toLowerCase().replace(' ', '-')
+                          "
+                        >
+                          <div class="card-energy-inner">
+                            <img [src]="getTypeImage(type)" />
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-							<div class="flex padded-small flex-nowrap">
-								<div class="min-6" *ngIf="card.pokemon">
-									<!-- Pokemon -->
-									<mb-pokemon-item-grid
-										size="small"
-										[pokemonVariant]="card.pokemon.variant"
-									>
-									</mb-pokemon-item-grid>
-								</div>
-								<div class="min-6">
-									<!-- Expansion -->
-									<mb-expansion-item-grid
-										size="small"
-										[expansion]="card.expansion"
-									>
-									</mb-expansion-item-grid>
-								</div>
-							</div>
+              <div class="flex padded-small flex-nowrap">
+                <div class="min-6" *ngIf="card.pokemon">
+                  <!-- Pokemon -->
+                  <mb-pokemon-item-grid
+                    size="small"
+                    [pokemonVariant]="card.pokemon.variant"
+                  >
+                  </mb-pokemon-item-grid>
+                </div>
+                <div class="min-6">
+                  <!-- Expansion -->
+                  <mb-expansion-item-grid
+                    size="small"
+                    [expansion]="card.expansion"
+                  >
+                  </mb-expansion-item-grid>
+                </div>
+              </div>
 
-							<div class="width-12" *ngIf="false">
-								<div class="flex padded-small">
-									<!-- TCG Player -->
-									<div
-										class="width-12 medium-6 small-12"
-										*ngIf="buttonTCGPlayer"
-									>
-										<mb-button
-											[button]="buttonTCGPlayer"
-										></mb-button>
-									</div>
+              <div class="width-12" *ngIf="false">
+                <div class="flex padded-small">
+                  <!-- TCG Player -->
+                  <div
+                    class="width-12 medium-6 small-12"
+                    *ngIf="buttonTCGPlayer"
+                  >
+                    <mb-button [button]="buttonTCGPlayer"></mb-button>
+                  </div>
 
-									<!-- TCG Player -->
-									<div
-										class="width-12 medium-6 small-12"
-										*ngIf="buttonEbay"
-									>
-										<mb-button
-											[button]="buttonEbay"
-										></mb-button>
-									</div>
-								</div>
-							</div>
+                  <!-- TCG Player -->
+                  <div class="width-12 medium-6 small-12" *ngIf="buttonEbay">
+                    <mb-button [button]="buttonEbay"></mb-button>
+                  </div>
+                </div>
+              </div>
 
-							<div
-								class="card-rarity flex flex-center padded-small"
-								*ngIf="tagRarity"
-							>
-								<!-- Rarity -->
-								<div>
-									<a
-										[routerLink]="
-											card.rarity &&
-											'/cards/rarity/' +
-												card.rarity
-													.toLowerCase()
-													.replace(' ', '-')
-										"
-									>
-										<mb-tag [tag]="tagRarity"></mb-tag>
-									</a>
-								</div>
+              <div
+                class="card-rarity flex flex-center padded-small"
+                *ngIf="tagRarity"
+              >
+                <!-- Rarity -->
+                <div>
+                  <a
+                    [routerLink]="
+                      card.rarity &&
+                      '/cards/rarity/' +
+                        card.rarity.toLowerCase().replace(' ', '-')
+                    "
+                  >
+                    <mb-tag [tag]="tagRarity"></mb-tag>
+                  </a>
+                </div>
 
-								<!-- Number -->
-								<div class="subheading">
-									<mb-tag [tag]="tagNumber"></mb-tag>
-								</div>
+                <!-- Number -->
+                <div class="subheading">
+                  <mb-tag [tag]="tagNumber"></mb-tag>
+                </div>
 
-								<!-- Artist -->
-								<div>
-									<a
-										class="artist-link"
-										[routerLink]="
-											'/cards/artists/' +
-											card.artist
-												.toLowerCase()
-												.replace(' ', '-')
-										"
-									>
-										<mb-tag [tag]="tagArtist"></mb-tag>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</article>
+                <!-- Artist -->
+                <div>
+                  <a
+                    class="artist-link"
+                    [routerLink]="
+                      '/cards/artists/' +
+                      card.artist.toLowerCase().replace(' ', '-')
+                    "
+                  >
+                    <mb-tag [tag]="tagArtist"></mb-tag>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
 
-	<div class="relative z-1">
-		<div *ngIf="userCards">
-			<!-- Collection -->
-			<mb-card-collection [card_id]="card.id" [userCards]="userCards">
-			</mb-card-collection>
-		</div>
-		<div *ngIf="showRelated">
-			<!-- Related -->
-			<mb-items
-				[items]="relatedCards"
-				(outputGetItems)="getRelatedCards()"
-				(outputDisplayModeChanged)="getRelatedCards()"
-			>
-			</mb-items>
-		</div>
-		<div>
-			<!-- Expansion -->
-			<mb-items
-				[items]="expansionCards"
-				(outputGetItems)="getExpansionCards()"
-				(outputDisplayModeChanged)="getExpansionCards()"
-			>
-			</mb-items>
-		</div>
-	</div>
+  <div class="relative z-1">
+    <!-- User Cards -->
+    <div *ngIf="userCards">
+      <user-cards [card_id]="card.id" [userCards]="userCards"> </user-cards>
+    </div>
+
+    <!-- Related -->
+    <div *ngIf="showRelated">
+      <mb-items
+        [items]="relatedCards"
+        (outputGetItems)="getRelatedCards()"
+        (outputDisplayModeChanged)="getRelatedCards()"
+      >
+      </mb-items>
+    </div>
+
+    <!-- Expansion -->
+    <div>
+      <mb-items
+        [items]="expansionCards"
+        (outputGetItems)="getExpansionCards()"
+        (outputDisplayModeChanged)="getExpansionCards()"
+      >
+      </mb-items>
+    </div>
+  </div>
 </div>

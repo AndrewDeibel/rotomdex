@@ -1,6 +1,5 @@
-import { CardCollectionItem } from './../../../components/card-collection/card-collection-item/card-collection-item';
-import { Select, SelectOption, SelectOptionGroup } from '@app/controls';
-import { Menu } from '@app/controls/menu';
+import { UserCard } from '@app/components/user-cards';
+import { SelectOption, SelectOptionGroup } from '@app/controls';
 import '@app/helpers/string.extensions';
 import { ItemsFilter } from '@app/layout';
 import { Icons } from '@app/models';
@@ -48,7 +47,7 @@ export class Card {
   has_reverse_holo: boolean;
   types: string[] = [];
   last_prices: CardLastPrices;
-  user_cards: CardCollectionItem[] = [];
+  user_cards: UserCard[] = [];
 
   route: string;
   tempId: number;

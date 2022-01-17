@@ -1,15 +1,10 @@
-import { AuthenticationService } from './../../services/auth.service';
-import { UserCardsService } from './../../components/card-collection/card-collection.service';
-import { Items } from './../../layout/main/items/items';
-import { LoaderService } from './../../controls/loader/loader.service';
-import { ActivatedRoute } from '@angular/router';
-import { Icons } from '@app/models';
-import { Menu, MenuItem } from '@app/controls/menu';
-import { ProgressBar } from './../../controls/progress-bar/progress-bar';
+import { AuthenticationService } from '@app/services/auth.service';
+import { UserCardsService } from '@app/components';
+import { Items, ItemGroup } from '@app/layout';
+import { Icons, Symbols } from '@app/models';
+import { Menu, MenuItem, LoaderService, ProgressBar } from '@app/controls';
 import { Component, OnInit } from '@angular/core';
-import { Symbols } from '@app/models';
 import { GetCards } from '@app/services/cards.service';
-import { ItemGroup } from '@app/layout';
 
 @Component({
   selector: 'collection',
@@ -25,7 +20,7 @@ export class CollectionComponent implements OnInit {
 
   constructor(
     private loaderService: LoaderService,
-    private cardCollectionService: UserCardsService,
+    private userCardsService: UserCardsService,
     private authenticationService: AuthenticationService
   ) {}
 
@@ -46,7 +41,7 @@ export class CollectionComponent implements OnInit {
   }
 
   setupSubscriptions() {
-    this.cardCollectionService.getUserCardsObservable().subscribe((res) => {
+    this.userCardsService.getUserCardsObservable().subscribe((res: any) => {
       if (res) {
         this.loaderService.clearItemLoading('getCollectionCards');
         this.items.footer.totalPages = res.total_pages;
@@ -105,7 +100,7 @@ export class CollectionComponent implements OnInit {
 
   getCollectionCards() {
     this.loaderService.addItemLoading('getCollectionCards');
-    this.cardCollectionService.getUserCards(
+    this.userCardsService.getUserCards(
       new GetCards({
         page: this.items.footer.page,
         page_size: this.items.footer.pageSize,

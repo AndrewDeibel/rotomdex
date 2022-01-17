@@ -6,31 +6,23 @@ import {
   Icons,
   Printings,
 } from '@app/models';
-import {
-  Dialog,
-  FormComponent,
-  MBFormControl,
-  MBFormGroup,
-  Textarea,
-} from '@app/controls';
+import { Dialog, MBFormControl, MBFormGroup, Textarea } from '@app/controls';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Select, SelectOption, SelectOptionGroup } from '@app/controls/select';
-
 import { Button } from '@app/controls/button';
-import { CardCollectionItem } from './card-collection-item';
-import { DialogService } from './../../../controls/dialog/dialog.service';
-import { MBForm } from './../../../controls/form/form';
-import { Textbox } from '@app/controls/textbox';
+import { UserCard } from './user-card';
+import { DialogService } from '../../../controls/dialog/dialog.service';
+import { MBForm } from '../../../controls/form/form';
 
 @Component({
-  selector: 'mb-card-collection-item',
-  templateUrl: './card-collection-item.component.html',
-  styleUrls: ['./card-collection-item.component.scss'],
+  selector: 'user-card',
+  templateUrl: './user-card.component.html',
+  styleUrls: ['./user-card.component.scss'],
 })
-export class CardCollectionItemComponent implements OnInit {
-  @Input() item: CardCollectionItem;
+export class UserCardComponent implements OnInit {
+  @Input() item: UserCard;
   @Output() deleted: EventEmitter<boolean> = new EventEmitter();
-  @Output() updated: EventEmitter<CardCollectionItem> = new EventEmitter();
+  @Output() updated: EventEmitter<UserCard> = new EventEmitter();
   selectCondition: Select;
   selectGradingCompany: Select;
   selectPrinting: Select;
@@ -69,7 +61,7 @@ export class CardCollectionItemComponent implements OnInit {
       ],
       change: (value) => {
         this.updated.emit(
-          new CardCollectionItem({
+          new UserCard({
             ...this.item,
             condition: (Condition as any)[value],
           })
@@ -125,7 +117,7 @@ export class CardCollectionItemComponent implements OnInit {
       ],
       change: (value) => {
         this.updated.emit(
-          new CardCollectionItem({
+          new UserCard({
             ...this.item,
             printing: (Printings as any)[value],
           })

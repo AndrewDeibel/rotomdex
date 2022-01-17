@@ -1,16 +1,10 @@
-import { APIResponse, buildUrl } from './../../models/api';
-import { CardResults, GetCards } from './../../services/cards.service';
-
-import { AuthenticationService } from '@app/services/auth.service';
+import { APIResponse, buildUrl } from '../../models/api';
+import { CardResults, GetCards } from '../../services/cards.service';
 import { BehaviorSubject } from 'rxjs';
-import { Card } from './../../pages/cards/card/card';
-import { CardCollectionItem } from './card-collection-item/card-collection-item';
-import { Condition } from './../../models/condition';
+import { Card } from '../../pages/cards/card/card';
+import { UserCard } from './user-card';
 import { HttpClient } from '@angular/common/http';
-import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from './../../../environments/environment';
-import { map } from 'rxjs/operators';
 
 export class UpdateUserCard {
   user_card_id: number;
@@ -61,35 +55,29 @@ export class UserCardsService {
   }
 
   // Get card user cards
-  private getCardUserCardsSubject = new BehaviorSubject<
-    CardCollectionItem[] | null
-  >(null);
+  private getCardUserCardsSubject = new BehaviorSubject<UserCard[] | null>(
+    null
+  );
   getCardUserCardsObservable() {
-    this.getCardUserCardsSubject = new BehaviorSubject<
-      CardCollectionItem[] | null
-    >(null);
+    this.getCardUserCardsSubject = new BehaviorSubject<UserCard[] | null>(null);
     return this.getCardUserCardsSubject.asObservable();
   }
   getCardUserCards(slug: string) {
     var url = buildUrl('user-cards/' + slug);
     this.http.get<APIResponse>(url).subscribe((res) => {
       this.getCardUserCardsSubject.next(
-        res.data.map((userCard: any) => new CardCollectionItem(userCard))
+        res.data.map((userCard: any) => new UserCard(userCard))
       );
     });
   }
 
   // Add user card
-  private addUserCardSubject = new BehaviorSubject<CardCollectionItem | null>(
-    null
-  );
+  private addUserCardSubject = new BehaviorSubject<UserCard | null>(null);
   addUserCardObservable() {
-    this.addUserCardSubject = new BehaviorSubject<CardCollectionItem | null>(
-      null
-    );
+    this.addUserCardSubject = new BehaviorSubject<UserCard | null>(null);
     return this.addUserCardSubject.asObservable();
   }
-  addUserCard(userCard: CardCollectionItem) {
+  addUserCard(userCard: UserCard) {
     this.http
       .post<APIResponse>(buildUrl('user-cards/create'), {
         ...userCard,
@@ -107,7 +95,7 @@ export class UserCardsService {
   }
 
   // Update user card
-  updateUserCard(userCard: CardCollectionItem) {
+  updateUserCard(userCard: UserCard) {
     return this.http.post<APIResponse>(buildUrl('user-cards/update'), userCard);
   }
 }

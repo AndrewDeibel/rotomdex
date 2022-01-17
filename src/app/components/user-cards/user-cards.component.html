@@ -35,14 +35,14 @@
           </div>
         </div>
       </div>
-      <mb-card-collection-item
+      <user-card
         class="box"
         *ngFor="let userCard of userCards"
         [item]="userCard"
         (deleted)="deleteItem(userCard)"
         (updated)="updateItem(userCard)"
       >
-      </mb-card-collection-item>
+      </user-card>
       <mb-empty *ngIf="userCards.length === 0" [empty]="empty"></mb-empty>
       <div class="width-12" *ngIf="userCards.length">
         <div class="border-top padding-top">

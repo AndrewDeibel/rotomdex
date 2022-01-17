@@ -1,82 +1,71 @@
 <div class="flex h-100">
-	<div class="input-bg">
-		<mb-menu [menu]="menuSidebar"></mb-menu>
-	</div>
-	<div class="box">
-		<collection-dashboard *ngIf="showDashboard()"></collection-dashboard>
-		<mb-items
-			*ngIf="showAll()"
-			[items]="items"
-			(outputGetItems)="getCollectionCards()"
-		></mb-items>
-		<collection-card-group
-			class="padding-4 box"
-			*ngIf="showAddGroup()"
-		></collection-card-group>
-		<div class="max" *ngIf="false">
-			<div class="flex padded">
-				<div class="width-4 medium-12">
-					<div class="panel">
-						<div class="flex padded">
-							<div class="width-6 flex vertical flex-center">
-								<img class="symbol" [src]="symbolCards" />
-								<h4>
-									987<span class="subheading">/40,000</span>
-								</h4>
-								<div class="subheading">Total Cards</div>
-							</div>
-							<div class="width-6 flex vertical flex-center">
-								<img class="symbol" [src]="symbolPokemon" />
-								<h4>300<span class="subheading">/999</span></h4>
-								<div class="subheading">Total Pokemon</div>
-							</div>
-							<div class="width-6">
-								<h4>48<span class="subheading">/88</span></h4>
-								<div class="subheading">Total Sets</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="width-8 medium-12">
-					<div class="panel">
-						<h4>History</h4>
-						<p>
-							Graph showing cards added to collection over time.
-						</p>
-					</div>
-				</div>
-				<div class="width-6 medium-12">
-					<div class="panel">
-						<h4>Expansions</h4>
-						<p>Progress collecting each set, sorted by progress.</p>
-						<div class="flex padded">
-							<div class="width-12">
-								<h6>Hidden Fates</h6>
-								<progress-bar
-									[progressBar]="progressBar"
-								></progress-bar>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="width-6 medium-12">
-					<div class="panel">
-						<h4>Pokemon</h4>
-						<p>
-							Progress collecting each pokemon, sorted by
-							progress.
-						</p>
-						<div class="flex padded">
-							<div class="col xlarge-12">
-								<h6>Charizard</h6>
-								<progress-bar
-									[progressBar]="progressBar"
-								></progress-bar>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="input-bg">
+    <mb-menu [menu]="menuSidebar"></mb-menu>
+  </div>
+  <div class="box">
+    <collection-dashboard *ngIf="showDashboard()"></collection-dashboard>
+    <mb-items
+      *ngIf="showAll()"
+      [items]="items"
+      (outputGetItems)="getCollectionCards()"
+    ></mb-items>
+    <collection-card-group
+      class="padding-4 box"
+      *ngIf="showAddGroup()"
+    ></collection-card-group>
+    <div class="max" *ngIf="false">
+      <div class="flex padded">
+        <div class="width-4 medium-12">
+          <div class="panel">
+            <div class="flex padded">
+              <div class="width-6 flex vertical flex-center">
+                <img class="symbol" [src]="symbolCards" />
+                <h4>987<span class="subheading">/40,000</span></h4>
+                <div class="subheading">Total Cards</div>
+              </div>
+              <div class="width-6 flex vertical flex-center">
+                <img class="symbol" [src]="symbolPokemon" />
+                <h4>300<span class="subheading">/999</span></h4>
+                <div class="subheading">Total Pokemon</div>
+              </div>
+              <div class="width-6">
+                <h4>48<span class="subheading">/88</span></h4>
+                <div class="subheading">Total Sets</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="width-8 medium-12">
+          <div class="panel">
+            <h4>History</h4>
+            <p>Graph showing cards added to collection over time.</p>
+          </div>
+        </div>
+        <div class="width-6 medium-12">
+          <div class="panel">
+            <h4>Expansions</h4>
+            <p>Progress collecting each set, sorted by progress.</p>
+            <div class="flex padded">
+              <div class="width-12">
+                <h6>Hidden Fates</h6>
+                <progress-bar [progressBar]="progressBar"></progress-bar>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="width-6 medium-12">
+          <div class="panel">
+            <h4>Pokemon</h4>
+            <p>Progress collecting each pokemon, sorted by progress.</p>
+            <div class="flex padded">
+              <div class="col xlarge-12">
+                <h6>Charizard</h6>
+                <progress-bar [progressBar]="progressBar"></progress-bar>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

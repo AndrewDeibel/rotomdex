@@ -1,20 +1,17 @@
-import { AddUserCard, UserCardsService } from './card-collection.service';
+import { UserCardsService } from './user-cards.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { GUID } from '@app/helpers';
-import { Condition, Icons, Printings } from '@app/models';
-import { Button } from '../../controls/button';
-import { Checkbox } from '../../controls/checkbox';
-import { Empty } from '../../controls/empty';
-import { CardCollectionItem } from './card-collection-item';
+import { Icons } from '@app/models';
+import { Button, Checkbox, Empty } from '@app/controls';
+import { UserCard } from './user-card';
 
 @Component({
-  selector: 'mb-card-collection',
-  templateUrl: './card-collection.component.html',
-  styleUrls: ['./card-collection.component.scss'],
+  selector: 'user-cards',
+  templateUrl: './user-cards.component.html',
+  styleUrls: ['./user-cards.component.scss'],
 })
-export class CardCollectionComponent implements OnInit {
+export class UserCardsComponent implements OnInit {
   @Input() card_id: number;
-  @Input() userCards: CardCollectionItem[] = [];
+  @Input() userCards: UserCard[] = [];
   buttonAdd: Button;
   checkboxWishList: Checkbox;
   buttonViewAll: Button;
@@ -83,14 +80,14 @@ export class CardCollectionComponent implements OnInit {
   }
 
   addItem(
-    userCard: CardCollectionItem = new CardCollectionItem({
+    userCard: UserCard = new UserCard({
       card_id: this.card_id,
     })
   ) {
     this.cardCollectionService.addUserCard(userCard);
   }
 
-  deleteItem(userCard: CardCollectionItem) {
+  deleteItem(userCard: UserCard) {
     this.cardCollectionService.removeUserCard(userCard.id).subscribe((res) => {
       if (res.success)
         this.userCards = this.userCards.filter(
@@ -99,7 +96,7 @@ export class CardCollectionComponent implements OnInit {
     });
   }
 
-  updateItem(userCard: CardCollectionItem) {
+  updateItem(userCard: UserCard) {
     this.cardCollectionService.updateUserCard(userCard).subscribe((res) => {
       if (res.success)
         this.userCards = this.userCards.map((_userCard) =>
