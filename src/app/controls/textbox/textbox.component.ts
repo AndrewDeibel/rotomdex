@@ -92,7 +92,7 @@ export class TextboxComponent implements ControlValueAccessor {
 
     // If max, check it
     if (this.textbox.max) {
-      let num = Number(this.value);
+      const num = Number(this.value);
 
       // Not a number
       if (isNaN(num)) {
@@ -107,7 +107,7 @@ export class TextboxComponent implements ControlValueAccessor {
 
     // If min, check it
     if (this.textbox.min) {
-      let num = Number(this.value);
+      const num = Number(this.value);
 
       // Not a number
       if (isNaN(num)) {

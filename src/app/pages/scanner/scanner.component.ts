@@ -172,8 +172,8 @@ export class ScannerComponent implements OnInit {
     });
 
     // Options
-    let scannerOptionMenuItems: MenuItem[] = [];
-    let switchCameraMenuItem = new MenuItem({
+    const scannerOptionMenuItems: MenuItem[] = [];
+    const switchCameraMenuItem = new MenuItem({
       text: 'Switch Cameras',
       icon: Icons.sync,
       click: () => {
@@ -378,8 +378,8 @@ export class ScannerComponent implements OnInit {
     this.scanned = true;
     console.info('received webcam image', webcamImage);
     this.webcamImage = webcamImage;
-    let bytes = webcamImage.imageAsBase64.length * (3 / 4) - 2;
-    let kilobytes = bytes / 1000;
+    const bytes = webcamImage.imageAsBase64.length * (3 / 4) - 2;
+    const kilobytes = bytes / 1000;
     this.lastImageSize = `${kilobytes}kb`;
 
     // Send request to server

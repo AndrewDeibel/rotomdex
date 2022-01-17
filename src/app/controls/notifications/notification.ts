@@ -18,7 +18,7 @@ export class Notification {
   }
 
   setupDefaults() {
-    let defaultDuration = 5000;
+    const defaultDuration = 5000;
     switch (this.alertType) {
       case AlertType.success: {
         if (!this.duration) {

@@ -55,11 +55,11 @@ export class Card {
   getCardNumber(): string {
     // IS number
     if (!isNaN(+this.number)) {
-      let x = `${this.number}`;
-      let y = `${this.expansion.total_cards}`;
-      let pad = '000';
-      let xFormatted = pad.substring(0, pad.length - x.length) + x;
-      let yFormatted = pad.substring(0, pad.length - y.length) + y;
+      const x = `${this.number}`;
+      const y = `${this.expansion.total_cards}`;
+      const pad = '000';
+      const xFormatted = pad.substring(0, pad.length - x.length) + x;
+      const yFormatted = pad.substring(0, pad.length - y.length) + y;
       return `${xFormatted}/${yFormatted}`;
     }
     // NOT number (promo)

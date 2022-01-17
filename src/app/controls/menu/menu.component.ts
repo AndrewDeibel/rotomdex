@@ -24,12 +24,11 @@ export class MenuComponent implements OnInit {
       }
 
       // item.click is often clearActive, so save current active state first
-      let active = item.active;
       if (item.click) {
         item.click(event);
       }
       if (item.menu) {
-        item.active = !active;
+        item.active = !item.active;
       }
     }
   }

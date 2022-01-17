@@ -17,8 +17,7 @@ export class FeaturedService {
   getFeatured() {
     this.http.get<APIResponse>(buildUrl('featured')).subscribe((res) => {
       if (res) {
-        let featured: Featured = new Featured(res.data);
-        this.getFeaturedSubject.next(featured);
+        this.getFeaturedSubject.next(new Featured(res.data));
       }
     });
   }

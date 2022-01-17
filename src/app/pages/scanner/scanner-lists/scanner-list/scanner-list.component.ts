@@ -40,7 +40,7 @@ export class ScannerListComponent implements OnInit {
 
   ngOnDestroy() {}
   ngOnInit() {
-    let addToMenuItem = new MenuItem({
+    const addToMenuItem = new MenuItem({
       text: 'Add to...',
       icon: Icons.plus,
       click: () => {
@@ -52,7 +52,7 @@ export class ScannerListComponent implements OnInit {
           }),
         });
 
-        let addToBinderMenuItem = new MenuItem({
+        const addToBinderMenuItem = new MenuItem({
           text: 'Binder',
           icon: Icons.binders,
           click: () => {},
@@ -170,7 +170,7 @@ export class ScannerListComponent implements OnInit {
   }
 
   buildCardMenu(card: Card) {
-    let removeMenuItem = new MenuItem({
+    const removeMenuItem = new MenuItem({
       icon: Icons.trash,
       text: 'Remove',
       click: (event: Event) => {
@@ -184,7 +184,7 @@ export class ScannerListComponent implements OnInit {
       },
     });
 
-    let cardMenuItem = new MenuItem({
+    const cardMenuItem = new MenuItem({
       menu: new Menu({
         classes: 'anchor-bottom anchor-left',
       }),
@@ -195,9 +195,11 @@ export class ScannerListComponent implements OnInit {
 
   search() {
     if (this.query.length) {
-      let searchCards = this.scannerService.scannerList.cards.filter((card) => {
-        return card.name.toLowerCase().includes(this.query.toLowerCase());
-      });
+      const searchCards = this.scannerService.scannerList.cards.filter(
+        (card) => {
+          return card.name.toLowerCase().includes(this.query.toLowerCase());
+        }
+      );
       this.items.itemGroups = [
         new ItemGroup({
           items: searchCards,

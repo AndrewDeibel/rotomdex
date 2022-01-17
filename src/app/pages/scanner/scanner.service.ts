@@ -45,7 +45,7 @@ export class ScannerService {
       .post<APIResponse>(buildUrl('scanner/detect'), params)
       .subscribe((res) => {
         if (res.success) {
-          let card = new Card(res.data.card);
+          const card = new Card(res.data.card);
           if (card.id > 0) {
             this.scanCardSubject.next(card);
           }
@@ -66,14 +66,11 @@ export class ScannerService {
       .post<APIResponse>(buildUrl('scanner/multiple'), params)
       .subscribe((res) => {
         if (res.success && res.data.length > 0) {
-          let cards: Card[] = [];
-          res.data.forEach((card: any) => {
-            let _card = new Card(card);
-            if (_card.id > 0) {
-              cards.push(_card);
-            }
-          });
-          this.scanCardsSubject.next(cards);
+          this.scanCardsSubject.next(
+            res.data
+              .map((card: any) => new Card(card))
+              .filter((card: Card) => card.id > 0)
+          );
         } else {
           this.scanCardsSubject.next([]);
         }
@@ -109,7 +106,7 @@ export class ScannerService {
     // this._scannerList.cards = this._scannerList.cards.filter(card => {
     // 	return card.tempId != cardOld.tempId;
     // });
-    let updatedScannerListCards: Card[] = [];
+    const updatedScannerListCards: Card[] = [];
     this._scannerList.cards.forEach((card) => {
       if (card.tempId === cardOld.tempId) {
         updatedScannerListCards.push(cardNew);
