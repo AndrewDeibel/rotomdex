@@ -31,17 +31,14 @@ export class ExpansionsComponent implements OnInit {
     });
   }
 
-  responseGetExpansions(series: Series[]) {
-    if (series) {
+  responseGetExpansions(seriesList: Series[]) {
+    if (seriesList) {
       this.loaderService.clearItemLoading('getExpansions');
-      this.items.itemGroups = [];
-      series.forEach((_series) => {
-        this.items.itemGroups.push({
-          items: _series.expansions,
-          name: _series.name,
-          progress: 24,
-        });
-      });
+      this.items.itemGroups = seriesList.map((series) => ({
+        items: series.expansions,
+        name: series.name,
+        progress: 24,
+      }));
     }
   }
 
