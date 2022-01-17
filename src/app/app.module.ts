@@ -45,9 +45,6 @@ import {
   HeroComponent,
 } from './controls';
 
-// User cards
-import { UserCardsComponent, UserCardComponent } from './components';
-
 // Pages
 import {
   SignInComponent,
@@ -73,6 +70,8 @@ import {
   CollectionComponent,
   CollectionDashboardComponent,
   CollectionCardGroupComponent,
+  UserCardsComponent,
+  UserCardComponent,
   EditProfileComponent,
 } from './pages';
 

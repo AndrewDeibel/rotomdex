@@ -1,10 +1,8 @@
 import { Component, Input, OnInit, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Icons, Size } from '@app/models';
-
-import { Select } from './select';
-import { SelectOption } from '@app/controls';
-import { Textbox } from './../textbox/textbox';
+import { Select, SelectOption } from './select';
+import { Textbox } from '@app/controls';
 
 @Component({
   selector: 'mb-select',

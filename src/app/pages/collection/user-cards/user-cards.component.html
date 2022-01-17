@@ -40,7 +40,7 @@
         *ngFor="let userCard of userCards"
         [item]="userCard"
         (deleted)="deleteItem(userCard)"
-        (updated)="updateItem(userCard)"
+        (updated)="updateItem($event)"
       >
       </user-card>
       <mb-empty *ngIf="userCards.length === 0" [empty]="empty"></mb-empty>

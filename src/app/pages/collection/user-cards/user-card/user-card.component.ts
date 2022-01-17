@@ -6,13 +6,13 @@ import {
   Icons,
   Printings,
 } from '@app/models';
-import { Dialog, MBFormControl, MBFormGroup, Textarea } from '@app/controls';
+import { Dialog, FormControl, FormControlGroup, Textarea } from '@app/controls';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Select, SelectOption, SelectOptionGroup } from '@app/controls/select';
 import { Button } from '@app/controls/button';
 import { UserCard } from './user-card';
-import { DialogService } from '../../../controls/dialog/dialog.service';
-import { MBForm } from '../../../controls/form/form';
+import { DialogService } from '@app/controls/dialog';
+import { Form } from '@app/controls/form';
 
 @Component({
   selector: 'user-card',
@@ -60,10 +60,13 @@ export class UserCardComponent implements OnInit {
         }),
       ],
       change: (value) => {
+        var test =
+          (Condition as any)[value.replace(' ', '')] ||
+          (ConditionGraded as any)[value.replace(' ', '').replace('.', '')];
         this.updated.emit(
           new UserCard({
             ...this.item,
-            condition: (Condition as any)[value],
+            condition: test,
           })
         );
       },
@@ -87,16 +90,24 @@ export class UserCardComponent implements OnInit {
         })
       );
     }
-    this.selectCondition.value = this.item.condition;
 
     // Grading company
     this.selectGradingCompany = new Select({
+      value: this.item.graded_by,
       classes: 'square',
       optionGroups: [
         new SelectOptionGroup({
           label: 'Graded By',
         }),
       ],
+      change: (value) => {
+        this.updated.emit(
+          new UserCard({
+            ...this.item,
+            graded_by: (GradingCompany as any)[value.replace(' ', '')],
+          })
+        );
+      },
     });
     for (let gradingCompany in GradingCompany) {
       this.selectGradingCompany.optionGroups[0].options.push(
@@ -109,6 +120,7 @@ export class UserCardComponent implements OnInit {
 
     // Printing
     this.selectPrinting = new Select({
+      value: this.item.printing,
       classes: 'square',
       optionGroups: [
         new SelectOptionGroup({
@@ -119,7 +131,7 @@ export class UserCardComponent implements OnInit {
         this.updated.emit(
           new UserCard({
             ...this.item,
-            printing: (Printings as any)[value],
+            printing: (Printings as any)[value.replace(' ', '')],
           })
         );
       },
@@ -142,12 +154,12 @@ export class UserCardComponent implements OnInit {
         this.dialogService.setDialog(
           new Dialog({
             title: 'Notes',
-            form: new MBForm({
+            form: new Form({
               formGroup: this.formNotes,
               groups: [
-                new MBFormGroup({
+                new FormControlGroup({
                   controls: [
-                    new MBFormControl({
+                    new FormControl({
                       //formControl: this.formNotes.controls.notesControl,
                       control: new Textarea({}),
                     }),

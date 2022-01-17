@@ -1,9 +1,9 @@
-export class MBFormControl {
-	control: any;
-	classes: string;
-	formControl: any;
+export class FormControl {
+  control: any;
+  classes: string;
+  formControl: any;
 
-	constructor(init?: Partial<MBFormControl>) {
-		Object.assign(this, init);
-	}
+  constructor(init?: Partial<FormControl>) {
+    Object.assign(this, init);
+  }
 }

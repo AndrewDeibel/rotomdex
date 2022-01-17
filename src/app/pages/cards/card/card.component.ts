@@ -1,5 +1,4 @@
-import { UserCard } from '@app/components/user-cards/user-card';
-import { UserCardsService } from '@app/components/user-cards/user-cards.service';
+import { UserCard, UserCardsService } from '@app/pages/collection';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Card, SetSortByCards } from './card';
 import { ActivatedRoute } from '@angular/router';

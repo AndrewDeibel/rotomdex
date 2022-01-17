@@ -1,21 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MBForm } from './form';
+import { Form } from './form';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-	selector: 'mb-form',
-	templateUrl: 'form.component.html'
+  selector: 'mb-form',
+  templateUrl: 'form.component.html',
 })
-
 export class FormComponent implements OnInit {
+  @Input() form: Form;
 
-	@Input() form: MBForm;
+  constructor() {}
 
-	constructor() { }
+  ngOnInit() {}
 
-	ngOnInit() { }
-
-	onSubmit(formGroup: FormGroup) {
-		window.alert('Valid: ' + formGroup.valid);
-	}
+  onSubmit(formGroup: FormGroup) {
+    window.alert('Valid: ' + formGroup.valid);
+  }
 }

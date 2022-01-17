@@ -1,5 +1,5 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { Size } from './../../models/size';
+import { Size } from '@app/models';
 
 export class Select {
   label: string;
@@ -19,7 +19,22 @@ export class Select {
   size: Size;
   change: (value: string) => void;
 
-  getSelectedOptions = () => this.options.filter((option) => option.selected);
+  getSelectedOptions = () => {
+    const selectedOptions = this.options.filter((option) => option.selected);
+    const selectedOptionGroupOptions = this.optionGroups
+      .filter(
+        (optionGroup) =>
+          optionGroup.options.filter((option) => option.selected).length
+      )
+      .map((optionGroup) => {
+        const selectedGroup = optionGroup.options.filter(
+          (option) => option.selected
+        );
+        return selectedGroup && selectedGroup[0];
+      });
+    return [...selectedOptions, ...selectedOptionGroupOptions];
+  };
+
   getUnselectedOptions = () =>
     this.options.filter(
       (option) =>
@@ -34,9 +49,10 @@ export class Select {
   public constructor(init?: Partial<Select>) {
     Object.assign(this, init);
     this.optionGroupsVisible = this.optionGroups;
-    //this.optionsVisible = this.options;
+    this.optionsVisible = this.options;
   }
 }
+
 export class SelectOption {
   text: string;
   value: string;
@@ -47,6 +63,7 @@ export class SelectOption {
     Object.assign(this, init);
   }
 }
+
 export class SelectOptionGroup {
   label: string;
   options: SelectOption[] = [];

@@ -1,4 +1,4 @@
-import { UserCard } from '@app/components/user-cards';
+import { UserCard } from '@app/pages/collection';
 import { SelectOption, SelectOptionGroup } from '@app/controls';
 import '@app/helpers/string.extensions';
 import { ItemsFilter } from '@app/layout';

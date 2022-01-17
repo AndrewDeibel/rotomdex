@@ -1,11 +1,11 @@
-import { MBFormControl } from './form-control/form-control';
+import { FormControl } from './form-control/form-control';
 
-export class MBFormGroup {
-	title: string;
-	subtitle: string;
-	controls: MBFormControl[];
+export class FormControlGroup {
+  title: string;
+  subtitle: string;
+  controls: FormControl[];
 
-    constructor(init?:Partial<MBFormGroup>) {
-		Object.assign(this, init);
-	}
+  constructor(init?: Partial<FormControlGroup>) {
+    Object.assign(this, init);
+  }
 }

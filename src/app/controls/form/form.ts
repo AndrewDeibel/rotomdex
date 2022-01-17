@@ -1,12 +1,12 @@
-import { MBFormGroup } from './form-group/form-group';
+import { FormControlGroup } from './form-group/form-group';
 import { FormGroup } from '@angular/forms';
 
-export class MBForm {
-	title: string;
-	groups: MBFormGroup[];
-	formGroup: FormGroup;
+export class Form {
+  title: string;
+  groups: FormControlGroup[];
+  formGroup: FormGroup;
 
-    constructor(init?:Partial<MBForm>) {
-		Object.assign(this, init);
-	}
+  constructor(init?: Partial<Form>) {
+    Object.assign(this, init);
+  }
 }

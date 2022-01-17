@@ -1,18 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MBFormGroup } from './form-group';
+import { FormControlGroup } from './form-group';
 
 @Component({
-	selector: 'mb-form-group',
-	templateUrl: 'form-group.component.html'
+  selector: 'mb-form-group',
+  templateUrl: 'form-group.component.html',
 })
-
 export class FormGroupComponent implements OnInit {
+  @Input() mbFormGroup: FormControlGroup;
 
-	@Input() mbFormGroup: MBFormGroup;
+  constructor() {}
 
-	constructor() { }
-
-	ngOnInit() {
-		
-	}
+  ngOnInit() {}
 }

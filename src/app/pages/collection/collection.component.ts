@@ -1,6 +1,6 @@
 import { APIGetPaged } from './../../models/api';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
-import { UserCardsService } from '@app/components';
+import { UserCardsService } from '@app/pages/collection';
 import { Items, ItemGroup } from '@app/layout';
 import { Icons, Symbols } from '@app/models';
 import { Menu, MenuItem, LoaderService, ProgressBar } from '@app/controls';
