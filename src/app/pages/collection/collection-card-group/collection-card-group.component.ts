@@ -1,6 +1,6 @@
 import { Icons } from '@app/models';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '@app/services/auth.service';
+import { AuthenticationService } from '@app/pages/auth/auth.service';
 import {
   Textbox,
   Button,

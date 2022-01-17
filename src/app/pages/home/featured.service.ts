@@ -1,5 +1,5 @@
-import { APIResponse } from './../models/api';
-import { Featured } from './../pages/home/featured';
+import { APIResponse } from '../../models/api';
+import { Featured } from './featured';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';

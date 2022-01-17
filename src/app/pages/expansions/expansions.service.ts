@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@app/../environments/environment';
 import { APIResponse } from '@app/models';
 import { Expansion, Series } from '@app/pages';
-import { CacheGlobal } from '../../services/cache/globalCache';
+import { Cache } from '../../helpers/cache';
 
 export interface GetExpansions {
   query: string;
@@ -23,16 +23,16 @@ export class ExpansionsService {
     return this.getExpansionsSubject.asObservable();
   }
   getExpansions(params: GetExpansions) {
-    if (CacheGlobal.expansions) {
+    if (Cache.expansions) {
       this.getExpansionsSubject.next(
-        this.handleExpansionsParams(params, CacheGlobal.expansions)
+        this.handleExpansionsParams(params, Cache.expansions)
       );
     } else {
       this.http
         .get<APIResponse>(`${environment.api}expansions`)
         .subscribe((res) => {
           const series = res.data.map((_series: any) => new Series(_series));
-          CacheGlobal.expansions = series;
+          Cache.expansions = series;
           this.getExpansionsSubject.next(
             this.handleExpansionsParams(params, series)
           );

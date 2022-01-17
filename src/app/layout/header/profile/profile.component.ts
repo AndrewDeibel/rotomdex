@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Menu, MenuItem } from '@app/controls/menu';
-import { AuthenticationService } from '@app/services/auth.service';
+import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Icons } from '@app/models/icons';
 
 @Component({

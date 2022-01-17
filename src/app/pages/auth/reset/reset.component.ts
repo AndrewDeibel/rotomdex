@@ -1,6 +1,6 @@
 import { NotificationsService, Notification, AlertType } from '@app/controls';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthenticationService } from '@app/services/auth.service';
+import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Textbox, Button, ButtonType } from '@app/controls';
 import { Component, OnInit } from '@angular/core';

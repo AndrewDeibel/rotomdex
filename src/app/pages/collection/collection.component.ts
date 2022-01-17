@@ -1,4 +1,4 @@
-import { AuthenticationService } from '@app/services/auth.service';
+import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { UserCardsService } from '@app/components';
 import { Items, ItemGroup } from '@app/layout';
 import { Icons, Symbols } from '@app/models';

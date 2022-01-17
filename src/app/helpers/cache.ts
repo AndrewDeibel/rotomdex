@@ -1,6 +1,6 @@
 import { Card, Expansion, Pokemon, PokemonVariant, Series } from '@app/pages';
 
-export abstract class CacheGlobal {
+export abstract class Cache {
   static expansions: Series[];
   static expansion: { [key: string]: Expansion } = {};
   static card: { [key: string]: Card } = {};

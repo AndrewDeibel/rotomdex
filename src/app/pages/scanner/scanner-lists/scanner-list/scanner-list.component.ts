@@ -15,7 +15,7 @@ import {
 } from '@app/layout/main';
 import { Items } from '@app/layout/main/items/items';
 import { Icons } from '@app/models/icons';
-import { AuthenticationService } from '@app/services/auth.service';
+import { AuthenticationService } from '@app/pages/auth/auth.service';
 
 //@AutoUnsubscribe()
 @Component({

@@ -5,7 +5,7 @@ import { Card } from '@app/pages/cards';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Pokemon, PokemonVariant } from './pokemon';
-import { CacheGlobal } from '../../../services/cache/globalCache';
+import { Cache } from '../../../helpers/cache';
 
 // Get pokemon interfaces
 export class GetPokemonVariantCards extends APIGetPaged {
@@ -33,8 +33,8 @@ export class PokemonService {
     return this.getPokemonSubject.asObservable();
   }
   getPokemon(slug: string) {
-    if (CacheGlobal.pokemon[slug]) {
-      this.getPokemonSubject.next(CacheGlobal.pokemon[slug]);
+    if (Cache.pokemon[slug]) {
+      this.getPokemonSubject.next(Cache.pokemon[slug]);
     } else {
       this.http
         .get<APIResponse>(`${environment.api}pokemon/${slug}`)
@@ -55,8 +55,8 @@ export class PokemonService {
     return this.getPokemonVariantSubject.asObservable();
   }
   getPokemonVariant(slug: string) {
-    if (CacheGlobal.pokemonVariant[slug]) {
-      this.getPokemonVariantSubject.next(CacheGlobal.pokemonVariant[slug]);
+    if (Cache.pokemonVariant[slug]) {
+      this.getPokemonVariantSubject.next(Cache.pokemonVariant[slug]);
     } else {
       this.http
         .get<APIResponse>(`${environment.api}pokemon-variants/${slug}`)

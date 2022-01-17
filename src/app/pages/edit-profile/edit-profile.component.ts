@@ -2,7 +2,7 @@ import { LoaderService } from '../../controls/loader/loader.service';
 import { Button, ButtonType } from '@app/controls/button';
 import { Textbox, Toggle, Select } from '@app/controls';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '@app/services/auth.service';
+import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';

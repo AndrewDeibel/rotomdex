@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Textbox } from '@app/controls/textbox/textbox';
 import { Button, ButtonType } from '@app/controls/button';
 import { Checkbox } from '@app/controls/checkbox';
-import { AuthenticationService } from '@app/services/auth.service';
+import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { NotificationsService, Notification, AlertType } from '@app/controls';

@@ -5,7 +5,7 @@ import { APIResponse } from '@app/models';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Card } from '@app/pages';
-import { CacheGlobal } from '@app/services/cache/globalCache';
+import { Cache } from '@app/helpers/cache';
 
 @Injectable({ providedIn: 'root' })
 export class CardService {
@@ -19,8 +19,8 @@ export class CardService {
   }
   getCard(code: string) {
     // Try cache
-    if (CacheGlobal.card[code]) {
-      this.getCardSubject.next(CacheGlobal.card[code]);
+    if (Cache.card[code]) {
+      this.getCardSubject.next(Cache.card[code]);
     } else {
       // Show loader
       this.loaderService.addItemLoading('getCard');
@@ -30,7 +30,7 @@ export class CardService {
         .subscribe((res) => {
           var card = new Card(res.data);
           // Add to cache
-          CacheGlobal.card[code] = card;
+          Cache.card[code] = card;
           this.getCardSubject.next(card);
           // Hide loader
           this.loaderService.clearItemLoading('getCard');

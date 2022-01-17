@@ -1,5 +1,5 @@
 import { Featured } from './featured';
-import { FeaturedService } from './../../services/featured.service';
+import { FeaturedService } from './featured.service';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Alert, AlertType, Button, Dialog, DialogService } from '@app/controls';
@@ -7,7 +7,7 @@ import { Icons } from '@app/models';
 import {
   ReleaseNote,
   ReleaseNotesServices,
-} from '@app/services/release-notes.services';
+} from '@app/pages/home/release-notes.services';
 
 @Component({
   selector: 'mb-home',
