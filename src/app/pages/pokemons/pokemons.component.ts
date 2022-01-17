@@ -5,8 +5,8 @@ import { AppSettings } from '@app/app';
 import { LoaderService } from '@app/controls';
 import { ItemGroup, Items } from '@app/layout/main';
 import { SetSortByPokemon, PokemonVariant } from './pokemon/pokemon';
-import { GetPokemonVariants, PokemonsService } from './pokemons.service';
-import { Symbols } from '@app/models';
+import { PokemonsService } from './pokemons.service';
+import { APIGetPaged, Symbols } from '@app/models';
 
 @Component({
   selector: 'mb-pokemons',
@@ -65,7 +65,7 @@ export class PokemonsComponent implements OnInit {
   getPokemonVariants() {
     this.loaderService.addItemLoading('getPokemon');
     this.pokemonService.getPokemonVariants(
-      new GetPokemonVariants({
+      new APIGetPaged({
         page: this.items.footer.page,
         page_size: this.items.footer.pageSize,
         sort_by: this.items.filter.selectSortBy.value,

@@ -1,10 +1,10 @@
+import { APIGetPaged } from './../../models/api';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { UserCardsService } from '@app/components';
 import { Items, ItemGroup } from '@app/layout';
 import { Icons, Symbols } from '@app/models';
 import { Menu, MenuItem, LoaderService, ProgressBar } from '@app/controls';
 import { Component, OnInit } from '@angular/core';
-import { GetCards } from '@app/pages/cards/cards.service';
 
 @Component({
   selector: 'collection',
@@ -101,7 +101,7 @@ export class CollectionComponent implements OnInit {
   getCollectionCards() {
     this.loaderService.addItemLoading('getCollectionCards');
     this.userCardsService.getUserCards(
-      new GetCards({
+      new APIGetPaged({
         page: this.items.footer.page,
         page_size: this.items.footer.pageSize,
         query: this.items.filter.textboxSearch.value,

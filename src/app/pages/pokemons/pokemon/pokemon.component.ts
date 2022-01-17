@@ -9,10 +9,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Button, DialogService, LoaderService } from '@app/controls';
 import { ItemGroup, Items } from '@app/layout/main';
 import { SetSortByPokemon, PokemonVariant } from './pokemon';
-import { GetPokemonVariantCards, PokemonService } from './pokemon.service';
+import { PokemonService } from './pokemon.service';
 import { Title } from '@angular/platform-browser';
 import { AppSettings } from '@app/app';
-import { Size, Symbols } from '@app/models';
+import { APIGetPaged, Size, Symbols } from '@app/models';
 import { Dialog } from '@app/controls/dialog/dialog';
 import { ProgressBar } from '@app/controls/progress-bar/progress-bar';
 
@@ -114,7 +114,7 @@ export class PokemonComponent implements OnInit {
         this.items.footer.totalPages = res.total_pages;
         this.items.footer.totalItems = res.total_results;
         this.items.filter.textboxSearch.placeholder = `Search ${this.pokemonVariant.name} cards...`;
-        if (res.cards.length) {
+        if (res.cards) {
           this.items.itemGroups = [
             new ItemGroup({
               items: res.cards,
@@ -155,7 +155,7 @@ export class PokemonComponent implements OnInit {
   getCards() {
     this.loaderService.addItemLoading('getPokemonCards');
     this.pokemonService.getPokemonVariantCards(
-      new GetPokemonVariantCards({
+      new APIGetPaged({
         page: this.items.footer.page,
         slug: this.slug,
         page_size: this.items.footer.pageSize,

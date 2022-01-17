@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Items } from '@app/layout/main';
+import { Items } from '@app/layout';
 import { ExpansionsService } from './expansions.service';
 import { Title } from '@angular/platform-browser';
 import { LoaderService } from '@app/controls';
 import { AppSettings } from '@app/app';
 import { Series, SetSortByExpansions } from './expansion/expansion';
-import { Icons } from '@app/models';
+import { APIGetPaged, Icons } from '@app/models';
 
 @Component({
   selector: 'mb-expansions',
@@ -27,11 +27,11 @@ export class ExpansionsComponent implements OnInit {
 
   setupSubscriptions() {
     this.expansionsService.getExpansionsObservable().subscribe((series) => {
-      if (series) this.reponseGetExpanions(series);
+      if (series) this.responseGetExpansions(series);
     });
   }
 
-  reponseGetExpanions(series: Series[]) {
+  responseGetExpansions(series: Series[]) {
     if (series) {
       this.loaderService.clearItemLoading('getExpansions');
       this.items.itemGroups = [];
@@ -60,10 +60,12 @@ export class ExpansionsComponent implements OnInit {
 
   getItems() {
     this.loaderService.addItemLoading('getExpansions');
-    this.expansionsService.getExpansions({
-      query: this.items.filter.textboxSearch.value,
-      sort_by: this.items.filter.selectSortBy.value,
-      sort_direction: this.items.filter.selectSortDirection.value,
-    });
+    this.expansionsService.getExpansions(
+      new APIGetPaged({
+        query: this.items.filter.textboxSearch.value,
+        sort_by: this.items.filter.selectSortBy.value,
+        sort_direction: this.items.filter.selectSortDirection.value,
+      })
+    );
   }
 }

@@ -1,26 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { APIGetPaged, APIResponse } from '@app/models';
-import { Card, Expansion } from '@app/pages';
+import { Card, Expansion, ResCards } from '@app/pages';
 import { BehaviorSubject } from 'rxjs';
-import { Cache } from '../../../helpers/cache';
-import { CardResults } from '../../cards/cards.service';
-
-export class GetExpansion extends APIGetPaged {
-  code: string;
-  constructor(init?: Partial<GetExpansion>) {
-    super();
-    Object.assign(this, init);
-  }
-}
-
-export class GetExpansionCards extends APIGetPaged {
-  code: string;
-  constructor(init?: Partial<GetExpansion>) {
-    super();
-    Object.assign(this, init);
-  }
-}
+import { Cache } from '@app/helpers';
 
 @Injectable({
   providedIn: 'root',
@@ -34,29 +17,24 @@ export class ExpansionService {
     this.getExpansionSubject = new BehaviorSubject<Expansion | null>(null);
     return this.getExpansionSubject.asObservable();
   }
-  getExpansion(params: GetExpansion) {
+  getExpansion(params: APIGetPaged) {
     if (Cache.expansion[params.code]) {
       this.getExpansionSubject.next(Cache.expansion[params.code]);
     } else {
       var url = params.buildUrl('expansion/' + params.code);
       this.http.get<APIResponse>(url).subscribe((res) => {
-        var expansion = new Expansion(res.data);
-        this.getExpansionSubject.next(expansion);
+        this.getExpansionSubject.next(new Expansion(res.data));
       });
     }
   }
 
-  // Expansions cards
-  private getExpansionCardsSubject = new BehaviorSubject<CardResults | null>(
-    null
-  );
+  // Get expansions cards
+  private getExpansionCardsSubject = new BehaviorSubject<ResCards | null>(null);
   getExpansionCardsObservable() {
-    this.getExpansionCardsSubject = new BehaviorSubject<CardResults | null>(
-      null
-    );
+    this.getExpansionCardsSubject = new BehaviorSubject<ResCards | null>(null);
     return this.getExpansionCardsSubject.asObservable();
   }
-  getExpansionCards(params: GetExpansionCards) {
+  getExpansionCards(params: APIGetPaged) {
     var url = params.buildUrl('expansion/' + params.code + '/cards');
     this.http.get<APIResponse>(url).subscribe((res) => {
       this.getExpansionCardsSubject.next({

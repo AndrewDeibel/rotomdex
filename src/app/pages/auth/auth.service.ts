@@ -1,8 +1,8 @@
+import { buildUrl } from '@app/models';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
 import { User } from '@app/models/user';
 
 @Injectable({ providedIn: 'root' })
@@ -25,19 +25,19 @@ export class AuthenticationService {
   }
 
   login(email: string, password: string) {
-    return this.http
-      .post<any>(environment.api + 'login', { email, password })
-      .pipe(
-        map((res) => {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          let user: User = new User(res.data.user);
-          user.token = res.data.token;
-          user.expires_at = res.data.expires_at;
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
-          return user;
-        })
-      );
+    return this.http.post<any>(buildUrl('login'), { email, password }).pipe(
+      map((res) => {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        const user: User = new User({
+          ...res.data.user,
+          token: res.data.token,
+          expires_at: res.data.expires_at,
+        });
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.currentUserSubject.next(user);
+        return user;
+      })
+    );
   }
 
   logout() {
@@ -54,7 +54,7 @@ export class AuthenticationService {
     password_confirmation: string
   ) {
     return this.http
-      .post<any>(environment.api + 'register', {
+      .post<any>(buildUrl('register'), {
         email,
         username,
         password,
@@ -62,8 +62,10 @@ export class AuthenticationService {
       })
       .pipe(
         map((res) => {
-          let user: User = new User(res.data.user);
-          user.token = res.data.token;
+          const user: User = new User({
+            ...res.data.user,
+            token: res.data.token,
+          });
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
         })
@@ -71,7 +73,7 @@ export class AuthenticationService {
   }
 
   forgot(email: string) {
-    return this.http.post<any>(environment.api + 'forgot-password', {
+    return this.http.post<any>(buildUrl('forgot-password'), {
       email,
     });
   }
@@ -82,7 +84,7 @@ export class AuthenticationService {
     password: string,
     password_confirmation: string
   ) {
-    return this.http.post<any>(environment.api + 'password-reset', {
+    return this.http.post<any>(buildUrl('password-reset'), {
       token,
       email,
       password,

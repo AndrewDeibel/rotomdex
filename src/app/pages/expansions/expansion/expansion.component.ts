@@ -1,10 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  ExpansionService,
-  GetExpansion,
-  GetExpansionCards,
-} from '@app/pages/expansions/expansion/expansion.service';
+import { ExpansionService } from '@app/pages/expansions/expansion/expansion.service';
 import { SetPageSize, SetSortByExpansion } from './expansion';
 import { CardsComponent, SetSortByCards } from '@app/pages/cards';
 import { DatePipe } from '@angular/common';
@@ -13,6 +9,7 @@ import { LoaderService, Menu, MenuItem } from '@app/controls';
 import { ItemGroup, Items } from '@app/layout/main';
 import { AppSettings } from '@app/app';
 import { ProgressBar } from '@app/controls/progress-bar/progress-bar';
+import { APIGetPaged } from '@app/models';
 
 @Component({
   selector: 'mb-expansion',
@@ -95,7 +92,7 @@ export class ExpansionComponent implements OnInit {
     this.code = code;
     this.loaderService.addItemLoading('getExpansion');
     this.expansionService.getExpansion(
-      new GetExpansion({
+      new APIGetPaged({
         code: code,
         page: this.items.footer.page,
         page_size: this.items.footer.pageSize,
@@ -110,7 +107,7 @@ export class ExpansionComponent implements OnInit {
   getExpansionCards() {
     this.loaderService.addItemLoading('getExpansionCards');
     this.expansionService.getExpansionCards(
-      new GetExpansionCards({
+      new APIGetPaged({
         code: this.code,
         page: this.items.footer.page,
         page_size: this.items.footer.pageSize,

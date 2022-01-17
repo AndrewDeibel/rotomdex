@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  CardsService,
-  CardResults,
-  GetCards as GetCards,
-  GetCardsFiltered,
-} from './cards.service';
+import { CardsService, ResCards } from './cards.service';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { LoaderService } from '@app/controls';
@@ -12,7 +7,7 @@ import { ItemGroup, Items } from '@app/layout/main';
 import { SetSortByCards } from './card/card';
 import { AppSettings } from '@app/app';
 import '@app/helpers/string.extensions';
-import { Symbols } from '@app/models';
+import { APIGetPaged, Symbols } from '@app/models';
 
 @Component({
   selector: 'mb-cards',
@@ -65,7 +60,7 @@ export class CardsComponent implements OnInit {
     });
   }
 
-  getCardsResponse(res: CardResults | null) {
+  getCardsResponse(res: ResCards | null) {
     if (res) {
       this.loaderService.clearItemLoading('getCards');
       this.loaderService.clearItemLoading('getFilteredCards');
@@ -112,7 +107,7 @@ export class CardsComponent implements OnInit {
     this.loaderService.addItemLoading('getCards');
     this.items.showHeader = false;
     this.cardsService.getCards(
-      new GetCards({
+      new APIGetPaged({
         page: this.items.footer.page,
         page_size: this.items.footer.pageSize,
         query: this.items.filter.textboxSearch.value,
@@ -125,7 +120,7 @@ export class CardsComponent implements OnInit {
   getFilteredCards() {
     this.loaderService.addItemLoading('getFilteredCards');
     this.cardsService.getCardsFiltered(
-      new GetCardsFiltered({
+      new APIGetPaged({
         page: this.items.footer.page,
         page_size: this.items.footer.pageSize,
         query: this.items.filter.textboxSearch.value,

@@ -1,16 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '@app/../environments/environment';
-import { APIResponse } from '@app/models';
+import { APIGetPaged, APIResponse, buildUrl } from '@app/models';
 import { Expansion, Series } from '@app/pages';
-import { Cache } from '../../helpers/cache';
-
-export interface GetExpansions {
-  query: string;
-  sort_by: string;
-  sort_direction: string;
-}
+import { Cache } from '@app/helpers';
 
 @Injectable({ providedIn: 'root' })
 export class ExpansionsService {
@@ -22,25 +15,23 @@ export class ExpansionsService {
     this.getExpansionsSubject = new BehaviorSubject<Series[] | null>(null);
     return this.getExpansionsSubject.asObservable();
   }
-  getExpansions(params: GetExpansions) {
+  getExpansions(params: APIGetPaged) {
     if (Cache.expansions) {
       this.getExpansionsSubject.next(
         this.handleExpansionsParams(params, Cache.expansions)
       );
     } else {
-      this.http
-        .get<APIResponse>(`${environment.api}expansions`)
-        .subscribe((res) => {
-          const series = res.data.map((_series: any) => new Series(_series));
-          Cache.expansions = series;
-          this.getExpansionsSubject.next(
-            this.handleExpansionsParams(params, series)
-          );
-        });
+      this.http.get<APIResponse>(buildUrl('expansions')).subscribe((res) => {
+        const series = res.data.map((series: any) => new Series(series));
+        Cache.expansions = series;
+        this.getExpansionsSubject.next(
+          this.handleExpansionsParams(params, series)
+        );
+      });
     }
   }
   handleExpansionsParams(
-    params: GetExpansions,
+    params: APIGetPaged,
     seriesCollection: Series[]
   ): Series[] {
     // No data

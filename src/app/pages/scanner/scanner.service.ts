@@ -1,15 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '@app/../environments/environment';
-import { APIResponse } from '@app/models/api';
-import { ScannerList } from '@app/pages/scanner/scanner-lists/scanner-list/scanner-list';
-import { Card } from '@app/pages/';
-import {
-  NotificationsService,
-  Notification,
-} from '@app/controls/notifications';
-import { AlertType } from '@app/controls/alert/alert';
+import { APIResponse, buildUrl } from '@app/models';
+import { ScannerList, Card } from '@app/pages';
+import { NotificationsService, Notification, AlertType } from '@app/controls';
 
 export enum ScanType {
   scan = 'scan',
@@ -48,7 +42,7 @@ export class ScannerService {
   }
   getScanCard(params: GetScanCardParams) {
     this.http
-      .post<APIResponse>(environment.api + 'scanner/detect', params)
+      .post<APIResponse>(buildUrl('scanner/detect'), params)
       .subscribe((res) => {
         if (res.success) {
           let card = new Card(res.data.card);
@@ -69,7 +63,7 @@ export class ScannerService {
   }
   getScanCards(params: GetScanCardsParams) {
     this.http
-      .post<APIResponse>(environment.api + 'scanner/multiple', params)
+      .post<APIResponse>(buildUrl('scanner/multiple'), params)
       .subscribe((res) => {
         if (res.success && res.data.length > 0) {
           let cards: Card[] = [];

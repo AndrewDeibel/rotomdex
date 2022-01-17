@@ -1,9 +1,8 @@
-import { APIResponse } from '../../models/api';
+import { APIResponse, buildUrl } from '@app/models';
 import { Featured } from './featured';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class FeaturedService {
@@ -16,13 +15,11 @@ export class FeaturedService {
     return this.getFeaturedSubject.asObservable();
   }
   getFeatured() {
-    this.http
-      .get<APIResponse>(`${environment.api}featured`)
-      .subscribe((res) => {
-        if (res) {
-          let featured: Featured = new Featured(res.data);
-          this.getFeaturedSubject.next(featured);
-        }
-      });
+    this.http.get<APIResponse>(buildUrl('featured')).subscribe((res) => {
+      if (res) {
+        let featured: Featured = new Featured(res.data);
+        this.getFeaturedSubject.next(featured);
+      }
+    });
   }
 }

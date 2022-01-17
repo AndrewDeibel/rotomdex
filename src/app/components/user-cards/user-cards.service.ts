@@ -1,7 +1,6 @@
-import { APIResponse, buildUrl } from '../../models/api';
-import { CardResults, GetCards } from '../../pages/cards/cards.service';
+import { APIGetPaged, APIResponse, buildUrl } from '@app/models';
+import { ResCards, Card } from '@app/pages';
 import { BehaviorSubject } from 'rxjs';
-import { Card } from '../../pages/cards/card/card';
 import { UserCard } from './user-card';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -36,12 +35,12 @@ export class UserCardsService {
   constructor(private http: HttpClient) {}
 
   // Get user cards
-  private getUserCardsSubject = new BehaviorSubject<CardResults | null>(null);
+  private getUserCardsSubject = new BehaviorSubject<ResCards | null>(null);
   getUserCardsObservable() {
-    this.getUserCardsSubject = new BehaviorSubject<CardResults | null>(null);
+    this.getUserCardsSubject = new BehaviorSubject<ResCards | null>(null);
     return this.getUserCardsSubject.asObservable();
   }
-  getUserCards(params: GetCards) {
+  getUserCards(params: APIGetPaged) {
     var url = params.buildUrl('user-cards');
     this.http.get<APIResponse>(url).subscribe((res) => {
       this.getUserCardsSubject.next({

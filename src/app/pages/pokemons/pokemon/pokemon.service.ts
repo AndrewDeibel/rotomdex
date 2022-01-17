@@ -1,24 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { APIGetPaged, APIResponse } from '@app/models';
-import { Card } from '@app/pages/cards';
+import { APIGetPaged, APIResponse, buildUrl } from '@app/models';
+import { Card, ResCards } from '@app/pages/cards';
 import { BehaviorSubject } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { Pokemon, PokemonVariant } from './pokemon';
-import { Cache } from '../../../helpers/cache';
-
-// Get pokemon interfaces
-export class GetPokemonVariantCards extends APIGetPaged {
-  constructor(init?: Partial<GetPokemonVariantCards>) {
-    super();
-    Object.assign(this, init);
-  }
-}
-export interface ResPokemonVariantCards {
-  total_results: number;
-  total_pages: number;
-  cards: Card[];
-}
+import { Cache } from '@app/helpers';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +23,7 @@ export class PokemonService {
       this.getPokemonSubject.next(Cache.pokemon[slug]);
     } else {
       this.http
-        .get<APIResponse>(`${environment.api}pokemon/${slug}`)
+        .get<APIResponse>(buildUrl('pokemon/' + slug))
         .subscribe((res) => {
           this.getPokemonSubject.next(new Pokemon(res.data));
         });
@@ -59,7 +45,7 @@ export class PokemonService {
       this.getPokemonVariantSubject.next(Cache.pokemonVariant[slug]);
     } else {
       this.http
-        .get<APIResponse>(`${environment.api}pokemon-variants/${slug}`)
+        .get<APIResponse>(buildUrl('pokemon-variants/' + slug))
         .subscribe((res) => {
           this.getPokemonVariantSubject.next(new PokemonVariant(res.data));
         });
@@ -67,14 +53,16 @@ export class PokemonService {
   }
 
   // Get pokemon variant cards
-  private getPokemonVariantCardsSubject =
-    new BehaviorSubject<ResPokemonVariantCards | null>(null);
+  private getPokemonVariantCardsSubject = new BehaviorSubject<ResCards | null>(
+    null
+  );
   getPokemonVariantCardsObservable() {
-    this.getPokemonVariantCardsSubject =
-      new BehaviorSubject<ResPokemonVariantCards | null>(null);
+    this.getPokemonVariantCardsSubject = new BehaviorSubject<ResCards | null>(
+      null
+    );
     return this.getPokemonVariantCardsSubject.asObservable();
   }
-  getPokemonVariantCards(params: GetPokemonVariantCards) {
+  getPokemonVariantCards(params: APIGetPaged) {
     var url = params.buildUrl(`pokemon-variants/${params.slug}/cards`);
     this.http.get<APIResponse>(url).subscribe((res) => {
       this.getPokemonVariantCardsSubject.next({

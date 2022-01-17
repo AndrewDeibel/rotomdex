@@ -15,13 +15,11 @@ import {
 } from '@app/controls';
 import { CardsService } from '../cards.service';
 import { ItemGroup, Items } from '@app/layout/main';
-import {
-  ExpansionService,
-  GetExpansionCards,
-} from '@app/pages/expansions/expansion/expansion.service';
-import { GetPokemonVariantCards, PokemonService } from '@app/pages/pokemons';
+import { ExpansionService } from '@app/pages/expansions/expansion/expansion.service';
+import { PokemonService } from '@app/pages/pokemons';
 import { Title } from '@angular/platform-browser';
 import { AppSettings } from '@app/app';
+import { APIGetPaged } from '@app/models';
 
 @Component({
   selector: 'mb-card',
@@ -220,7 +218,7 @@ export class CardComponent implements OnInit {
       this.showRelated = true;
       this.loaderService.addItemLoading('getPokemonCards');
       this.pokemonService.getPokemonVariantCards(
-        new GetPokemonVariantCards({
+        new APIGetPaged({
           page: this.relatedCards.footer.page,
           slug: this.card.pokemon.variant.slug,
           page_size: this.relatedCards.footer.pageSize,
@@ -236,7 +234,7 @@ export class CardComponent implements OnInit {
     if (this.card) {
       this.loaderService.addItemLoading('getExpansionCards');
       this.expansionService.getExpansionCards(
-        new GetExpansionCards({
+        new APIGetPaged({
           code: this.card.expansion.code,
           page: this.expansionCards.footer.page,
           page_size: this.expansionCards.footer.pageSize,

@@ -1,11 +1,10 @@
 import { LoaderService } from '@app/controls';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { APIResponse } from '@app/models';
+import { APIResponse, buildUrl } from '@app/models';
 import { BehaviorSubject } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { Card } from '@app/pages';
-import { Cache } from '@app/helpers/cache';
+import { Cache } from '@app/helpers';
 
 @Injectable({ providedIn: 'root' })
 export class CardService {
@@ -25,16 +24,14 @@ export class CardService {
       // Show loader
       this.loaderService.addItemLoading('getCard');
       // Request
-      this.http
-        .get<APIResponse>(environment.api + 'card/' + code)
-        .subscribe((res) => {
-          var card = new Card(res.data);
-          // Add to cache
-          Cache.card[code] = card;
-          this.getCardSubject.next(card);
-          // Hide loader
-          this.loaderService.clearItemLoading('getCard');
-        });
+      this.http.get<APIResponse>(buildUrl('card/' + code)).subscribe((res) => {
+        var card = new Card(res.data);
+        // Add to cache
+        Cache.card[code] = card;
+        this.getCardSubject.next(card);
+        // Hide loader
+        this.loaderService.clearItemLoading('getCard');
+      });
     }
   }
 }

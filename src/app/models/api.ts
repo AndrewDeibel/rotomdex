@@ -17,8 +17,7 @@ export class APIReponseMeta {
   total: number;
 }
 
-// Extend/inherit this class
-// when using paged API endpoint
+// Class when using paged API endpoints
 export class APIGetPaged {
   page: number;
   page_size: number;
@@ -32,6 +31,7 @@ export class APIGetPaged {
   rarity: string;
   user_id: number;
   slug: string;
+  code: string;
 
   url: string;
 
@@ -100,6 +100,10 @@ export class APIGetPaged {
     this.url = buildUrl(folder, query.toString());
     return this.url;
   };
+
+  constructor(init?: Partial<APIGetPaged>) {
+    Object.assign(this, init);
+  }
 }
 
 export const buildUrl = (folder: string, queryString = '') => {
