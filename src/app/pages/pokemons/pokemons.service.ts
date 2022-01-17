@@ -25,15 +25,16 @@ export class PokemonsService {
     return this.getPokemonVariantsSubject.asObservable();
   }
   getPokemonVariants(params: APIGetPaged) {
-    var url = params.buildUrl('pokemon-variants');
-    this.http.get<APIResponse>(url).subscribe((res) => {
-      this.getPokemonVariantsSubject.next({
-        total_pages: res.meta.last_page,
-        total_results: res.meta.total,
-        pokemon_variants: res.data.map(
-          (pokemonVariant: any) => new PokemonVariant(pokemonVariant)
-        ),
+    this.http
+      .get<APIResponse>(params.buildUrl('pokemon-variants'))
+      .subscribe((res) => {
+        this.getPokemonVariantsSubject.next({
+          total_pages: res.meta.last_page,
+          total_results: res.meta.total,
+          pokemon_variants: res.data.map(
+            (pokemonVariant: any) => new PokemonVariant(pokemonVariant)
+          ),
+        });
       });
-    });
   }
 }

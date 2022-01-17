@@ -25,7 +25,7 @@ export class CardService {
       this.loaderService.addItemLoading('getCard');
       // Request
       this.http.get<APIResponse>(buildUrl('card/' + code)).subscribe((res) => {
-        var card = new Card(res.data);
+        const card = new Card(res.data);
         // Add to cache
         Cache.card[code] = card;
         this.getCardSubject.next(card);

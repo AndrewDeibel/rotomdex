@@ -41,16 +41,17 @@ export class UserCardsService {
     return this.getUserCardsSubject.asObservable();
   }
   getUserCards(params: APIGetPaged) {
-    var url = params.buildUrl('user-cards');
-    this.http.get<APIResponse>(url).subscribe((res) => {
-      this.getUserCardsSubject.next({
-        cards: res.data.map((card: any) => {
-          new Card(card);
-        }),
-        total_pages: res.meta.last_page,
-        total_results: res.meta.total,
+    this.http
+      .get<APIResponse>(params.buildUrl('user-cards'))
+      .subscribe((res) => {
+        this.getUserCardsSubject.next({
+          cards: res.data.map((card: any) => {
+            new Card(card);
+          }),
+          total_pages: res.meta.last_page,
+          total_results: res.meta.total,
+        });
       });
-    });
   }
 
   // Get card user cards
@@ -62,12 +63,13 @@ export class UserCardsService {
     return this.getCardUserCardsSubject.asObservable();
   }
   getCardUserCards(slug: string) {
-    var url = buildUrl('user-cards/' + slug);
-    this.http.get<APIResponse>(url).subscribe((res) => {
-      this.getCardUserCardsSubject.next(
-        res.data.map((userCard: any) => new UserCard(userCard))
-      );
-    });
+    this.http
+      .get<APIResponse>(buildUrl('user-cards/' + slug))
+      .subscribe((res) => {
+        this.getCardUserCardsSubject.next(
+          res.data.map((userCard: any) => new UserCard(userCard))
+        );
+      });
   }
 
   // Add user card

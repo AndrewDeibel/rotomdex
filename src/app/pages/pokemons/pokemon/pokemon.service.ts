@@ -63,13 +63,16 @@ export class PokemonService {
     return this.getPokemonVariantCardsSubject.asObservable();
   }
   getPokemonVariantCards(params: APIGetPaged) {
-    var url = params.buildUrl(`pokemon-variants/${params.slug}/cards`);
-    this.http.get<APIResponse>(url).subscribe((res) => {
-      this.getPokemonVariantCardsSubject.next({
-        total_pages: res.meta.last_page,
-        total_results: res.meta.total,
-        cards: res.data.map((card: any) => new Card(card)),
+    this.http
+      .get<APIResponse>(
+        params.buildUrl(`pokemon-variants/${params.slug}/cards`)
+      )
+      .subscribe((res) => {
+        this.getPokemonVariantCardsSubject.next({
+          total_pages: res.meta.last_page,
+          total_results: res.meta.total,
+          cards: res.data.map((card: any) => new Card(card)),
+        });
       });
-    });
   }
 }

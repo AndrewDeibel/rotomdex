@@ -22,8 +22,7 @@ export class CardsService {
     return this.getCardsSubject.asObservable();
   }
   getCards(params: APIGetPaged) {
-    var url = params.buildUrl('cards');
-    this.http.get<APIResponse>(url).subscribe((res) => {
+    this.http.get<APIResponse>(params.buildUrl('cards')).subscribe((res) => {
       this.getCardsSubject.next({
         cards: res.data.map((card: any) => new Card(card)),
         total_pages: res.meta.last_page,
@@ -39,13 +38,14 @@ export class CardsService {
     return this.getCardsFilteredSubject.asObservable();
   }
   getCardsFiltered(params: APIGetPaged) {
-    var url = params.buildUrl('cards/filter');
-    this.http.get<APIResponse>(url).subscribe((res) => {
-      this.getCardsFilteredSubject.next({
-        cards: res.data.map((card: any) => new Card(card)),
-        total_pages: res.meta.last_page,
-        total_results: res.meta.total,
+    this.http
+      .get<APIResponse>(params.buildUrl('cards/filter'))
+      .subscribe((res) => {
+        this.getCardsFilteredSubject.next({
+          cards: res.data.map((card: any) => new Card(card)),
+          total_pages: res.meta.last_page,
+          total_results: res.meta.total,
+        });
       });
-    });
   }
 }

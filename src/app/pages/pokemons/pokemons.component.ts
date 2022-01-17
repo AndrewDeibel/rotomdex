@@ -40,11 +40,13 @@ export class PokemonsComponent implements OnInit {
         this.loaderService.clearItemLoading('getPokemon');
         this.items.footer.totalPages = res.total_pages;
         this.items.footer.totalItems = res.total_results;
-        var group = new ItemGroup();
-        res.pokemon_variants?.forEach((pokemon_variant) => {
-          group.items.push(new PokemonVariant(pokemon_variant));
-        });
-        this.items.itemGroups = [group];
+        this.items.itemGroups = [
+          new ItemGroup({
+            items: res.pokemon_variants?.map(
+              (pokemonVariant: any) => new PokemonVariant(pokemonVariant)
+            ),
+          }),
+        ];
       }
     });
   }

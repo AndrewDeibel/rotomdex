@@ -21,10 +21,11 @@ export class ExpansionService {
     if (Cache.expansion[params.code]) {
       this.getExpansionSubject.next(Cache.expansion[params.code]);
     } else {
-      var url = params.buildUrl('expansion/' + params.code);
-      this.http.get<APIResponse>(url).subscribe((res) => {
-        this.getExpansionSubject.next(new Expansion(res.data));
-      });
+      this.http
+        .get<APIResponse>(params.buildUrl('expansion/' + params.code))
+        .subscribe((res) => {
+          this.getExpansionSubject.next(new Expansion(res.data));
+        });
     }
   }
 
@@ -35,13 +36,14 @@ export class ExpansionService {
     return this.getExpansionCardsSubject.asObservable();
   }
   getExpansionCards(params: APIGetPaged) {
-    var url = params.buildUrl('expansion/' + params.code + '/cards');
-    this.http.get<APIResponse>(url).subscribe((res) => {
-      this.getExpansionCardsSubject.next({
-        cards: res.data.map((card: any) => new Card(card)),
-        total_pages: res.meta.last_page,
-        total_results: res.meta.total,
+    this.http
+      .get<APIResponse>(params.buildUrl('expansion/' + params.code + '/cards'))
+      .subscribe((res) => {
+        this.getExpansionCardsSubject.next({
+          cards: res.data.map((card: any) => new Card(card)),
+          total_pages: res.meta.last_page,
+          total_results: res.meta.total,
+        });
       });
-    });
   }
 }
