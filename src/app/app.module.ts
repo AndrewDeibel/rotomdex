@@ -303,6 +303,9 @@ import {
     CollectionComponent,
     ScannerComponent,
     ScannerListsComponent,
+
+    // Helpers
+    ClickOutsideDirective,
   ],
   imports: [
     BrowserModule,

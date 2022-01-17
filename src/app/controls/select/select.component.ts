@@ -61,7 +61,11 @@ export class SelectComponent implements ControlValueAccessor {
   });
 
   click() {
-    if (this.select.multiple || !this.select.value.length)
+    if (
+      this.select.multiple ||
+      !this.select.value ||
+      !this.select.value?.length
+    )
       this.select.open = true;
   }
 
