@@ -1,17 +1,21 @@
-import { Icons } from '@app/models';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '@app/pages/auth/auth.service';
 import {
-  Textbox,
   Button,
-  Textarea,
-  Toggle,
+  ButtonType,
+  LoaderService,
+  NotificationsService,
   Select,
   SelectOption,
-  ButtonType,
+  Textarea,
+  Textbox,
+  Toggle,
 } from '@app/controls';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Icons } from '@app/models';
+import { UserCardGroup } from '@app/pages';
+import { AuthenticationService } from '@app/pages/auth/auth.service';
+import { UserCardGroupService } from './user-card-group.services';
 
 @Component({
   selector: 'user-card-group',
@@ -22,7 +26,6 @@ export class UserCardGroupComponent implements OnInit {
   form: FormGroup;
   textboxName: Textbox;
   selectType: Select;
-  selectIcon: Select;
   textareaDescription: Textarea;
   togglePublic: Toggle;
   buttonSave: Button;
@@ -30,7 +33,10 @@ export class UserCardGroupComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private loaderService: LoaderService,
+    private userCardGroupService: UserCardGroupService,
+    private notificationService: NotificationsService
   ) {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigateByUrl('/');
@@ -38,10 +44,25 @@ export class UserCardGroupComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.setupSubscriptions();
+    this.setupControls();
+  }
+
+  setupSubscriptions() {
+    this.userCardGroupService
+      .addUserCardGroupObservable()
+      .subscribe((userCardGroup) => {
+        if (userCardGroup) {
+          this.router.navigateByUrl('/collection/dashboard');
+        }
+      });
+  }
+
+  setupControls() {
     this.form = this.formBuilder.group({
       nameControl: ['', Validators.required],
       selectType: ['', Validators.required],
-      selectIcon: ['', Validators.required],
+      selectIcon: [''],
       descriptionControl: [''],
       publicControl: [''],
     });
@@ -51,55 +72,33 @@ export class UserCardGroupComponent implements OnInit {
     this.selectType = new Select({
       label: 'Type',
       advancedSelect: true,
-      multiple: true,
-      placeholder: 'Select icon...',
+      multiple: false,
+      placeholder: 'Select type...',
       options: [
         new SelectOption({
           text: 'Binder',
           icon: Icons.binder,
+          value: 'binder',
         }),
         new SelectOption({
           text: 'Deck',
           icon: Icons.deck,
+          value: 'deck',
         }),
         new SelectOption({
           text: 'Trades',
           icon: Icons.exchange,
+          value: 'trades',
         }),
         new SelectOption({
           text: 'Box',
           icon: Icons.archive,
+          value: 'box',
         }),
         new SelectOption({
           text: 'Group',
           icon: Icons.folder,
-        }),
-      ],
-    });
-    this.selectIcon = new Select({
-      label: 'Icon',
-      advancedSelect: true,
-      placeholder: 'Select icon...',
-      options: [
-        new SelectOption({
-          text: 'Binder',
-          icon: Icons.binder,
-        }),
-        new SelectOption({
-          text: 'Deck',
-          icon: Icons.deck,
-        }),
-        new SelectOption({
-          text: 'Trades',
-          icon: Icons.exchange,
-        }),
-        new SelectOption({
-          text: 'Box',
-          icon: Icons.archive,
-        }),
-        new SelectOption({
-          text: 'Group',
-          icon: Icons.folder,
+          value: 'group',
         }),
       ],
     });
@@ -125,5 +124,15 @@ export class UserCardGroupComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+
+    this.loaderService.addItemLoading('user-card-group');
+    this.userCardGroupService.addUserCardGroup(
+      new UserCardGroup({
+        name: this.form.controls['nameControl'].value,
+        type: this.form.controls['selectType'].value,
+        description: this.form.controls['descriptionControl'].value,
+        public: this.form.controls['publicControl'].value,
+      })
+    );
   }
 }

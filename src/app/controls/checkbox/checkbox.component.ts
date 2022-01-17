@@ -24,10 +24,10 @@ export class CheckboxComponent implements ControlValueAccessor {
 
   onChange: any = () => {};
   onTouched: any = () => {};
-  registerOnChange(fn: Function) {
+  registerOnChange(fn: any) {
     this.onChange = fn;
   }
-  registerOnTouched(fn: Function) {
+  registerOnTouched(fn: any) {
     this.onTouched = fn;
   }
   writeValue(checked: boolean) {

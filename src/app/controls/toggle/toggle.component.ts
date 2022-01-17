@@ -18,10 +18,10 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 export class ToggleComponent implements ControlValueAccessor {
   onChange: any = () => {};
   onTouched: any = () => {};
-  registerOnChange(fn: Function) {
+  registerOnChange(fn: any) {
     this.onChange = fn;
   }
-  registerOnTouched(fn: Function) {
+  registerOnTouched(fn: any) {
     this.onTouched = fn;
   }
   writeValue(event: any) {

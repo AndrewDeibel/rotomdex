@@ -103,10 +103,13 @@ export class CardLastPrices {
 
 export class UserCardGroup {
   name: string;
-  icon: Icons;
+  icon: string;
+  type: string;
   cards: Card[] = [];
   count: number = 0;
   id: number;
+  public: boolean;
+  description: string;
   constructor(init?: Partial<UserCardGroup>) {
     Object.assign(this, init);
   }

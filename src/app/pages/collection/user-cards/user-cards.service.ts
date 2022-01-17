@@ -78,9 +78,7 @@ export class UserCardsService {
   }
   addUserCard(userCard: UserCard) {
     this.http
-      .post<APIResponse>(buildUrl('user-cards/create'), {
-        ...userCard,
-      })
+      .post<APIResponse>(buildUrl('user-cards/create'), userCard)
       .subscribe((res) => {
         if (res.success) this.addUserCardSubject.next(userCard);
       });

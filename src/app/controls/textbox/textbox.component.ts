@@ -15,7 +15,6 @@ import { Textbox } from './textbox';
   selector: 'textbox',
   templateUrl: './textbox.component.html',
   styleUrls: ['./textbox.component.scss'],
-
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -25,24 +24,30 @@ import { Textbox } from './textbox';
   ],
 })
 export class TextboxComponent implements ControlValueAccessor {
+  constructor() {}
   onChange: any = () => {};
   onTouched: any = () => {};
-  registerOnChange(fn: Function) {
+  registerOnChange(fn: any) {
     this.onChange = fn;
   }
-  registerOnTouched(fn: Function) {
+  registerOnTouched(fn: any) {
     this.onTouched = fn;
   }
   writeValue(value: string) {
     this.value = value;
   }
+  setDisabledState(isDisabled: boolean) {
+    this.textbox.disabled = isDisabled;
+  }
+
   previousValue: string;
   get value() {
     return this.textbox.value;
   }
-  set value(value) {
-    this.textbox.value = value;
-    this.onChange(value);
+  set value(_value) {
+    this.textbox.value = _value;
+    if (this.textbox.change) this.textbox.change(_value);
+    this.onChange(_value);
     this.onTouched();
   }
 
@@ -51,8 +56,6 @@ export class TextboxComponent implements ControlValueAccessor {
   @Output() outputKeydownEnter: EventEmitter<string> = new EventEmitter();
   @Output() outputClickIcon: EventEmitter<string> = new EventEmitter();
   @Output() outputClickClear: EventEmitter<string> = new EventEmitter();
-
-  constructor() {}
 
   click = (e: MouseEvent) => {
     e.preventDefault();
@@ -123,15 +126,10 @@ export class TextboxComponent implements ControlValueAccessor {
     return this.textbox.valid;
   }
 
-  change() {
+  change(event?: any) {
     // If valid
-    if (this.validate()) {
-      if (this.textbox.change) {
-        this.textbox.change(this.value);
-      }
-    } else {
-      this.setPreviousValue();
-    }
+    if (this.validate()) this.value = event?.currentTarget?.value;
+    else this.setPreviousValue();
 
     // Set previous value after change
     this.previousValue = this.value;

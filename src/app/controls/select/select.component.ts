@@ -22,10 +22,10 @@ export class SelectComponent implements ControlValueAccessor {
 
   onChange: any = () => {};
   onTouched: any = () => {};
-  registerOnChange(fn: Function) {
+  registerOnChange(fn: any) {
     this.onChange = fn;
   }
-  registerOnTouched(fn: Function) {
+  registerOnTouched(fn: any) {
     this.onTouched = fn;
   }
   writeValue(value: string) {
@@ -73,15 +73,26 @@ export class SelectComponent implements ControlValueAccessor {
     this.select.open = false;
   }
 
-  change() {
+  change(event?: any) {
+    this.value = event?.currentTarget?.value;
     if (this.select.change) this.select.change(this.select.value);
   }
 
   selectOption(option: SelectOption) {
     option.selected = true;
+    let values = this.value ? this.value.split(',') : [];
+    if (!values.includes(option.value)) {
+      values.push(option.value);
+      this.value = values.join(',');
+    }
   }
 
   unselectOption(option: SelectOption) {
     option.selected = false;
+    let values = this.value ? this.value.split(',') : [];
+    if (values.includes(option.value)) {
+      values = values.filter((value) => value !== option.value);
+      this.value = values.join(',');
+    }
   }
 }
