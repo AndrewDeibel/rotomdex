@@ -231,6 +231,7 @@ import {
   faBookOpen,
   faInbox,
   faExchange,
+  faStickyNote,
 } from '@fortawesome/pro-duotone-svg-icons';
 
 @NgModule({
@@ -477,7 +478,8 @@ export class AppModule {
       faBookOpen,
       faInbox,
       faBalanceScale,
-      faExchange
+      faExchange,
+      faStickyNote
     );
     faConfig.defaultPrefix = 'fad';
   }

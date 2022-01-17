@@ -26,7 +26,7 @@ export class UserCardComponent implements OnInit {
   selectCondition: Select;
   selectGradingCompany: Select;
   selectPrinting: Select;
-  selectBinder: Select;
+  selectGroup: Select;
   buttonNotes: Button;
   buttonAdd: Button;
   buttonRemove: Button;
@@ -136,10 +136,24 @@ export class UserCardComponent implements OnInit {
       );
     }
 
+    // Group
+    this.selectGroup = new Select({
+      classes: 'square small-round-right',
+      multiple: true,
+      options: this.userCardGroups?.map(
+        (userCardGroup) =>
+          new SelectOption({
+            text: userCardGroup.name,
+            value: userCardGroup.id.toString(),
+          })
+      ),
+    });
+
     // Notes
     this.buttonNotes = new Button({
       text: 'Notes',
-      classes: 'square secondary',
+      icon: Icons.stickyNote,
+      classes: 'square secondary small-round-left',
       width: '100%',
       click: () => {
         this.dialogService.open(
@@ -151,22 +165,11 @@ export class UserCardComponent implements OnInit {
       },
     });
 
-    // Group
-    this.selectBinder = new Select({
-      classes: 'square',
-      multiple: true,
-      options: this.userCardGroups?.map(
-        (userCardGroup) =>
-          new SelectOption({
-            text: userCardGroup.name,
-            value: userCardGroup.id.toString(),
-          })
-      ),
-    });
-
     // Button remove
     this.buttonRemove = new Button({
+      text: 'Remove',
       icon: Icons.trash,
+      width: '100%',
       classes: 'secondary square-left',
       click: () => {
         if (confirm('Are you sure you want to delete this item?')) {

@@ -1,30 +1,32 @@
 <div class="width-12">
   <div class="flex flex-center">
     <div class="box">
-      <div class="flex flex-center">
-        <div class="box">
+      <div class="flex flex-center small-vertical">
+        <div class="box small-12">
           <div class="flex flex-center">
-            <div class="width-3 small-4">
+            <div class="width-3">
               <app-select [select]="selectCondition"></app-select>
             </div>
-            <div class="width-3 small-none">
+            <div class="width-3">
               <app-select [select]="selectGradingCompany"></app-select>
             </div>
-            <div class="width-3 small-none">
+            <div class="width-3">
               <app-select [select]="selectPrinting"></app-select>
             </div>
-            <div class="width-3 small-4">
-              <app-select [select]="selectBinder"></app-select>
+            <div class="width-3">
+              <app-select [select]="selectGroup"></app-select>
             </div>
           </div>
         </div>
-        <div>
-          <app-button [button]="buttonNotes"></app-button>
+        <div class="flex small-12">
+          <div class="small-6">
+            <app-button [button]="buttonNotes"></app-button>
+          </div>
+          <div class="small-6">
+            <app-button [button]="buttonRemove"></app-button>
+          </div>
         </div>
       </div>
-    </div>
-    <div>
-      <app-button [button]="buttonRemove"></app-button>
     </div>
   </div>
 </div>

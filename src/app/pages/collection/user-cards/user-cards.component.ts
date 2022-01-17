@@ -76,8 +76,10 @@ export class UserCardsComponent implements OnInit {
     // Header buttons for spacing
     this.buttonNotes = new Button({
       text: 'Notes',
+      icon: Icons.stickyNote,
     });
     this.buttonDelete = new Button({
+      text: 'Remove',
       icon: Icons.trash,
     });
 
