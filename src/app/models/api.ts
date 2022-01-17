@@ -1,5 +1,4 @@
 import { HttpParams } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 
 export class APIResponse {
   success: boolean;
@@ -107,7 +106,6 @@ export class APIGetPaged {
 }
 
 export const buildUrl = (folder: string, queryString = '') => {
-  return `${environment.api}${folder}${
-    queryString.length ? '?' + queryString : ''
-  }`;
+  const apiUrl = 'https://api.rotomdex.app/api/';
+  return `${apiUrl}${folder}${queryString.length ? '?' + queryString : ''}`;
 };

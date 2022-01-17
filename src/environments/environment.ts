@@ -2,12 +2,20 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
+class Environment {
+  production: boolean;
+  api: string;
+  images: string;
+  constructor(init?: Partial<Environment>) {
+    Object.assign(this, init);
+  }
+}
+
+export const environment = new Environment({
   production: false,
   api: 'https://api.rotomdex.app/api/',
   images: 'https://images.rotomdex.app/',
-  //api: "http://api.manabinder.local/api/"
-};
+});
 
 /*
  * For easier debugging in development mode, you can import the following file
