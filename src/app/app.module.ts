@@ -24,7 +24,6 @@ import { AppComponent } from './app.component';
 // Controls
 import {
   AlertComponent,
-  ButtonComponent,
   CheckboxComponent,
   EditorComponent,
   FormComponent,
@@ -40,9 +39,10 @@ import {
   ToggleComponent,
   ProgressBarComponent,
   TypeTagComponent,
-  DialogComponent,
   EmptyComponent,
   HeroComponent,
+  DialogModule,
+  ButtonComponent,
 } from './controls';
 
 // Pages
@@ -238,7 +238,6 @@ import {
     // Controls
     // ====================
     MenuComponent,
-    ButtonComponent,
     CheckboxComponent,
     LoaderComponent,
     SelectComponent,
@@ -254,9 +253,9 @@ import {
     AlertComponent,
     ProgressBarComponent,
     TypeTagComponent,
-    DialogComponent,
     EmptyComponent,
     HeroComponent,
+    ButtonComponent,
 
     // Page
     // ====================
@@ -303,6 +302,7 @@ import {
   ],
   imports: [
     BrowserModule,
+    DialogModule,
     CommonModule,
     AppRoutingModule,
     HttpClientModule,

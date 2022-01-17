@@ -1,9 +1,14 @@
 @import "settings";
 
-.dialog {
+:host {
   position: fixed;
+  z-index: 999;
+}
+
+.dialog {
   top: 50%;
   left: 50%;
+  position: absolute;
   transform: translate(-50%, -50%);
   min-width: 200px;
   display: flex;
@@ -14,6 +19,7 @@
   max-width: calc(100% - #{$spacing * 4});
   max-height: calc(100% - #{$spacing * 4});
   overflow: hidden;
+  z-index: 999;
   @media (max-width: $screen-small) {
     width: calc(100% - #{$spacing * 4});
   }
@@ -39,7 +45,5 @@
     padding: $spacing * 2;
     flex: 1;
     overflow-y: auto;
-  }
-  .dialog-footer {
   }
 }

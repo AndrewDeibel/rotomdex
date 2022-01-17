@@ -153,24 +153,24 @@ export class UserCardComponent implements OnInit {
       classes: 'square secondary',
       width: '100%',
       click: () => {
-        this.dialogService.setDialog(
-          new Dialog({
-            title: 'Notes',
-            form: new Form({
-              formGroup: this.formNotes,
-              groups: [
-                new FormControlGroup({
-                  controls: [
-                    new FormControl({
-                      //formControl: this.formNotes.controls.notesControl,
-                      control: new Textarea({}),
-                    }),
-                  ],
-                }),
-              ],
-            }),
-          })
-        );
+        // this.dialogService.setDialog(
+        //   new Dialog({
+        //     title: 'Notes',
+        //     form: new Form({
+        //       formGroup: this.formNotes,
+        //       groups: [
+        //         new FormControlGroup({
+        //           controls: [
+        //             new FormControl({
+        //               //formControl: this.formNotes.controls.notesControl,
+        //               control: new Textarea({}),
+        //             }),
+        //           ],
+        //         }),
+        //       ],
+        //     }),
+        //   })
+        // );
       },
     });
 

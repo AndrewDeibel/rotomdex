@@ -7,8 +7,18 @@ import {
 import { MenuItem } from '@app/controls/menu';
 import { LoaderService } from './controls';
 import { NavigationEnd, Router, RoutesRecognized } from '@angular/router';
-import { Dialog } from './controls/dialog/dialog';
+import { Dialog, DialogConfig, DialogRef } from './controls/dialog/dialog';
 import { DialogService } from './controls/dialog/dialog.service';
+
+@Component({
+  template: `this is a test {{ config.data.message }}`,
+})
+export class DialogBodyComponent {
+  constructor(public config: DialogConfig, public dialog: DialogRef) {}
+  onClose(): void {
+    this.dialog.close();
+  }
+}
 
 @Component({
   selector: 'app-root',
@@ -29,7 +39,14 @@ export class AppComponent implements OnInit {
     private router: Router,
     private loaderService: LoaderService,
     private dialogService: DialogService
-  ) {}
+  ) {
+    const ref = this.dialogService.open(DialogBodyComponent, {
+      data: 'Testing message',
+    });
+    ref.afterClosed.subscribe((result) => {
+      console.log('Dialog closed', result);
+    });
+  }
 
   ngOnInit() {
     // Loader
@@ -39,15 +56,6 @@ export class AppComponent implements OnInit {
         this.cdRef.detectChanges();
       }
     });
-
-    // Dialog
-    this.dialogService
-      .getDialogObservable()
-      .subscribe((dialog: Dialog | null) => {
-        if (dialog) {
-          this.dialog = dialog;
-        }
-      });
 
     // Scroll to top
     this.router.events.subscribe((event) => {

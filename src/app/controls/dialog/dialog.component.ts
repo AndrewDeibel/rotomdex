@@ -1,28 +1,70 @@
+import { InsertionDirective } from './insertion.directive';
+import { Subject } from 'rxjs';
 import {
   Component,
-  OnInit,
-  Input,
-  ElementRef,
+  Type,
   HostListener,
+  AfterViewInit,
+  OnDestroy,
+  ComponentRef,
+  ViewChild,
+  ComponentFactoryResolver,
+  ChangeDetectorRef,
 } from '@angular/core';
-import { Dialog } from './dialog';
+import { DialogRef } from './dialog';
 
 @Component({
-  selector: 'app-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
 })
-export class DialogComponent implements OnInit {
+export class DialogComponent implements AfterViewInit, OnDestroy {
+  // Refs
+  componentRef: ComponentRef<any>;
+  childComponentType: Type<any>;
+  @ViewChild(InsertionDirective) insertionPoint: InsertionDirective;
+  private readonly _onClose = new Subject<any>();
+  public onClose = this._onClose.asObservable();
+
+  // Close on escape key
   @HostListener('window:keyup', ['$event'])
   keyUp(event: KeyboardEvent) {
     if (event.key === 'Escape') {
-      this.dialog.close();
+      this.dialogRef.close();
     }
   }
-  @Input() dialog: Dialog;
-  loading: boolean;
 
-  constructor(private elRef: ElementRef) {}
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private changeDetectorRef: ChangeDetectorRef,
+    private dialogRef: DialogRef
+  ) {}
 
-  ngOnInit(): void {}
+  ngAfterViewInit(): void {
+    this.loadChildComponent(this.childComponentType);
+    this.changeDetectorRef.detectChanges();
+  }
+
+  ngOnDestroy(): void {
+    if (this.componentRef) this.componentRef.destroy();
+  }
+
+  onOverlayClicked(): void {
+    this.dialogRef.close();
+  }
+
+  onDialogClicked(event: MouseEvent): void {
+    event.stopPropagation();
+  }
+
+  loadChildComponent(componentType: Type<any>): void {
+    const componentFactory =
+      this.componentFactoryResolver.resolveComponentFactory(componentType);
+    const viewContainerRef = this.insertionPoint.viewContainerRef;
+    viewContainerRef.clear();
+    this.componentRef = viewContainerRef.createComponent(componentFactory);
+  }
+
+  close(): void {
+    this._onClose.next('');
+  }
 }

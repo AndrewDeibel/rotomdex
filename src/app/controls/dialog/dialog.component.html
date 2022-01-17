@@ -1,38 +1,27 @@
-<div
-  class="overlay pointer"
-  [class.active]="dialog && dialog.active"
-  (click)="dialog.close()"
->
-  <div class="max relative">
-    <div *ngIf="dialog" class="dialog" (click)="$event.stopPropagation()">
-      <div class="dialog-header">
-        <div class="flex padded flex-center">
-          <div class="box min-0 ellipsis">
-            <div class="dialog-title">
-              <h4>{{ dialog.title }}</h4>
-            </div>
-          </div>
-          <div>
-            <div class="dialog-close" (click)="dialog.close()">
-              <fa-icon icon="times"></fa-icon>
-            </div>
+<div class="overlay active pointer" (click)="onOverlayClicked()">
+  <div class="dialog" (click)="onDialogClicked($event)">
+    <!-- <div class="dialog-header">
+      <div class="flex padded flex-center">
+        <div class="box min-0 ellipsis">
+          <div class="dialog-title">
+            <h4>{{ dialog.title }}</h4>
           </div>
         </div>
-      </div>
-      <div
-        class="dialog-content"
-        [innerHtml]="dialog.content"
-        *ngIf="dialog.content"
-      ></div>
-      <app-form *ngIf="dialog.form" [form]="dialog.form"></app-form>
-      <div class="dialog-footer" *ngIf="dialog.buttons.length">
-        <div class="flex padded">
-          <div *ngFor="let button of dialog.buttons">
-            <app-button [button]="button"></app-button>
-          </div>
+        <div>
+          <div class="dialog-close" (click)="dialog.close()"></div>
         </div>
       </div>
-      <loader [active]="loading"></loader>
+    </div> -->
+    <div class="dialog-content">
+      <ng-template appInsertion></ng-template>
     </div>
+    <!-- <div class="dialog-footer" *ngIf="dialog.buttons.length">
+      <div class="flex padded">
+        <div *ngFor="let button of dialog.buttons">
+          <app-button [button]="button"></app-button>
+        </div>
+      </div>
+    </div>
+    <loader [active]="loading"></loader> -->
   </div>
 </div>

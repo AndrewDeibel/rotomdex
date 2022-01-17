@@ -99,12 +99,12 @@ export class CardComponent implements OnInit {
 
   createDialogCardImage() {
     if (this.card) {
-      this.dialogService.setDialog(
-        new Dialog({
-          title: `${this.card.name} - ${this.card.expansion.name}`,
-          content: `<div class="card-image"><img src="${this.card.image_high_res}" /></div>`,
-        })
-      );
+      // this.dialogService.setDialog(
+      //   new Dialog({
+      //     title: `${this.card.name} - ${this.card.expansion.name}`,
+      //     content: `<div class="card-image"><img src="${this.card.image_high_res}" /></div>`,
+      //   })
+      // );
     }
   }
 

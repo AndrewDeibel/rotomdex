@@ -1,232 +1,232 @@
 // HTML
 html {
-	background: $main-bg;
+  background: $main-bg;
 }
 
 // Body
 body {
-	min-width: $min;
-	height: 100vh;
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	font-family: $font-family;
-	font-size: $font-size;
-	color: $font-color;
-	overflow-x: hidden;
+  min-width: $min;
+  height: 100vh;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  font-family: $font-family;
+  font-size: $font-size;
+  color: $font-color;
+  overflow-x: hidden;
 }
 
 // Min/max
 .min {
-	min-width: $min;
+  min-width: $min;
 }
 .max {
-	max-width: $max;
-	margin: 0 auto;
+  max-width: $max;
+  margin: 0 auto;
 }
 
 // Cursors
 .pointer {
-	cursor: pointer;
+  cursor: pointer;
 }
 .resize-ns {
-	cursor: ns-resize;
+  cursor: ns-resize;
 }
 .resize-ew {
-	cursor: ew-resize;
+  cursor: ew-resize;
 }
 
 // Shadow
 .shadow {
-	box-shadow: $shadow;
+  box-shadow: $shadow;
 }
 img {
-	&.shadow {
-		box-shadow: none;
-		filter: drop-shadow($shadow);
-	}
+  &.shadow {
+    box-shadow: none;
+    filter: drop-shadow($shadow);
+  }
 }
 .shadow-large {
-	box-shadow: $shadow-large;
+  box-shadow: $shadow-large;
 }
 
 // Z index
 @for $i from 1 through 20 {
-	.z-#{$i} {
-		z-index: $i;
-	}
+  .z-#{$i} {
+    z-index: $i;
+  }
 }
 
 // Position
 .relative {
-	position: relative;
+  position: relative;
 }
 .absolute {
-	position: absolute;
+  position: absolute;
 }
 .fixed {
-	position: fixed;
+  position: fixed;
 }
 
 // Display
 .block {
-	display: block !important;
+  display: block !important;
 }
 .inline-block {
-	display: inline-block !important;
+  display: inline-block !important;
 }
 .none {
-	display: none !important;
+  display: none !important;
 }
 @media (max-width: $screen-small) {
-	.small-none {
-		display: none !important;
-	}
+  .small-none {
+    display: none !important;
+  }
 }
 
 // Backgrounds
 .bg {
-	background: $main-bg;
+  background: $main-bg;
 }
 
 // Alerts
 .success {
-	background: $success !important;
+  background: $success !important;
 }
 .info {
-	background: $info !important;
+  background: $info !important;
 }
 .warning {
-	background: $warning !important;
+  background: $warning !important;
 }
 .error {
-	background: $error !important;
+  background: $error !important;
 }
 
 // Color
 @each $color-name, $color-value in $colors {
-	.color-#{$color-name} {
-		color: #{color-value} !important;
-	}
-	.bg-#{$color-name} {
-		background-color: #{$color-value} !important;
-	}
+  .color-#{$color-name} {
+    color: #{color-value} !important;
+  }
+  .bg-#{$color-name} {
+    background-color: #{$color-value} !important;
+  }
 }
 .input-bg {
-	background-color: $input-bg;
+  background-color: $input-bg;
 }
 
 // Gradient
 .texture-gradient {
-	overflow: hidden;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 1;
-	pointer-events: none;
-	&:before {
-		content: "";
-		pointer-events: none;
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: linear-gradient(rgba(white, 0.2), transparent);
-		z-index: 2;
-	}
-	+ *:not([class^="texture-"]) {
-		position: relative;
-		z-index: 2;
-	}
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+  &:before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(white, 0.2), transparent);
+    z-index: 2;
+  }
+  + *:not([class^="texture-"]) {
+    position: relative;
+    z-index: 2;
+  }
 }
 
 @for $i from 1 through 10 {
-	.opacity-#{$i} {
-		opacity: $i / 10;
-	}
+  .opacity-#{$i} {
+    opacity: $i / 10;
+  }
 }
 
 // State
 .hover {
-	transition: $transition;
-	&:hover {
-		border-color: $primary-color;
-		box-shadow: $shadow-focus;
-	}
+  transition: $transition;
+  &:hover {
+    border-color: $primary-color;
+    box-shadow: $shadow-focus;
+  }
 }
 .hover-zoom {
-	transition: $transition;
-	&:hover {
-		transform: scale(1.1);
-	}
+  transition: $transition;
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 .hover-zoom-large {
-	transition: $transition;
-	&:hover {
-		transform: scale(1.4);
-	}
+  transition: $transition;
+  &:hover {
+    transform: scale(1.4);
+  }
 }
 .hover-z-1:hover {
-	position: relative;
-	z-index: 1;
+  position: relative;
+  z-index: 1;
 }
 
 .transition {
-	transition: $transition;
+  transition: $transition;
 }
 
 .overlay {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 999;
-	background: rgba(black, 0.8);
-	pointer-events: none;
-	opacity: 0;
-	transition: $transition;
-	&.active,
-	&.open {
-		pointer-events: all;
-		opacity: 1;
-	}
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 998;
+  background: rgba(black, 0.8);
+  pointer-events: none;
+  opacity: 0;
+  transition: $transition;
+  &.active,
+  &.open {
+    pointer-events: all;
+    opacity: 1;
+  }
 }
 
 .hidden {
-	visibility: hidden !important;
+  visibility: hidden !important;
 }
 
 @each $side in $sides {
-	.#{$side} {
-		#{$side}: 0;
-	}
+  .#{$side} {
+    #{$side}: 0;
+  }
 }
 
 .panel {
-	border-radius: $border-radius-small;
-	box-shadow: $shadow;
-	padding: $spacing * 2;
-	background: $panel-bg;
-	position: relative;
-	&:after {
-		content: "";
-		border-radius: $border-radius-small;
-		width: 100%;
-		height: 100%;
-		box-shadow: $shadow-sheen;
-		z-index: 10;
-		position: absolute;
-		border: $border;
-		top: 0;
-		left: 0;
-		pointer-events: none;
-		z-index: 0;
-	}
-	> * {
-		z-index: 1;
-	}
+  border-radius: $border-radius-small;
+  box-shadow: $shadow;
+  padding: $spacing * 2;
+  background: $panel-bg;
+  position: relative;
+  &:after {
+    content: "";
+    border-radius: $border-radius-small;
+    width: 100%;
+    height: 100%;
+    box-shadow: $shadow-sheen;
+    z-index: 10;
+    position: absolute;
+    border: $border;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  > * {
+    z-index: 1;
+  }
 }

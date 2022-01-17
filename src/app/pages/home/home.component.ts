@@ -60,15 +60,15 @@ export class HomeComponent implements OnInit {
   }
 
   createDialogReleaseNote(releaseNote: ReleaseNote) {
-    this.dialogService.setDialog(
-      new Dialog({
-        title: releaseNote.title,
-        content: `
-				<p>${releaseNote.content}</p>
-				<div class="subheading">v${releaseNote.version} - ${this.datePipe.transform(
-          releaseNote.date
-        )}</div>`,
-      })
-    );
+    // this.dialogService.setDialog(
+    //   new Dialog({
+    //     title: releaseNote.title,
+    //     content: `
+    // 		<p>${releaseNote.content}</p>
+    // 		<div class="subheading">v${releaseNote.version} - ${this.datePipe.transform(
+    //       releaseNote.date
+    //     )}</div>`,
+    //   })
+    // );
   }
 }
