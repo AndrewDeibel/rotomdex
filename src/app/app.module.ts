@@ -68,8 +68,8 @@ import {
   PokmeonItemListComponent,
   PokemonComponent,
   CollectionComponent,
-  CollectionDashboardComponent,
-  CollectionCardGroupComponent,
+  DashboardComponent,
+  UserCardGroupComponent,
   UserCardsComponent,
   UserCardComponent,
   EditProfileComponent,
@@ -271,8 +271,8 @@ import {
     ItemsGridComponent,
     ItemsListComponent,
     ItemsGroupsComponent,
-    CollectionCardGroupComponent,
-    CollectionDashboardComponent,
+    UserCardGroupComponent,
+    DashboardComponent,
 
     // Pages
     // ====================

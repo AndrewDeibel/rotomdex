@@ -1,3 +1,4 @@
+import { UserCardGroup } from './../../../cards/card/card';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   Condition,
@@ -21,6 +22,7 @@ import { Form } from '@app/controls/form';
 })
 export class UserCardComponent implements OnInit {
   @Input() item: UserCard;
+  @Input() userCardGroups: UserCardGroup[];
   @Output() deleted: EventEmitter<boolean> = new EventEmitter();
   @Output() updated: EventEmitter<UserCard> = new EventEmitter();
   selectCondition: Select;
@@ -172,17 +174,17 @@ export class UserCardComponent implements OnInit {
       },
     });
 
-    // Binder
+    // Group
     this.selectBinder = new Select({
       classes: 'square',
       multiple: true,
-      options: [
-        new SelectOption({
-          text: 'Binder 1',
-          value: 'binder1',
-          selected: true,
-        }),
-      ],
+      options: this.userCardGroups?.map(
+        (userCardGroup) =>
+          new SelectOption({
+            text: userCardGroup.name,
+            value: userCardGroup.id.toString(),
+          })
+      ),
     });
 
     // Button remove

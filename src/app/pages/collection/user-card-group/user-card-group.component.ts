@@ -14,11 +14,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'collection-card-group',
-  templateUrl: 'collection-card-group.component.html',
-  styleUrls: ['./collection-card-group.component.scss'],
+  selector: 'user-card-group',
+  templateUrl: 'user-card-group.component.html',
+  styleUrls: ['./user-card-group.component.scss'],
 })
-export class CollectionCardGroupComponent implements OnInit {
+export class UserCardGroupComponent implements OnInit {
   form: FormGroup;
   textboxName: Textbox;
   selectType: Select;

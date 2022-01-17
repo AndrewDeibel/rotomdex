@@ -41,6 +41,7 @@
         [item]="userCard"
         (deleted)="deleteItem(userCard)"
         (updated)="updateItem($event)"
+        [userCardGroups]="userCardGroups"
       >
       </user-card>
       <mb-empty *ngIf="userCards.length === 0" [empty]="empty"></mb-empty>

@@ -101,12 +101,13 @@ export class CardLastPrices {
   }
 }
 
-export class CardGroup {
-  title: string;
+export class UserCardGroup {
+  name: string;
   icon: Icons;
   cards: Card[] = [];
   count: number = 0;
-  constructor(init?: Partial<CardGroup>) {
+  id: number;
+  constructor(init?: Partial<UserCardGroup>) {
     Object.assign(this, init);
   }
 }

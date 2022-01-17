@@ -1,6 +1,12 @@
+import { AuthenticationService } from '@app/pages/auth/auth.service';
+import { UserCardGroup } from './../../cards/card/card';
+import {
+  UserCardGroupService,
+  ResUserCardGroups,
+} from './../user-card-group/user-card-group.services';
 import { UserCardsService } from './user-cards.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { Icons } from '@app/models';
+import { APIGetPaged, Icons } from '@app/models';
 import { Button, Checkbox, Empty } from '@app/controls';
 import { UserCard } from './user-card';
 
@@ -18,12 +24,24 @@ export class UserCardsComponent implements OnInit {
   empty: Empty;
   buttonNotes: Button;
   buttonDelete: Button;
+  userCardGroups: UserCardGroup[];
 
-  constructor(private userCardsService: UserCardsService) {}
+  constructor(
+    private userCardsService: UserCardsService,
+    private userCardGroupService: UserCardGroupService,
+    private authenticationService: AuthenticationService
+  ) {}
 
   ngOnInit(): void {
     this.setupControls();
     this.setupSubscriptions();
+
+    this.userCardGroupService.getUserCardGroups(
+      new APIGetPaged({
+        user_id: this.authenticationService.currentUserValue?.id,
+        page_size: 100,
+      })
+    );
   }
 
   setupControls() {
@@ -73,6 +91,11 @@ export class UserCardsComponent implements OnInit {
     this.userCardsService.addUserCardObservable().subscribe((addedCard) => {
       if (addedCard) {
         this.userCards.push(addedCard);
+      }
+    });
+    this.userCardGroupService.getUserCardGroupsObservable().subscribe((res) => {
+      if (res) {
+        this.userCardGroups = res.user_card_groups;
       }
     });
   }
