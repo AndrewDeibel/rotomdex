@@ -45,9 +45,7 @@ export class UserCardsService {
       .get<APIResponse>(params.buildUrl('user-cards'))
       .subscribe((res) => {
         this.getUserCardsSubject.next({
-          cards: res.data.map((card: any) => {
-            new Card(card);
-          }),
+          cards: res.data.map((userCard: any) => new Card(userCard.card)),
           total_pages: res.meta.last_page,
           total_results: res.meta.total,
         });
