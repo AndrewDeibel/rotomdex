@@ -4,7 +4,7 @@ import { Textbox } from '@app/controls';
 import { Icons } from '@app/models';
 
 @Component({
-  selector: 'mb-search',
+  selector: 'search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
   encapsulation: ViewEncapsulation.None,

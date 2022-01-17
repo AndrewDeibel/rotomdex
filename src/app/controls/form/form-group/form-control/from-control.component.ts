@@ -8,7 +8,7 @@ import { Checkbox } from '@app/controls/checkbox';
 import { Toggle } from '@app/controls/toggle';
 
 @Component({
-  selector: 'mb-form-control',
+  selector: 'form-control',
   templateUrl: 'form-control.component.html',
 })
 export class FormControlComponent implements OnInit {

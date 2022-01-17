@@ -9,26 +9,26 @@
         <h1>Edit Profile</h1>
       </div>
       <div>
-        <mb-textbox [textbox]="textboxEmail"></mb-textbox>
+        <textbox [textbox]="textboxEmail"></textbox>
       </div>
       <div>
-        <mb-textbox [textbox]="textboxUsername"></mb-textbox>
+        <textbox [textbox]="textboxUsername"></textbox>
       </div>
       <div>
-        <mb-select [select]="selectFavoritePokemon"></mb-select>
+        <app-select [select]="selectFavoritePokemon"></app-select>
       </div>
       <div>
-        <mb-select [select]="selectUserIcon"></mb-select>
+        <app-select [select]="selectUserIcon"></app-select>
       </div>
       <div>
-        <mb-toggle [toggle]="togglePublic"></mb-toggle>
+        <toggle [toggle]="togglePublic"></toggle>
       </div>
       <div>
-        <mb-button [button]="buttonChangePassword"></mb-button>
+        <app-button [button]="buttonChangePassword"></app-button>
       </div>
       <div class="flex padded">
-        <mb-button [button]="buttonCancel"></mb-button>
-        <mb-button [button]="buttonSubmit"></mb-button>
+        <app-button [button]="buttonCancel"></app-button>
+        <app-button [button]="buttonSubmit"></app-button>
       </div>
     </div>
   </div>

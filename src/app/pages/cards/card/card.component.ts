@@ -21,7 +21,7 @@ import { AppSettings } from '@app/app';
 import { APIGetPaged } from '@app/models';
 
 @Component({
-  selector: 'mb-card',
+  selector: 'card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
   encapsulation: ViewEncapsulation.None,

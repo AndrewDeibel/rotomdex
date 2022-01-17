@@ -1,24 +1,24 @@
 <!-- Header -->
-<mb-header [transparent]="transparentHeader"></mb-header>
+<app-header [transparent]="transparentHeader"></app-header>
 
 <!-- Notifications -->
-<mb-notifications></mb-notifications>
+<notifications></notifications>
 
 <!-- Main -->
 <main id="main" [class.padding-top-none]="transparentHeader">
-	<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </main>
 
 <!-- Footer -->
-<mb-footer></mb-footer>
+<app-footer></app-footer>
 
 <!-- Loader -->
-<mb-loader [active]="loading"></mb-loader>
+<loader [active]="loading"></loader>
 
 <!-- Dialog -->
-<mb-dialog [dialog]="dialog"></mb-dialog>
+<app-dialog [dialog]="dialog"></app-dialog>
 
 <!-- Scroll top -->
 <a class="scrollTop" *ngIf="showScrollToTop" (click)="scrollToTop()">
-	<fa-icon icon="arrow-up"></fa-icon>
+  <fa-icon icon="arrow-up"></fa-icon>
 </a>

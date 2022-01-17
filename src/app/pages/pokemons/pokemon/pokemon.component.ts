@@ -1,23 +1,25 @@
-import { Tag } from './../../../controls/tag/tag';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
+  Button,
+  DialogService,
+  LoaderService,
+  Tag,
   Select,
   SelectOptionGroup,
   SelectOption,
-} from './../../../controls/select/select';
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Button, DialogService, LoaderService } from '@app/controls';
+  ProgressBar,
+  Dialog,
+} from '@app/controls';
 import { ItemGroup, Items } from '@app/layout/main';
 import { SetSortByPokemon, PokemonVariant } from './pokemon';
 import { PokemonService } from './pokemon.service';
 import { Title } from '@angular/platform-browser';
 import { AppSettings } from '@app/app';
 import { APIGetPaged, Size, Symbols } from '@app/models';
-import { Dialog } from '@app/controls/dialog/dialog';
-import { ProgressBar } from '@app/controls/progress-bar/progress-bar';
 
 @Component({
-  selector: 'mb-pokemon',
+  selector: 'pokemon',
   templateUrl: 'pokemon.component.html',
   styleUrls: ['./pokemon.component.scss'],
 })

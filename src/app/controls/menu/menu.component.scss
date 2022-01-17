@@ -2,319 +2,319 @@
 @import "../button/button.component.scss";
 
 .menu {
-	//box-shadow: $shadow-sheen;
-	//border: $border;
-	background: $input-bg;
-	@media (max-width: $screen-medium) {
-		&.medium-stacked {
-			a {
-				flex-direction: column;
-			}
-		}
-	}
-	a:not(.no-ellipsis) {
-		.text {
-			white-space: nowrap;
-			text-overflow: ellipsis;
-			overflow: hidden;
-		}
-	}
-	&.dark {
-		border-color: $border-color-strong;
-	}
-	a {
-		display: flex;
-		flex-wrap: nowrap;
-		align-items: center;
-		min-height: 40px;
-		padding: $spacing ($spacing * 2);
-		flex: 1;
-		max-width: 100%;
-		user-select: none;
-		color: $font-color;
-		@media (max-width: $screen-small) {
-			padding: 8px 12px;
-		}
-		&:hover {
-			background: rgba($grey, 0.1);
-		}
-		.text {
-			flex: 1 0 0;
-			min-width: 0;
-			+ .price {
-				padding-left: $spacing;
-			}
-		}
-		.symbol {
-			height: 20px;
-			width: 20px;
-			display: flex;
-			justify-content: center;
-			filter: contrast(0) brightness(10);
-			//filter: contrast(0) sepia(100%) hue-rotate(164deg) brightness(0.7)
-			//	saturate(2);
-			img {
-				max-height: 100%;
-				display: block;
-			}
-			+ * {
-				padding-left: $spacing;
-			}
-		}
-		.icon {
-			fa-icon {
-				width: 20px;
-				height: 16px;
-			}
-			+ .text {
-				padding-left: $spacing;
-			}
-		}
-		span + .icon-expand {
-			padding-left: $spacing;
-		}
-		.price {
-			color: $green;
-			font-weight: bold;
-		}
-	}
-	li {
-		position: relative;
-		display: flex;
-		user-select: none;
-		flex-wrap: wrap;
-		//flex: 1 0 0; // Made card detail tabs span parent
-		&.active {
-			> a {
-				box-shadow: inset 3px 0 0 $primary-color;
-				background: rgba($primary-color, 0.1);
-			}
-		}
+  //box-shadow: $shadow-sheen;
+  //border: $border;
+  background: $input-bg;
+  @media (max-width: $screen-medium) {
+    &.medium-stacked {
+      a {
+        flex-direction: column;
+      }
+    }
+  }
+  a:not(.no-ellipsis) {
+    .text {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+  &.dark {
+    border-color: $border-color-strong;
+  }
+  a {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    min-height: 40px;
+    padding: $spacing ($spacing * 2);
+    flex: 1;
+    max-width: 100%;
+    user-select: none;
+    color: $font-color;
+    @media (max-width: $screen-small) {
+      padding: 8px 12px;
+    }
+    &:hover {
+      background: rgba($grey, 0.1);
+    }
+    .text {
+      flex: 1 0 0;
+      min-width: 0;
+      + .price {
+        padding-left: $spacing;
+      }
+    }
+    .symbol {
+      height: 20px;
+      width: 20px;
+      display: flex;
+      justify-content: center;
+      filter: contrast(0) brightness(10);
+      //filter: contrast(0) sepia(100%) hue-rotate(164deg) brightness(0.7)
+      //	saturate(2);
+      img {
+        max-height: 100%;
+        display: block;
+      }
+      + * {
+        padding-left: $spacing;
+      }
+    }
+    .icon {
+      fa-icon {
+        width: 20px;
+        height: 16px;
+      }
+      + .text {
+        padding-left: $spacing;
+      }
+    }
+    span + .icon-expand {
+      padding-left: $spacing;
+    }
+    .price {
+      color: $green;
+      font-weight: bold;
+    }
+  }
+  li {
+    position: relative;
+    display: flex;
+    user-select: none;
+    flex-wrap: wrap;
+    //flex: 1 0 0; // Made card detail tabs span parent
+    &.active {
+      > a {
+        box-shadow: inset 3px 0 0 $primary-color;
+        background: rgba($primary-color, 0.1);
+      }
+    }
 
-		&.disabled {
-			opacity: 0.5;
-			cursor: not-allowed;
-			a {
-				pointer-events: none;
-			}
-		}
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      a {
+        pointer-events: none;
+      }
+    }
 
-		.form {
-			display: flex;
-			flex-wrap: nowrap;
-		}
+    .form {
+      display: flex;
+      flex-wrap: nowrap;
+    }
 
-		// Handle icon rotation
-		&.icon-tap {
-			> a {
-				> .icon {
-					fa-icon {
-						transform: rotateY(180deg);
-					}
-				}
-			}
-		}
-		mb-textbox {
-			display: block;
-			+ mb-button {
-				&.padding {
-					padding-left: 0;
-				}
-			}
-		}
-		mb-button {
-			display: block;
-		}
+    // Handle icon rotation
+    &.icon-tap {
+      > a {
+        > .icon {
+          fa-icon {
+            transform: rotateY(180deg);
+          }
+        }
+      }
+    }
+    textbox {
+      display: block;
+      + Button {
+        &.padding {
+          padding-left: 0;
+        }
+      }
+    }
+    Button {
+      display: block;
+    }
 
-		// See collection card version menu for why
-		mb-menu {
-			min-width: 100%;
-		}
-	}
-	ul {
-		position: relative;
-		.menu {
-			position: absolute;
-			top: 100%;
-			left: 0;
-			background: $panel-bg;
-			box-shadow: $shadow;
-			border-radius: $border-radius;
-			white-space: nowrap;
-			z-index: 1;
-			&.anchor-right {
-				left: auto;
-				right: 0;
-			}
-			&.anchor-bottom {
-				bottom: 100%;
-				top: auto;
-			}
-			&.anchor-center {
-				left: 50%;
-				transform: translateX(-50%);
-			}
+    // See collection card version menu for why
+    app-menu {
+      min-width: 100%;
+    }
+  }
+  ul {
+    position: relative;
+    .menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: $panel-bg;
+      box-shadow: $shadow;
+      border-radius: $border-radius;
+      white-space: nowrap;
+      z-index: 1;
+      &.anchor-right {
+        left: auto;
+        right: 0;
+      }
+      &.anchor-bottom {
+        bottom: 100%;
+        top: auto;
+      }
+      &.anchor-center {
+        left: 50%;
+        transform: translateX(-50%);
+      }
 
-			ul {
-				overflow-y: auto;
-				// Sub-sub menu
-				.menu {
-					position: relative;
-					top: 0;
-					left: 0;
-					right: auto;
-					bottom: auto;
-					margin: $spacing;
-				}
-			}
-		}
-	}
+      ul {
+        overflow-y: auto;
+        // Sub-sub menu
+        .menu {
+          position: relative;
+          top: 0;
+          left: 0;
+          right: auto;
+          bottom: auto;
+          margin: $spacing;
+        }
+      }
+    }
+  }
 
-	// Borders
-	&.borders {
-		&:not(.horizonal) {
-			li:not(:last-child) {
-				border-bottom: $border;
-			}
-		}
-		&.horizonal {
-			li:not(:last-child) {
-				border-right: $border;
-			}
-		}
-	}
+  // Borders
+  &.borders {
+    &:not(.horizonal) {
+      li:not(:last-child) {
+        border-bottom: $border;
+      }
+    }
+    &.horizonal {
+      li:not(:last-child) {
+        border-right: $border;
+      }
+    }
+  }
 
-	// Sizes
-	&.small {
-		a {
-			padding: 8px 12px;
-			font-size: 14px;
-			.icon {
-				fa-icon {
-					width: 14px;
-					height: 14px;
-				}
-			}
-		}
-	}
-	&.large {
-		a {
-			padding: 12px 24px;
-			font-size: 120%;
-			.icon {
-				fa-icon {
-					width: 24px;
-					height: 24px;
-				}
-			}
-		}
-	}
+  // Sizes
+  &.small {
+    a {
+      padding: 8px 12px;
+      font-size: 14px;
+      .icon {
+        fa-icon {
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+  }
+  &.large {
+    a {
+      padding: 12px 24px;
+      font-size: 120%;
+      .icon {
+        fa-icon {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+  }
 
-	// Round
-	&.round {
-		> ul > li {
-			&:first-child > a {
-				border-top-left-radius: $border-radius;
-				border-top-right-radius: $border-radius;
-			}
-			&:last-child > a {
-				border-bottom-left-radius: $border-radius;
-				border-bottom-right-radius: $border-radius;
-			}
-		}
-		&.horizontal {
-			> ul > li {
-				&:first-child > a {
-					border-top-left-radius: $border-radius;
-					border-bottom-left-radius: $border-radius;
-					border-top-right-radius: 0;
-					border-bottom-right-radius: 0;
-				}
-				&:last-child > a {
-					border-top-right-radius: $border-radius;
-					border-bottom-right-radius: $border-radius;
-					border-bottom-left-radius: 0;
-					border-top-left-radius: 0;
-				}
-				&:first-child:last-child > a {
-					border-radius: $border-radius;
-				}
-			}
-		}
-	}
-	@media (max-width: $screen-medium) {
-		&.medium-square {
-			> ul > li {
-				&:first-child > a {
-					border-radius: 0 !important;
-				}
-				&:last-child > a {
-					border-radius: 0 !important;
-				}
-			}
-		}
-	}
-	&.round-top {
-		li {
-			&:first-child > a {
-				border-top-left-radius: $border-radius;
-				border-top-right-radius: $border-radius;
-			}
-		}
-	}
-	&.round-bottom {
-		li {
-			&:last-child > a {
-				border-bottom-right-radius: $border-radius;
-				border-bottom-left-radius: $border-radius;
-			}
-		}
-	}
+  // Round
+  &.round {
+    > ul > li {
+      &:first-child > a {
+        border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+      }
+      &:last-child > a {
+        border-bottom-left-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+      }
+    }
+    &.horizontal {
+      > ul > li {
+        &:first-child > a {
+          border-top-left-radius: $border-radius;
+          border-bottom-left-radius: $border-radius;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+        &:last-child > a {
+          border-top-right-radius: $border-radius;
+          border-bottom-right-radius: $border-radius;
+          border-bottom-left-radius: 0;
+          border-top-left-radius: 0;
+        }
+        &:first-child:last-child > a {
+          border-radius: $border-radius;
+        }
+      }
+    }
+  }
+  @media (max-width: $screen-medium) {
+    &.medium-square {
+      > ul > li {
+        &:first-child > a {
+          border-radius: 0 !important;
+        }
+        &:last-child > a {
+          border-radius: 0 !important;
+        }
+      }
+    }
+  }
+  &.round-top {
+    li {
+      &:first-child > a {
+        border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+      }
+    }
+  }
+  &.round-bottom {
+    li {
+      &:last-child > a {
+        border-bottom-right-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
+      }
+    }
+  }
 
-	// Tabs
-	&.tabs {
-		border-bottom: 1px solid $border-color;
-		> ul {
-			> li {
-				> a {
-					border-top-left-radius: $border-radius-small;
-					border-top-right-radius: $border-radius-small;
-					@media (max-width: $screen-medium) {
-						flex-direction: column;
-						align-items: center;
-						font-size: 100%;
-						padding: $spacing;
-						.text {
-							flex: initial;
-							padding-left: 0 !important;
-							margin-top: 4px;
-						}
-						.icon-expand {
-							display: none;
-						}
-					}
-					@media (max-width: $screen-small) {
-						font-size: 14px;
-					}
-				}
-			}
-		}
-	}
+  // Tabs
+  &.tabs {
+    border-bottom: 1px solid $border-color;
+    > ul {
+      > li {
+        > a {
+          border-top-left-radius: $border-radius-small;
+          border-top-right-radius: $border-radius-small;
+          @media (max-width: $screen-medium) {
+            flex-direction: column;
+            align-items: center;
+            font-size: 100%;
+            padding: $spacing;
+            .text {
+              flex: initial;
+              padding-left: 0 !important;
+              margin-top: 4px;
+            }
+            .icon-expand {
+              display: none;
+            }
+          }
+          @media (max-width: $screen-small) {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
 
-	// Horizontal
-	&.tabs,
-	&.horizontal {
-		> ul {
-			display: flex;
-			flex-wrap: nowrap;
-			> li {
-				&.active {
-					> a {
-						box-shadow: inset 0 -3px 0 0 $primary-color,
-							0 1px 0 0 $primary-color;
-					}
-				}
-			}
-		}
-	}
+  // Horizontal
+  &.tabs,
+  &.horizontal {
+    > ul {
+      display: flex;
+      flex-wrap: nowrap;
+      > li {
+        &.active {
+          > a {
+            box-shadow: inset 0 -3px 0 0 $primary-color,
+              0 1px 0 0 $primary-color;
+          }
+        }
+      }
+    }
+  }
 }

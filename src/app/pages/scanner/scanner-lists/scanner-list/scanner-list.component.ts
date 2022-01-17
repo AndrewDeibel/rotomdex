@@ -19,7 +19,7 @@ import { AuthenticationService } from '@app/pages/auth/auth.service';
 
 //@AutoUnsubscribe()
 @Component({
-  selector: 'mb-scanner-list',
+  selector: 'scanner-list',
   templateUrl: './scanner-list.component.html',
 })
 export class ScannerListComponent implements OnInit {

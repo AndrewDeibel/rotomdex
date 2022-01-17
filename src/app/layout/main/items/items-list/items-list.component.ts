@@ -6,7 +6,7 @@ import { Card } from '@app/pages';
 import { Expansion } from '@app/pages';
 
 @Component({
-  selector: 'mb-items-list',
+  selector: 'items-list',
   templateUrl: './items-list.component.html',
   styleUrls: ['./items-list.component.scss'],
 })

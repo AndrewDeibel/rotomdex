@@ -1,41 +1,34 @@
 <!-- List/Grid -->
-<div
-	[class.item-groups]="groups.length > 1"
-	*ngIf="groups && groups.length">
-	<div
-		*ngFor="let group of groups"
-		class="item-group">
-		<div class="item-group-inner padding-2">		
-			<div class="max">
+<div [class.item-groups]="groups.length > 1" *ngIf="groups && groups.length">
+  <div *ngFor="let group of groups" class="item-group">
+    <div class="item-group-inner padding-2">
+      <div class="max">
+        <div class="padding-bottom" *ngIf="group.name">
+          <div class="flex padded flex-end">
+            <div class="box">
+              <div class="h2 bold">{{ group.name }}</div>
+            </div>
+            <div class="width-3">
+              <progress-bar
+                class="padding-bottom block"
+                [progressBar]="getProgressBar(group)"
+              >
+              </progress-bar>
+            </div>
+          </div>
+        </div>
 
-				<div class="padding-bottom" *ngIf="group.name">
-					<div class="flex padded flex-end">
-						<div class="box">
-							<div class="h2 bold">{{group.name}}</div>
-						</div>
-						<div class="width-3">
-							<progress-bar
-								class="padding-bottom block"
-								[progressBar]="getProgressBar(group)">
-							</progress-bar>
-						</div>
-					</div>
-				</div>
+        <!-- List -->
+        <items-list *ngIf="showList(group)" [items]="group.items"> </items-list>
 
-				<!-- List -->
-				<mb-items-list
-					*ngIf="showList(group)"
-					[items]="group.items">
-				</mb-items-list>
-
-				<!-- Grid -->
-				<mb-items-grid
-					*ngIf="showGrid(group)"
-					[itemClasses]="itemClasses"
-					[items]="group.items">
-				</mb-items-grid>
-				
-			</div>
-		</div>
-	</div>
+        <!-- Grid -->
+        <items-grid
+          *ngIf="showGrid(group)"
+          [itemClasses]="itemClasses"
+          [items]="group.items"
+        >
+        </items-grid>
+      </div>
+    </div>
+  </div>
 </div>

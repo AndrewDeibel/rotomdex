@@ -12,7 +12,7 @@ import { ProgressBar } from '@app/controls/progress-bar/progress-bar';
 import { APIGetPaged } from '@app/models';
 
 @Component({
-  selector: 'mb-expansion',
+  selector: 'expansion',
   templateUrl: './expansion.component.html',
   styleUrls: ['./expansion.component.scss'],
 })

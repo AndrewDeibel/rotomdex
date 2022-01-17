@@ -3,7 +3,7 @@ import { Form } from './form';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'mb-form',
+  selector: 'app-form',
   templateUrl: 'form.component.html',
 })
 export class FormComponent implements OnInit {

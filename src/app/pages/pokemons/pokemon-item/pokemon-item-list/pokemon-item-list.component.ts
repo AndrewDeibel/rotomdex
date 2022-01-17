@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Pokemon, PokemonVariant } from '../../pokemon/pokemon';
 
 @Component({
-  selector: 'mb-pokemon-item-list',
+  selector: 'pokemon-item-list',
   templateUrl: 'pokemon-item-list.component.html',
   styleUrls: ['./pokemon-item-list.component.scss'],
 })

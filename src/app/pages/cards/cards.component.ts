@@ -10,7 +10,7 @@ import '@app/helpers/string.extensions';
 import { APIGetPaged, Symbols } from '@app/models';
 
 @Component({
-  selector: 'mb-cards',
+  selector: 'cards',
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.scss'],
 })

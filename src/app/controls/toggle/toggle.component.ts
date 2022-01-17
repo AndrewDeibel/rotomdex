@@ -3,7 +3,7 @@ import { Toggle } from './toggle';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Component({
-  selector: 'mb-toggle',
+  selector: 'toggle',
   templateUrl: 'toggle.component.html',
   styleUrls: ['./toggle.component.scss'],
 

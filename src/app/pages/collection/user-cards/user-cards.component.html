@@ -5,7 +5,7 @@
         <h2><a [routerLink]="">Collection</a></h2>
       </div>
       <div>
-        <mb-checkbox [checkbox]="checkboxWishList"></mb-checkbox>
+        <checkbox [checkbox]="checkboxWishList"></checkbox>
       </div>
     </div>
   </div>
@@ -26,12 +26,12 @@
                 </div>
               </div>
               <div style="height: 0">
-                <mb-button class="hidden" [button]="buttonNotes"></mb-button>
+                <app-button class="hidden" [button]="buttonNotes"></app-button>
               </div>
             </div>
           </div>
           <div style="height: 0">
-            <mb-button class="hidden" [button]="buttonDelete"></mb-button>
+            <app-button class="hidden" [button]="buttonDelete"></app-button>
           </div>
         </div>
       </div>
@@ -44,13 +44,13 @@
         [userCardGroups]="userCardGroups"
       >
       </user-card>
-      <mb-empty *ngIf="userCards.length === 0" [empty]="empty"></mb-empty>
+      <empty *ngIf="userCards.length === 0" [empty]="empty"></empty>
       <div class="width-12" *ngIf="userCards.length">
         <div class="border-top padding-top">
           <div class="flex padded flex-center">
             <div class="box"></div>
             <div>
-              <mb-button [button]="buttonAdd"></mb-button>
+              <app-button [button]="buttonAdd"></app-button>
             </div>
           </div>
         </div>

@@ -1,39 +1,36 @@
 <a
-	class="item-list-pokemon flex"
-	[routerLink]="pokemonVariant.route ? pokemonVariant.route : []">
-
-	<div class="flex padded flex-center box">
-		<div>
-			<figure class="pokemon-image">
-				<img
-					*ngIf="getSprite(pokemonVariant)"
-					src="{{getSprite(pokemonVariant)}}" />
-			</figure>
-		</div>
-		<div class="box">
-			<figcaption class="pokemon-info">
-				<div class="flex padded flex-center">
-					<span class="width-6 pokemon-name">
-						{{pokemonVariant.name}}
-					</span>
-					<span class="width-3 expansion-release-date subheading">
-						#{{pokemonVariant.pokemon.national_dex_number}}
-					</span>
-					<span class="width-3 expansion-total-cards subheading">
-						<div
-							class="pokemon-types flex"
-							*ngIf="pokemonVariant.types">
-							<div class="flex padded">
-								<div
-									*ngFor="let type of pokemonVariant.types">
-									<mb-type-tag [type]="type"></mb-type-tag>
-								</div>
-							</div>
-						</div>
-					</span>
-				</div>
-			</figcaption>
-		</div>
-	</div>
-
+  class="item-list-pokemon flex"
+  [routerLink]="pokemonVariant.route ? pokemonVariant.route : []"
+>
+  <div class="flex padded flex-center box">
+    <div>
+      <figure class="pokemon-image">
+        <img
+          *ngIf="getSprite(pokemonVariant)"
+          src="{{ getSprite(pokemonVariant) }}"
+        />
+      </figure>
+    </div>
+    <div class="box">
+      <figcaption class="pokemon-info">
+        <div class="flex padded flex-center">
+          <span class="width-6 pokemon-name">
+            {{ pokemonVariant.name }}
+          </span>
+          <span class="width-3 expansion-release-date subheading">
+            #{{ pokemonVariant.pokemon.national_dex_number }}
+          </span>
+          <span class="width-3 expansion-total-cards subheading">
+            <div class="pokemon-types flex" *ngIf="pokemonVariant.types">
+              <div class="flex padded">
+                <div *ngFor="let type of pokemonVariant.types">
+                  <type-tag [type]="type"></type-tag>
+                </div>
+              </div>
+            </div>
+          </span>
+        </div>
+      </figcaption>
+    </div>
+  </div>
 </a>

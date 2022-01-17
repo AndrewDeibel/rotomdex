@@ -1,22 +1,22 @@
 <footer id="footer">
-	<div class="max">
-		<div class="flex padded">
-			<div class="width-4 small-12 small-order-2">
-				<mb-menu [menu]="menuLeft"></mb-menu>
-			</div>
-			<div class="width-4 small-12 small-order-3">
-				<mb-menu [menu]="menuCenter"></mb-menu>
-			</div>
-			<div class="width-4 small-12 small-order-1">
-				<a class="logo" routerLink="/">
-					<span><b>Rotom</b>dex</span>
-				</a>
-			</div>
-		</div>
-	</div>
+  <div class="max">
+    <div class="flex padded">
+      <div class="width-4 small-12 small-order-2">
+        <app-menu [menu]="menuLeft"></app-menu>
+      </div>
+      <div class="width-4 small-12 small-order-3">
+        <app-menu [menu]="menuCenter"></app-menu>
+      </div>
+      <div class="width-4 small-12 small-order-1">
+        <a class="logo" routerLink="/">
+          <span><b>Rotom</b>dex</span>
+        </a>
+      </div>
+    </div>
+  </div>
 </footer>
 <div class="copyright">
-	Rotom Dex is not affiliated with, sponsored or endorsed by, or in any way
-	associated with Pokemon or The Pokemon Company International Inc. &copy;
-	{{ year }} Rotom Dex. All rights reserved.
+  Rotom Dex is not affiliated with, sponsored or endorsed by, or in any way
+  associated with Pokemon or The Pokemon Company International Inc. &copy;
+  {{ year }} Rotom Dex. All rights reserved.
 </div>

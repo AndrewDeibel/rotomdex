@@ -1,59 +1,59 @@
 @import "settings";
 
 :host {
-	display: flex;
-	flex-direction: column;
-	flex: 1 0 0;
-	z-index: 1;
-	position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+  z-index: 1;
+  position: relative;
 }
 
 #menu {
-	width: 100%;
-	border-bottom: $border;
-	background: $menu-bg;
-	a {
-		color: white;
-	}
+  width: 100%;
+  border-bottom: $border;
+  background: $menu-bg;
+  a {
+    color: white;
+  }
 }
 
 #main {
-	background-color: $main-bg;
-	flex: 1;
-	position: relative;
-	z-index: 1;
-	@media (max-width: $screen-medium) {
-		padding-top: $header-height;
-	}
+  background-color: $main-bg;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  @media (max-width: $screen-medium) {
+    padding-top: $header-height;
+  }
 }
 
 .scrollTop {
-	border-radius: 999px;
-	padding: $spacing * 2.5;
-	width: 64px;
-	height: 64px;
-	position: fixed;
-	bottom: 32px;
-	right: 32px;
-	background: $secondary-color;
-	color: white;
-	box-shadow: $shadow;
-	cursor: pointer;
-	z-index: 10;
-	&:hover {
-		box-shadow: $shadow-large;
-	}
-	@media (max-width: $screen-medium) {
-		bottom: 100px;
-	}
+  border-radius: 999px;
+  padding: $spacing * 2.5;
+  width: 64px;
+  height: 64px;
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  background: $secondary-color;
+  color: white;
+  box-shadow: $shadow;
+  cursor: pointer;
+  z-index: 10;
+  &:hover {
+    box-shadow: $shadow-large;
+  }
+  @media (max-width: $screen-medium) {
+    bottom: 100px;
+  }
 }
 
-mb-loader ::ng-deep .overlay {
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	position: fixed;
-	z-index: 999;
-	display: block;
+loader ::ng-deep .overlay {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 999;
+  display: block;
 }

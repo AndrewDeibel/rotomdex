@@ -75,12 +75,12 @@
 
     <!-- Options -->
     <div class="scanner-options">
-      <mb-menu [menu]="menuScannerOptions"></mb-menu>
+      <app-menu [menu]="menuScannerOptions"></app-menu>
     </div>
 
     <!-- Mode -->
     <div class="scanner-modes">
-      <mb-menu [menu]="menuScannerModes"></mb-menu>
+      <app-menu [menu]="menuScannerModes"></app-menu>
     </div>
 
     <!-- Result -->
@@ -88,7 +88,7 @@
       *ngIf="visibleMatches.length && scannerResultMenu"
       class="scanner-result {{ showResult ? 'active' : '' }}"
     >
-      <mb-menu [menu]="scannerResultMenu"></mb-menu>
+      <app-menu [menu]="scannerResultMenu"></app-menu>
     </div>
 
     <!-- Results -->
@@ -115,5 +115,5 @@
 </div>
 
 <div class="flex justify-center padding" style="padding-top: 0">
-  <mb-alert [alert]="alert"></mb-alert>
+  <alert [alert]="alert"></alert>
 </div>

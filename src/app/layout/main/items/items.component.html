@@ -1,37 +1,34 @@
-<div
-	class="relative small-square"
-	*ngIf="items">
+<div class="relative small-square" *ngIf="items">
+  <!-- Header -->
+  <items-header *ngIf="items.showHeader" [itemsHeader]="items.header">
+  </items-header>
 
-	<!-- Header -->
-	<mb-items-header
-		*ngIf="items.showHeader"
-		[itemsHeader]="items.header">
-	</mb-items-header>
+  <!-- Filter -->
+  <items-filter
+    *ngIf="items.showFilters"
+    [itemsFilter]="items.filter"
+    (outputGetItems)="_outputGetItems()"
+    (outputDisplayModeChanged)="displayModeChanged($event)"
+  >
+  </items-filter>
 
-	<!-- Filter -->
-	<mb-items-filter
-		*ngIf="items.showFilters"
-		[itemsFilter]="items.filter"
-		(outputGetItems)="_outputGetItems()"
-		(outputDisplayModeChanged)="displayModeChanged($event)">
-	</mb-items-filter>
+  <!-- Empty -->
+  <empty *ngIf="empty && showEmpty()" [empty]="empty"></empty>
 
-	<!-- Empty -->
-	<mb-empty *ngIf="empty && showEmpty()" [empty]="empty"></mb-empty>
+  <!-- Groups -->
+  <items-groups
+    *ngIf="showGroups()"
+    [groups]="items.itemGroups"
+    [itemClasses]="items.itemClasses"
+    [itemDisplayType]="items.itemDisplayType"
+  >
+  </items-groups>
 
-	<!-- Groups -->
-	<mb-items-groups
-		*ngIf="showGroups()"
-		[groups]="items.itemGroups"
-		[itemClasses]="items.itemClasses"
-		[itemDisplayType]="items.itemDisplayType">
-	</mb-items-groups>
-
-	<!-- Footer -->
-	<mb-items-footer
-		*ngIf="items.itemGroups.length && items.showFooter"
-		[itemsFooter]="items.footer"
-		(outputGetItems)="_outputGetItems()">
-	</mb-items-footer>
-
+  <!-- Footer -->
+  <items-footer
+    *ngIf="items.itemGroups.length && items.showFooter"
+    [itemsFooter]="items.footer"
+    (outputGetItems)="_outputGetItems()"
+  >
+  </items-footer>
 </div>

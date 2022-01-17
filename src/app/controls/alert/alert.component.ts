@@ -2,17 +2,14 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Alert } from './alert';
 
 @Component({
-	selector: 'mb-alert',
-	templateUrl: 'alert.component.html',
-	styleUrls: ['./alert.component.scss']
+  selector: 'alert',
+  templateUrl: 'alert.component.html',
+  styleUrls: ['./alert.component.scss'],
 })
-
 export class AlertComponent implements OnInit {
+  @Input() alert: Alert;
 
-	@Input() alert: Alert;
+  constructor() {}
 
-	constructor() { }
-
-	ngOnInit() { }
-
+  ngOnInit() {}
 }

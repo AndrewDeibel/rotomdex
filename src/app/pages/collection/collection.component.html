@@ -1,14 +1,14 @@
 <div class="flex h-100">
   <div class="input-bg">
-    <mb-menu [menu]="menuSidebar"></mb-menu>
+    <app-menu [menu]="menuSidebar"></app-menu>
   </div>
   <div class="box">
     <collection-dashboard *ngIf="showDashboard()"></collection-dashboard>
-    <mb-items
+    <items
       *ngIf="showAll()"
       [items]="items"
       (outputGetItems)="getCollectionCards()"
-    ></mb-items>
+    ></items>
     <user-card-group
       class="padding-4 box"
       *ngIf="showAddGroup()"

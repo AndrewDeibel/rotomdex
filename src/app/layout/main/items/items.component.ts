@@ -10,7 +10,7 @@ import { Empty } from '@app/controls';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
-  selector: 'mb-items',
+  selector: 'items',
   templateUrl: 'items.component.html',
   styleUrls: ['./items.component.scss'],
 })

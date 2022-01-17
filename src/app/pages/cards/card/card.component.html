@@ -63,19 +63,19 @@
               <div class="flex padded-small flex-nowrap">
                 <div class="min-6" *ngIf="card.pokemon">
                   <!-- Pokemon -->
-                  <mb-pokemon-item-grid
+                  <pokemon-item-grid
                     size="small"
                     [pokemonVariant]="card.pokemon.variant"
                   >
-                  </mb-pokemon-item-grid>
+                  </pokemon-item-grid>
                 </div>
                 <div class="min-6">
                   <!-- Expansion -->
-                  <mb-expansion-item-grid
+                  <expansion-item-grid
                     size="small"
                     [expansion]="card.expansion"
                   >
-                  </mb-expansion-item-grid>
+                  </expansion-item-grid>
                 </div>
               </div>
 
@@ -86,12 +86,12 @@
                     class="width-12 medium-6 small-12"
                     *ngIf="buttonTCGPlayer"
                   >
-                    <mb-button [button]="buttonTCGPlayer"></mb-button>
+                    <app-button [button]="buttonTCGPlayer"></app-button>
                   </div>
 
                   <!-- TCG Player -->
                   <div class="width-12 medium-6 small-12" *ngIf="buttonEbay">
-                    <mb-button [button]="buttonEbay"></mb-button>
+                    <app-button [button]="buttonEbay"></app-button>
                   </div>
                 </div>
               </div>
@@ -109,13 +109,13 @@
                         card.rarity.toLowerCase().replace(' ', '-')
                     "
                   >
-                    <mb-tag [tag]="tagRarity"></mb-tag>
+                    <tag [tag]="tagRarity"></tag>
                   </a>
                 </div>
 
                 <!-- Number -->
                 <div class="subheading">
-                  <mb-tag [tag]="tagNumber"></mb-tag>
+                  <tag [tag]="tagNumber"></tag>
                 </div>
 
                 <!-- Artist -->
@@ -127,7 +127,7 @@
                       card.artist.toLowerCase().replace(' ', '-')
                     "
                   >
-                    <mb-tag [tag]="tagArtist"></mb-tag>
+                    <tag [tag]="tagArtist"></tag>
                   </a>
                 </div>
               </div>
@@ -146,22 +146,22 @@
 
     <!-- Related -->
     <div *ngIf="showRelated">
-      <mb-items
+      <items
         [items]="relatedCards"
         (outputGetItems)="getRelatedCards()"
         (outputDisplayModeChanged)="getRelatedCards()"
       >
-      </mb-items>
+      </items>
     </div>
 
     <!-- Expansion -->
     <div>
-      <mb-items
+      <items
         [items]="expansionCards"
         (outputGetItems)="getExpansionCards()"
         (outputDisplayModeChanged)="getExpansionCards()"
       >
-      </mb-items>
+      </items>
     </div>
   </div>
 </div>

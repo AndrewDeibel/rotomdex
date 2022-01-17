@@ -10,7 +10,7 @@ import {
 } from '@app/pages/home/release-notes.services';
 
 @Component({
-  selector: 'mb-home',
+  selector: 'home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })

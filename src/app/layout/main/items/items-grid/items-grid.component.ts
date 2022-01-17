@@ -4,7 +4,7 @@ import { Card } from '@app/pages';
 import { Expansion } from '@app/pages';
 
 @Component({
-  selector: 'mb-items-grid',
+  selector: 'items-grid',
   templateUrl: './items-grid.component.html',
   styleUrls: ['./items-grid.component.scss'],
 })

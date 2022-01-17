@@ -2,7 +2,7 @@
 <hero></hero>
 
 <!-- Under development -->
-<mb-alert [alert]="alert" id="dev-alert" *ngIf="false"></mb-alert>
+<alert [alert]="alert" id="dev-alert" *ngIf="false"></alert>
 
 <!-- Expansions -->
 <div class="section dark" *ngIf="featured && featured.expansions">
@@ -32,7 +32,7 @@
           in-between. RotomDex provides the latest card and set data for both
           English and Japanese (coming soon).
         </p>
-        <mb-button [button]="expansionButton"></mb-button>
+        <app-button [button]="expansionButton"></app-button>
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@
           many more unique Japanese cards, there is always new cards to find and
           appreciate.
         </p>
-        <mb-button [button]="cardsButton"></mb-button>
+        <app-button [button]="cardsButton"></app-button>
       </div>
       <div class="width-6 small-12">
         <div id="cards">
@@ -103,7 +103,7 @@
           ever-growing Pokedex. With nearly 1,000 Pokemon species there is
           always a new Pokemon to learn about.
         </p>
-        <mb-button [button]="pokemonButton"></mb-button>
+        <app-button [button]="pokemonButton"></app-button>
       </div>
     </div>
   </div>
@@ -121,7 +121,7 @@
           cards using binders, decks, and other grouping categories. View and
           share your collection stats and history.
         </p>
-        <mb-button [button]="collectionButton"></mb-button>
+        <app-button [button]="collectionButton"></app-button>
       </div>
       <div class="width-6 small-12 small-order-2">
         <div id="pokemon">

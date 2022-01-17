@@ -1,8 +1,8 @@
 <nav
-	*ngIf="menu"
-	(clickOutside)="clickOutside()"
-	[class.dark]="menu.dark"
-	class="menu
+  *ngIf="menu"
+  (clickOutside)="clickOutside()"
+  [class.dark]="menu.dark"
+  class="menu
 		{{ menu.round ? 'round' : '' }}
 		{{ menu.size ? menu.size : '' }}
 		{{ menu.classes ? menu.classes : '' }}
@@ -10,95 +10,92 @@
 		{{ menu.tabs ? 'tabs' : '' }}
 		{{ menu.borders ? 'borders' : '' }}"
 >
-	<div class="menu-search" *ngIf="menu.search">
-		<mb-textbox [textbox]="menu.textboxSearch"></mb-textbox>
-	</div>
-	<ul
-		[style.minHeight]="menu.minHeight ? menu.minHeight : null"
-		[style.minWidth]="menu.minWidth ? menu.minWidth : null"
-		[style.maxHeight]="menu.maxHeight ? menu.maxHeight : null"
-		[style.maxWidth]="menu.maxWidth ? menu.maxWidth : null"
-	>
-		<li
-			*ngFor="let item of menu.items"
-			[class.disabled]="item.disabled"
-			[class.active]="item.active"
-			class="{{ item.classes ? item.classes : '' }}"
-			[routerLinkActive]="item.route ? 'active' : ''"
-			[routerLinkActiveOptions]="{ exact: item.exactMatch }"
-		>
-			<hr *ngIf="item.separator" />
+  <div class="menu-search" *ngIf="menu.search">
+    <textbox [textbox]="menu.textboxSearch"></textbox>
+  </div>
+  <ul
+    [style.minHeight]="menu.minHeight ? menu.minHeight : null"
+    [style.minWidth]="menu.minWidth ? menu.minWidth : null"
+    [style.maxHeight]="menu.maxHeight ? menu.maxHeight : null"
+    [style.maxWidth]="menu.maxWidth ? menu.maxWidth : null"
+  >
+    <li
+      *ngFor="let item of menu.items"
+      [class.disabled]="item.disabled"
+      [class.active]="item.active"
+      class="{{ item.classes ? item.classes : '' }}"
+      [routerLinkActive]="item.route ? 'active' : ''"
+      [routerLinkActiveOptions]="{ exact: item.exactMatch }"
+    >
+      <hr *ngIf="item.separator" />
 
-			<a
-				[class]="item.classesLink"
-				*ngIf="!item.separator && !item.textbox && !item.route"
-				[href]="item && item.href"
-				[target]="item && item.target"
-				(click)="onItemClick(item, $event)"
-			>
-				<span class="symbol" *ngIf="item.symbol">
-					<img [src]="item.symbol" />
-				</span>
-				<span class="icon" *ngIf="item.icon">
-					<fa-icon [icon]="item.icon"></fa-icon>
-				</span>
-				<span
-					class="text {{ menu.maxWidth ? 'ellipsis' : '' }}"
-					*ngIf="item.text"
-				>
-					{{ item.text }}
-				</span>
-				<span class="price" *ngIf="item.price">
-					{{ item.price | currency }}
-				</span>
-				<span class="icon-expand" *ngIf="item.menu">
-					<fa-icon [icon]="getExpandIcon(item)"></fa-icon>
-				</span>
-			</a>
+      <a
+        [class]="item.classesLink"
+        *ngIf="!item.separator && !item.textbox && !item.route"
+        [href]="item && item.href"
+        [target]="item && item.target"
+        (click)="onItemClick(item, $event)"
+      >
+        <span class="symbol" *ngIf="item.symbol">
+          <img [src]="item.symbol" />
+        </span>
+        <span class="icon" *ngIf="item.icon">
+          <fa-icon [icon]="item.icon"></fa-icon>
+        </span>
+        <span
+          class="text {{ menu.maxWidth ? 'ellipsis' : '' }}"
+          *ngIf="item.text"
+        >
+          {{ item.text }}
+        </span>
+        <span class="price" *ngIf="item.price">
+          {{ item.price | currency }}
+        </span>
+        <span class="icon-expand" *ngIf="item.menu">
+          <fa-icon [icon]="getExpandIcon(item)"></fa-icon>
+        </span>
+      </a>
 
-			<a
-				[routerLink]="item.route"
-				[class]="item.classesLink"
-				*ngIf="!item.separator && !item.textbox && item.route"
-				(click)="onItemClick(item, $event)"
-			>
-				<span class="symbol" *ngIf="item.symbol">
-					<img [src]="item.symbol" />
-				</span>
-				<span class="icon" *ngIf="item.icon">
-					<fa-icon [icon]="item.icon"></fa-icon>
-				</span>
-				<span
-					class="text {{ menu.maxWidth ? 'ellipsis' : '' }}"
-					*ngIf="item.text"
-				>
-					{{ item.text }}
-				</span>
-				<span class="price" *ngIf="item.price">
-					{{ item.price | currency }}
-				</span>
-				<span class="icon-expand" *ngIf="item.menu">
-					<fa-icon [icon]="getExpandIcon(item)"></fa-icon>
-				</span>
-			</a>
+      <a
+        [routerLink]="item.route"
+        [class]="item.classesLink"
+        *ngIf="!item.separator && !item.textbox && item.route"
+        (click)="onItemClick(item, $event)"
+      >
+        <span class="symbol" *ngIf="item.symbol">
+          <img [src]="item.symbol" />
+        </span>
+        <span class="icon" *ngIf="item.icon">
+          <fa-icon [icon]="item.icon"></fa-icon>
+        </span>
+        <span
+          class="text {{ menu.maxWidth ? 'ellipsis' : '' }}"
+          *ngIf="item.text"
+        >
+          {{ item.text }}
+        </span>
+        <span class="price" *ngIf="item.price">
+          {{ item.price | currency }}
+        </span>
+        <span class="icon-expand" *ngIf="item.menu">
+          <fa-icon [icon]="getExpandIcon(item)"></fa-icon>
+        </span>
+      </a>
 
-			<div class="form" *ngIf="item.textbox || item.button">
-				<mb-textbox
-					*ngIf="item.textbox"
-					[textbox]="item.textbox"
-					class="padding"
-				></mb-textbox>
-				<mb-button
-					*ngIf="item.button"
-					[button]="item.button"
-					class="padding"
-				></mb-button>
-			</div>
+      <div class="form" *ngIf="item.textbox || item.button">
+        <textbox
+          *ngIf="item.textbox"
+          [textbox]="item.textbox"
+          class="padding"
+        ></textbox>
+        <app-button
+          *ngIf="item.button"
+          [button]="item.button"
+          class="padding"
+        ></app-button>
+      </div>
 
-			<mb-menu
-				*ngIf="item.menu && item.active"
-				[menu]="item.menu"
-			></mb-menu>
-		</li>
-	</ul>
+      <app-menu *ngIf="item.menu && item.active" [menu]="item.menu"></app-menu>
+    </li>
+  </ul>
 </nav>

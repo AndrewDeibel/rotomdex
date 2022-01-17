@@ -6,7 +6,7 @@ import { Textbox, Button, ButtonType } from '@app/controls';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'mb-reset',
+  selector: 'reset',
   templateUrl: './reset.component.html',
   styleUrls: ['./reset.component.scss'],
 })

@@ -3,7 +3,7 @@ import { ProgressBar } from '@app/controls/progress-bar/progress-bar';
 import { Pokemon, PokemonVariant } from '../../pokemon/pokemon';
 
 @Component({
-  selector: 'mb-pokemon-item-grid',
+  selector: 'pokemon-item-grid',
   templateUrl: 'pokemon-item-grid.component.html',
   styleUrls: ['./pokemon-item-grid.component.scss'],
 })

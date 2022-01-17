@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { NotificationsService, Notification, AlertType } from '@app/controls';
 
 @Component({
-  selector: 'mb-forgot',
+  selector: 'forgot',
   templateUrl: './forgot.component.html',
   styleUrls: ['./forgot.component.scss'],
 })

@@ -4,7 +4,7 @@ import { ItemDisplayType } from '../items-filter';
 import { ItemGroup } from './item-group';
 
 @Component({
-  selector: 'mb-items-groups',
+  selector: 'items-groups',
   templateUrl: 'items-groups.component.html',
   styleUrls: ['./items-groups.component.scss'],
 })

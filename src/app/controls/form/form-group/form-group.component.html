@@ -1,6 +1,9 @@
 <div *ngIf="mbFormGroup" class="flex padded flex-wrap">
-	<h4 *ngIf="mbFormGroup.title">{{mbFormGroup.title}}</h4>
-	<div class="{{formControl.classes}}" *ngFor="let formControl of mbFormGroup.controls">
-		<mb-form-control [mbFormControl]="formControl"></mb-form-control>
-	</div>
+  <h4 *ngIf="mbFormGroup.title">{{ mbFormGroup.title }}</h4>
+  <div
+    class="{{ formControl.classes }}"
+    *ngFor="let formControl of mbFormGroup.controls"
+  >
+    <form-control [mbFormControl]="formControl"></form-control>
+  </div>
 </div>

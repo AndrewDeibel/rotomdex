@@ -5,7 +5,7 @@ import { Select, SelectOption } from './select';
 import { Textbox } from '@app/controls';
 
 @Component({
-  selector: 'mb-select',
+  selector: 'app-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
 

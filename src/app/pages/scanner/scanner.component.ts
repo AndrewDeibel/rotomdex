@@ -19,7 +19,7 @@ import { AppSettings } from '@app/app';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
-  selector: 'mb-scanner',
+  selector: 'scanner',
   templateUrl: './scanner.component.html',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./scanner.component.scss'],

@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Editor } from './editor';
 
 @Component({
-  selector: 'mb-editor',
+  selector: 'editor',
   templateUrl: 'editor.component.html',
 })
 export class EditorComponent implements OnInit {

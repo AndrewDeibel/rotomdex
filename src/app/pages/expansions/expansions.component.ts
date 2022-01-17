@@ -8,7 +8,7 @@ import { Series, SetSortByExpansions } from './expansion/expansion';
 import { APIGetPaged, Icons } from '@app/models';
 
 @Component({
-  selector: 'mb-expansions',
+  selector: 'expansions',
   templateUrl: './expansions.component.html',
 })
 export class ExpansionsComponent implements OnInit {

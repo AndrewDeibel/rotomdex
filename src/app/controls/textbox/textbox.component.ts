@@ -12,7 +12,7 @@ import { Alert } from '../alert';
 import { Textbox } from './textbox';
 
 @Component({
-  selector: 'mb-textbox',
+  selector: 'textbox',
   templateUrl: './textbox.component.html',
   styleUrls: ['./textbox.component.scss'],
 

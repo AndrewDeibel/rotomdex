@@ -7,105 +7,99 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Icons } from '@app/models/icons';
 
 @Component({
-	selector: 'mb-items-footer',
-	templateUrl: 'items-footer-component.html',
-	styleUrls: ['./items-footer-component.scss']
+  selector: 'items-footer',
+  templateUrl: 'items-footer-component.html',
+  styleUrls: ['./items-footer-component.scss'],
 })
-
 export class ItemsFooterComponent implements OnInit {
+  @Input() itemsFooter: ItemsFooter;
 
-	@Input() itemsFooter: ItemsFooter;
+  @Output() outputGetItems: EventEmitter<void> = new EventEmitter();
 
-	@Output() outputGetItems: EventEmitter<void> = new EventEmitter;
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
-	constructor(
-		private route: ActivatedRoute,
-		private router: Router) { }
+  ngOnInit() {
+    this.setupDefaultControls();
+    this.setupDefaultControlAttributes();
+  }
 
-	ngOnInit() {
+  setupDefaultControls() {
+    // Page
+    this.itemsFooter.textboxPage.value = this.itemsFooter.page.toString();
+    this.itemsFooter.textboxPage.max = this.itemsFooter.totalPages;
+    this.itemsFooter.textboxPage.change = (value) => {
+      this.itemsFooter.page = +value;
+      this.outputGetItems.emit();
+    };
 
-		this.setupDefaultControls();
-		this.setupDefaultControlAttributes();
-	}
+    // Page size
+    this.itemsFooter.selectPageSize.value =
+      this.itemsFooter.pageSize.toString();
+    this.itemsFooter.selectPageSize.change = (value) => {
+      this.itemsFooter.pageSize = +value;
+      this.itemsFooter.page = 1;
+      this.itemsFooter.textboxPage.value = this.itemsFooter.page.toString();
+      this.outputGetItems.emit();
+    };
 
-	setupDefaultControls() {
+    // Prev
+    this.itemsFooter.buttonPrev.click = () => {
+      this.itemsFooter.page--;
+      this.itemsFooter.textboxPage.value = this.itemsFooter.page.toString();
+      this.outputGetItems.emit();
+    };
 
-		// Page
-		this.itemsFooter.textboxPage.value = this.itemsFooter.page.toString();
-		this.itemsFooter.textboxPage.max = this.itemsFooter.totalPages;
-		this.itemsFooter.textboxPage.change = value => {
-			this.itemsFooter.page = +value;
-			this.outputGetItems.emit();
-		}
+    // Next
+    this.itemsFooter.buttonNext.click = () => {
+      this.itemsFooter.page++;
+      this.itemsFooter.textboxPage.value = this.itemsFooter.page.toString();
+      this.outputGetItems.emit();
+    };
+  }
 
-		// Page size
-		this.itemsFooter.selectPageSize.value = this.itemsFooter.pageSize.toString();
-		this.itemsFooter.selectPageSize.change = value => {
-			this.itemsFooter.pageSize = +value;
-			this.itemsFooter.page = 1;
-			this.itemsFooter.textboxPage.value = this.itemsFooter.page.toString();
-			this.outputGetItems.emit();
-		};
+  setupDefaultControlAttributes() {
+    // Prev/next
+    this.itemsFooter.buttonPrev.icon = Icons.arrowLeft;
+    this.itemsFooter.buttonNext.icon = Icons.arrowRight;
 
-		// Prev
-		this.itemsFooter.buttonPrev.click = () => {
-			this.itemsFooter.page--;
-			this.itemsFooter.textboxPage.value = this.itemsFooter.page.toString();
-			this.outputGetItems.emit();
-		};
+    // Page size
+    this.itemsFooter.selectPageSize.optionGroups = [
+      new SelectOptionGroup({
+        label: 'Page Size',
+        options: [
+          new SelectOption({
+            text: '12',
+            value: '12',
+          }),
+          new SelectOption({
+            text: '24',
+            value: '24',
+          }),
+          new SelectOption({
+            text: '60',
+            value: '60',
+          }),
+          new SelectOption({
+            text: '100',
+            value: '100',
+          }),
+        ],
+      }),
+    ];
+    this.itemsFooter.selectPageSize.value =
+      this.itemsFooter.pageSize.toString();
 
-		// Next
-		this.itemsFooter.buttonNext.click = () => {
-			this.itemsFooter.page++;
-			this.itemsFooter.textboxPage.value = this.itemsFooter.page.toString();
-			this.outputGetItems.emit();
-		};
-	}
+    // Page
+    this.itemsFooter.textboxPage.type = 'number';
+    this.itemsFooter.textboxPage.min = 1;
+    this.itemsFooter.textboxPage.width = 64;
+  }
 
-	setupDefaultControlAttributes() {
+  isPrevDisabled() {
+    return this.itemsFooter.page <= 1;
+  }
 
-		// Prev/next
-		this.itemsFooter.buttonPrev.icon = Icons.arrowLeft;
-		this.itemsFooter.buttonNext.icon = Icons.arrowRight;
-
-		// Page size
-		this.itemsFooter.selectPageSize.optionGroups = [
-			new SelectOptionGroup({
-				label: "Page Size",
-				options: [
-					
-					new SelectOption({
-						text: "12",
-						value: "12"
-					}),
-					new SelectOption({
-						text: "24",
-						value: "24"
-					}),
-					new SelectOption({
-						text: "60",
-						value: "60"
-					}),
-					new SelectOption({
-						text: "100",
-						value: "100"
-					})
-				]
-			})
-		];
-		this.itemsFooter.selectPageSize.value = this.itemsFooter.pageSize.toString();
-
-		// Page
-		this.itemsFooter.textboxPage.type = "number";
-		this.itemsFooter.textboxPage.min = 1;
-		this.itemsFooter.textboxPage.width = 64;
-	}
-
-	isPrevDisabled() {
-		return this.itemsFooter.page <= 1;
-	}
-
-	isNextDisabled() {
-		return this.itemsFooter.page >= this.itemsFooter.totalPages;
-	}
+  isNextDisabled() {
+    return this.itemsFooter.page >= this.itemsFooter.totalPages;
+  }
 }

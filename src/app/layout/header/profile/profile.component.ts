@@ -4,7 +4,7 @@ import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Icons } from '@app/models/icons';
 
 @Component({
-  selector: '[mb-profile]',
+  selector: '[profile]',
   templateUrl: './profile.component.html',
 })
 export class ProfileComponent implements OnInit {

@@ -1,80 +1,78 @@
 <!-- Header -->
 <div *ngIf="itemsHeader" id="item-header" class="z-4 border-bottom">
-	<div class="max-12 width-12">
-		<div class="max">
-			<div class="flex box padded-2 flex-center">
-				<!-- Symbol -->
-				<div class="symbol-wrapper" *ngIf="itemsHeader.symbol">
-					<div class="symbol-inner">
-						<img
-							class="symbol {{ itemsHeader.symbolRarity }}"
-							src="{{ itemsHeader.symbol }}"
-						/>
-					</div>
-				</div>
+  <div class="max-12 width-12">
+    <div class="max">
+      <div class="flex box padded-2 flex-center">
+        <!-- Symbol -->
+        <div class="symbol-wrapper" *ngIf="itemsHeader.symbol">
+          <div class="symbol-inner">
+            <img
+              class="symbol {{ itemsHeader.symbolRarity }}"
+              src="{{ itemsHeader.symbol }}"
+            />
+          </div>
+        </div>
 
-				<!-- Icon -->
-				<div *ngIf="itemsHeader.icon" class="icon-wrapper">
-					<fa-icon [icon]="itemsHeader.icon"></fa-icon>
-				</div>
+        <!-- Icon -->
+        <div *ngIf="itemsHeader.icon" class="icon-wrapper">
+          <fa-icon [icon]="itemsHeader.icon"></fa-icon>
+        </div>
 
-				<div class="box min-0">
-					<!-- Title -->
-					<h2 class="title ellipsis">
-						<a
-							*ngIf="itemsHeader.titleRoute"
-							[routerLink]="itemsHeader.titleRoute"
-						>
-							{{ itemsHeader.title }}
-						</a>
-						<span *ngIf="!itemsHeader.titleRoute">
-							{{ itemsHeader.title }}
-						</span>
-					</h2>
+        <div class="box min-0">
+          <!-- Title -->
+          <h2 class="title ellipsis">
+            <a
+              *ngIf="itemsHeader.titleRoute"
+              [routerLink]="itemsHeader.titleRoute"
+            >
+              {{ itemsHeader.title }}
+            </a>
+            <span *ngIf="!itemsHeader.titleRoute">
+              {{ itemsHeader.title }}
+            </span>
+          </h2>
 
-					<!-- Sub heading -->
-					<div class="subheading">
-						{{ itemsHeader.subtitle }}
-						<span *ngIf="itemsHeader.price"
-							>-
-							<span class="price">
-								{{ itemsHeader.price | currency }}
-							</span>
-						</span>
-					</div>
+          <!-- Sub heading -->
+          <div class="subheading">
+            {{ itemsHeader.subtitle }}
+            <span *ngIf="itemsHeader.price"
+              >-
+              <span class="price">
+                {{ itemsHeader.price | currency }}
+              </span>
+            </span>
+          </div>
 
-					<!-- Tags -->
-					<div class="tags" *ngIf="itemsHeader.tags.length">
-						<div class="flex padded flex-wrap">
-							<div *ngFor="let tag of itemsHeader.tags">
-								<mb-tag [tag]="tag"></mb-tag>
-							</div>
-						</div>
-					</div>
-				</div>
+          <!-- Tags -->
+          <div class="tags" *ngIf="itemsHeader.tags.length">
+            <div class="flex padded flex-wrap">
+              <div *ngFor="let tag of itemsHeader.tags">
+                <tag [tag]="tag"></tag>
+              </div>
+            </div>
+          </div>
+        </div>
 
-				<!-- Menu -->
-				<div class="main-header-menu" *ngIf="itemsHeader.menu">
-					<mb-menu [menu]="itemsHeader.menu"></mb-menu>
-				</div>
+        <!-- Menu -->
+        <div class="main-header-menu" *ngIf="itemsHeader.menu">
+          <app-menu [menu]="itemsHeader.menu"></app-menu>
+        </div>
 
-				<!-- Toggle -->
-				<div *ngIf="itemsHeader.toggle">
-					<mb-toggle [toggle]="itemsHeader.toggle"></mb-toggle>
-				</div>
+        <!-- Toggle -->
+        <div *ngIf="itemsHeader.toggle">
+          <toggle [toggle]="itemsHeader.toggle"></toggle>
+        </div>
 
-				<!-- Button -->
-				<div *ngIf="itemsHeader.button">
-					<mb-button [button]="itemsHeader.button"></mb-button>
-				</div>
+        <!-- Button -->
+        <div *ngIf="itemsHeader.button">
+          <app-button [button]="itemsHeader.button"></app-button>
+        </div>
 
-				<!-- Progress bar -->
-				<div *ngIf="itemsHeader.progressBar" class="width-3 medium-12">
-					<progress-bar
-						[progressBar]="itemsHeader.progressBar"
-					></progress-bar>
-				</div>
-			</div>
-		</div>
-	</div>
+        <!-- Progress bar -->
+        <div *ngIf="itemsHeader.progressBar" class="width-3 medium-12">
+          <progress-bar [progressBar]="itemsHeader.progressBar"></progress-bar>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

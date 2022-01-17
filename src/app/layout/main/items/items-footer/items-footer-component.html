@@ -1,44 +1,42 @@
 <!-- Footer -->
 <div
-	id="main-footer"
-	class="pager padding-y padding-x-2 relative round-bottom border-top z-1"
+  id="main-footer"
+  class="pager padding-y padding-x-2 relative round-bottom border-top z-1"
 >
-	<div class="max">
-		<div class="flex padded flex-center">
-			<!-- Page size -->
-			<div class="width-3">
-				<div class="flex">
-					<mb-select
-						*ngIf="itemsFooter.selectPageSize"
-						[select]="itemsFooter.selectPageSize"
-					></mb-select>
-				</div>
-			</div>
+  <div class="max">
+    <div class="flex padded flex-center">
+      <!-- Page size -->
+      <div class="width-3">
+        <div class="flex">
+          <app-select
+            *ngIf="itemsFooter.selectPageSize"
+            [select]="itemsFooter.selectPageSize"
+          ></app-select>
+        </div>
+      </div>
 
-			<!-- Pages -->
-			<div class="width-6 flex justify-center">
-				<div class="flex" *ngIf="itemsFooter.totalPages > 1">
-					<mb-button
-						[disabled]="isPrevDisabled()"
-						[button]="itemsFooter.buttonPrev"
-					></mb-button>
-					<mb-textbox
-						[textbox]="itemsFooter.textboxPage"
-					></mb-textbox>
-					<mb-button
-						[disabled]="isNextDisabled()"
-						[button]="itemsFooter.buttonNext"
-					></mb-button>
-				</div>
-			</div>
+      <!-- Pages -->
+      <div class="width-6 flex justify-center">
+        <div class="flex" *ngIf="itemsFooter.totalPages > 1">
+          <app-button
+            [disabled]="isPrevDisabled()"
+            [button]="itemsFooter.buttonPrev"
+          ></app-button>
+          <textbox [textbox]="itemsFooter.textboxPage"></textbox>
+          <app-button
+            [disabled]="isNextDisabled()"
+            [button]="itemsFooter.buttonNext"
+          ></app-button>
+        </div>
+      </div>
 
-			<!-- Total -->
-			<div class="width-3 align-right">
-				<div class="subheading">
-					{{itemsFooter.totalItems}} Total - Page {{itemsFooter.page}}
-					of {{itemsFooter.totalPages}}
-				</div>
-			</div>
-		</div>
-	</div>
+      <!-- Total -->
+      <div class="width-3 align-right">
+        <div class="subheading">
+          {{itemsFooter.totalItems}} Total - Page {{itemsFooter.page}} of
+          {{itemsFooter.totalPages}}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

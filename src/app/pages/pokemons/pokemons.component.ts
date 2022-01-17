@@ -9,7 +9,7 @@ import { PokemonsService } from './pokemons.service';
 import { APIGetPaged, Symbols } from '@app/models';
 
 @Component({
-  selector: 'mb-pokemons',
+  selector: 'pokemons',
   templateUrl: 'pokemons.component.html',
 })
 export class PokemonsComponent implements OnInit {

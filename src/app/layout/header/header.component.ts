@@ -13,7 +13,7 @@ import { Location } from '@angular/common';
 import { User } from '@app/models/user';
 
 @Component({
-  selector: 'mb-header',
+  selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   encapsulation: ViewEncapsulation.None,

@@ -8,7 +8,7 @@ import { first } from 'rxjs/operators';
 import { LoaderService } from '@app/controls';
 
 @Component({
-  selector: 'mb-signup',
+  selector: 'signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
 })

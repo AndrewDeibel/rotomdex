@@ -1,32 +1,26 @@
 <a class="card-grid" [routerLink]="card.route ? card.route : []">
-	<div class="card-image-wrapper" *ngIf="card.image">
-		<div class="card-image">
-			<mb-loader [active]="imageLoading"></mb-loader>
-			<img
-				src="{{ card.image }}"
-				[hidden]="imageLoading"
-				(load)="onLoad()"
-			/>
-			<div
-				class="money-tag"
-				*ngIf="
-					false && card.last_prices && card.last_prices.market_price
-				"
-			>
-				{{ card.last_prices.market_price | currency }}
-			</div>
-			<div class="collection">
-				<mb-textbox [textbox]="textbox"></mb-textbox>
-			</div>
-		</div>
+  <div class="card-image-wrapper" *ngIf="card.image">
+    <div class="card-image">
+      <loader [active]="imageLoading"></loader>
+      <img src="{{ card.image }}" [hidden]="imageLoading" (load)="onLoad()" />
+      <div
+        class="money-tag"
+        *ngIf="false && card.last_prices && card.last_prices.market_price"
+      >
+        {{ card.last_prices.market_price | currency }}
+      </div>
+      <div class="collection">
+        <textbox [textbox]="textbox"></textbox>
+      </div>
+    </div>
 
-		<div class="card-information ellipsis">
-			<div class="card-number subheading">
-				{{ card.getCardNumber() }}
-			</div>
-			<div class="card-name ellipsis">
-				{{ card.name }}
-			</div>
-		</div>
-	</div>
+    <div class="card-information ellipsis">
+      <div class="card-number subheading">
+        {{ card.getCardNumber() }}
+      </div>
+      <div class="card-name ellipsis">
+        {{ card.name }}
+      </div>
+    </div>
+  </div>
 </a>

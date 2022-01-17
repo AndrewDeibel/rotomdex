@@ -1,25 +1,16 @@
 <div class="items-list" *ngIf="items.length">
-    <ul>
-        <li *ngFor="let item of items">
-			
-			<!-- Card -->
-			<mb-card-item-list
-				*ngIf="isCard(item)"
-				[card]="item">
-			</mb-card-item-list>
+  <ul>
+    <li *ngFor="let item of items">
+      <!-- Card -->
+      <card-item-list *ngIf="isCard(item)" [card]="item"> </card-item-list>
 
-			<!-- Expansion -->
-			<mb-expansion-item-list
-				*ngIf="isExpansion(item)"
-				[expansion]="item">
-			</mb-expansion-item-list>
+      <!-- Expansion -->
+      <expansion-item-list *ngIf="isExpansion(item)" [expansion]="item">
+      </expansion-item-list>
 
-			<!-- Pokemon variant -->
-			<mb-pokemon-item-list
-				*ngIf="isPokemonVariant(item)"
-				[pokemonVariant]="item">
-			</mb-pokemon-item-list>
-
-		</li>
-    </ul>
+      <!-- Pokemon variant -->
+      <pokemon-item-list *ngIf="isPokemonVariant(item)" [pokemonVariant]="item">
+      </pokemon-item-list>
+    </li>
+  </ul>
 </div>

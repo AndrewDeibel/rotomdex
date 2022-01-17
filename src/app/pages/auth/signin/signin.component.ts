@@ -9,7 +9,7 @@ import { first } from 'rxjs/operators';
 import { NotificationsService, Notification, AlertType } from '@app/controls';
 
 @Component({
-  selector: 'mb-signin',
+  selector: 'signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss'],
 })

@@ -3,7 +3,7 @@ import { Notification } from './notification';
 import { NotificationsService } from './notifications.service';
 
 @Component({
-  selector: 'mb-notifications',
+  selector: 'notifications',
   templateUrl: 'notifications.component.html',
   styleUrls: ['./notifications.component.scss'],
   encapsulation: ViewEncapsulation.None,

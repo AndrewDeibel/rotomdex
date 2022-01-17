@@ -3,7 +3,7 @@ import { Menu, MenuItem } from './menu';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'mb-menu',
+  selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })
