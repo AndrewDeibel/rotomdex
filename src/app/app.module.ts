@@ -1,3 +1,4 @@
+import { ChangePasswordDialogComponent } from './pages/edit-profile/change-password-dialog.component';
 // Angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -277,6 +278,7 @@ import {
     DashboardComponent,
     CardImageDialogComponent,
     UserCardNotesDialogComponent,
+    ChangePasswordDialogComponent,
 
     // Pages
     // ====================

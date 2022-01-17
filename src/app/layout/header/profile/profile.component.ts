@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
       horizontal: true,
       items: [
         new MenuItem({
-          text: this.authenticationService.currentUserValue?.username,
+          text: this.authenticationService.currentUserValue?.name,
           icon: Icons.user,
           menu: new Menu({
             classes: 'anchor-right',
@@ -40,14 +40,6 @@ export class ProfileComponent implements OnInit {
                   this.menu.clearActive();
                 },
               }),
-              // ...( [new MenuItem({
-              // 	text: "Admin",
-              // 	icon: Icons.donate,
-              // 	route: "patreon",
-              // 	click: () => {
-              // 		this.menu.clearActive();
-              // 	}
-              // })]),
               new MenuItem({
                 text: 'Sign Out',
                 icon: Icons.signOut,

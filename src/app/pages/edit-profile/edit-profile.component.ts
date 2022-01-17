@@ -1,11 +1,17 @@
-import { LoaderService } from '../../controls/loader/loader.service';
-import { Button, ButtonType } from '@app/controls/button';
-import { Textbox, Toggle, Select } from '@app/controls';
-import { Router } from '@angular/router';
-import { AuthenticationService } from '@app/pages/auth/auth.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { first } from 'rxjs/operators';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import {
+  DialogConfig,
+  DialogService,
+  Select,
+  Textbox,
+  Toggle,
+} from '@app/controls';
+import { Button, ButtonType } from '@app/controls/button';
+import { AuthenticationService } from '@app/pages/auth/auth.service';
+import { LoaderService } from '../../controls/loader/loader.service';
+import { ChangePasswordDialogComponent } from './change-password-dialog.component';
 
 @Component({
   selector: 'edit-profile',
@@ -27,7 +33,8 @@ export class EditProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private dialogService: DialogService
   ) {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigateByUrl('/');
@@ -51,7 +58,7 @@ export class EditProfileComponent implements OnInit {
     this.textboxUsername = new Textbox({
       label: 'Username',
       readOnly: true,
-      value: this.authenticationService.currentUserValue?.username,
+      value: this.authenticationService.currentUserValue?.name,
     });
     this.selectUserIcon = new Select({
       advancedSelect: true,
@@ -80,6 +87,14 @@ export class EditProfileComponent implements OnInit {
     });
     this.buttonChangePassword = new Button({
       text: 'Change Password',
+      click: () => {
+        this.dialogService.open(
+          ChangePasswordDialogComponent,
+          new DialogConfig({
+            title: 'Change Password',
+          })
+        );
+      },
     });
   }
 
