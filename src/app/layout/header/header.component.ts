@@ -10,7 +10,7 @@ import { Menu, MenuItem } from '@app/controls/menu';
 
 import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Location } from '@angular/common';
-import { User } from '@app/models/user';
+import { User } from '@app/pages/user';
 
 @Component({
   selector: 'app-header',

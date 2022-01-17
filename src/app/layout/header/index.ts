@@ -1,3 +1,3 @@
 export * from './header.component';
-export * from './profile';
+export * from './profile-menu';
 export * from './search';

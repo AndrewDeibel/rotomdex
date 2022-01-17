@@ -1,4 +1,3 @@
-import { ChangePasswordDialogComponent } from './pages/edit-profile/change-password-dialog.component';
 // Angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -73,9 +72,10 @@ import {
   UserCardGroupComponent,
   UserCardsComponent,
   UserCardComponent,
-  EditProfileComponent,
+  EditUserComponent,
   CardImageDialogComponent,
   UserCardNotesDialogComponent,
+  ChangePasswordDialogComponent,
 } from './pages';
 
 // Page
@@ -291,7 +291,7 @@ import {
     SignUpComponent,
     ForgotComponent,
     ResetComponent,
-    EditProfileComponent,
+    EditUserComponent,
     ExpansionsComponent,
     ExpansionItemGridComponent,
     ExpansionItemListComponent,

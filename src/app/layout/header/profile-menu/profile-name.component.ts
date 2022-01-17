@@ -4,8 +4,8 @@ import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Icons } from '@app/models/icons';
 
 @Component({
-  selector: '[profile]',
-  templateUrl: './profile.component.html',
+  selector: '[profile-name]',
+  templateUrl: './profile-name.component.html',
 })
 export class ProfileComponent implements OnInit {
   menu: Menu;

@@ -10,15 +10,15 @@ import {
 } from '@app/controls';
 import { Button, ButtonType } from '@app/controls/button';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
-import { LoaderService } from '../../controls/loader/loader.service';
+import { LoaderService } from '../../../controls/loader/loader.service';
 import { ChangePasswordDialogComponent } from './change-password-dialog.component';
 
 @Component({
-  selector: 'edit-profile',
-  templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss'],
+  selector: 'edit-user',
+  templateUrl: './edit-user.component.html',
+  styleUrls: ['./edit-user.component.scss'],
 })
-export class EditProfileComponent implements OnInit {
+export class EditUserComponent implements OnInit {
   form: FormGroup;
   textboxUsername: Textbox;
   textboxEmail: Textbox;

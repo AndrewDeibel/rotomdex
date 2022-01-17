@@ -1,4 +1,4 @@
-import { EditProfileComponent } from '@app/pages';
+import { EditUserComponent } from '@app/pages';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -109,13 +109,13 @@ const routes: Routes = [
   },
 
   // Edit profile
-  {
-    path: 'profile',
-    component: EditProfileComponent,
-  },
+  // {
+  //   path: 'profile/:name',
+  //   component: ProfileComponent,
+  // },
   {
     path: 'profile/edit',
-    component: EditProfileComponent,
+    component: EditUserComponent,
   },
 
   // Expansions
