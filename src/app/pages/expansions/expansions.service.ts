@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@app/../environments/environment';
 import { APIResponse } from '@app/models';
 import { Expansion, Series } from '@app/pages';
-import { CacheGlobal } from './cache/globalCache';
+import { CacheGlobal } from '../../services/cache/globalCache';
 
 export interface GetExpansions {
   query: string;

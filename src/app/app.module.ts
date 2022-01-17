@@ -301,11 +301,6 @@ import {
     CollectionComponent,
     ScannerComponent,
     ScannerListsComponent,
-
-    // User cards
-    // ====================
-    UserCardsComponent,
-    UserCardComponent,
   ],
   imports: [
     BrowserModule,

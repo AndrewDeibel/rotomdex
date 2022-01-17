@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, Version } from '@angular/core';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { Subject, Observable, Subscription } from 'rxjs';
-import { ScannerService, ScanType } from '@app/services/scanner.service';
+import { ScannerService, ScanType } from '@app/pages/scanner/scanner.service';
 import { Router } from '@angular/router';
 import { Card } from '@app/pages/cards/card';
 import { Checkbox } from '@app/controls/checkbox';

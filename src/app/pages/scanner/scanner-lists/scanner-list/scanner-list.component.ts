@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Card } from '@app/pages/cards/card';
-import { ScannerService } from '@app/services/scanner.service';
-import { Cards } from '@app/pages/cards/cards';
+import { ScannerService } from '@app/pages/scanner/scanner.service';
 import { MenuItem, Menu } from '@app/controls/menu';
 import { Textbox } from '@app/controls/textbox';
 import { Button } from '@app/controls/button';
@@ -17,7 +16,6 @@ import {
 import { Items } from '@app/layout/main/items/items';
 import { Icons } from '@app/models/icons';
 import { AuthenticationService } from '@app/services/auth.service';
-import { ScannerList } from './scanner-list';
 
 //@AutoUnsubscribe()
 @Component({

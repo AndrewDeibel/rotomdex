@@ -19,7 +19,6 @@ import {
   SignUpComponent,
   ForgotComponent,
   ResetComponent,
-  CollectionCardGroupComponent,
 } from '@app/pages';
 
 const routes: Routes = [

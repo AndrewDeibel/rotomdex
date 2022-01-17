@@ -1,11 +1,11 @@
-import { LoaderService } from './../controls/loader/loader.service';
+import { LoaderService } from '@app/controls';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { APIResponse } from '@app/models';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Card } from '@app/pages/cards/card/card';
-import { CacheGlobal } from './cache/globalCache';
+import { Card } from '@app/pages';
+import { CacheGlobal } from '@app/services/cache/globalCache';
 
 @Injectable({ providedIn: 'root' })
 export class CardService {

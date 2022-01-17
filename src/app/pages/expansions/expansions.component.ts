@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Items } from '@app/layout/main';
-import { ExpansionsService } from '../../services/expansions.service';
+import { ExpansionsService } from './expansions.service';
 import { Title } from '@angular/platform-browser';
 import { LoaderService } from '@app/controls';
 import { AppSettings } from '@app/app';

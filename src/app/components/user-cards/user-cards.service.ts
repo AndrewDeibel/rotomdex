@@ -1,5 +1,5 @@
 import { APIResponse, buildUrl } from '../../models/api';
-import { CardResults, GetCards } from '../../services/cards.service';
+import { CardResults, GetCards } from '../../pages/cards/cards.service';
 import { BehaviorSubject } from 'rxjs';
 import { Card } from '../../pages/cards/card/card';
 import { UserCard } from './user-card';

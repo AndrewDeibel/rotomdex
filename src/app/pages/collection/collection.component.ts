@@ -4,7 +4,7 @@ import { Items, ItemGroup } from '@app/layout';
 import { Icons, Symbols } from '@app/models';
 import { Menu, MenuItem, LoaderService, ProgressBar } from '@app/controls';
 import { Component, OnInit } from '@angular/core';
-import { GetCards } from '@app/services/cards.service';
+import { GetCards } from '@app/pages/cards/cards.service';
 
 @Component({
   selector: 'collection',

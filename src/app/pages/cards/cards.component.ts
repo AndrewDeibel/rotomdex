@@ -1,16 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Menu, MenuItem } from '@app/controls/menu';
-import { SearchService } from '@app/services/search.service';
+import { Component, OnInit } from '@angular/core';
 import {
   CardsService,
   CardResults,
   GetCards as GetCards,
   GetCardsFiltered,
-} from '../../services/cards.service';
+} from './cards.service';
 import { ActivatedRoute } from '@angular/router';
-import { ItemDisplayType } from '@app/layout/main/items/items-filter/items-filter';
 import { Title } from '@angular/platform-browser';
-import { AuthenticationService } from '../../services/auth.service';
 import { LoaderService } from '@app/controls';
 import { ItemGroup, Items } from '@app/layout/main';
 import { SetSortByCards } from './card/card';

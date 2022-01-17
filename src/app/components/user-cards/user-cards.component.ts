@@ -19,7 +19,7 @@ export class UserCardsComponent implements OnInit {
   buttonNotes: Button;
   buttonDelete: Button;
 
-  constructor(private cardCollectionService: UserCardsService) {}
+  constructor(private userCardsService: UserCardsService) {}
 
   ngOnInit(): void {
     this.setupControls();
@@ -70,13 +70,11 @@ export class UserCardsComponent implements OnInit {
   }
 
   setupSubscriptions() {
-    this.cardCollectionService
-      .addUserCardObservable()
-      .subscribe((addedCard) => {
-        if (addedCard) {
-          this.userCards.push(addedCard);
-        }
-      });
+    this.userCardsService.addUserCardObservable().subscribe((addedCard) => {
+      if (addedCard) {
+        this.userCards.push(addedCard);
+      }
+    });
   }
 
   addItem(
@@ -84,11 +82,11 @@ export class UserCardsComponent implements OnInit {
       card_id: this.card_id,
     })
   ) {
-    this.cardCollectionService.addUserCard(userCard);
+    this.userCardsService.addUserCard(userCard);
   }
 
   deleteItem(userCard: UserCard) {
-    this.cardCollectionService.removeUserCard(userCard.id).subscribe((res) => {
+    this.userCardsService.removeUserCard(userCard.id).subscribe((res) => {
       if (res.success)
         this.userCards = this.userCards.filter(
           (_userCard) => _userCard.id !== userCard.id
@@ -97,7 +95,7 @@ export class UserCardsComponent implements OnInit {
   }
 
   updateItem(userCard: UserCard) {
-    this.cardCollectionService.updateUserCard(userCard).subscribe((res) => {
+    this.userCardsService.updateUserCard(userCard).subscribe((res) => {
       if (res.success)
         this.userCards = this.userCards.map((_userCard) =>
           _userCard.id === userCard.id ? userCard : _userCard

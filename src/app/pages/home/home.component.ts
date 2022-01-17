@@ -4,13 +4,10 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Alert, AlertType, Button, Dialog, DialogService } from '@app/controls';
 import { Icons } from '@app/models';
-import { ExpansionsService } from '@app/services/expansions.service';
 import {
   ReleaseNote,
   ReleaseNotesServices,
 } from '@app/services/release-notes.services';
-import { Expansion } from '../expansions';
-import { Pokemon } from '../pokemons';
 
 @Component({
   selector: 'mb-home',

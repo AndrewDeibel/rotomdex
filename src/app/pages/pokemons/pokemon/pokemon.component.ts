@@ -8,15 +8,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Button, DialogService, LoaderService } from '@app/controls';
 import { ItemGroup, Items } from '@app/layout/main';
-import { Card, Cards } from '@app/pages/cards';
 import { SetSortByPokemon, PokemonVariant } from './pokemon';
-import {
-  GetPokemonVariantCards,
-  PokemonService,
-} from '../../../services/pokemon.service';
+import { GetPokemonVariantCards, PokemonService } from './pokemon.service';
 import { Title } from '@angular/platform-browser';
 import { AppSettings } from '@app/app';
-import { Icons, Size, Symbols } from '@app/models';
+import { Size, Symbols } from '@app/models';
 import { Dialog } from '@app/controls/dialog/dialog';
 import { ProgressBar } from '@app/controls/progress-bar/progress-bar';
 

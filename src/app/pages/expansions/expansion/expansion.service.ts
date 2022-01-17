@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { APIGetPaged, APIResponse } from '@app/models';
 import { Card, Expansion } from '@app/pages';
 import { BehaviorSubject } from 'rxjs';
-import { CacheGlobal } from './cache/globalCache';
-import { CardResults } from './cards.service';
+import { CacheGlobal } from '../../../services/cache/globalCache';
+import { CardResults } from '../../cards/cards.service';
 
 export class GetExpansion extends APIGetPaged {
   code: string;

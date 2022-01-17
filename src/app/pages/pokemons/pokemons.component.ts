@@ -2,13 +2,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { AppSettings } from '@app/app';
-import { LoaderService, SelectOption, SelectOptionGroup } from '@app/controls';
+import { LoaderService } from '@app/controls';
 import { ItemGroup, Items } from '@app/layout/main';
 import { SetSortByPokemon, PokemonVariant } from './pokemon/pokemon';
-import {
-  GetPokemonVariants,
-  PokemonsService,
-} from '../../services/pokemons.service';
+import { GetPokemonVariants, PokemonsService } from './pokemons.service';
 import { Symbols } from '@app/models';
 
 @Component({

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@app/../environments/environment';
-
 import { APIResponse } from '@app/models/api';
 import { ScannerList } from '@app/pages/scanner/scanner-lists/scanner-list/scanner-list';
 import { Card } from '@app/pages/';

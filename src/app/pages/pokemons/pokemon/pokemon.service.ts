@@ -4,8 +4,8 @@ import { APIGetPaged, APIResponse } from '@app/models';
 import { Card } from '@app/pages/cards';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Pokemon, PokemonVariant } from '../pages/pokemons/pokemon/pokemon';
-import { CacheGlobal } from './cache/globalCache';
+import { Pokemon, PokemonVariant } from './pokemon';
+import { CacheGlobal } from '../../../services/cache/globalCache';
 
 // Get pokemon interfaces
 export class GetPokemonVariantCards extends APIGetPaged {

@@ -1,5 +1,5 @@
-import { ScanType } from '@app/services/scanner.service';
+import { ScanType } from '@app/pages/scanner/scanner.service';
 
 export class Scanner {
-	type: ScanType
+  type: ScanType;
 }

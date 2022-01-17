@@ -3,7 +3,7 @@ import { UserCardsService } from '@app/components/user-cards/user-cards.service'
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Card, SetSortByCards } from './card';
 import { ActivatedRoute } from '@angular/router';
-import { CardService } from '../../../services/card.service';
+import { CardService } from './card.service';
 import '@app/helpers/string.extensions';
 import { Icons, Symbols } from '@app/models/icons';
 import {
@@ -13,12 +13,12 @@ import {
   LoaderService,
   Tag,
 } from '@app/controls';
-import { CardsService } from '../../../services/cards.service';
+import { CardsService } from '../cards.service';
 import { ItemGroup, Items } from '@app/layout/main';
 import {
   ExpansionService,
   GetExpansionCards,
-} from '@app/services/expansion.service';
+} from '@app/pages/expansions/expansion/expansion.service';
 import { GetPokemonVariantCards, PokemonService } from '@app/pages/pokemons';
 import { Title } from '@angular/platform-browser';
 import { AppSettings } from '@app/app';

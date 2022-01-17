@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { APIGetPaged, APIResponse } from '@app/models';
 import { BehaviorSubject } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { Pokemon, PokemonVariant } from '../pages/pokemons/pokemon/pokemon';
+import { Pokemon, PokemonVariant } from './pokemon/pokemon';
 
 export class GetPokemons extends APIGetPaged {
   constructor(init?: Partial<GetPokemons>) {
