@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -32,7 +33,8 @@ export class UserCardGroupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private router: Router,
-    private userCardGroupService: UserCardGroupService
+    private userCardGroupService: UserCardGroupService,
+    private location: Location
   ) {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigateByUrl('/');
@@ -112,7 +114,9 @@ export class UserCardGroupComponent implements OnInit {
     this.buttonCancel = new Button({
       text: 'Cancel',
       classes: 'secondary',
-      route: '/collection/dashboard',
+      click: () => {
+        this.location.back();
+      },
     });
   }
 

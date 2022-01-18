@@ -1,4 +1,4 @@
-@import "settings", "scaffold/typography";
+@import "settings";
 
 .scanner-wrapper {
   margin: 0 auto;
@@ -95,7 +95,6 @@
       white-space: nowrap;
       border-radius: $border-radius;
       padding: 2px 8px;
-      @extend .subheading;
     }
   }
   .scanner-options {
@@ -155,7 +154,6 @@
       bottom: 12px;
       left: 50%;
       transform: translateX(-50%);
-      @extend .subheading;
     }
   }
   .scanner-result {
@@ -215,7 +213,6 @@
         @for $i from 1 through 20 {
           &:nth-child(#{$i}) {
             margin-top: 14px * ($i - 1);
-            //margin-left: 4px * ($i - 1);
           }
         }
       }

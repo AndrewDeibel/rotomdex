@@ -37,7 +37,6 @@ export class CollectionComponent implements OnInit {
   ngOnInit() {
     this.setupSubscriptions();
     this.setupControls();
-    this.getCollectionCards();
   }
 
   setupSubscriptions() {

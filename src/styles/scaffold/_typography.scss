@@ -86,6 +86,7 @@ li {
 }
 .unordered-list {
   padding-left: 24px;
+  margin-bottom: $spacing * 2;
   li {
     list-style: disc;
   }

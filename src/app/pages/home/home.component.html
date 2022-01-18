@@ -12,7 +12,7 @@
         <div id="expansion-logos">
           <div class="flex padded relative">
             <div
-              class="width-3 small-2"
+              class="width-3 small-2 flex vertical justify-center"
               *ngFor="let expansion of featured.expansions"
             >
               <a [routerLink]="expansion.route">
@@ -45,9 +45,9 @@
       <div class="width-6 small-12">
         <h2>Cards</h2>
         <p>
-          Everyone has a favorite card but with over 9,000 English cards and
-          many more unique Japanese cards, there is always new cards to find and
-          appreciate.
+          View every Pokemon card printed! Sort by artist, release date,
+          Pokemon, rarity, or card type. Everyone has a favorite card but with
+          14,000+ unique cards there is always new cards to appreciate.
         </p>
         <app-button [button]="cardsButton"></app-button>
       </div>
@@ -99,9 +99,9 @@
       <div class="width-6 small-12 small-order-1">
         <h2>Pokemon</h2>
         <p>
-          View all the cards featuring your favorite Pokemon and explore the
-          ever-growing Pokedex. With nearly 1,000 Pokemon species there is
-          always a new Pokemon to learn about.
+          View the cards featuring your favorite Pokemon and explore the
+          ever-growing Pokedex. With 1,000+ Pokemon species, and 14,000+ unique
+          cards there is always a new Pokemon card to learn about.
         </p>
         <app-button [button]="pokemonButton"></app-button>
       </div>
@@ -116,16 +116,40 @@
       <div class="width-6 small-12 small-order-1">
         <h2>Collection</h2>
         <p>
-          Manage your entire Pokemon card collection, including card metadata
-          such as condition, graded condition, and unique printings. Organize
-          cards using binders, decks, and other grouping categories. View and
-          share your collection stats and history.
+          Manage your entire Pokemon card collection! Organize cards using
+          binders, decks, and other grouping categories. View and share your
+          collection stats and history. Included card metadata:
         </p>
+        <ul class="unordered-list">
+          <li>Condition (mint, near mint, graded 10, graded 9.5, etc)</li>
+          <li>Grading company (PSA, BGS, CGC, etc)</li>
+          <li>Unique printings (1st edition, reverse foil, etc)</li>
+          <li>Price (acquired price, market price)</li>
+          <li>Notes (memories, history, misc)</li>
+          <li>Group (binder, deck, box)</li>
+          <li>Wishlist</li>
+        </ul>
         <app-button [button]="collectionButton"></app-button>
       </div>
       <div class="width-6 small-12 small-order-2">
-        <div id="pokemon">
-          <div class="flex padded relative"></div>
+        <div id="collection">
+          <div class="flex padded-large relative justify-center">
+            <div class="width-4 flex justify-center">
+              <fa-icon icon="book-open"></fa-icon>
+            </div>
+            <div class="width-4 flex justify-center">
+              <fa-icon icon="layer-group"></fa-icon>
+            </div>
+            <div class="width-4 flex justify-center">
+              <fa-icon icon="exchange"></fa-icon>
+            </div>
+            <div class="width-4 flex justify-center">
+              <fa-icon icon="archive"></fa-icon>
+            </div>
+            <div class="width-4 flex justify-center">
+              <fa-icon icon="folder"></fa-icon>
+            </div>
+          </div>
         </div>
       </div>
     </div>
