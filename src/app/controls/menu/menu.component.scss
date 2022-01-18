@@ -98,6 +98,9 @@
         pointer-events: none;
       }
     }
+    > hr {
+      width: 100%;
+    }
 
     .form {
       display: flex;

@@ -140,4 +140,7 @@ export enum Icons {
   exchange = 'exchange',
   stickyNote = 'sticky-note',
   star = 'star',
+  fileImport = 'file-import',
+  download = 'download',
+  upload = 'upload',
 }

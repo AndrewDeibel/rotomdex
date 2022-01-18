@@ -1,0 +1,12 @@
+<div *ngIf="fileUpload" class="file-upload-wrapper">
+  <label *ngIf="fileUpload.label" class="label">
+    {{ fileUpload.label }}
+  </label>
+  <input
+    type="file"
+    class="file-upload {{ fileUpload.classes }}"
+    [value]="fileUpload.value"
+    [attr.readOnly]="fileUpload.readOnly"
+    [attr.disabled]="fileUpload.disabled"
+  />
+</div>

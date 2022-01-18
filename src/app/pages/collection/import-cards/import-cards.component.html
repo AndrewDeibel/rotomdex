@@ -1,0 +1,31 @@
+<div>
+  <div class="section">
+    <div class="max">
+      <h2>1. Download Template</h2>
+      <p style="max-width: 600px">
+        To get started download our card template .csv file. Then enter your
+        card data or convert your existing .csv file to match our template
+        column format.
+      </p>
+      <app-button [button]="buttonDownloadTemplate"></app-button>
+    </div>
+  </div>
+  <div class="section">
+    <div class="max">
+      <h2>2. Upload Cards</h2>
+      <p style="max-width: 600px">
+        Upload your formatted card data and start the import process.
+      </p>
+      <file-upload [fileUpload]="fileUploadCards"></file-upload>
+    </div>
+  </div>
+  <div class="section">
+    <div class="max">
+      <h2>3. Start Import</h2>
+      <p style="max-width: 600px">
+        Once you have uploaded your card data, start the import process.
+      </p>
+      <app-button [button]="buttonStartImport"></app-button>
+    </div>
+  </div>
+</div>

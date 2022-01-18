@@ -16,3 +16,4 @@ export * from './type-tag';
 export * from './dialog';
 export * from './empty';
 export * from './hero';
+export * from './file-upload';

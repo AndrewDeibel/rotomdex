@@ -1,7 +1,7 @@
 {
   "name": "RotomDex",
   "short_name": "RotomDex",
-  "theme_color": "#1976d2",
+  "theme_color": "#c92323",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",

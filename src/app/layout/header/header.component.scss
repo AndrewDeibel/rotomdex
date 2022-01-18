@@ -60,7 +60,7 @@
 
   &.transparent {
     + .menu-wrapper #menu {
-      @media (min-width: $screen-medium + 1px) {
+      @media (min-width: calc($screen-medium + 1px)) {
         background: transparent;
       }
       color: white;

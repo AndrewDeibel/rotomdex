@@ -28,15 +28,10 @@ export class CollectionComponent implements OnInit {
     }
   }
 
-  showDashboard = () => {
-    return window.location.pathname === '/collection/dashboard';
-  };
-  showAddGroup = () => {
-    return window.location.pathname === '/collection/add';
-  };
-  showAll = () => {
-    return window.location.pathname === '/collection';
-  };
+  showDashboard = () => window.location.pathname === '/collection/dashboard';
+  showImport = () => window.location.pathname === '/collection/import';
+  showAll = () => window.location.pathname === '/collection';
+  showAddGroup = () => window.location.pathname === '/collection/add';
 
   ngOnInit() {
     this.setupSubscriptions();
@@ -63,6 +58,7 @@ export class CollectionComponent implements OnInit {
   }
 
   setupControls() {
+    this.items.header.title = 'All Cards';
     this.progressBar = new ProgressBar({
       total: 80,
       value: 20,
@@ -80,6 +76,12 @@ export class CollectionComponent implements OnInit {
           exactMatch: true,
         }),
         new MenuItem({
+          text: 'Import',
+          icon: Icons.fileImport,
+          route: '/collection/import',
+          exactMatch: true,
+        }),
+        new MenuItem({
           text: 'Wishlist',
           icon: Icons.star,
           route: '/collection/wishlist',
@@ -90,6 +92,9 @@ export class CollectionComponent implements OnInit {
           symbol: Symbols.cards,
           route: '/collection',
           exactMatch: true,
+        }),
+        new MenuItem({
+          separator: true,
         }),
         new MenuItem({
           text: 'Example Binder 1',

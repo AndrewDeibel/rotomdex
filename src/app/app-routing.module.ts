@@ -1,4 +1,3 @@
-import { EditUserComponent } from '@app/pages';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -19,6 +18,8 @@ import {
   SignUpComponent,
   ForgotComponent,
   ResetComponent,
+  EditUserComponent,
+  ImportCardsComponent,
 } from '@app/pages';
 
 const routes: Routes = [
@@ -82,6 +83,10 @@ const routes: Routes = [
   {
     path: 'collection/:id',
     component: CollectionComponent,
+  },
+  {
+    path: 'collection/import',
+    component: ImportCardsComponent,
   },
 
   // Scanner

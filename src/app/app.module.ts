@@ -43,6 +43,7 @@ import {
   HeroComponent,
   DialogModule,
   ButtonComponent,
+  FileUploadComponent,
 } from './controls';
 
 // Pages
@@ -76,6 +77,7 @@ import {
   CardImageDialogComponent,
   UserCardNotesDialogComponent,
   ChangePasswordDialogComponent,
+  ImportCardsComponent,
 } from './pages';
 
 // Page
@@ -234,6 +236,9 @@ import {
   faExchange,
   faStickyNote,
   faStar,
+  faFileImport,
+  faUpload,
+  faDownload,
 } from '@fortawesome/pro-duotone-svg-icons';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -263,6 +268,7 @@ import { environment } from '../environments/environment';
     EmptyComponent,
     HeroComponent,
     ButtonComponent,
+    FileUploadComponent,
 
     // Page
     // ====================
@@ -309,6 +315,7 @@ import { environment } from '../environments/environment';
     CollectionComponent,
     ScannerComponent,
     ScannerListsComponent,
+    ImportCardsComponent,
 
     // Helpers
     ClickOutsideDirective,
@@ -330,7 +337,7 @@ import { environment } from '../environments/environment';
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
   providers: [
@@ -491,7 +498,10 @@ export class AppModule {
       faBalanceScale,
       faExchange,
       faStickyNote,
-      faStar
+      faStar,
+      faFileImport,
+      faDownload,
+      faUpload
     );
     faConfig.defaultPrefix = 'fad';
   }

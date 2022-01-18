@@ -16,6 +16,15 @@ body {
   overflow-x: hidden;
 }
 
+.section {
+  padding: $spacing * 14 $spacing * 2;
+  background: $main-bg;
+  overflow: hidden;
+  &:not(:last-child) {
+    border-bottom: $border;
+  }
+}
+
 // Min/max
 .min {
   min-width: $min;

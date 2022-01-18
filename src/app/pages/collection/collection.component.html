@@ -1,18 +1,29 @@
-<div class="flex h-100">
+<div class="flex h-100 small-vertical">
   <div class="input-bg">
     <app-menu [menu]="menuSidebar"></app-menu>
   </div>
   <div class="box">
-    <collection-dashboard *ngIf="showDashboard()"></collection-dashboard>
-    <items
-      *ngIf="showAll()"
-      [items]="items"
-      (outputGetItems)="getCollectionCards()"
-    ></items>
-    <user-card-group
-      class="padding-4 box"
-      *ngIf="showAddGroup()"
-    ></user-card-group>
+    <!-- Dashboard -->
+    <div *ngIf="showDashboard()">
+      <collection-dashboard></collection-dashboard>
+    </div>
+
+    <!-- Import -->
+    <div *ngIf="showImport()">
+      <import-cards></import-cards>
+    </div>
+
+    <!--  All cards -->
+    <div *ngIf="showAll()">
+      <items [items]="items" (outputGetItems)="getCollectionCards()"></items>
+    </div>
+
+    <!-- Add group -->
+    <div *ngIf="showAddGroup()">
+      <user-card-group class="padding-4 box"></user-card-group>
+    </div>
+
+    <!-- Dashboard mockup -->
     <div class="max" *ngIf="false">
       <div class="flex padded">
         <div class="width-4 medium-12">
