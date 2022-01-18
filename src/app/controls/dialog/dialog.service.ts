@@ -61,8 +61,10 @@ export class DialogService {
   }
 
   private removeDialogComponentFromBody(): void {
-    this.appRef.detachView(this.dialogComponentRef.hostView);
-    this.dialogComponentRef.destroy();
+    if (this.dialogComponentRef) {
+      this.appRef.detachView(this.dialogComponentRef.hostView);
+      this.dialogComponentRef.destroy();
+    }
   }
 
   public closeAll(): void {

@@ -145,22 +145,14 @@
     </div>
 
     <!-- Related -->
-    <div *ngIf="showRelated">
-      <items
-        [items]="relatedCards"
-        (outputGetItems)="getRelatedCards()"
-        (outputDisplayModeChanged)="getRelatedCards()"
-      >
+    <div>
+      <items [items]="relatedCards" (outputGetItems)="getRelatedCards()">
       </items>
     </div>
 
     <!-- Expansion -->
     <div>
-      <items
-        [items]="expansionCards"
-        (outputGetItems)="getExpansionCards()"
-        (outputDisplayModeChanged)="getExpansionCards()"
-      >
+      <items [items]="expansionCards" (outputGetItems)="getExpansionCards()">
       </items>
     </div>
   </div>

@@ -31,6 +31,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/pro-duotone-svg-icons": "^5.15.4",
     "ng-inline-svg-2": "^14.0.1",
+    "ngx-auto-unsubscribe": "^3.0.1",
     "ngx-color-picker": "^11.0.0",
     "ngx-webcam": "^0.4.1",
     "rxjs": "~7.4.0",

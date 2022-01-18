@@ -5,7 +5,7 @@ import { MenuItem, Menu } from '@app/controls/menu';
 import { Textbox } from '@app/controls/textbox';
 import { Button } from '@app/controls/button';
 import { Select } from '@app/controls/select';
-//import { AutoUnsubscribe } from "ngx-auto-unsubscribe";
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { CardsService } from '@app/pages/cards';
 import {
   ItemsHeader,
@@ -17,7 +17,7 @@ import { Items } from '@app/layout/main/items/items';
 import { Icons } from '@app/models/icons';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
 
-//@AutoUnsubscribe()
+@AutoUnsubscribe()
 @Component({
   selector: 'scanner-list',
   templateUrl: './scanner-list.component.html',

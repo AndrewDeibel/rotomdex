@@ -30,11 +30,10 @@ export class CardsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.setupSubscriptions();
     this.setupControls();
   }
 
-  setupSubscriptions() {
+  _getCards() {
     this.route.params.subscribe((params) => {
       this.type = params['type']?.replace('-', ' ');
       this.artist = params['artist']?.replace('-', ' ');
@@ -48,6 +47,7 @@ export class CardsComponent implements OnInit {
         this.subtype ||
         this.rarity
       ) {
+        this.getFilteredCards();
       } else {
         this.getCards();
       }
@@ -85,20 +85,6 @@ export class CardsComponent implements OnInit {
     this.items.filter.textboxSearch.placeholder = 'Search Cards...';
     this.items.filter.selectSortDirection.value = 'asc';
     SetSortByCards(this.items.filter);
-  }
-
-  _getCards() {
-    if (
-      this.type ||
-      this.artist ||
-      this.supertype ||
-      this.subtype ||
-      this.rarity
-    ) {
-      this.getFilteredCards();
-    } else {
-      this.getCards();
-    }
   }
 
   getCards() {

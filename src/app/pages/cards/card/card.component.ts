@@ -16,10 +16,12 @@ import { Icons, Symbols } from '@app/models/icons';
 import { UserCard, UserCardsService } from '@app/pages/collection';
 import { ExpansionService } from '@app/pages/expansions/expansion/expansion.service';
 import { PokemonService } from '@app/pages/pokemons';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { Card, SetSortByCards } from './card';
 import { CardImageDialogComponent } from './card-image-dialog.component';
 import { CardService } from './card.service';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'card',
   templateUrl: './card.component.html',
@@ -37,7 +39,6 @@ export class CardComponent implements OnInit {
   tagNumber: Tag;
   buttonTCGPlayer: Button;
   buttonEbay: Button;
-  showRelated: boolean;
 
   constructor(
     private titleService: Title,
@@ -55,6 +56,7 @@ export class CardComponent implements OnInit {
     this.setupSubscriptions();
     this.handleRoute();
   }
+  ngOnDestroy() {}
 
   resetControls() {
     this.card = null;
@@ -153,8 +155,7 @@ export class CardComponent implements OnInit {
         });
 
         // Get related/expansion cards
-        this.getRelatedCards();
-        this.getExpansionCards();
+        //this.getRelatedCards();
 
         // Expansion name
         this.expansionCards.header.title = `${this.card.expansion.name} Cards`;
@@ -215,7 +216,6 @@ export class CardComponent implements OnInit {
 
   getRelatedCards() {
     if (this.card && this.card.pokemon) {
-      this.showRelated = true;
       this.pokemonService.getPokemonVariantCards(
         new APIGetPaged({
           page: this.relatedCards.footer.page,
