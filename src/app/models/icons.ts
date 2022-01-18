@@ -139,4 +139,5 @@ export enum Icons {
   balanceScale = 'balance-scale',
   exchange = 'exchange',
   stickyNote = 'sticky-note',
+  star = 'star',
 }

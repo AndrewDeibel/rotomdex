@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Notification, NotificationsService } from '@app/controls';
 import { APIGetPaged, APIResponse, buildUrl } from '@app/models';
 import { BehaviorSubject } from 'rxjs';
-import { UserCardGroup } from './../../cards/card/card';
+import { UserCardGroup } from '@app/pages/collection';
 
 export interface ResUserCardGroups {
   total_results: number;

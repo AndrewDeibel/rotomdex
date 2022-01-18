@@ -64,15 +64,23 @@ const routes: Routes = [
 
   // Collection
   {
-    path: 'collection/dashboard',
-    component: CollectionComponent,
-  },
-  {
     path: 'collection',
     component: CollectionComponent,
   },
   {
+    path: 'collection/dashboard',
+    component: CollectionComponent,
+  },
+  {
+    path: 'collection/wishlist',
+    component: CollectionComponent,
+  },
+  {
     path: 'collection/add',
+    component: CollectionComponent,
+  },
+  {
+    path: 'collection/:id',
     component: CollectionComponent,
   },
 

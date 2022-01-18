@@ -1,9 +1,11 @@
+import { AlertType } from './../../controls/alert/alert';
 import { buildUrl } from '@app/models';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '@app/pages/user/user';
+import { Notification, NotificationsService } from '@app/controls';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -11,7 +13,10 @@ export class AuthenticationService {
   currentUserObservable() {
     return this.currentUserSubject.asObservable();
   }
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private notificationService: NotificationsService
+  ) {
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
       this.currentUserSubject = new BehaviorSubject<User | null>(
@@ -36,6 +41,13 @@ export class AuthenticationService {
         });
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);
+        // success notification
+        this.notificationService.addNotifications([
+          new Notification({
+            alertType: AlertType.success,
+            message: 'Successfully signed in',
+          }),
+        ]);
       });
   }
 

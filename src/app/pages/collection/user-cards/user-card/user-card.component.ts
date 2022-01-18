@@ -9,8 +9,7 @@ import {
   Icons,
   Printings,
 } from '@app/models';
-import { UserCardGroup } from './../../../cards/card/card';
-import { UserCard } from './user-card';
+import { UserCard, UserCardGroup } from './user-card';
 import { UserCardNotesDialogComponent } from './user-card-notes-dialog.component';
 
 @Component({

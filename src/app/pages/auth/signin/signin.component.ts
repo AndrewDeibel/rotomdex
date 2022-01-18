@@ -1,17 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Textbox } from '@app/controls/textbox/textbox';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NotificationsService } from '@app/controls';
 import { Button, ButtonType } from '@app/controls/button';
 import { Checkbox } from '@app/controls/checkbox';
+import { Textbox } from '@app/controls/textbox/textbox';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { first } from 'rxjs/operators';
-import {
-  NotificationsService,
-  Notification,
-  AlertType,
-  FormControl,
-} from '@app/controls';
 
 @Component({
   selector: 'signin',
@@ -75,12 +69,6 @@ export class SignInComponent implements OnInit {
     this.authenticationService.currentUserObservable().subscribe((user) => {
       if (user) {
         this.router.navigateByUrl(this.returnUrl);
-        this.notificationService.addNotifications([
-          new Notification({
-            alertType: AlertType.success,
-            message: 'Successfully signed in',
-          }),
-        ]);
       }
     });
 

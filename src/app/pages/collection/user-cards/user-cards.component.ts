@@ -1,14 +1,9 @@
-import { AuthenticationService } from '@app/pages/auth/auth.service';
-import { UserCardGroup } from './../../cards/card/card';
-import {
-  UserCardGroupService,
-  ResUserCardGroups,
-} from './../user-card-group/user-card-group.services';
-import { UserCardsService } from './user-cards.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { APIGetPaged, Icons } from '@app/models';
 import { Button, Checkbox, Empty } from '@app/controls';
-import { UserCard } from './user-card';
+import { APIGetPaged, Icons } from '@app/models';
+import { AuthenticationService } from '@app/pages/auth/auth.service';
+import { UserCardGroup, UserCardsService, UserCard } from '.';
+import { UserCardGroupService } from './../user-card-group/user-card-group.services';
 
 @Component({
   selector: 'user-cards',

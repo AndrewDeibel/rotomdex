@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { APIGetPaged } from './../../models/api';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { UserCardsService } from '@app/pages/collection';
@@ -21,8 +22,13 @@ export class CollectionComponent implements OnInit {
   constructor(
     private loaderService: LoaderService,
     private userCardsService: UserCardsService,
-    private authenticationService: AuthenticationService
-  ) {}
+    private authenticationService: AuthenticationService,
+    private router: Router
+  ) {
+    if (!this.authenticationService.currentUserValue) {
+      this.router.navigateByUrl('/');
+    }
+  }
 
   showDashboard = () => {
     return window.location.pathname === '/collection/dashboard';
@@ -74,6 +80,12 @@ export class CollectionComponent implements OnInit {
           text: 'Dashboard',
           icon: Icons.dashboard,
           route: '/collection/dashboard',
+          exactMatch: true,
+        }),
+        new MenuItem({
+          text: 'Wishlist',
+          icon: Icons.star,
+          route: '/collection/wishlist',
           exactMatch: true,
         }),
         new MenuItem({

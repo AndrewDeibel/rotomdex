@@ -49,9 +49,11 @@ export class ResetComponent implements OnInit {
     });
     this.textboxPassword = new Textbox({
       label: 'Password',
+      type: 'password',
     });
     this.textboxConfirmPassword = new Textbox({
       label: 'Confirm Password',
+      type: 'password',
     });
     this.buttonSubmit = new Button({
       text: 'Reset Password',

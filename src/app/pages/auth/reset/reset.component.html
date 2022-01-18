@@ -8,13 +8,22 @@
       <h1>Reset Password</h1>
     </div>
     <div>
-      <textbox [textbox]="textboxEmail"></textbox>
+      <textbox
+        [textbox]="textboxEmail"
+        formControlName="emailControl"
+      ></textbox>
     </div>
     <div>
-      <textbox [textbox]="textboxPassword"></textbox>
+      <textbox
+        [textbox]="textboxPassword"
+        formControlName="passwordControl"
+      ></textbox>
     </div>
     <div>
-      <textbox [textbox]="textboxConfirmPassword"> </textbox>
+      <textbox
+        [textbox]="textboxConfirmPassword"
+        formControlName="confirmPasswordControl"
+      ></textbox>
     </div>
     <div>
       <app-button [button]="buttonSubmit"></app-button>
