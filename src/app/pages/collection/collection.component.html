@@ -13,6 +13,11 @@
       <import-cards></import-cards>
     </div>
 
+    <!-- Wishlist -->
+    <div *ngIf="showWishlist()">
+      <wishlist></wishlist>
+    </div>
+
     <!--  All cards -->
     <div *ngIf="showAll()">
       <items [items]="items" (outputGetItems)="getCollectionCards()"></items>

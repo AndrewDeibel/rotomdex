@@ -30,6 +30,7 @@ export class CollectionComponent implements OnInit {
 
   showDashboard = () => window.location.pathname === '/collection/dashboard';
   showImport = () => window.location.pathname === '/collection/import';
+  showWishlist = () => window.location.pathname === '/collection/wishlist';
   showAll = () => window.location.pathname === '/collection';
   showAddGroup = () => window.location.pathname === '/collection/add';
 

@@ -14,7 +14,7 @@ export class UserCardsComponent implements OnInit {
   @Input() card_id: number;
   @Input() userCards: UserCard[] = [];
   buttonAdd: Button;
-  checkboxWishList: Checkbox;
+  checkboxWishlist: Checkbox;
   buttonViewAll: Button;
   empty: Empty;
   buttonNotes: Button;
@@ -79,7 +79,7 @@ export class UserCardsComponent implements OnInit {
     });
 
     // Checkbox wish list
-    this.checkboxWishList = new Checkbox({
+    this.checkboxWishlist = new Checkbox({
       text: 'Wishlist',
     });
   }

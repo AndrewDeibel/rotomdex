@@ -78,6 +78,7 @@ import {
   UserCardNotesDialogComponent,
   ChangePasswordDialogComponent,
   ImportCardsComponent,
+  WishlistComponent,
 } from './pages';
 
 // Page
@@ -316,6 +317,7 @@ import { environment } from '../environments/environment';
     ScannerComponent,
     ScannerListsComponent,
     ImportCardsComponent,
+    WishlistComponent,
 
     // Helpers
     ClickOutsideDirective,
