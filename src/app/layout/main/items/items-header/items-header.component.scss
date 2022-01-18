@@ -1,69 +1,70 @@
 @import "settings";
 
 #item-header {
-	position: relative;
-	padding: $spacing * 2;
-	display: flex;
-	fa-icon {
-		width: 64px;
-		height: 64px;
-		padding: $spacing * 2;
-	}
-	.symbol-wrapper {
-		width: auto;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		@media (max-width: $screen-small) {
-			width: 100%;
-		}
-		img {
-			max-width: 100%;
-			max-height: 100%;
-		}
-		.symbol-inner {
-			height: 56px;
-			max-width: 200px;
-			padding: $spacing;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-	}
-	.title {
-		margin: 0;
-	}
-	.price {
-		color: $green;
-		font-weight: bold;
-	}
-	.tags {
-		margin-top: 6px;
-	}
-	@media (max-width: $screen-small) {
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
-		[class^="texture"] {
-			border-top-left-radius: 0;
-			border-top-right-radius: 0;
-		}
-		.icon-wrapper,
-		.symbol-wrapper {
-			//display: none;
-			fa-icon {
-				padding: $spacing;
-				width: 40px;
-				height: 40px;
-			}
-		}
-		.cards-menu {
-			display: flex;
-			width: 100%;
-		}
-		.main-header-menu {
-			width: 100%;
-			display: flex;
-		}
-	}
+  position: relative;
+  padding: $spacing * 2;
+  display: flex;
+  .icon-wrapper {
+    fa-icon {
+      width: 64px;
+      height: 64px;
+      padding: $spacing * 2;
+    }
+  }
+  .symbol-wrapper {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @media (max-width: $screen-small) {
+      width: 100%;
+    }
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+    .symbol-inner {
+      height: 56px;
+      max-width: 200px;
+      padding: $spacing;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .title {
+    margin: 0;
+  }
+  .price {
+    color: $green;
+    font-weight: bold;
+  }
+  .tags {
+    margin-top: 6px;
+  }
+  @media (max-width: $screen-small) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    [class^="texture"] {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+    .icon-wrapper,
+    .symbol-wrapper {
+      fa-icon {
+        padding: $spacing;
+        width: 40px;
+        height: 40px;
+      }
+    }
+    .cards-menu {
+      display: flex;
+      width: 100%;
+    }
+    .main-header-menu {
+      width: 100%;
+      display: flex;
+    }
+  }
 }

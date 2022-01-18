@@ -19,11 +19,16 @@ $heading-divisor: 4;
     a,
     .link {
       color: $heading-font-color;
+      display: flex;
       &:hover,
       &:focus,
       &:active {
         text-decoration: underline;
       }
+    }
+    fa-icon {
+      margin: 0 $spacing;
+      width: $font-size * (1 + ((6 - $i) / $heading-divisor)) - 8px;
     }
   }
   .h#{$i} {

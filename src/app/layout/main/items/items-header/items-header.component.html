@@ -25,7 +25,8 @@
               *ngIf="itemsHeader.titleRoute"
               [routerLink]="itemsHeader.titleRoute"
             >
-              {{ itemsHeader.title }}
+              <span>{{ itemsHeader.title }}</span>
+              <fa-icon icon="external-link"></fa-icon>
             </a>
             <span *ngIf="!itemsHeader.titleRoute">
               {{ itemsHeader.title }}

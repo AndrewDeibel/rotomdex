@@ -2,7 +2,11 @@
   <div class="max">
     <div class="flex padded flex-center">
       <div class="box">
-        <h2><a [routerLink]="">Collection</a></h2>
+        <h2>
+          <a [routerLink]="'/collection'"
+            ><span>Collection</span><fa-icon icon="external-link"></fa-icon
+          ></a>
+        </h2>
       </div>
       <div>
         <checkbox [checkbox]="checkboxWishlist"></checkbox>
