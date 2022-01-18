@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import {
   Button,
   ButtonType,
-  LoaderService,
-  NotificationsService,
   Select,
   SelectOption,
   Textarea,
@@ -34,9 +32,7 @@ export class UserCardGroupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private router: Router,
-    private loaderService: LoaderService,
-    private userCardGroupService: UserCardGroupService,
-    private notificationService: NotificationsService
+    private userCardGroupService: UserCardGroupService
   ) {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigateByUrl('/');
@@ -125,7 +121,6 @@ export class UserCardGroupComponent implements OnInit {
       return;
     }
 
-    this.loaderService.addItemLoading('user-card-group');
     this.userCardGroupService.addUserCardGroup(
       new UserCardGroup({
         name: this.form.controls['nameControl'].value,

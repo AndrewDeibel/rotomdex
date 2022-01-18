@@ -42,7 +42,6 @@ export class ExpansionComponent implements OnInit {
   subscribeExpansion() {
     this.expansionService.getExpansionObservable().subscribe((expansion) => {
       if (expansion) {
-        this.loaderService.clearItemLoading('getExpansion');
         this.titleService.setTitle(AppSettings.titlePrefix + expansion.name);
         this.items.header.symbol = expansion.logo;
         this.items.header.progressBar = new ProgressBar({
@@ -65,7 +64,6 @@ export class ExpansionComponent implements OnInit {
   subscribeExpansionCards() {
     this.expansionService.getExpansionCardsObservable().subscribe((res) => {
       if (res) {
-        this.loaderService.clearItemLoading('getExpansionCards');
         this.items.itemGroups = [];
         this.items.itemGroups.push(
           new ItemGroup({
@@ -90,7 +88,6 @@ export class ExpansionComponent implements OnInit {
 
   getExpansion(code: string) {
     this.code = code;
-    this.loaderService.addItemLoading('getExpansion');
     this.expansionService.getExpansion(
       new APIGetPaged({
         code: code,
@@ -105,7 +102,6 @@ export class ExpansionComponent implements OnInit {
   }
 
   getExpansionCards() {
-    this.loaderService.addItemLoading('getExpansionCards');
     this.expansionService.getExpansionCards(
       new APIGetPaged({
         code: this.code,

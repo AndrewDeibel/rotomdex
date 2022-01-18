@@ -1,12 +1,11 @@
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 import { AppSettings } from '@app/app';
-import { LoaderService } from '@app/controls';
 import { ItemGroup, Items } from '@app/layout/main';
-import { SetSortByPokemon, PokemonVariant } from './pokemon/pokemon';
-import { PokemonsService } from './pokemons.service';
 import { APIGetPaged, Symbols } from '@app/models';
+import { PokemonVariant, SetSortByPokemon } from './pokemon/pokemon';
+import { PokemonsService } from './pokemons.service';
 
 @Component({
   selector: 'pokemons',
@@ -18,7 +17,6 @@ export class PokemonsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private loaderService: LoaderService,
     private titleService: Title,
     private pokemonService: PokemonsService
   ) {}
@@ -37,7 +35,6 @@ export class PokemonsComponent implements OnInit {
     // Get data
     this.pokemonService.getPokemonVariantsObservable().subscribe((res) => {
       if (res) {
-        this.loaderService.clearItemLoading('getPokemon');
         this.items.footer.totalPages = res.total_pages;
         this.items.footer.totalItems = res.total_results;
         this.items.itemGroups = [
@@ -65,7 +62,6 @@ export class PokemonsComponent implements OnInit {
   }
 
   getPokemonVariants() {
-    this.loaderService.addItemLoading('getPokemon');
     this.pokemonService.getPokemonVariants(
       new APIGetPaged({
         page: this.items.footer.page,

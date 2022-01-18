@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Items } from '@app/layout';
-import { ExpansionsService } from './expansions.service';
 import { Title } from '@angular/platform-browser';
-import { LoaderService } from '@app/controls';
 import { AppSettings } from '@app/app';
-import { Series, SetSortByExpansions } from './expansion/expansion';
+import { Items } from '@app/layout';
 import { APIGetPaged, Icons } from '@app/models';
+import { Series, SetSortByExpansions } from './expansion/expansion';
+import { ExpansionsService } from './expansions.service';
 
 @Component({
   selector: 'expansions',
@@ -15,7 +14,6 @@ export class ExpansionsComponent implements OnInit {
   items: Items = new Items();
 
   constructor(
-    private loaderService: LoaderService,
     private titleService: Title,
     private expansionsService: ExpansionsService
   ) {}
@@ -33,7 +31,6 @@ export class ExpansionsComponent implements OnInit {
 
   responseGetExpansions(seriesList: Series[]) {
     if (seriesList) {
-      this.loaderService.clearItemLoading('getExpansions');
       this.items.itemGroups = seriesList.map((series) => ({
         items: series.expansions,
         name: series.name,
@@ -56,7 +53,6 @@ export class ExpansionsComponent implements OnInit {
   }
 
   getItems() {
-    this.loaderService.addItemLoading('getExpansions');
     this.expansionsService.getExpansions(
       new APIGetPaged({
         query: this.items.filter.textboxSearch.value,

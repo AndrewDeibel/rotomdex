@@ -1,3 +1,4 @@
+import { LoaderService } from './../../../controls/loader/loader.service';
 import { APIGetPaged, APIResponse, buildUrl } from '@app/models';
 import { ResCards, Card } from '@app/pages';
 import { BehaviorSubject } from 'rxjs';
@@ -32,7 +33,7 @@ export class AddUserCard {
 
 @Injectable({ providedIn: 'root' })
 export class UserCardsService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private loaderService: LoaderService) {}
 
   // Get user cards
   private getUserCardsSubject = new BehaviorSubject<ResCards | null>(null);
@@ -41,6 +42,7 @@ export class UserCardsService {
     return this.getUserCardsSubject.asObservable();
   }
   getUserCards(params: APIGetPaged) {
+    this.loaderService.addItemLoading('getUserCards');
     this.http
       .get<APIResponse>(params.buildUrl('user-cards'))
       .subscribe((res) => {
@@ -49,6 +51,7 @@ export class UserCardsService {
           total_pages: res.meta.last_page,
           total_results: res.meta.total,
         });
+        this.loaderService.clearItemLoading('getUserCards');
       });
   }
 
@@ -61,12 +64,14 @@ export class UserCardsService {
     return this.getCardUserCardsSubject.asObservable();
   }
   getCardUserCards(slug: string) {
+    this.loaderService.addItemLoading('getUserCardsCard');
     this.http
       .get<APIResponse>(buildUrl('user-cards/' + slug))
       .subscribe((res) => {
         this.getCardUserCardsSubject.next(
           res.data.map((userCard: any) => new UserCard(userCard))
         );
+        this.loaderService.clearItemLoading('getUserCardsCard');
       });
   }
 
@@ -77,10 +82,12 @@ export class UserCardsService {
     return this.addUserCardSubject.asObservable();
   }
   addUserCard(userCard: UserCard) {
+    this.loaderService.addItemLoading('addUserCard');
     this.http
       .post<APIResponse>(buildUrl('user-cards/create'), userCard)
       .subscribe((res) => {
         if (res.success) this.addUserCardSubject.next(userCard);
+        this.loaderService.clearItemLoading('addUserCard');
       });
   }
 

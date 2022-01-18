@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Textbox } from '@app/controls/textbox/textbox';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Button, ButtonType } from '@app/controls/button';
+import { Textbox } from '@app/controls/textbox/textbox';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { first } from 'rxjs/operators';
-import { LoaderService } from '@app/controls';
 
 @Component({
   selector: 'signup',
@@ -22,7 +20,6 @@ export class SignUpComponent implements OnInit {
   buttonSubmit: Button;
 
   constructor(
-    private loaderService: LoaderService,
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
@@ -34,6 +31,11 @@ export class SignUpComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setupControls();
+    this.setupSubscriptions();
+  }
+
+  setupControls() {
     this.form = this.formBuilder.group({
       emailControl: ['', Validators.required],
       usernameControl: ['', Validators.required],
@@ -64,27 +66,23 @@ export class SignUpComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
+  setupSubscriptions() {
+    this.authenticationService.currentUserObservable().subscribe((user) => {
+      if (user) {
+        this.router.navigateByUrl(this.returnUrl);
+      }
+    });
+  }
+
   submit() {
     if (this.form.invalid) {
       return;
     }
-
-    this.loaderService.addItemLoading('register');
-    this.authenticationService
-      .register(
-        this.textboxEmail.value,
-        this.textboxUsername.value,
-        this.textboxPassword.value,
-        this.textboxConfirmPassword.value
-      )
-      .pipe(first())
-      .subscribe(
-        (data) => {
-          this.router.navigateByUrl(this.returnUrl);
-        },
-        (error) => {
-          this.loaderService.clearItemLoading('register');
-        }
-      );
+    this.authenticationService.register(
+      this.textboxEmail.value,
+      this.textboxUsername.value,
+      this.textboxPassword.value,
+      this.textboxConfirmPassword.value
+    );
   }
 }

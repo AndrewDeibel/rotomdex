@@ -182,7 +182,6 @@ export class CardComponent implements OnInit {
     // Response get related cards
     this.pokemonService.getPokemonVariantCardsObservable().subscribe((res) => {
       if (res) {
-        this.loaderService.clearItemLoading('getPokemonCards');
         this.relatedCards.itemGroups = [
           new ItemGroup({
             items: res.cards,
@@ -194,7 +193,6 @@ export class CardComponent implements OnInit {
     // Response get expansion cards
     this.expansionService.getExpansionCardsObservable().subscribe((res) => {
       if (res) {
-        this.loaderService.clearItemLoading('getExpansionCards');
         this.expansionCards.itemGroups = [
           new ItemGroup({
             items: res.cards,
@@ -218,7 +216,6 @@ export class CardComponent implements OnInit {
   getRelatedCards() {
     if (this.card && this.card.pokemon) {
       this.showRelated = true;
-      this.loaderService.addItemLoading('getPokemonCards');
       this.pokemonService.getPokemonVariantCards(
         new APIGetPaged({
           page: this.relatedCards.footer.page,
@@ -234,7 +231,6 @@ export class CardComponent implements OnInit {
 
   getExpansionCards() {
     if (this.card) {
-      this.loaderService.addItemLoading('getExpansionCards');
       this.expansionService.getExpansionCards(
         new APIGetPaged({
           code: this.card.expansion.code,

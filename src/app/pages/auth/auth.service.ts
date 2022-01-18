@@ -5,7 +5,11 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '@app/pages/user/user';
-import { Notification, NotificationsService } from '@app/controls';
+import {
+  LoaderService,
+  Notification,
+  NotificationsService,
+} from '@app/controls';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -15,7 +19,8 @@ export class AuthenticationService {
   }
   constructor(
     private http: HttpClient,
-    private notificationService: NotificationsService
+    private notificationService: NotificationsService,
+    private loaderService: LoaderService
   ) {
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
@@ -30,6 +35,7 @@ export class AuthenticationService {
   }
 
   login(email: string, password: string) {
+    this.loaderService.addItemLoading('login');
     return this.http
       .post<any>(buildUrl('login'), { email, password })
       .subscribe((res) => {
@@ -48,6 +54,7 @@ export class AuthenticationService {
             message: 'Successfully signed in',
           }),
         ]);
+        this.loaderService.clearItemLoading('login');
       });
   }
 
@@ -66,6 +73,7 @@ export class AuthenticationService {
     password: string,
     password_confirmation: string
   ) {
+    this.loaderService.addItemLoading('register');
     return this.http
       .post<any>(buildUrl('register'), {
         email,
@@ -81,6 +89,7 @@ export class AuthenticationService {
           });
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
+          this.loaderService.clearItemLoading('register');
         })
       );
   }

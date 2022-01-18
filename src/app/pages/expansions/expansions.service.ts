@@ -1,3 +1,4 @@
+import { LoaderService } from '@app/controls';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -7,7 +8,7 @@ import { Cache } from '@app/helpers';
 
 @Injectable({ providedIn: 'root' })
 export class ExpansionsService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private loaderService: LoaderService) {}
 
   // Get expansions
   private getExpansionsSubject = new BehaviorSubject<Series[] | null>(null);
@@ -21,12 +22,14 @@ export class ExpansionsService {
         this.handleExpansionsParams(params, Cache.expansions)
       );
     } else {
+      this.loaderService.addItemLoading('getExpansions');
       this.http.get<APIResponse>(buildUrl('expansions')).subscribe((res) => {
         const series = res.data.map((series: any) => new Series(series));
         Cache.expansions = series;
         this.getExpansionsSubject.next(
           this.handleExpansionsParams(params, series)
         );
+        this.loaderService.clearItemLoading('getExpansions');
       });
     }
   }

@@ -1,3 +1,4 @@
+import { LoaderService } from './../../controls/loader/loader.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { APIGetPaged, APIResponse } from '@app/models';
@@ -14,7 +15,7 @@ export interface ResPokemonVariants {
   providedIn: 'root',
 })
 export class PokemonsService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private loaderService: LoaderService) {}
 
   // Get all pokemon variants
   private getPokemonVariantsSubject =
@@ -25,6 +26,7 @@ export class PokemonsService {
     return this.getPokemonVariantsSubject.asObservable();
   }
   getPokemonVariants(params: APIGetPaged) {
+    this.loaderService.addItemLoading('getPokemon');
     this.http
       .get<APIResponse>(params.buildUrl('pokemon-variants'))
       .subscribe((res) => {
@@ -35,6 +37,7 @@ export class PokemonsService {
             (pokemonVariant: any) => new PokemonVariant(pokemonVariant)
           ),
         });
+        this.loaderService.clearItemLoading('getPokemon');
       });
   }
 }

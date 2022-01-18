@@ -1,3 +1,4 @@
+import { LoaderService } from './../../controls/loader/loader.service';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -13,7 +14,7 @@ export interface ResCards {
 
 @Injectable({ providedIn: 'root' })
 export class CardsService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private loaderService: LoaderService) {}
 
   // Get cards
   private getCardsSubject = new BehaviorSubject<ResCards | null>(null);
@@ -22,12 +23,14 @@ export class CardsService {
     return this.getCardsSubject.asObservable();
   }
   getCards(params: APIGetPaged) {
+    this.loaderService.addItemLoading('getCards');
     this.http.get<APIResponse>(params.buildUrl('cards')).subscribe((res) => {
       this.getCardsSubject.next({
         cards: res.data.map((card: any) => new Card(card)),
         total_pages: res.meta.last_page,
         total_results: res.meta.total,
       });
+      this.loaderService.clearItemLoading('getCards');
     });
   }
 
@@ -38,6 +41,7 @@ export class CardsService {
     return this.getCardsFilteredSubject.asObservable();
   }
   getCardsFiltered(params: APIGetPaged) {
+    this.loaderService.addItemLoading('getFilteredCards');
     this.http
       .get<APIResponse>(params.buildUrl('cards/filter'))
       .subscribe((res) => {
@@ -46,6 +50,7 @@ export class CardsService {
           total_pages: res.meta.last_page,
           total_results: res.meta.total,
         });
+        this.loaderService.clearItemLoading('getFilteredCards');
       });
   }
 }

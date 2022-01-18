@@ -62,8 +62,6 @@ export class CardsComponent implements OnInit {
 
   getCardsResponse(res: ResCards | null) {
     if (res) {
-      this.loaderService.clearItemLoading('getCards');
-      this.loaderService.clearItemLoading('getFilteredCards');
       this.items.footer.totalPages = res.total_pages;
       this.items.footer.totalItems = res.total_results;
       if (res.cards && res.cards.length) {
@@ -104,7 +102,6 @@ export class CardsComponent implements OnInit {
   }
 
   getCards() {
-    this.loaderService.addItemLoading('getCards');
     this.items.showHeader = false;
     this.cardsService.getCards(
       new APIGetPaged({
@@ -118,7 +115,6 @@ export class CardsComponent implements OnInit {
   }
 
   getFilteredCards() {
-    this.loaderService.addItemLoading('getFilteredCards');
     this.cardsService.getCardsFiltered(
       new APIGetPaged({
         page: this.items.footer.page,

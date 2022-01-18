@@ -1,11 +1,10 @@
-import { Router } from '@angular/router';
-import { APIGetPaged } from './../../models/api';
-import { AuthenticationService } from '@app/pages/auth/auth.service';
-import { UserCardsService } from '@app/pages/collection';
-import { Items, ItemGroup } from '@app/layout';
-import { Icons, Symbols } from '@app/models';
-import { Menu, MenuItem, LoaderService, ProgressBar } from '@app/controls';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Menu, MenuItem, ProgressBar } from '@app/controls';
+import { ItemGroup, Items } from '@app/layout';
+import { Icons, Symbols, APIGetPaged } from '@app/models';
+import { AuthenticationService } from '@app/pages/auth';
+import { UserCardsService } from '@app/pages/collection';
 
 @Component({
   selector: 'collection',
@@ -20,7 +19,6 @@ export class CollectionComponent implements OnInit {
   items: Items = new Items();
 
   constructor(
-    private loaderService: LoaderService,
     private userCardsService: UserCardsService,
     private authenticationService: AuthenticationService,
     private router: Router
@@ -49,7 +47,6 @@ export class CollectionComponent implements OnInit {
   setupSubscriptions() {
     this.userCardsService.getUserCardsObservable().subscribe((res: any) => {
       if (res) {
-        this.loaderService.clearItemLoading('getCollectionCards');
         this.items.footer.totalPages = res.total_pages;
         this.items.footer.totalItems = res.total_results;
         if (res.cards && res.cards.length) {
@@ -111,7 +108,6 @@ export class CollectionComponent implements OnInit {
   }
 
   getCollectionCards() {
-    this.loaderService.addItemLoading('getCollectionCards');
     this.userCardsService.getUserCards(
       new APIGetPaged({
         page: this.items.footer.page,

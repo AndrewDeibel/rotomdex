@@ -13,7 +13,6 @@ import { AuthenticationService } from '@app/pages/auth/auth.service';
   styleUrls: ['./signin.component.scss'],
 })
 export class SignInComponent implements OnInit {
-  loading: boolean = false;
   returnUrl: string;
   form: FormGroup;
   textboxEmail: Textbox;
@@ -34,6 +33,11 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setupControls();
+    this.setupSubscriptions();
+  }
+
+  setupControls() {
     this.form = this.formBuilder.group({
       emailControl: ['', Validators.required],
       passwordControl: ['', Validators.required],
@@ -61,18 +65,18 @@ export class SignInComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  submit() {
-    if (this.form.invalid) {
-      return;
-    }
-
+  setupSubscriptions() {
     this.authenticationService.currentUserObservable().subscribe((user) => {
       if (user) {
         this.router.navigateByUrl(this.returnUrl);
       }
     });
+  }
 
-    this.loading = true;
+  submit() {
+    if (this.form.invalid) {
+      return;
+    }
     this.authenticationService.login(
       this.textboxEmail.value,
       this.textboxPassword.value

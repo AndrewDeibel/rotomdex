@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Notification, NotificationsService } from '@app/controls';
+import {
+  LoaderService,
+  Notification,
+  NotificationsService,
+} from '@app/controls';
 import { APIGetPaged, APIResponse, buildUrl } from '@app/models';
 import { BehaviorSubject } from 'rxjs';
 import { UserCardGroup } from '@app/pages/collection';
@@ -15,7 +19,8 @@ export interface ResUserCardGroups {
 export class UserCardGroupService {
   constructor(
     private http: HttpClient,
-    private notificationService: NotificationsService
+    private notificationService: NotificationsService,
+    private loaderService: LoaderService
   ) {}
 
   // Get user card groups
@@ -51,6 +56,7 @@ export class UserCardGroupService {
     return this.addUserCardGroupSubject.asObservable();
   }
   addUserCardGroup(userCardGroup: UserCardGroup) {
+    this.loaderService.addItemLoading('user-card-group');
     this.http
       .post<APIResponse>(buildUrl('card-groups/create'), userCardGroup)
       .subscribe((res) => {
@@ -61,6 +67,7 @@ export class UserCardGroupService {
               message: `Added ${userCardGroup.name}`,
             }),
           ]);
+          this.loaderService.clearItemLoading('user-card-group');
         }
       });
   }

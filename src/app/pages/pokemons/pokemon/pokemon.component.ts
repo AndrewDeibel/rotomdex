@@ -1,4 +1,3 @@
-import { PokedexEntryDialogComponent } from './pokedex-entry-dialog.component';
 import { Component, Input, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,6 +15,7 @@ import {
 } from '@app/controls';
 import { ItemGroup, Items } from '@app/layout/main';
 import { APIGetPaged, Size, Symbols } from '@app/models';
+import { PokedexEntryDialogComponent } from './pokedex-entry-dialog.component';
 import { PokemonVariant, SetSortByPokemon } from './pokemon';
 import { PokemonService } from './pokemon.service';
 
@@ -114,7 +114,6 @@ export class PokemonComponent implements OnInit {
     // Response get pokemon cards
     this.pokemonService.getPokemonVariantCardsObservable().subscribe((res) => {
       if (res) {
-        this.loaderService.clearItemLoading('getPokemonCards');
         this.items.footer.totalPages = res.total_pages;
         this.items.footer.totalItems = res.total_results;
         this.items.filter.textboxSearch.placeholder = `Search ${this.pokemonVariant.name} cards...`;
@@ -133,8 +132,6 @@ export class PokemonComponent implements OnInit {
     // Request get pokemon
     this.route.params.subscribe((params) => {
       this.slug = params['slug'];
-
-      this.loaderService.addItemLoading('getPokemon');
       this.pokemonService.getPokemonVariant(this.slug);
     });
   }
@@ -157,7 +154,6 @@ export class PokemonComponent implements OnInit {
   }
 
   getCards() {
-    this.loaderService.addItemLoading('getPokemonCards');
     this.pokemonService.getPokemonVariantCards(
       new APIGetPaged({
         page: this.items.footer.page,

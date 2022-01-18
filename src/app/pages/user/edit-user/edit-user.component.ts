@@ -10,7 +10,6 @@ import {
 } from '@app/controls';
 import { Button, ButtonType } from '@app/controls/button';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
-import { LoaderService } from '../../../controls/loader/loader.service';
 import { ChangePasswordDialogComponent } from './change-password-dialog.component';
 
 @Component({
@@ -33,7 +32,6 @@ export class EditUserComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private loaderService: LoaderService,
     private dialogService: DialogService
   ) {
     if (!this.authenticationService.currentUserValue) {
@@ -102,7 +100,5 @@ export class EditUserComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-
-    this.loaderService.addItemLoading('register');
   }
 }

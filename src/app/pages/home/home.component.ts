@@ -1,11 +1,6 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Alert, AlertType, Button, DialogService } from '@app/controls';
+import { Alert, AlertType, Button } from '@app/controls';
 import { Icons } from '@app/models';
-import {
-  ReleaseNote,
-  ReleaseNotesServices,
-} from '@app/pages/home/release-notes.services';
 import { Featured } from './featured';
 import { FeaturedService } from './featured.service';
 
@@ -38,12 +33,7 @@ export class HomeComponent implements OnInit {
     route: '/collection',
   });
 
-  constructor(
-    private datePipe: DatePipe,
-    private featuredService: FeaturedService,
-    private releaseNotesService: ReleaseNotesServices,
-    private dialogService: DialogService
-  ) {}
+  constructor(private featuredService: FeaturedService) {}
 
   ngOnInit(): void {
     this.alert = new Alert({
