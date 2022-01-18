@@ -1,4 +1,4 @@
-import { EditProfileComponent } from '../pages/profile/edit-profile/edit-profile.component';
+import { EditUserComponent } from '@app/pages/user';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth.guard';
@@ -20,7 +20,6 @@ import {
   SignUpComponent,
   ForgotComponent,
   ResetComponent,
-  CollectionCardGroupComponent,
 } from '../pages';
 
 const routes: Routes = [
@@ -113,11 +112,11 @@ const routes: Routes = [
   // Edit profile
   {
     path: 'profile',
-    component: EditProfileComponent,
+    component: EditUserComponent,
   },
   {
     path: 'profile/edit',
-    component: EditProfileComponent,
+    component: EditUserComponent,
   },
 
   // Expansions
