@@ -11,6 +11,7 @@ export class Button {
   icon: IconProp;
   symbol: string;
   href: string;
+  target: string;
   route: string;
   disabled: boolean;
   classes: string;
@@ -18,6 +19,7 @@ export class Button {
   type: ButtonType = ButtonType.button;
   price: number;
   size: Size;
+  align: string;
 
   public click: () => void;
 

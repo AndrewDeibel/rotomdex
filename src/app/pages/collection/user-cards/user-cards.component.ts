@@ -86,14 +86,10 @@ export class UserCardsComponent implements OnInit {
 
   setupSubscriptions() {
     this.userCardsService.addUserCardObservable().subscribe((addedCard) => {
-      if (addedCard) {
-        this.userCards.push(addedCard);
-      }
+      if (addedCard) this.userCards.push(addedCard);
     });
     this.userCardGroupService.getUserCardGroupsObservable().subscribe((res) => {
-      if (res) {
-        this.userCardGroups = res.user_card_groups;
-      }
+      if (res) this.userCardGroups = res.user_card_groups;
     });
   }
 

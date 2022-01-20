@@ -68,7 +68,7 @@ export class PokemonComponent implements OnInit {
           this.buttonDex = new Button({
             symbol: Symbols.pokeball,
             text: 'Pokédex Entry',
-            size: Size.small,
+            size: Size.xsmall,
             click: () => {
               this.dialogService.open(
                 PokedexEntryDialogComponent,

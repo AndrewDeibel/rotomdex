@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1642484877010,
+  "timestamp": 1642646965044,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,11 +13,11 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.971b1a0d700f8a85.js",
+        "/main.fb16eb37d2b5ef05.js",
         "/manifest.webmanifest",
         "/polyfills.a90d0f9c1878eb88.js",
         "/runtime.f167786c2dee8f61.js",
-        "/styles.a2fbc30cb3e547b2.css"
+        "/styles.136622b936c42fe9.css"
       ],
       "patterns": []
     },
@@ -38,6 +38,7 @@
         "/assets/icons/icon-72x72.png",
         "/assets/icons/icon-96x96.png",
         "/assets/moltresgalar.jpg",
+        "/assets/placeholder.jpg",
         "/assets/pokeball.png",
         "/assets/symbols/cards-source.ai",
         "/assets/symbols/cards.ai",
@@ -78,6 +79,7 @@
     "/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/assets/moltresgalar.jpg": "affebad713b5bf9c2099a163374823d300ca752c",
+    "/assets/placeholder.jpg": "fb7ac1e20fb8c8a9a49fb96d07d08dc429aebe34",
     "/assets/pokeball.png": "a4a8892d5578957891cff895576adabd88b08839",
     "/assets/symbols/cards-source.ai": "b5e1408e5ac1563164e99dd9c8bf311b0e3b2739",
     "/assets/symbols/cards.ai": "b9cb27883495713cd5a434dc628314037fa69c44",
@@ -104,12 +106,12 @@
     "/assets/user/placeholder-female.jpg": "122888a5af26ba53f80b1e126581dec4fe83c208",
     "/assets/user/placeholder-male.jpg": "36c06817aebb3e461e487c2ba27bfe2dc1398b4d",
     "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "3bba3c9e9718d117bc26db762643000efd71799c",
-    "/main.971b1a0d700f8a85.js": "586d03e59c2066c2edaff7ee74f01f8520628696",
+    "/index.html": "f9638b42764c7cc00bb2cb1591686402ad81d8c2",
+    "/main.fb16eb37d2b5ef05.js": "5fc4e2d65b02da718711fd927b48287c8e16af23",
     "/manifest.webmanifest": "5fce7eef20d4307d9bcd146f140c0f88c8d9a506",
     "/polyfills.a90d0f9c1878eb88.js": "b4711754abbd131a24a1d0e6e162c19c5355a7b8",
     "/runtime.f167786c2dee8f61.js": "212b0fd0750b44d04c912f68aff3e1ae5932d42a",
-    "/styles.a2fbc30cb3e547b2.css": "6ff9b7ebdd6d1d497a9cf62bd4fd5336a84facf1"
+    "/styles.136622b936c42fe9.css": "27bda8917f0088bccdf0e6558ef689a8d97c6de7"
   },
   "navigationUrls": [
     {

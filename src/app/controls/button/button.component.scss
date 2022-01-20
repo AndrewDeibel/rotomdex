@@ -19,13 +19,28 @@
   box-shadow: $shadow-sheen;
   justify-content: center;
 
-  &.small {
+  &.xsmall {
     padding: 2px 8px;
     font-size: 12px;
     line-height: 1;
     .symbol + .text {
       margin-left: 4px;
     }
+  }
+
+  &.small {
+    padding: 6px 8px;
+    font-size: 14px;
+    line-height: 1;
+    .symbol + .text {
+      margin-left: 4px;
+    }
+  }
+  &.left {
+    justify-content: flex-start;
+  }
+  &.right {
+    justify-content: flex-end;
   }
   .text {
     display: flex;

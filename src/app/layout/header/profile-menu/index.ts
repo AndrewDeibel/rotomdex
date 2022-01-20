@@ -1,1 +1,1 @@
-export * from './profile-name.component';
+export * from './profile-menu.component';

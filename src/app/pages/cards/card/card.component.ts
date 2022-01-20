@@ -1,3 +1,4 @@
+import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -39,16 +40,18 @@ export class CardComponent implements OnInit {
   tagNumber: Tag;
   buttonTCGPlayer: Button;
   buttonEbay: Button;
+  buttonAdmin: Button;
+  hasAdminAccess: boolean;
 
   constructor(
     private titleService: Title,
-    private loaderService: LoaderService,
     private cardService: CardService,
     private route: ActivatedRoute,
     private expansionService: ExpansionService,
     private dialogService: DialogService,
     private pokemonService: PokemonService,
-    private userCardsService: UserCardsService
+    private userCardsService: UserCardsService,
+    private authenticationService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
@@ -63,8 +66,6 @@ export class CardComponent implements OnInit {
   }
 
   setupControls() {
-    this.resetControls();
-
     // Related cards
     this.relatedCards.footer.pageSize = 12;
     this.relatedCards.noResultsImage = Symbols.cards;
@@ -87,11 +88,13 @@ export class CardComponent implements OnInit {
       icon: Icons.externalLink,
       text: 'Buy on TCGPlayer',
       classes: 'small width-12',
+      align: 'left',
     });
     this.buttonEbay = new Button({
       icon: Icons.externalLink,
       text: 'Buy on eBay',
       classes: 'small width-12',
+      align: 'left',
     });
   }
 
@@ -118,14 +121,30 @@ export class CardComponent implements OnInit {
     this.cardService.getCardObservable().subscribe((card) => {
       if (card) {
         this.titleService.setTitle(AppSettings.titlePrefix + card.name);
+        this.resetControls();
 
         // Data
         this.card = card;
 
+        // Related cards
         if (this.card.pokemon) {
           this.relatedCards.header.title = `${this.card.pokemon.variant.name} Cards`;
           this.relatedCards.header.titleRoute = this.card.pokemon.route;
           this.relatedCards.noResults = `No ${this.card.pokemon.variant.name} cards found`;
+        }
+
+        // Admin button
+        this.hasAdminAccess =
+          this.authenticationService.currentUserValue?.hasNovaAccess || false;
+        if (this.hasAdminAccess) {
+          this.buttonAdmin = new Button({
+            icon: Icons.signIn,
+            text: 'Edit in Admin',
+            classes: 'small width-12',
+            align: 'left',
+            target: '_blank',
+            href: this.card.nova_edit_url,
+          });
         }
 
         // Rarity
@@ -150,12 +169,10 @@ export class CardComponent implements OnInit {
           });
         }
 
+        // Card number
         this.tagNumber = new Tag({
-          text: this.card.getCardNumber(),
+          text: this.card.number,
         });
-
-        // Get related/expansion cards
-        //this.getRelatedCards();
 
         // Expansion name
         this.expansionCards.header.title = `${this.card.expansion.name} Cards`;
@@ -210,7 +227,8 @@ export class CardComponent implements OnInit {
       // Get card
       this.cardService.getCard(slug);
       // Get user cards
-      this.userCardsService.getCardUserCards(slug);
+      if (this.authenticationService.currentUserValue?.id)
+        this.userCardsService.getCardUserCards(slug);
     });
   }
 

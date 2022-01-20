@@ -79,19 +79,27 @@
                 </div>
               </div>
 
-              <div class="width-12" *ngIf="false">
+              <div class="width-12">
                 <div class="flex padded-small">
                   <!-- TCG Player -->
                   <div
                     class="width-12 medium-6 small-12"
-                    *ngIf="buttonTCGPlayer"
+                    *ngIf="buttonTCGPlayer && false"
                   >
                     <app-button [button]="buttonTCGPlayer"></app-button>
                   </div>
 
-                  <!-- TCG Player -->
-                  <div class="width-12 medium-6 small-12" *ngIf="buttonEbay">
+                  <!-- Ebay -->
+                  <div
+                    class="width-12 medium-6 small-12"
+                    *ngIf="buttonEbay && false"
+                  >
                     <app-button [button]="buttonEbay"></app-button>
+                  </div>
+
+                  <!-- Admin -->
+                  <div class="admin-access" *ngIf="hasAdminAccess">
+                    <app-button [button]="buttonAdmin"></app-button>
                   </div>
                 </div>
               </div>

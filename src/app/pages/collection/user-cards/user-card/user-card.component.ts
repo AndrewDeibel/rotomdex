@@ -36,6 +36,21 @@ export class UserCardComponent implements OnInit {
     this.buildControls();
   }
 
+  ngOnChanges(): void {
+    // Group
+    this.selectGroup = new Select({
+      classes: 'square small-round-right',
+      multiple: true,
+      options: this.userCardGroups?.map(
+        (userCardGroup) =>
+          new SelectOption({
+            text: userCardGroup.name,
+            value: userCardGroup.id?.toString(),
+          })
+      ),
+    });
+  }
+
   buildControls() {
     // Condition
     this.selectCondition = new Select({
@@ -134,19 +149,6 @@ export class UserCardComponent implements OnInit {
         })
       );
     }
-
-    // Group
-    this.selectGroup = new Select({
-      classes: 'square small-round-right',
-      multiple: true,
-      options: this.userCardGroups?.map(
-        (userCardGroup) =>
-          new SelectOption({
-            text: userCardGroup.name,
-            value: userCardGroup.id.toString(),
-          })
-      ),
-    });
 
     // Notes
     this.buttonNotes = new Button({

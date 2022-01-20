@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AlertType } from './../../controls/alert/alert';
 import { buildUrl } from '@app/models';
 import { Injectable } from '@angular/core';
@@ -20,7 +21,8 @@ export class AuthenticationService {
   constructor(
     private http: HttpClient,
     private notificationService: NotificationsService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private router: Router
   ) {
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
@@ -63,7 +65,7 @@ export class AuthenticationService {
     localStorage.removeItem('currentUser');
     if (this.currentUserSubject) {
       this.currentUserSubject?.next(null);
-      location.reload();
+      this.router.navigateByUrl('/');
     }
   }
 

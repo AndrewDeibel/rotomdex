@@ -48,11 +48,12 @@ export class Card {
   types: string[] = [];
   last_prices: CardLastPrices;
   user_cards: UserCard[] = [];
+  nova_edit_url: string;
 
   route: string;
   tempId: number;
 
-  getCardNumber(): string {
+  private getCardNumber(): string {
     // IS number
     if (!isNaN(+this.number)) {
       const x = `${this.number}`;
@@ -73,6 +74,7 @@ export class Card {
 
     // Route
     this.route = '/cards/' + this.slug;
+    this.number = this.getCardNumber();
 
     // Initalize expansion
     if (init?.expansion) this.expansion = new Expansion(init.expansion);

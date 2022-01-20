@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 // Third party
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -85,7 +86,7 @@ import {
 import {
   FooterComponent,
   HeaderComponent,
-  ProfileComponent,
+  ProfileMenuComponent,
   SearchComponent,
   ItemsComponent,
   ItemsHeaderComponent,
@@ -241,7 +242,6 @@ import {
   faUpload,
   faDownload,
 } from '@fortawesome/pro-duotone-svg-icons';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 @NgModule({
@@ -275,7 +275,7 @@ import { environment } from '../environments/environment';
     // ====================
     HeaderComponent,
     SearchComponent,
-    ProfileComponent,
+    ProfileMenuComponent,
     FooterComponent,
     ItemsComponent,
     ItemsHeaderComponent,
@@ -310,7 +310,7 @@ import { environment } from '../environments/environment';
     PokemonItemGridComponent,
     PokmeonItemListComponent,
     PokemonComponent,
-    ProfileComponent,
+    ProfileMenuComponent,
     UserCardComponent,
     UserCardsComponent,
     CollectionComponent,

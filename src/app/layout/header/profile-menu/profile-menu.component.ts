@@ -4,10 +4,10 @@ import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Icons } from '@app/models/icons';
 
 @Component({
-  selector: '[profile-name]',
-  templateUrl: './profile-name.component.html',
+  selector: '[profile-menu]',
+  templateUrl: './profile-menu.component.html',
 })
-export class ProfileComponent implements OnInit {
+export class ProfileMenuComponent implements OnInit {
   menu: Menu;
 
   constructor(private authenticationService: AuthenticationService) {}
@@ -40,6 +40,17 @@ export class ProfileComponent implements OnInit {
                   this.menu.clearActive();
                 },
               }),
+              ...(this.authenticationService.currentUserValue?.hasNovaAccess ||
+              true
+                ? [
+                    new MenuItem({
+                      text: 'Admin Login',
+                      icon: Icons.signIn,
+                      href: 'https://api.rotomdex.app/nova',
+                      target: '_blank',
+                    }),
+                  ]
+                : []),
               new MenuItem({
                 text: 'Sign Out',
                 icon: Icons.signOut,
