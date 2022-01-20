@@ -3,6 +3,7 @@ import { Button, Checkbox, Empty } from '@app/controls';
 import { APIGetPaged, Icons } from '@app/models';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { UserCardGroup, UserCardsService, UserCard } from '.';
+import { WishlistService } from '..';
 import { UserCardGroupService } from './../user-card-group/user-card-group.services';
 
 @Component({
@@ -24,7 +25,8 @@ export class UserCardsComponent implements OnInit {
   constructor(
     private userCardsService: UserCardsService,
     private userCardGroupService: UserCardGroupService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private wishlistService: WishlistService
   ) {}
 
   ngOnInit(): void {
@@ -81,6 +83,10 @@ export class UserCardsComponent implements OnInit {
     // Checkbox wish list
     this.checkboxWishlist = new Checkbox({
       text: 'Wishlist',
+      change: (checked) => {
+        if (checked) this.wishlistService.addWishlistCard(this.card_id);
+        else this.wishlistService.removeWishlistCard(this.card_id);
+      },
     });
   }
 

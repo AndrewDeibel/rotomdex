@@ -1,4 +1,11 @@
 <div class="checkbox" (click)="click($event)">
-	<input [id]="checkbox.id" type="checkbox" [checked]="value" />
-	<label [for]="checkbox.id" *ngIf="checkbox.text" class="label">{{checkbox.text}}</label>
+  <input
+    (change)="change($event)"
+    [id]="checkbox.id"
+    type="checkbox"
+    [checked]="value"
+  />
+  <label [for]="checkbox.id" *ngIf="checkbox.text" class="label">{{
+    checkbox.text
+  }}</label>
 </div>

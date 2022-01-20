@@ -36,11 +36,16 @@ export class CheckboxComponent implements ControlValueAccessor {
   get value() {
     return this.checkbox.checked;
   }
-  set value(_value) {
-    this.checkbox.checked = _value;
-    this.onChange(_value);
+  set value(checked) {
+    this.checkbox.checked = checked;
+    if (this.checkbox.change) this.checkbox.change(checked);
+    this.onChange(checked);
     this.onTouched();
   }
 
   @Input() checkbox: Checkbox = new Checkbox();
+
+  change(event?: any) {
+    this.value = event?.currentTarget?.checked;
+  }
 }

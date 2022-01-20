@@ -37,7 +37,7 @@ export class WishlistService {
   addWishlistCard(card_id: number) {
     this.loaderService.addItemLoading('addWishlistCard');
     this.http
-      .post<APIResponse>(buildUrl('wishlist/add'), {
+      .post<APIResponse>(buildUrl('wishlist/add-card'), {
         card_id,
       })
       .subscribe((res) => {
@@ -55,7 +55,7 @@ export class WishlistService {
   removeWishlistCard(card_id: number) {
     this.loaderService.addItemLoading('removeWishlistCard');
     this.http
-      .post<APIResponse>(buildUrl('wishlist/remove'), {
+      .post<APIResponse>(buildUrl('wishlist/remove-card'), {
         card_id,
       })
       .subscribe((res) => {
