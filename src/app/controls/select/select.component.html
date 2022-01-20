@@ -46,13 +46,15 @@
     <div class="search-options">
       <textbox [textbox]="textboxSearch"></textbox>
     </div>
-    <div
-      class="select-option"
-      *ngFor="let option of select.getUnselectedOptions()"
-      (click)="selectOption(option)"
-    >
-      <fa-icon *ngIf="option.icon" [icon]="option.icon"></fa-icon>
-      <span class="text">{{ option.text }}</span>
+    <div class="available-options-inner">
+      <div
+        class="select-option"
+        *ngFor="let option of select.getUnselectedOptions()"
+        (click)="selectOption(option)"
+      >
+        <fa-icon *ngIf="option.icon" [icon]="option.icon"></fa-icon>
+        <span class="text">{{ option.text }}</span>
+      </div>
     </div>
   </div>
   <fa-icon icon="caret-down"></fa-icon>

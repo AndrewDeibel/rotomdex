@@ -105,15 +105,18 @@ select {
     background: $main-bg;
     box-shadow: $shadow;
     border-radius: $border-radius;
-    overflow: scroll;
-    max-height: 300px;
     border: $border;
+    overflow: hidden;
     .select-option {
       padding: 8px 16px;
       background: $input-bg;
       &:hover {
         background: $primary-color;
       }
+    }
+    .available-options-inner {
+      overflow-y: auto;
+      max-height: 300px;
     }
   }
   .search-options {
@@ -135,10 +138,12 @@ select {
     }
     .text {
       flex: 1;
-      padding-left: 8px;
     }
     fa-icon {
       width: 16px;
+      + .text {
+        padding-left: 8px;
+      }
     }
   }
 }

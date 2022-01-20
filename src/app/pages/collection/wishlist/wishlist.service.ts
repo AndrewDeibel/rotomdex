@@ -5,10 +5,15 @@ import { LoaderService } from './../../../controls/loader/loader.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { AlertType, Notification, NotificationsService } from '@app/controls';
 
 @Injectable({ providedIn: 'root' })
 export class WishlistService {
-  constructor(private http: HttpClient, private loaderService: LoaderService) {}
+  constructor(
+    private http: HttpClient,
+    private loaderService: LoaderService,
+    private notificationService: NotificationsService
+  ) {}
 
   // Get wishlist cards
   private getWishlistCardsSubject = new BehaviorSubject<ResCards | null>(null);
@@ -41,7 +46,15 @@ export class WishlistService {
         card_id,
       })
       .subscribe((res) => {
-        if (res.success) this.addWishlistCardSubject.next(true);
+        if (res.success) {
+          this.addWishlistCardSubject.next(true);
+          this.notificationService.addNotifications([
+            new Notification({
+              message: 'Added to wishlist',
+              alertType: AlertType.success,
+            }),
+          ]);
+        }
         this.loaderService.clearItemLoading('addWishlistCard');
       });
   }
@@ -59,7 +72,15 @@ export class WishlistService {
         card_id,
       })
       .subscribe((res) => {
-        if (res.success) this.removeWishlistCardSubject.next(true);
+        if (res.success) {
+          this.removeWishlistCardSubject.next(true);
+          this.notificationService.addNotifications([
+            new Notification({
+              message: 'Removed from wishlist',
+              alertType: AlertType.success,
+            }),
+          ]);
+        }
         this.loaderService.clearItemLoading('removeWishlistCard');
       });
   }

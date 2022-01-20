@@ -48,6 +48,14 @@ export class UserCardComponent implements OnInit {
             value: userCardGroup.id?.toString(),
           })
       ),
+      change: (value) => {
+        this.updated.emit(
+          new UserCard({
+            ...this.item,
+            card_group_id: Number(value),
+          })
+        );
+      },
     });
   }
 
@@ -65,13 +73,13 @@ export class UserCardComponent implements OnInit {
         }),
       ],
       change: (value) => {
-        var test =
+        var condition =
           (Condition as any)[value.replace(' ', '')] ||
           (ConditionGraded as any)[value.replace(' ', '').replace('.', '')];
         this.updated.emit(
           new UserCard({
             ...this.item,
-            condition: test,
+            condition,
           })
         );
       },

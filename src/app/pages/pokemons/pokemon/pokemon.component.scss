@@ -112,12 +112,6 @@
   text-transform: capitalize;
 }
 
-.pokemon-dex {
-  @media (max-width: $screen-medium) {
-    width: 100%;
-  }
-}
-
 .pokemon-sprites {
   position: absolute;
   left: 80px;
