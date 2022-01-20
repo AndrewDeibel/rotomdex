@@ -63,6 +63,10 @@ export class FooterComponent implements OnInit {
           text: 'Facebook',
           symbol: Symbols.facebook,
         }),
+        new MenuItem({
+          text: 'Twitter',
+          symbol: Symbols.twitter,
+        }),
       ],
     });
   }

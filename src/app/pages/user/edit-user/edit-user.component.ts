@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -32,7 +33,8 @@ export class EditUserComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private location: Location
   ) {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigateByUrl('/');
@@ -62,7 +64,7 @@ export class EditUserComponent implements OnInit {
       advancedSelect: true,
       multiple: false,
       options: [],
-      label: 'Icon',
+      label: 'Avatar',
     });
     this.selectFavoritePokemon = new Select({
       advancedSelect: true,
@@ -76,15 +78,20 @@ export class EditUserComponent implements OnInit {
       textChecked: 'Public',
     });
     this.buttonSubmit = new Button({
-      text: 'Save Profile',
+      text: 'Save',
       type: ButtonType.submit,
     });
     this.buttonCancel = new Button({
       text: 'Cancel',
       classes: 'secondary',
+      click: () => {
+        this.location.back();
+      },
     });
     this.buttonChangePassword = new Button({
       text: 'Change Password',
+      label: 'Change Password',
+      classes: 'small-12',
       click: () => {
         this.dialogService.open(
           ChangePasswordDialogComponent,

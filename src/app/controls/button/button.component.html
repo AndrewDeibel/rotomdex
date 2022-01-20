@@ -1,3 +1,6 @@
+<label *ngIf="button.label" class="label">
+  {{ button.label }}
+</label>
 <button
   *ngIf="button && !button.href"
   class="button {{ button.classes }} {{ button.size }} {{ button.align }}"

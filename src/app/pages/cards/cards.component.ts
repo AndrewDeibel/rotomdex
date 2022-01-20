@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CardsService, ResCards } from './cards.service';
-import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { LoaderService } from '@app/controls';
-import { ItemGroup, Items } from '@app/layout/main';
-import { SetSortByCards } from './card/card';
+import { ActivatedRoute } from '@angular/router';
 import { AppSettings } from '@app/app';
 import '@app/helpers/string.extensions';
+import { ItemGroup, Items } from '@app/layout/main';
 import { APIGetPaged, Symbols } from '@app/models';
+import { SetSortByCards } from './card/card';
+import { CardsService, ResCards } from './cards.service';
 
 @Component({
   selector: 'cards',
@@ -25,8 +24,7 @@ export class CardsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private titleService: Title,
-    private cardsService: CardsService,
-    private loaderService: LoaderService
+    private cardsService: CardsService
   ) {}
 
   ngOnInit() {

@@ -20,6 +20,7 @@ export class Button {
   price: number;
   size: Size;
   align: string;
+  label: string;
 
   public click: () => void;
 
