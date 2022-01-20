@@ -6,10 +6,13 @@ import {
   DialogConfig,
   DialogService,
   Select,
+  SelectOption,
   Textbox,
   Toggle,
 } from '@app/controls';
 import { Button, ButtonType } from '@app/controls/button';
+import { APIGetPaged } from '@app/models';
+import { PokemonsService } from '@app/pages';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { ChangePasswordDialogComponent } from './change-password-dialog.component';
 
@@ -34,7 +37,8 @@ export class EditUserComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private dialogService: DialogService,
-    private location: Location
+    private location: Location,
+    private pokemonsService: PokemonsService
   ) {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigateByUrl('/');
@@ -42,6 +46,19 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setupControls();
+    this.setupSubscriptions();
+    this.pokemonsService.getPokemonVariants(
+      new APIGetPaged({
+        page: 1,
+        page_size: 24,
+        sort_by: 'pokemon.order',
+        sort_direction: 'asc',
+      })
+    );
+  }
+
+  setupControls() {
     this.form = this.formBuilder.group({
       emailControl: [''],
       usernameControl: [''],
@@ -100,6 +117,21 @@ export class EditUserComponent implements OnInit {
           })
         );
       },
+    });
+  }
+
+  setupSubscriptions() {
+    this.pokemonsService.getPokemonVariantsObservable().subscribe((res) => {
+      if (res) {
+        this.selectFavoritePokemon.options =
+          res.pokemon_variants?.map(
+            (pokemonVariant) =>
+              new SelectOption({
+                text: pokemonVariant.name,
+                value: pokemonVariant.id.toString(),
+              })
+          ) || [];
+      }
     });
   }
 

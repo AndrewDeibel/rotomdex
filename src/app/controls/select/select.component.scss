@@ -105,7 +105,7 @@ select {
     background: $main-bg;
     box-shadow: $shadow;
     border-radius: $border-radius;
-    overflow: hidden;
+    overflow: scroll;
     max-height: 300px;
     border: $border;
     .select-option {

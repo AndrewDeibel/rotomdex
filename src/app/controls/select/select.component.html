@@ -51,7 +51,7 @@
       *ngFor="let option of select.getUnselectedOptions()"
       (click)="selectOption(option)"
     >
-      <fa-icon [icon]="option.icon"></fa-icon>
+      <fa-icon *ngIf="option.icon" [icon]="option.icon"></fa-icon>
       <span class="text">{{ option.text }}</span>
     </div>
   </div>

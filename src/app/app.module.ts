@@ -86,7 +86,7 @@ import {
 import {
   FooterComponent,
   HeaderComponent,
-  ProfileMenuComponent,
+  UserMenuComponent,
   SearchComponent,
   ItemsComponent,
   ItemsHeaderComponent,
@@ -275,7 +275,7 @@ import { environment } from '../environments/environment';
     // ====================
     HeaderComponent,
     SearchComponent,
-    ProfileMenuComponent,
+    UserMenuComponent,
     FooterComponent,
     ItemsComponent,
     ItemsHeaderComponent,
@@ -310,7 +310,7 @@ import { environment } from '../environments/environment';
     PokemonItemGridComponent,
     PokmeonItemListComponent,
     PokemonComponent,
-    ProfileMenuComponent,
+    UserMenuComponent,
     UserCardComponent,
     UserCardsComponent,
     CollectionComponent,

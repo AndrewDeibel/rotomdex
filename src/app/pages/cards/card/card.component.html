@@ -149,7 +149,11 @@
   <div class="relative z-1">
     <!-- User Cards -->
     <div *ngIf="userCards">
-      <user-cards [card_id]="card.id" [userCards]="userCards"> </user-cards>
+      <user-cards
+        [card_id]="card.id"
+        [userCards]="userCards"
+        [on_wishlist]="card.on_wishlist"
+      ></user-cards>
     </div>
 
     <!-- Related -->

@@ -49,6 +49,7 @@ export class Card {
   last_prices: CardLastPrices;
   user_cards: UserCard[] = [];
   nova_edit_url: string;
+  on_wishlist: boolean;
 
   route: string;
   tempId: number;

@@ -4,10 +4,10 @@ import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Icons } from '@app/models/icons';
 
 @Component({
-  selector: '[profile-menu]',
-  templateUrl: './profile-menu.component.html',
+  selector: '[user-menu]',
+  templateUrl: './user-menu.component.html',
 })
-export class ProfileMenuComponent implements OnInit {
+export class UserMenuComponent implements OnInit {
   menu: Menu;
 
   constructor(private authenticationService: AuthenticationService) {}

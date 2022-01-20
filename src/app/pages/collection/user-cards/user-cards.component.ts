@@ -13,6 +13,7 @@ import { UserCardGroupService } from './../user-card-group/user-card-group.servi
 })
 export class UserCardsComponent implements OnInit {
   @Input() card_id: number;
+  @Input() on_wishlist: boolean;
   @Input() userCards: UserCard[] = [];
   buttonAdd: Button;
   checkboxWishlist: Checkbox;
@@ -28,6 +29,10 @@ export class UserCardsComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private wishlistService: WishlistService
   ) {}
+
+  ngOnChange() {
+    this.setupControls();
+  }
 
   ngOnInit(): void {
     this.setupControls();
@@ -82,6 +87,7 @@ export class UserCardsComponent implements OnInit {
 
     // Checkbox wish list
     this.checkboxWishlist = new Checkbox({
+      checked: this.on_wishlist,
       text: 'Wishlist',
       change: (checked) => {
         if (checked) this.wishlistService.addWishlistCard(this.card_id);
