@@ -1,3 +1,4 @@
+import { Router, RouterStateSnapshot } from '@angular/router';
 import {
   Component,
   HostListener,
@@ -28,7 +29,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -38,8 +40,12 @@ export class HeaderComponent implements OnInit {
       items: [
         new MenuItem({
           icon: Icons.signIn,
-          route: 'signin',
           text: 'Sign In',
+          click: () => {
+            this.router.navigate(['/signin'], {
+              queryParams: { returnUrl: this.router.routerState.snapshot.url },
+            });
+          },
         }),
       ],
     });

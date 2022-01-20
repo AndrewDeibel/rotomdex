@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NotificationsService } from '@app/controls';
 import { Button, ButtonType } from '@app/controls/button';
 import { Checkbox } from '@app/controls/checkbox';
 import { Textbox } from '@app/controls/textbox/textbox';
@@ -21,7 +20,6 @@ export class SignInComponent implements OnInit {
   buttonSubmit: Button;
 
   constructor(
-    private notificationService: NotificationsService,
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
