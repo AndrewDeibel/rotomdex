@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
     this.alert = new Alert({
       type: AlertType.warning,
       message:
-        '<b>Under Development:</b> Please note that Rotom Dex is still under development, you should expect to find some issues.',
+        '<b>Under Development:</b> Please note that Rotomdex is still under development, you should expect to find some issues.',
     });
 
     // Featured

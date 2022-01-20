@@ -1,53 +1,61 @@
 @import "settings";
 
 .hero {
-	height: 80vh;
-	max-height: 650px;
-	background-size: cover;
-	background-position: top center;
-	padding-top: $header-height;
-	color: white;
-	position: relative;
-	margin-top: -($header-height + 58px);
-	@media (max-width: $screen-medium) {
-		padding-top: 150px;
-	}
-	.hero-content {
-		z-index: 3;
-		position: relative;
-		filter: drop-shadow($shadow);
-	}
-	.logo {
-		margin-bottom: 32px;
-		h1 {
-			color: white;
-			margin-bottom: 8px;
-		}
-		h5 {
-			color: white;
-			font-weight: normal;
-			margin-top: 0;
-		}
-	}
-	.hero-overlay {
-		z-index: 1;
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		pointer-events: none;
-		background: linear-gradient(rgba(black, 0.9) 0%, rgba(black, 0.25) 50%);
-	}
-	&:after {
-		content: "";
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 128px;
-		background: linear-gradient(transparent 0%, $main-bg 100%);
-		z-index: 2;
-		pointer-events: none;
-	}
+  height: 80vh;
+  max-height: 650px;
+  padding-top: $header-height;
+  color: white;
+  position: relative;
+  margin-top: -($header-height + 58px);
+  @media (max-width: $screen-medium) {
+    padding-top: 150px;
+  }
+  .hero-content {
+    z-index: 3;
+    position: relative;
+    filter: drop-shadow($shadow);
+  }
+  .hero-bg {
+    position: absolute;
+    background-size: cover;
+    background-position: top center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.6;
+  }
+  .logo {
+    margin-bottom: 32px;
+    h1 {
+      color: white;
+      margin-bottom: 8px;
+    }
+    h5 {
+      color: white;
+      font-weight: normal;
+      margin-top: 0;
+    }
+  }
+  .hero-overlay {
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    pointer-events: none;
+    background: linear-gradient(rgba(black, 0.9) 0%, rgba(black, 0.25) 50%);
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 128px;
+    background: linear-gradient(transparent 0%, $main-bg 100%);
+    z-index: 2;
+    pointer-events: none;
+  }
 }
