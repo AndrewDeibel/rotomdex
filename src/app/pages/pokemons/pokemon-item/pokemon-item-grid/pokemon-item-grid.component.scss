@@ -1,123 +1,122 @@
 @import "settings", "custom";
 
 :host {
-	width: 100%;
+  width: 100%;
 }
 
 .item-grid-pokemon {
-	border-radius: $border-radius-small;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	transition: $transition;
-	position: relative;
-	overflow: hidden;
-	&:after {
-		content: "";
-		border-radius: $border-radius-small;
-		width: 100%;
-		height: 100%;
-		box-shadow: $shadow-sheen;
-		z-index: 10;
-		position: absolute;
-		border: $border;
-	}
-	&.small {
-		min-width: 140px;
-		.pokemon-image-wrapper {
-			.pokemon-image {
-				margin-top: 0;
-				margin-bottom: 0;
-				height: 80px;
-				width: 80px;
-				padding: $spacing;
-			}
-			.pokemon-image-placeholder {
-				padding: 0 !important;
-				height: 32px !important;
-				width: 32px !important;
-				margin-top: $spacing * 3;
-				margin-bottom: $spacing * 3;
-			}
-		}
-		.pokemon-types {
-			display: none !important;
-		}
-	}
-	&:hover {
-		border-color: $primary-color;
-		box-shadow: $shadow-focus;
-		&:after {
-			border-color: $primary-color;
-		}
-	}
-	.pokemon-image-wrapper {
-		display: block;
-		z-index: 2;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		overflow: hidden;
-		position: relative;
-		.pokemon-image,
-		.pokemon-image-placeholder {
-			filter: drop-shadow($shadow);
-			margin: auto;
-			z-index: 2;
-			position: relative;
-			margin-top: $spacing * 2;
-			margin-bottom: $spacing * 2;
-			height: 96px;
-			width: 96px;
-		}
-		.pokemon-image-placeholder {
-			color: white;
-			padding: $spacing * 2;
-			fa-icon {
-				height: 100%;
-			}
-		}
-		@each $type, $color in $poke-types {
-			&.#{$type} {
-				background: linear-gradient(
-					to right,
-					$color,
-					lighten($color, 10%)
-				);
-			}
-		}
-		.pokemon-number {
-			padding: $spacing;
-			color: white;
-			font-weight: bold;
-			font-size: 14px;
-			text-shadow: $text-shadow;
-			position: absolute;
-			top: 0;
-			left: 0;
-		}
+  border-radius: $border-radius-small;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: $transition;
+  position: relative;
+  overflow: hidden;
+  &:after {
+    content: "";
+    border-radius: $border-radius-small;
+    width: 100%;
+    height: 100%;
+    box-shadow: $shadow-sheen;
+    z-index: 10;
+    position: absolute;
+    border: $border;
+  }
+  &.small {
+    min-width: 140px;
+    .pokemon-image-wrapper {
+      .pokemon-image {
+        margin-top: 0;
+        margin-bottom: 0;
+        height: 80px;
+        width: 80px;
+        padding: $spacing;
+      }
+      .pokemon-image-placeholder {
+        padding: 0 !important;
+        height: 32px !important;
+        width: 32px !important;
+        margin-top: $spacing * 3;
+        margin-bottom: $spacing * 3;
+      }
+      .bg-type {
+        width: 100px;
+      }
+    }
+    .pokemon-types {
+      display: none !important;
+    }
+  }
+  &:hover {
+    border-color: $primary-color;
+    box-shadow: $shadow-focus;
+    &:after {
+      border-color: $primary-color;
+    }
+  }
+  .pokemon-image-wrapper {
+    display: block;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    .pokemon-image,
+    .pokemon-image-placeholder {
+      filter: drop-shadow($shadow);
+      margin: auto;
+      z-index: 2;
+      position: relative;
+      margin-top: $spacing * 2;
+      margin-bottom: $spacing * 2;
+      height: 96px;
+      width: 96px;
+    }
+    .pokemon-image-placeholder {
+      color: white;
+      padding: $spacing * 2;
+      fa-icon {
+        height: 100%;
+      }
+    }
+    @each $type, $color in $poke-types {
+      &.#{$type} {
+        background: linear-gradient(to right, $color, lighten($color, 10%));
+      }
+    }
+    .pokemon-number {
+      padding: $spacing;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      text-shadow: $text-shadow;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
 
-		.bg-type {
-			position: absolute;
-			left: 50%;
-			top: 50%;
-			transform: translate(-50%, -50%);
-			width: 180px;
-			opacity: 0.15;
-			z-index: 1;
-		}
-		.pokemon-types {
-			display: flex;
-			flex-wrap: nowrap;
-			padding: $spacing;
-			z-index: 2;
-		}
-	}
-	.pokemon-info {
-		padding: $spacing;
-		background: $main-bg;
-		width: 100%;
-		color: white;
-	}
+    .bg-type {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 180px;
+      opacity: 0.15;
+      z-index: 1;
+    }
+    .pokemon-types {
+      display: flex;
+      flex-wrap: nowrap;
+      padding: $spacing;
+      z-index: 2;
+    }
+  }
+  .pokemon-info {
+    padding: $spacing;
+    background: $main-bg;
+    width: 100%;
+    color: white;
+  }
 }

@@ -82,32 +82,36 @@ export class PokemonComponent implements OnInit {
 
           // Height/weight
           this.tagHeight = new Tag({
-            text: this.pokemonVariant.height / 10 + ' m',
+            text: this.pokemonVariant.height / 10 + 'm',
           });
           this.tagWeight = new Tag({
             text: this.pokemonVariant.weight / 10 + 'kg',
           });
 
           // Variants
-          this.selectVariants.optionGroups = [
-            new SelectOptionGroup({
-              label: 'Variants',
-              options: [
-                new SelectOption({
-                  text: this.pokemonVariant.name,
-                  value: this.pokemonVariant.route,
-                }),
-                ...this.pokemonVariant.other_variants.map(
-                  (variant) =>
-                    new SelectOption({
-                      text: variant.name,
-                      value: variant.route,
-                    })
-                ),
-              ],
-            }),
-          ];
-          this.selectVariants.value = this.pokemonVariant.route;
+          if (this.pokemonVariant.other_variants.length) {
+            this.selectVariants.optionGroups = [
+              new SelectOptionGroup({
+                label: 'Variants',
+                options: [
+                  new SelectOption({
+                    text: this.pokemonVariant.name,
+                    value: this.pokemonVariant.route,
+                  }),
+                  ...this.pokemonVariant.other_variants.map(
+                    (variant) =>
+                      new SelectOption({
+                        text: variant.name,
+                        value: variant.route,
+                      })
+                  ),
+                ],
+              }),
+            ];
+            this.selectVariants.value = this.pokemonVariant.route;
+          } else {
+            this.selectVariants.optionGroups = [];
+          }
         }
       });
 

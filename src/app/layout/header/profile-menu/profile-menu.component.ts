@@ -20,7 +20,6 @@ export class ProfileMenuComponent implements OnInit {
       items: [
         new MenuItem({
           text: this.authenticationService.currentUserValue?.name,
-          icon: Icons.user,
           menu: new Menu({
             classes: 'anchor-right',
             items: [

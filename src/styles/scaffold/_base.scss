@@ -204,6 +204,9 @@ img {
     opacity: 1;
   }
 }
+.dialog-overlay {
+  position: fixed;
+}
 
 .hidden {
   visibility: hidden !important;

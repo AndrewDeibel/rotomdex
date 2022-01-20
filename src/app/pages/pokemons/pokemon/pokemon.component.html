@@ -31,7 +31,7 @@
       <fa-icon icon="question"></fa-icon>
     </div>
 
-    <!-- Pokeball -->
+    <!-- Type bg -->
     <img
       class="bg-type"
       src="https://duiker101.github.io/pokemon-type-svg-icons/icons/{{
@@ -41,7 +41,10 @@
 
     <progress-bar [progressBar]="progressBar"> </progress-bar>
 
-    <app-select [select]="selectVariants"></app-select>
+    <app-select
+      *ngIf="pokemonVariant.other_variants.length"
+      [select]="selectVariants"
+    ></app-select>
 
     <!-- Evolutions -->
     <div
