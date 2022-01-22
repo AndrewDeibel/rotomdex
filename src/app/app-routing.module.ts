@@ -20,6 +20,7 @@ import {
   ResetComponent,
   EditUserComponent,
   ImportCardsComponent,
+  VerifyComponent,
 } from '@app/pages';
 
 const routes: Routes = [
@@ -119,6 +120,14 @@ const routes: Routes = [
   {
     path: 'reset/:token',
     component: ResetComponent,
+  },
+  {
+    path: 'verify',
+    component: VerifyComponent,
+  },
+  {
+    path: 'verify/:token',
+    component: VerifyComponent,
   },
 
   // Edit profile

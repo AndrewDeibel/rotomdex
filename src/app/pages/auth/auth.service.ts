@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { AlertType } from './../../controls/alert/alert';
 import { buildUrl } from '@app/models';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '@app/pages/user/user';
@@ -14,6 +14,8 @@ import {
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
+  // Current user
+  // ====================
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   currentUserObservable() {
     return this.currentUserSubject.asObservable();
@@ -26,30 +28,31 @@ export class AuthenticationService {
   ) {
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
-      this.currentUserSubject = new BehaviorSubject<User | null>(
-        new User(JSON.parse(currentUser))
-      );
+      this.currentUserSubject.next(new User(JSON.parse(currentUser)));
     }
   }
-
   public get currentUserValue(): User | null {
     return this.currentUserSubject?.value;
   }
+  public set currentUserValue(user: User | null) {
+    if (user) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      this.currentUserSubject.next(user);
+    }
+  }
 
+  // Login
+  // ====================
   login(email: string, password: string) {
     this.loaderService.addItemLoading('login');
     return this.http
       .post<any>(buildUrl('login'), { email, password })
       .subscribe((res) => {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        const user: User = new User({
+        this.currentUserValue = new User({
           ...res.data.user,
           token: res.data.token,
           expires_at: res.data.expires_at,
         });
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
-        // success notification
         this.notificationService.addNotifications([
           new Notification({
             alertType: AlertType.success,
@@ -60,6 +63,8 @@ export class AuthenticationService {
       });
   }
 
+  // Logout
+  // ====================
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
@@ -69,6 +74,8 @@ export class AuthenticationService {
     }
   }
 
+  // Register
+  // ====================
   register(
     email: string,
     username: string,
@@ -96,12 +103,16 @@ export class AuthenticationService {
       );
   }
 
+  // Forgot
+  // ====================
   forgot(email: string) {
     return this.http.post<any>(buildUrl('forgot-password'), {
       email,
     });
   }
 
+  // Reset
+  // ====================
   reset(
     token: string,
     email: string,
@@ -114,5 +125,13 @@ export class AuthenticationService {
       password,
       password_confirmation,
     });
+  }
+
+  // Verify
+  // ====================
+  verify(token: string = '') {
+    let query = new HttpParams();
+    if (token && token.length) query = query.set('code', token);
+    return this.http.get<any>(buildUrl('verify', query.toString()));
   }
 }

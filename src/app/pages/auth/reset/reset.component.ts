@@ -22,7 +22,7 @@ export class ResetComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private notificationService: NotificationsService
   ) {
     if (this.authenticationService.currentUserValue) {
@@ -31,8 +31,8 @@ export class ResetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Get query params
-    this.route.params.subscribe((params) => {
+    // Get token
+    this.activatedRoute.params.subscribe((params) => {
       this.token = params['token'];
     });
 

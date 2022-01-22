@@ -1,0 +1,21 @@
+<div class="padding-y-8 flex vertical flex-center">
+  <div
+    *ngIf="showResend"
+    class="flex vertical padded-2 max-100"
+    style="width: 400px"
+  >
+    <div>
+      <h1>Verify Email</h1>
+    </div>
+    <div>
+      <p>
+        In order to use your Rotomdex account you must first verify your email
+        address. Please check your inbox/spam, or click the button below if you
+        need to resend the verification email.
+      </p>
+    </div>
+    <div>
+      <app-button [button]="buttonResend"></app-button>
+    </div>
+  </div>
+</div>

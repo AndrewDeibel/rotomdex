@@ -21,9 +21,8 @@ export class ForgotComponent implements OnInit {
     private formBuilder: FormBuilder,
     private notificationService: NotificationsService
   ) {
-    if (this.authenticationService.currentUserValue) {
+    if (this.authenticationService.currentUserValue)
       this.router.navigateByUrl('/');
-    }
   }
 
   ngOnInit(): void {
