@@ -57,7 +57,7 @@ export class Card {
 
   private getCardNumber(): string {
     // IS number
-    if (!isNaN(+this.number)) {
+    if (!isNaN(+this.number) && this.expansion) {
       const x = `${this.number}`;
       const y = `${this.expansion.total_cards}`;
       const pad = '000';

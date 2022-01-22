@@ -45,7 +45,7 @@ export class ScannerService {
       .post<APIResponse>(buildUrl('scanner/detect'), params)
       .subscribe((res) => {
         if (res.success) {
-          const card = new Card(res.data.card);
+          const card = new Card(res.data.card.card);
           if (card.id > 0) {
             this.scanCardSubject.next(card);
           }

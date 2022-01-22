@@ -316,6 +316,7 @@ import { environment } from '../environments/environment';
     CollectionComponent,
     ScannerComponent,
     ScannerListsComponent,
+    ScannerListComponent,
     ImportCardsComponent,
     WishlistComponent,
 
