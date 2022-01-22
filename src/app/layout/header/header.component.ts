@@ -89,29 +89,26 @@ export class HeaderComponent implements OnInit {
           this.menu.clearActive();
         },
       }),
-      // new MenuItem({
-      // 	text: "Collection",
-      // 	route: "collection",
-      // 	click: () => {
-      // 		this.menu.clearActive();
-      // 	}
-      // }),
-      // new MenuItem({
-      // 	icon: Icons.scanner,
-      // 	text: 'Scanner',
-      // 	route: 'scanner',
-      // 	click: () => {
-      // 		this.menu.clearActive();
-      // 	},
-      // }),
-      new MenuItem({
-        icon: Icons.archive,
-        text: 'Collection',
-        route: 'collection',
-        click: () => {
-          this.menu.clearActive();
-        },
-      })
+      ...(this.authenticationService.currentUserValue
+        ? [
+            new MenuItem({
+              icon: Icons.scanner,
+              text: 'Scanner',
+              route: 'scanner',
+              click: () => {
+                this.menu.clearActive();
+              },
+            }),
+            new MenuItem({
+              icon: Icons.archive,
+              text: 'Collection',
+              route: 'collection',
+              click: () => {
+                this.menu.clearActive();
+              },
+            }),
+          ]
+        : [])
     );
   }
 

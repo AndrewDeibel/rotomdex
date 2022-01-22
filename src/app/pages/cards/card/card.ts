@@ -23,6 +23,7 @@ export class Attack {
 
 export class Card {
   id: number;
+  card_id: number;
   name: string;
   slug: string;
   pokemon: Pokemon;
@@ -76,6 +77,9 @@ export class Card {
     // Route
     this.route = '/cards/' + this.slug;
     this.number = this.getCardNumber();
+
+    // ID
+    if (init?.card_id) this.id = init.card_id;
 
     // Initalize expansion
     if (init?.expansion) this.expansion = new Expansion(init.expansion);
