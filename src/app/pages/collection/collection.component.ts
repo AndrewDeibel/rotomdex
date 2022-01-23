@@ -85,30 +85,43 @@ export class CollectionComponent implements OnInit {
         }
       }
     });
-    this.userCardGroupService
-      .getUserCardGroupsObservable()
-      .subscribe((res: ResUserCardGroups | null) => {
-        if (res) {
-          this.menuSidebar.items.push(
-            new MenuItem({
-              separator: true,
+    this.userCardGroupService.getUserCardGroupsObservable().subscribe((res) => {
+      if (res) {
+        this.menuSidebar.items.push(
+          new MenuItem({
+            separator: true,
+          }),
+          ...res.user_card_groups.map(
+            (item: UserCardGroup) =>
+              new MenuItem({
+                text: item.name,
+                route: `/collection/group/${item.id}`,
+              })
+          ),
+          new MenuItem({
+            text: 'Add Group',
+            icon: Icons.plus,
+            route: '/collection/add',
+            exactMatch: true,
+          })
+        );
+      }
+    });
+    this.userCardGroupService.getUserCardGroupObservable().subscribe((res) => {
+      if (res) {
+        this.groupItems.footer.totalPages = res.total_pages;
+        this.groupItems.footer.totalItems = res.total_results;
+        if (res.cards && res.cards.length) {
+          this.groupItems.itemGroups = [
+            new ItemGroup({
+              items: res.cards,
             }),
-            ...res.user_card_groups.map(
-              (item: UserCardGroup) =>
-                new MenuItem({
-                  text: item.name,
-                  route: `/collection/group/${item.id}`,
-                })
-            ),
-            new MenuItem({
-              text: 'Add Group',
-              icon: Icons.plus,
-              route: '/collection/add',
-              exactMatch: true,
-            })
-          );
+          ];
+        } else {
+          this.groupItems.itemGroups = [];
         }
-      });
+      }
+    });
   }
 
   setupControls() {
@@ -166,7 +179,9 @@ export class CollectionComponent implements OnInit {
     );
   }
 
-  getUserCardGroupCards() {}
+  getUserCardGroupCards() {
+    this.userCardGroupService.getUserCardGroup(this.id);
+  }
 
   getUserCards() {
     this.userCardsService.getUserCards(

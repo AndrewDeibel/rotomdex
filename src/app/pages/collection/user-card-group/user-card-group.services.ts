@@ -8,6 +8,7 @@ import {
 import { APIGetPaged, APIResponse, buildUrl } from '@app/models';
 import { BehaviorSubject } from 'rxjs';
 import { UserCardGroup } from '@app/pages/collection';
+import { ResCards } from '@app/pages';
 
 export interface ResUserCardGroups {
   total_results: number;
@@ -45,7 +46,24 @@ export class UserCardGroupService {
       });
   }
 
-  // Add user card groups
+  // Get user card group
+  private getUserCardGroupSubject = new BehaviorSubject<ResCards | null>(null);
+  getUserCardGroupObservable() {
+    this.getUserCardGroupSubject = new BehaviorSubject<ResCards | null>(null);
+    return this.getUserCardGroupSubject.asObservable();
+  }
+  getUserCardGroup(id: number) {
+    this.http
+      .get<APIResponse>(buildUrl(`card-groups/${id}`))
+      .subscribe((res) => {
+        // this.getUserCardGroupSubject.next({
+        //   cards: res.data.cards.map((card) => new Card(card)),
+        //   total_pages: res.c
+        // });
+      });
+  }
+
+  // Add user card group
   private addUserCardGroupSubject = new BehaviorSubject<UserCardGroup | null>(
     null
   );
