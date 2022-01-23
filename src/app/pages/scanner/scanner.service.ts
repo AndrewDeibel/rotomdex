@@ -3,21 +3,13 @@ import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { APIResponse, buildUrl } from '@app/models';
 import { ScannerList, Card } from '@app/pages';
-import { NotificationsService, Notification, AlertType } from '@app/controls';
-
-export enum ScanType {
-  scan = 'scan',
-  multiple = 'scan_multiple',
-  snapshot = 'snapshot',
-}
-
-export interface GetScanCardParams {
-  image: string;
-}
-
-export interface GetScanCardsParams {
-  image: string;
-}
+import {
+  NotificationsService,
+  Notification,
+  AlertType,
+  defaultDuration,
+  LoaderService,
+} from '@app/controls';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +17,8 @@ export interface GetScanCardsParams {
 export class ScannerService {
   constructor(
     private http: HttpClient,
-    private notificationService: NotificationsService
+    private notificationService: NotificationsService,
+    private loaderService: LoaderService
   ) {}
 
   // TempId
@@ -35,44 +28,31 @@ export class ScannerService {
   }
 
   // Scan single card
-  private scanCardSubject = new BehaviorSubject<Card | null>(null);
-  getScanCardObservable() {
-    this.scanCardSubject = new BehaviorSubject<Card | null>(null);
-    return this.scanCardSubject.asObservable();
+  private scanSubject = new BehaviorSubject<Card | null>(null);
+  scanObservable() {
+    this.scanSubject = new BehaviorSubject<Card | null>(null);
+    return this.scanSubject.asObservable();
   }
-  getScanCard(params: GetScanCardParams) {
+  scan(image: string) {
+    this.loaderService.addItemLoading('scan');
     this.http
-      .post<APIResponse>(buildUrl('scanner/detect'), params)
+      .post<APIResponse>(buildUrl('scanner/detect'), { image })
       .subscribe((res) => {
+        this.loaderService.clearItemLoading('scan');
         if (res.success) {
           const card = new Card(res.data.card.card);
           if (card.id > 0) {
-            this.scanCardSubject.next(card);
+            this.scanSubject.next(card);
           }
         } else {
-          this.scanCardSubject.next(null);
-        }
-      });
-  }
-
-  // Scan mutiple cards
-  private scanCardsSubject = new BehaviorSubject<Card[]>([]);
-  getScanCardsObservable() {
-    this.scanCardsSubject = new BehaviorSubject<Card[]>([]);
-    return this.scanCardsSubject.asObservable();
-  }
-  getScanCards(params: GetScanCardsParams) {
-    this.http
-      .post<APIResponse>(buildUrl('scanner/multiple'), params)
-      .subscribe((res) => {
-        if (res.success && res.data.length > 0) {
-          this.scanCardsSubject.next(
-            res.data
-              .map((card: any) => new Card(card))
-              .filter((card: Card) => card.id > 0)
-          );
-        } else {
-          this.scanCardsSubject.next([]);
+          this.notificationService.addNotifications([
+            new Notification({
+              message: res.data,
+              alertType: AlertType.error,
+              duration: defaultDuration,
+            }),
+          ]);
+          this.scanSubject.next(null);
         }
       });
   }

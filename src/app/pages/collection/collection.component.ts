@@ -1,3 +1,7 @@
+import {
+  UserCardGroupService,
+  ResUserCardGroups,
+} from './user-card-group/user-card-group.services';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Menu, MenuItem, ProgressBar } from '@app/controls';
@@ -20,6 +24,7 @@ export class CollectionComponent implements OnInit {
 
   constructor(
     private userCardsService: UserCardsService,
+    private userCardGroupService: UserCardGroupService,
     private authenticationService: AuthenticationService,
     private router: Router
   ) {
@@ -28,15 +33,26 @@ export class CollectionComponent implements OnInit {
     }
   }
 
-  showDashboard = () => window.location.pathname === '/collection/dashboard';
-  showImport = () => window.location.pathname === '/collection/import';
-  showWishlist = () => window.location.pathname === '/collection/wishlist';
-  showAll = () => window.location.pathname === '/collection';
-  showAddGroup = () => window.location.pathname === '/collection/add';
+  showDashboard: boolean;
+  showImport: boolean;
+  showWishlist: boolean;
+  showAll: boolean;
+  showAddGroup: boolean;
 
   ngOnInit() {
+    this.showHideTabs();
     this.setupSubscriptions();
     this.setupControls();
+    this.getUserCardGroups();
+  }
+
+  showHideTabs() {
+    // TODO: move this logic to child routes
+    this.showDashboard = window.location.pathname === '/collection/dashboard';
+    this.showImport = window.location.pathname === '/collection/import';
+    this.showWishlist = window.location.pathname === '/collection/wishlist';
+    this.showAll = window.location.pathname === '/collection';
+    this.showAddGroup = window.location.pathname === '/collection/add';
   }
 
   setupSubscriptions() {
@@ -55,6 +71,29 @@ export class CollectionComponent implements OnInit {
         }
       }
     });
+    this.userCardGroupService
+      .getUserCardGroupsObservable()
+      .subscribe((res: ResUserCardGroups | null) => {
+        if (res) {
+          this.menuSidebar.items.push(
+            new MenuItem({
+              separator: true,
+            }),
+            ...res.user_card_groups.map(
+              (item: any) =>
+                new MenuItem({
+                  text: item.name,
+                })
+            ),
+            new MenuItem({
+              text: 'Add Group',
+              icon: Icons.plus,
+              route: '/collection/add',
+              exactMatch: true,
+            })
+          );
+        }
+      });
   }
 
   setupControls() {
@@ -93,26 +132,20 @@ export class CollectionComponent implements OnInit {
           route: '/collection',
           exactMatch: true,
         }),
-        new MenuItem({
-          separator: true,
-        }),
-        new MenuItem({
-          text: 'Example Binder 1',
-          icon: Icons.archive,
-          route: '/collection/123',
-          exactMatch: true,
-        }),
-        new MenuItem({
-          text: 'Add Group',
-          icon: Icons.plus,
-          route: '/collection/add',
-          exactMatch: true,
-        }),
       ],
     });
   }
 
-  getCollectionCards() {
+  getUserCardGroups() {
+    this.userCardGroupService.getUserCardGroups(
+      new APIGetPaged({
+        page: 1,
+        page_size: 100,
+      })
+    );
+  }
+
+  getUserCards() {
     this.userCardsService.getUserCards(
       new APIGetPaged({
         page: this.items.footer.page,

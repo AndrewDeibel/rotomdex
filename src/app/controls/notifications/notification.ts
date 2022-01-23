@@ -2,6 +2,8 @@ import { Icons } from '@app/models/icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { AlertType } from '../alert/alert';
 
+export const defaultDuration = 3500;
+
 export class Notification {
   id: number;
   message: string;
@@ -18,7 +20,6 @@ export class Notification {
   }
 
   setupDefaults() {
-    const defaultDuration = 3500;
     switch (this.alertType) {
       case AlertType.success: {
         if (!this.duration) {

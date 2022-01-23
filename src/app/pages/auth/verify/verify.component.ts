@@ -1,5 +1,5 @@
 import { AuthenticationService } from './../auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {
   AlertType,
@@ -22,7 +22,8 @@ export class VerifyComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private authenticationService: AuthenticationService,
-    private notificationService: NotificationsService
+    private notificationService: NotificationsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +60,7 @@ export class VerifyComponent implements OnInit {
                 alertType: AlertType.success,
               }),
             ]);
+            this.router.navigateByUrl('/');
           }
         });
       }

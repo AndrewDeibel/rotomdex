@@ -4,27 +4,27 @@
   </div>
   <div class="box small-12">
     <!-- Dashboard -->
-    <div *ngIf="showDashboard()">
+    <div *ngIf="showDashboard">
       <collection-dashboard></collection-dashboard>
     </div>
 
     <!-- Import -->
-    <div *ngIf="showImport()">
+    <div *ngIf="showImport">
       <import-cards></import-cards>
     </div>
 
     <!-- Wishlist -->
-    <div *ngIf="showWishlist()">
+    <div *ngIf="showWishlist">
       <wishlist></wishlist>
     </div>
 
     <!--  All cards -->
-    <div *ngIf="showAll()">
-      <items [items]="items" (outputGetItems)="getCollectionCards()"></items>
+    <div *ngIf="showAll">
+      <items [items]="items" (outputGetItems)="getUserCards()"></items>
     </div>
 
     <!-- Add group -->
-    <div *ngIf="showAddGroup()">
+    <div *ngIf="showAddGroup">
       <user-card-group class="padding-4 box"></user-card-group>
     </div>
 

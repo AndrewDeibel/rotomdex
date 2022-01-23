@@ -1,86 +1,24 @@
-<div class="scanner-wrapper padding">
+<div class="scanner-wrapper">
   <div class="scanner">
-    <div
-      class="scanner-errors-overlay"
-      (click)="errors = []"
-      *ngIf="errors.length > 0"
-    >
-      <div class="scanner-errors">
-        <h4>Errors</h4>
-        <ul>
-          <li *ngFor="let error of errors">{{ error | json }}</li>
-        </ul>
-      </div>
-    </div>
     <div class="scanner-camera-wrapper">
       <!-- Webcam -->
       <webcam
-        *ngIf="showWebcam"
         [height]="600"
         [width]="400"
         [trigger]="triggerObservable"
-        [allowCameraSwitch]="allowCameraSwitch"
+        [allowCameraSwitch]="true"
         [switchCamera]="nextWebcamObservable"
         [videoOptions]="videoOptions"
         [imageQuality]="1"
-        (imageCapture)="handleImage($event)"
-        (cameraSwitched)="cameraWasSwitched($event)"
-        (initError)="handleInitError($event)"
+        (imageCapture)="handleWebcamImage($event)"
+        (initError)="handleWebcamInitError($event)"
       ></webcam>
 
-      <!-- Overlay -->
-      <div
-        *ngIf="false"
-        class="scanner-camera-overlay {{ scanning ? 'scanning' : '' }}"
-      ></div>
-
-      <!-- FPS -->
-      <div
-        *ngIf="false"
-        class="scanner-status {{ scanning ? 'scanning' : '' }}"
-      >
-        <div class="scanner-fps">fps</div>
-      </div>
-
-      <!-- Scan -->
-      <div
-        *ngIf="showActionScan"
-        (click)="scannerToggle()"
-        class="scanner-action scanner-scan {{ scanning ? 'scanning' : '' }}"
-      >
-        <fa-icon [icon]="scanIcon"></fa-icon>
-        <span>{{ scanning ? "Stop" : "Start" }}</span>
-      </div>
-
       <!-- Snapshot -->
-      <div
-        *ngIf="showActionSnapshot"
-        (click)="runScan()"
-        class="scanner-action scanner-snapshot"
-      >
+      <div (click)="runScan()" class="scanner-action scanner-snapshot">
         <fa-icon icon="camera"></fa-icon>
         <span>Capture</span>
       </div>
-
-      <!-- Mutiple -->
-      <div
-        *ngIf="showActionMultiple"
-        (click)="runScan()"
-        class="scanner-action scanner-multiple"
-      >
-        <fa-icon icon="bring-front"></fa-icon>
-        <span>Capture</span>
-      </div>
-    </div>
-
-    <!-- Options -->
-    <div class="scanner-options">
-      <app-menu [menu]="menuScannerOptions"></app-menu>
-    </div>
-
-    <!-- Mode -->
-    <div class="scanner-modes">
-      <app-menu [menu]="menuScannerModes"></app-menu>
     </div>
 
     <!-- Result -->
@@ -94,9 +32,7 @@
     <!-- Results -->
     <a
       [routerLink]="'/scanner/lists/1'"
-      class="scanner-results-wrapper animated fadeInUp {{
-        prompt ? 'prompt' : ''
-      }}"
+      class="scanner-results-wrapper animated fadeInUp"
       *ngIf="visibleMatches.length > 0"
     >
       <div class="scanner-results">
@@ -112,8 +48,4 @@
       </div>
     </a>
   </div>
-</div>
-
-<div class="flex justify-center padding" style="padding-top: 0">
-  <alert [alert]="alert"></alert>
 </div>
