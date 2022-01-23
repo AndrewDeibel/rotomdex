@@ -29,6 +29,7 @@ export class APIGetPaged {
   subtype: string;
   rarity: string;
   user_id: number;
+  card_group_id: number;
   slug: string;
   code: string;
 
@@ -90,6 +91,11 @@ export class APIGetPaged {
     if (this.user_id && this.user_id.toString().length)
       query = query.set('user_id', this.user_id.toString());
     else query = query.delete('user_id');
+
+    // Card group ID
+    if (this.card_group_id && this.card_group_id.toString().length)
+      query = query.set('card_group_id', this.card_group_id.toString());
+    else query = query.delete('card_group_id');
 
     // Slug
     if (this.slug && this.slug.length) query = query.set('slug', this.slug);

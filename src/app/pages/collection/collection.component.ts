@@ -107,7 +107,7 @@ export class CollectionComponent implements OnInit {
         );
       }
     });
-    this.userCardGroupService.getUserCardGroupObservable().subscribe((res) => {
+    this.userCardsService.getUserCardsObservable().subscribe((res) => {
       if (res) {
         this.groupItems.footer.totalPages = res.total_pages;
         this.groupItems.footer.totalItems = res.total_results;
@@ -180,7 +180,17 @@ export class CollectionComponent implements OnInit {
   }
 
   getUserCardGroupCards() {
-    this.userCardGroupService.getUserCardGroup(this.id);
+    this.userCardsService.getUserCards(
+      new APIGetPaged({
+        page: this.groupItems.footer.page,
+        page_size: this.groupItems.footer.pageSize,
+        query: this.groupItems.filter.textboxSearch.value,
+        sort_by: this.groupItems.filter.selectSortBy.value,
+        sort_direction: this.groupItems.filter.selectSortDirection.value,
+        user_id: this.authenticationService.currentUserValue?.id,
+        card_group_id: this.id,
+      })
+    );
   }
 
   getUserCards() {
