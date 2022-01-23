@@ -7,7 +7,7 @@ import { Card } from '@app/pages/cards/card';
 import { ScannerService } from '@app/pages/scanner/scanner.service';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
-import { Observable, Subject } from 'rxjs';
+import { last, Observable, Subject } from 'rxjs';
 
 @AutoUnsubscribe()
 @Component({
@@ -76,8 +76,25 @@ export class ScannerComponent implements OnInit {
 
   setupService() {
     this.scannerService.scanObservable().subscribe((card: any) => {
-      if (card) this.addMatches([card]);
+      if (card) {
+        if (!card.placeholder) this.addMatches([card]);
+        else this.removePlaceholder();
+      }
     });
+  }
+
+  removePlaceholder() {
+    var placeholders = this.matches.filter((match) => match.placeholder);
+    var lastPlaceholder = placeholders[placeholders.length - 1];
+    this.matches = this.matches.filter(
+      (match) => match.tempId !== lastPlaceholder.tempId
+    );
+    this.visibleMatches = this.visibleMatches.filter(
+      (match) => match.tempId !== lastPlaceholder.tempId
+    );
+
+    // Update cache
+    this.scannerService.scannerList.cards = this.matches;
   }
 
   addMatches(cards: Card[]) {
@@ -97,6 +114,10 @@ export class ScannerComponent implements OnInit {
     this.scannerService.scannerList.cards = this.matches;
   }
 
+  runScan() {
+    if (this.trigger) this.trigger.next();
+  }
+
   handleWebcamInitError(error: WebcamInitError): void {
     this.notificationService.addNotifications([
       new Notification({
@@ -114,6 +135,7 @@ export class ScannerComponent implements OnInit {
   handleWebcamImage(webcamImage: WebcamImage): void {
     this.scanned = true;
     const kilobytes = (webcamImage.imageAsBase64.length * (3 / 4) - 2) / 1000;
+    this.addMatches([new Card({ placeholder: true })]);
     this.scannerService.scan(webcamImage.imageAsBase64);
   }
 
@@ -123,9 +145,5 @@ export class ScannerComponent implements OnInit {
 
   get nextWebcamObservable(): Observable<boolean | string> {
     return this.nextWebcam.asObservable();
-  }
-
-  runScan() {
-    if (this.trigger) this.trigger.next();
   }
 }

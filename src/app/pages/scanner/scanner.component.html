@@ -28,10 +28,15 @@
   >
     <div class="scanner-results">
       <div
-        *ngFor="let match of visibleMatches"
+        *ngFor="let card of visibleMatches"
         class="scanner-result animated zoomIn"
       >
-        <img class="scanner-result-image" [src]="match.image" />
+        <img
+          class="scanner-result-image"
+          [src]="card.image"
+          onerror="this.src='./assets/placeholder.jpg';"
+        />
+        <loader [active]="card.placeholder"></loader>
       </div>
       <div class="scanner-results-count">
         <span>{{ matches.length }}</span>

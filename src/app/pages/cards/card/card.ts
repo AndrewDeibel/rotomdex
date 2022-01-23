@@ -22,6 +22,7 @@ export class Attack {
 }
 
 export class Card {
+  placeholder: boolean;
   id: number;
   card_id: number;
   name: string;

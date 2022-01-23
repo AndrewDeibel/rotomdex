@@ -8,7 +8,6 @@ import {
   Notification,
   AlertType,
   defaultDuration,
-  LoaderService,
 } from '@app/controls';
 
 @Injectable({
@@ -17,8 +16,7 @@ import {
 export class ScannerService {
   constructor(
     private http: HttpClient,
-    private notificationService: NotificationsService,
-    private loaderService: LoaderService
+    private notificationService: NotificationsService
   ) {}
 
   // TempId
@@ -34,16 +32,11 @@ export class ScannerService {
     return this.scanSubject.asObservable();
   }
   scan(image: string) {
-    this.loaderService.addItemLoading('scan');
     this.http
       .post<APIResponse>(buildUrl('scanner/detect'), { image })
       .subscribe((res) => {
-        this.loaderService.clearItemLoading('scan');
         if (res.success) {
-          const card = new Card(res.data.card.card);
-          if (card.id > 0) {
-            this.scanSubject.next(card);
-          }
+          this.scanSubject.next(new Card(res.data.card.card));
         } else {
           this.notificationService.addNotifications([
             new Notification({
@@ -52,7 +45,9 @@ export class ScannerService {
               duration: defaultDuration,
             }),
           ]);
-          this.scanSubject.next(null);
+          this.scanSubject.next(
+            new Card({ placeholder: true, tempId: this.getTempId() })
+          );
         }
       });
   }
