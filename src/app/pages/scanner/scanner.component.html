@@ -1,51 +1,49 @@
-<div class="scanner-wrapper">
-  <div class="scanner">
-    <div class="scanner-camera-wrapper">
-      <!-- Webcam -->
-      <webcam
-        [height]="600"
-        [width]="400"
-        [trigger]="triggerObservable"
-        [allowCameraSwitch]="true"
-        [switchCamera]="nextWebcamObservable"
-        [videoOptions]="videoOptions"
-        [imageQuality]="1"
-        (imageCapture)="handleWebcamImage($event)"
-        (initError)="handleWebcamInitError($event)"
-      ></webcam>
+<div class="scanner">
+  <div class="scanner-camera-wrapper">
+    <!-- Webcam -->
+    <webcam
+      [height]="600"
+      [width]="400"
+      [trigger]="triggerObservable"
+      [allowCameraSwitch]="true"
+      [switchCamera]="nextWebcamObservable"
+      [videoOptions]="videoOptions"
+      [imageQuality]="1"
+      (imageCapture)="handleWebcamImage($event)"
+      (initError)="handleWebcamInitError($event)"
+    ></webcam>
 
-      <!-- Snapshot -->
-      <div (click)="runScan()" class="scanner-action scanner-snapshot">
-        <fa-icon icon="camera"></fa-icon>
-        <span>Capture</span>
-      </div>
+    <!-- Snapshot -->
+    <div (click)="runScan()" class="scanner-action scanner-snapshot">
+      <fa-icon icon="camera"></fa-icon>
+      <span>Capture</span>
     </div>
-
-    <!-- Result -->
-    <div
-      *ngIf="visibleMatches.length && scannerResultMenu"
-      class="scanner-result {{ showResult ? 'active' : '' }}"
-    >
-      <app-menu [menu]="scannerResultMenu"></app-menu>
-    </div>
-
-    <!-- Results -->
-    <a
-      [routerLink]="'/scanner/lists/1'"
-      class="scanner-results-wrapper animated fadeInUp"
-      *ngIf="visibleMatches.length > 0"
-    >
-      <div class="scanner-results">
-        <div
-          *ngFor="let match of visibleMatches"
-          class="scanner-result animated zoomIn"
-        >
-          <img class="scanner-result-image" [src]="match.image" />
-        </div>
-        <div class="scanner-results-count">
-          <span>{{ matches.length }}</span>
-        </div>
-      </div>
-    </a>
   </div>
+
+  <!-- Result -->
+  <div
+    *ngIf="visibleMatches.length && scannerResultMenu"
+    class="scanner-result {{ showResult ? 'active' : '' }}"
+  >
+    <app-menu [menu]="scannerResultMenu"></app-menu>
+  </div>
+
+  <!-- Results -->
+  <a
+    [routerLink]="'/scanner/lists/1'"
+    class="scanner-results-wrapper animated fadeInUp"
+    *ngIf="visibleMatches.length > 0"
+  >
+    <div class="scanner-results">
+      <div
+        *ngFor="let match of visibleMatches"
+        class="scanner-result animated zoomIn"
+      >
+        <img class="scanner-result-image" [src]="match.image" />
+      </div>
+      <div class="scanner-results-count">
+        <span>{{ matches.length }}</span>
+      </div>
+    </div>
+  </a>
 </div>

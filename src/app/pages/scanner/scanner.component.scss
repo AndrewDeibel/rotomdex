@@ -1,123 +1,119 @@
 @import "settings";
 
-.scanner-wrapper {
-  margin: 0 auto;
-  width: 400px;
-  .scanner {
-    position: relative;
-    padding-bottom: percentage(3.5/2.5);
-    overflow: hidden;
-    .scanner-camera-wrapper {
+.scanner {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  .scanner-camera-wrapper {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    ::ng-deep webcam,
+    ::ng-deep .webcam-wrapper {
+      width: 100%;
+      height: 100%;
       position: absolute;
-      z-index: 1;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      ::ng-deep webcam,
-      ::ng-deep .webcam-wrapper {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: black;
-      }
-      ::ng-deep video {
-        transform: translate(-50%, -50%);
-        position: absolute;
-        display: block;
-        width: auto;
-        top: 50%;
-        left: 50%;
-        max-width: 100%;
-        max-height: 100%;
-      }
+      background: black;
     }
-    .scanner-action {
+    ::ng-deep video {
+      transform: translate(-50%, -50%);
       position: absolute;
-      overflow: hidden;
-      z-index: 1;
-      bottom: 0px;
+      display: block;
+      width: auto;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+    }
+  }
+  .scanner-action {
+    position: absolute;
+    overflow: hidden;
+    z-index: 1;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 72px;
+    height: 72px;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    transition: $transition;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+    background: $green;
+    box-shadow: 0 0 4px 4px rgba($green, 0.4);
+    &:hover {
+      box-shadow: 0 0 4px 8px rgba($green, 0.4);
+    }
+    fa-icon {
+      position: absolute;
+      top: 14px;
       left: 50%;
       transform: translateX(-50%);
-      width: 72px;
-      height: 72px;
-      border-top-left-radius: 50%;
-      border-top-right-radius: 50%;
-      transition: $transition;
-      color: white;
-      cursor: pointer;
-      user-select: none;
-      background: $green;
-      box-shadow: 0 0 4px 4px rgba($green, 0.4);
-      &:hover {
-        box-shadow: 0 0 4px 8px rgba($green, 0.4);
-      }
-      fa-icon {
+      width: 24px;
+      height: 24px;
+    }
+    span {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  .scanner-results-wrapper {
+    background: rgba(black, 0.5);
+    position: absolute;
+    border-radius: 4%;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    cursor: pointer;
+    .scanner-results {
+      width: 100px;
+      overflow: hidden;
+      padding-bottom: percentage(3.5/2.5);
+      border-radius: 4%;
+      .scanner-result {
+        width: 100px;
         position: absolute;
-        top: 14px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 24px;
-        height: 24px;
-      }
-      span {
-        position: absolute;
-        bottom: 12px;
-        left: 50%;
-        transform: translateX(-50%);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding-bottom: percentage(3.5/2.5);
+        transform-origin: bottom center;
+        @for $i from 1 through 20 {
+          &:nth-child(#{$i}) {
+            margin-top: 14px * ($i - 1);
+          }
+        }
+        .scanner-result-image {
+          display: block;
+          border-radius: 4%;
+          box-shadow: $shadow;
+        }
       }
     }
-    .scanner-results-wrapper {
-      background: rgba(black, 0.5);
+    .scanner-results-count {
+      background: $green;
+      color: white;
+      box-shadow: $shadow;
+      border-radius: 999px;
       position: absolute;
-      border-radius: 4%;
-      bottom: 0;
-      left: 0;
-      z-index: 2;
-      cursor: pointer;
-      .scanner-results {
-        width: 100px;
-        overflow: hidden;
-        padding-bottom: percentage(3.5/2.5);
-        border-radius: 4%;
-        .scanner-result {
-          width: 100px;
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          padding-bottom: percentage(3.5/2.5);
-          transform-origin: bottom center;
-          @for $i from 1 through 20 {
-            &:nth-child(#{$i}) {
-              margin-top: 14px * ($i - 1);
-            }
-          }
-          .scanner-result-image {
-            display: block;
-            border-radius: 4%;
-            box-shadow: $shadow;
-          }
-        }
-      }
-      .scanner-results-count {
-        background: $green;
-        color: white;
-        box-shadow: $shadow;
-        border-radius: 999px;
+      height: 32px;
+      width: 32px;
+      top: -8px;
+      right: -8px;
+      z-index: 10;
+      span {
         position: absolute;
-        height: 32px;
-        width: 32px;
-        top: -8px;
-        right: -8px;
-        z-index: 10;
-        span {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        }
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
     }
   }
