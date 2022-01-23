@@ -12,23 +12,15 @@
     ></webcam>
   </div>
 
-  <!-- Result -->
-  <div
-    *ngIf="visibleMatches.length && scannerResultMenu"
-    class="scanner-result {{ showResult ? 'active' : '' }}"
-  >
-    <app-menu [menu]="scannerResultMenu"></app-menu>
-  </div>
-
   <!-- Results -->
   <a
-    [routerLink]="'/scanner/lists/1'"
+    [routerLink]="'/scanner/list'"
     class="scanner-results-wrapper animated fadeInUp"
-    *ngIf="visibleMatches.length > 0"
+    *ngIf="scansVisible.length > 0"
   >
     <div class="scanner-results">
       <div
-        *ngFor="let card of visibleMatches"
+        *ngFor="let card of scansVisible"
         class="scanner-result animated zoomIn"
       >
         <img
@@ -39,7 +31,7 @@
         <loader [active]="card.placeholder"></loader>
       </div>
       <div class="scanner-results-count">
-        <span>{{ matches.length }}</span>
+        <span>{{ scans.length }}</span>
       </div>
     </div>
   </a>

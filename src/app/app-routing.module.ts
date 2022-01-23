@@ -9,7 +9,6 @@ import {
   ExpansionsComponent,
   ExpansionComponent,
   ScannerComponent,
-  ScannerListsComponent,
   ScannerListComponent,
   PokemonsComponent,
   PokemonComponent,
@@ -96,11 +95,7 @@ const routes: Routes = [
     component: ScannerComponent,
   },
   {
-    path: 'scanner/lists',
-    component: ScannerListsComponent,
-  },
-  {
-    path: 'scanner/lists/:id',
+    path: 'scanner/list',
     component: ScannerListComponent,
   },
 

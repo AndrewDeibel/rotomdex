@@ -34,12 +34,8 @@ export class ScannerComponent implements OnInit {
   >();
 
   // Options
-  matches: Card[] = [];
-  visibleMatches: Card[] = [];
-  scanned: boolean;
-  showResult: boolean;
-  scannerResultMenu: Menu;
-  menuScannerOptions: Menu;
+  scans: Card[] = [];
+  scansVisible: Card[] = [];
   soundEffect: HTMLAudioElement;
 
   ngOnDestroy() {}
@@ -69,49 +65,16 @@ export class ScannerComponent implements OnInit {
     this.titleService.setTitle(AppSettings.titlePrefix + 'Scanner');
 
     // Cached results
-    if (this.scannerService.scannerList.cards.length) {
-      this.addMatches(this.scannerService.scannerList.cards);
-    }
+    if (this.scannerService.scans.length)
+      this.scans = this.scannerService.scans;
   }
 
   setupService() {
-    this.scannerService.scanObservable().subscribe((card: any) => {
-      if (card) {
-        if (!card.placeholder) this.addMatches([card]);
-        else this.removePlaceholder();
-      }
+    this.scannerService.scansObservable().subscribe((scans) => {
+      this.scans = scans;
+      // Limit visible to 6
+      this.scansVisible = this.scans.slice(0, 6);
     });
-  }
-
-  removePlaceholder() {
-    var placeholders = this.matches.filter((match) => match.placeholder);
-    var lastPlaceholder = placeholders[placeholders.length - 1];
-    this.matches = this.matches.filter(
-      (match) => match.tempId !== lastPlaceholder.tempId
-    );
-    this.visibleMatches = this.visibleMatches.filter(
-      (match) => match.tempId !== lastPlaceholder.tempId
-    );
-
-    // Update cache
-    this.scannerService.scannerList.cards = this.matches;
-  }
-
-  addMatches(cards: Card[]) {
-    if (this.scanned) this.soundEffect.play();
-    cards.forEach((card) => this.addMatch(card));
-  }
-
-  addMatch(card: Card) {
-    card.tempId = this.scannerService.getTempId();
-
-    // Limit tray to 10
-    if (this.visibleMatches.length >= 6) this.visibleMatches.shift();
-    this.visibleMatches.push(card);
-    this.matches.push(card);
-
-    // Update cache
-    this.scannerService.scannerList.cards = this.matches;
   }
 
   runScan() {
@@ -133,9 +96,8 @@ export class ScannerComponent implements OnInit {
   }
 
   handleWebcamImage(webcamImage: WebcamImage): void {
-    this.scanned = true;
+    this.soundEffect.play();
     const kilobytes = (webcamImage.imageAsBase64.length * (3 / 4) - 2) / 1000;
-    this.addMatches([new Card({ placeholder: true })]);
     this.scannerService.scan(webcamImage.imageAsBase64);
   }
 

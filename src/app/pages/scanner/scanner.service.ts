@@ -26,17 +26,17 @@ export class ScannerService {
   }
 
   // Scan single card
-  private scanSubject = new BehaviorSubject<Card | null>(null);
-  scanObservable() {
-    this.scanSubject = new BehaviorSubject<Card | null>(null);
-    return this.scanSubject.asObservable();
-  }
   scan(image: string) {
+    const tempId = this.getTempId();
+    this.addScan(new Card({ placeholder: true, tempId }));
     this.http
       .post<APIResponse>(buildUrl('scanner/detect'), { image })
       .subscribe((res) => {
+        this.removeScan(tempId);
         if (res.success) {
-          this.scanSubject.next(new Card(res.data.card.card));
+          this.addScan(
+            new Card({ ...res.data.card.card, tempId: this.getTempId() })
+          );
         } else {
           this.notificationService.addNotifications([
             new Notification({
@@ -45,74 +45,32 @@ export class ScannerService {
               duration: defaultDuration,
             }),
           ]);
-          this.scanSubject.next(
-            new Card({ placeholder: true, tempId: this.getTempId() })
-          );
         }
       });
   }
 
-  // Scan cache
-  private _scannerList: ScannerList = new ScannerList();
-  get scannerList() {
-    return this._scannerList;
-  }
-  set scannerList(scannerList) {
-    this._scannerList = scannerList;
-  }
-
-  // Clear cache
-  clearScans() {
-    this._scannerList = new ScannerList();
-  }
-
-  // Scan cache
+  // Scanned cards
   private scansSubject = new BehaviorSubject<Card[]>([]);
-  getScansObservable() {
-    this.scansSubject = new BehaviorSubject<Card[]>([]);
+  scansObservable() {
     return this.scansSubject.asObservable();
   }
-  getScans() {
-    this.scansSubject.next(this._scannerList.cards);
+  clearScans() {
+    this.scansSubject = new BehaviorSubject<Card[]>([]);
   }
-
-  changeVersion(cardOld: Card, cardNew: Card) {
-    // Remove old card via tempId
-    // this._scannerList.cards = this._scannerList.cards.filter(card => {
-    // 	return card.tempId != cardOld.tempId;
-    // });
-    const updatedScannerListCards: Card[] = [];
-    this._scannerList.cards.forEach((card) => {
-      if (card.tempId === cardOld.tempId) {
-        updatedScannerListCards.push(cardNew);
-      } else {
-        updatedScannerListCards.push(card);
-      }
-    });
-
-    this._scannerList.cards = updatedScannerListCards;
-
-    // Add new card
-    //cardNew.tempId = cardOld.tempId++;
-    //this._scannerList.cards.push(cardNew);
-
-    // Update subscriptions
-    this.scansSubject.next(this._scannerList.cards);
+  addScan(scan: Card) {
+    const scans = [...this.scansSubject.value, scan];
+    this.scansSubject.next(scans);
   }
-
-  removeCard(card: Card) {
-    this._scannerList.cards = this._scannerList.cards.filter((_card) => {
-      return _card.tempId != card.tempId;
-    });
-
-    // Update subscriptions
-    this.scansSubject.next(this._scannerList.cards);
-
-    this.notificationService.addNotifications([
-      new Notification({
-        alertType: AlertType.success,
-        message: 'Removed ' + card.name + ' from results',
-      }),
-    ]);
+  removeScan(tempId: number) {
+    const scans = this.scansSubject.value.filter(
+      (scan) => scan.tempId !== tempId
+    );
+    this.scansSubject.next(scans);
+  }
+  get scans() {
+    return this.scansSubject.value;
+  }
+  set scans(scans: Card[]) {
+    this.scansSubject.next(scans);
   }
 }

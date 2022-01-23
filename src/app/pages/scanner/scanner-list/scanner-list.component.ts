@@ -146,27 +146,31 @@ export class ScannerListComponent implements OnInit {
     });
 
     // Response from get scans request
-    this.scannerService.getScansObservable().subscribe((scans) => {
-      scans.forEach((card) => {
-        this.buildCardMenu(card);
-      });
-      this.items.itemGroups = [
-        new ItemGroup({
-          items: scans,
-        }),
-      ];
-      this.items.header.subtitle = 'cards: ' + scans.length;
-      let price: number = 0;
-      this.items.itemGroups[0].items.forEach((card) => {
-        if (card.price) {
-          price += card.price;
-        }
-      });
-      this.items.header.price = price;
+    this.scannerService.scansObservable().subscribe((scans) => {
+      if (scans) this.setScans(scans);
     });
 
     // Request scans
-    this.scannerService.getScans();
+    this.setScans(this.scannerService.scans);
+  }
+
+  setScans(scans: Card[]) {
+    scans.forEach((card) => {
+      this.buildCardMenu(card);
+    });
+    this.items.itemGroups = [
+      new ItemGroup({
+        items: scans,
+      }),
+    ];
+    this.items.header.subtitle = 'cards: ' + scans.length;
+    let price: number = 0;
+    this.items.itemGroups[0].items.forEach((card) => {
+      if (card.price) {
+        price += card.price;
+      }
+    });
+    this.items.header.price = price;
   }
 
   buildCardMenu(card: Card) {
@@ -175,10 +179,10 @@ export class ScannerListComponent implements OnInit {
       text: 'Remove',
       click: (event: Event) => {
         event.stopPropagation();
-        this.scannerService.removeCard(card);
+        this.scannerService.removeScan(card.tempId);
         this.items.itemGroups = [
           new ItemGroup({
-            items: this.scannerService.scannerList.cards,
+            items: this.scannerService.scans,
           }),
         ];
       },
@@ -195,11 +199,9 @@ export class ScannerListComponent implements OnInit {
 
   search() {
     if (this.query.length) {
-      const searchCards = this.scannerService.scannerList.cards.filter(
-        (card) => {
-          return card.name.toLowerCase().includes(this.query.toLowerCase());
-        }
-      );
+      const searchCards = this.scannerService.scans.filter((card) => {
+        return card.name.toLowerCase().includes(this.query.toLowerCase());
+      });
       this.items.itemGroups = [
         new ItemGroup({
           items: searchCards,
@@ -208,7 +210,7 @@ export class ScannerListComponent implements OnInit {
     } else {
       this.items.itemGroups = [
         new ItemGroup({
-          items: this.scannerService.scannerList.cards,
+          items: this.scannerService.scans,
         }),
       ];
     }
