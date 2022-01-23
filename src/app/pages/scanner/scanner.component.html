@@ -1,9 +1,7 @@
 <div class="scanner">
-  <div class="scanner-camera-wrapper">
-    <!-- Webcam -->
+  <!-- Webcam -->
+  <div class="scanner-camera-wrapper" (click)="runScan()">
     <webcam
-      [height]="600"
-      [width]="400"
       [trigger]="triggerObservable"
       [allowCameraSwitch]="true"
       [switchCamera]="nextWebcamObservable"
@@ -12,12 +10,6 @@
       (imageCapture)="handleWebcamImage($event)"
       (initError)="handleWebcamInitError($event)"
     ></webcam>
-
-    <!-- Snapshot -->
-    <div (click)="runScan()" class="scanner-action scanner-snapshot">
-      <fa-icon icon="camera"></fa-icon>
-      <span>Capture</span>
-    </div>
   </div>
 
   <!-- Result -->

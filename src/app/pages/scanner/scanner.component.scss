@@ -29,41 +29,6 @@
       min-height: 100%;
     }
   }
-  .scanner-action {
-    position: absolute;
-    overflow: hidden;
-    z-index: 1;
-    bottom: 0px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 72px;
-    height: 72px;
-    border-top-left-radius: 50%;
-    border-top-right-radius: 50%;
-    transition: $transition;
-    color: white;
-    cursor: pointer;
-    user-select: none;
-    background: $green;
-    box-shadow: 0 0 4px 4px rgba($green, 0.4);
-    &:hover {
-      box-shadow: 0 0 4px 8px rgba($green, 0.4);
-    }
-    fa-icon {
-      position: absolute;
-      top: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 24px;
-      height: 24px;
-    }
-    span {
-      position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-  }
   .scanner-results-wrapper {
     background: rgba(black, 0.5);
     position: absolute;
