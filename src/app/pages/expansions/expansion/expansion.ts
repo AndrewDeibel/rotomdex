@@ -14,7 +14,7 @@ export class Expansion {
   release_date: Date;
   symbol: string;
   logo: string;
-  progress: number = 17;
+  total_cards_owned: number;
 
   route: string;
   cards: Card[] = [];
@@ -33,6 +33,8 @@ export class Expansion {
 export class Series {
   id: number;
   name: string;
+  total_cards: number;
+  total_cards_owned: number;
   expansions: Expansion[] = [];
 
   constructor(init?: Partial<Series>) {

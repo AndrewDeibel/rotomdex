@@ -17,6 +17,7 @@ export class UserCardsComponent implements OnInit {
   @Input() userCards: UserCard[] = [];
   buttonAdd: Button;
   checkboxWishlist: Checkbox;
+  checkboxFavorite: Checkbox;
   buttonViewAll: Button;
   empty: Empty;
   buttonNotes: Button;
@@ -87,12 +88,19 @@ export class UserCardsComponent implements OnInit {
 
     // Checkbox wish list
     this.checkboxWishlist = new Checkbox({
+      id: 'wishlist',
       checked: this.on_wishlist,
       text: 'Wishlist',
       change: (checked) => {
         if (checked) this.wishlistService.addWishlistCard(this.card_id);
         else this.wishlistService.removeWishlistCard(this.card_id);
       },
+    });
+
+    // Checkbox favorite
+    this.checkboxFavorite = new Checkbox({
+      id: 'favorite',
+      text: 'Favorite',
     });
   }
 

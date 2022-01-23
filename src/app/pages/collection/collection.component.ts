@@ -3,12 +3,12 @@ import {
   ResUserCardGroups,
 } from './user-card-group/user-card-group.services';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Menu, MenuItem, ProgressBar } from '@app/controls';
 import { ItemGroup, Items } from '@app/layout';
 import { Icons, Symbols, APIGetPaged } from '@app/models';
 import { AuthenticationService } from '@app/pages/auth';
-import { UserCardsService } from '@app/pages/collection';
+import { UserCardsService, UserCardGroup } from '@app/pages/collection';
 
 @Component({
   selector: 'collection',
@@ -21,12 +21,14 @@ export class CollectionComponent implements OnInit {
   symbolPokemon: Symbols;
   menuSidebar: Menu;
   items: Items = new Items();
+  groupItems: Items = new Items();
 
   constructor(
     private userCardsService: UserCardsService,
     private userCardGroupService: UserCardGroupService,
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigateByUrl('/');
@@ -37,10 +39,13 @@ export class CollectionComponent implements OnInit {
   showImport: boolean;
   showWishlist: boolean;
   showAll: boolean;
+  showGroup: boolean;
   showAddGroup: boolean;
+  id: number;
 
   ngOnInit() {
     this.showHideTabs();
+    this.handleParams();
     this.setupSubscriptions();
     this.setupControls();
     this.getUserCardGroups();
@@ -53,6 +58,15 @@ export class CollectionComponent implements OnInit {
     this.showWishlist = window.location.pathname === '/collection/wishlist';
     this.showAll = window.location.pathname === '/collection';
     this.showAddGroup = window.location.pathname === '/collection/add';
+  }
+
+  handleParams() {
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['id']) {
+        this.id = Number(params['id']);
+        this.showGroup = true;
+      }
+    });
   }
 
   setupSubscriptions() {
@@ -80,9 +94,10 @@ export class CollectionComponent implements OnInit {
               separator: true,
             }),
             ...res.user_card_groups.map(
-              (item: any) =>
+              (item: UserCardGroup) =>
                 new MenuItem({
                   text: item.name,
+                  route: `/collection/group/${item.id}`,
                 })
             ),
             new MenuItem({
@@ -122,8 +137,14 @@ export class CollectionComponent implements OnInit {
         }),
         new MenuItem({
           text: 'Wishlist',
-          icon: Icons.star,
+          icon: Icons.clipboardCheck,
           route: '/collection/wishlist',
+          exactMatch: true,
+        }),
+        new MenuItem({
+          text: 'Favorites',
+          icon: Icons.heart,
+          route: '/collection/favorites',
           exactMatch: true,
         }),
         new MenuItem({
@@ -144,6 +165,8 @@ export class CollectionComponent implements OnInit {
       })
     );
   }
+
+  getUserCardGroupCards() {}
 
   getUserCards() {
     this.userCardsService.getUserCards(

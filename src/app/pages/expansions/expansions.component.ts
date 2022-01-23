@@ -34,7 +34,8 @@ export class ExpansionsComponent implements OnInit {
       this.items.itemGroups = seriesList.map((series) => ({
         items: series.expansions,
         name: series.name,
-        progress: 24,
+        progress: series.total_cards_owned,
+        total_cards: series.total_cards,
       }));
     }
   }

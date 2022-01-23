@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProgressBar } from '@app/controls/progress-bar/progress-bar';
-import { Pokemon, PokemonVariant } from '../../pokemon/pokemon';
+import { PokemonVariant } from '../../pokemon/pokemon';
 
 @Component({
   selector: 'pokemon-item-grid',
@@ -17,7 +17,7 @@ export class PokemonItemGridComponent implements OnInit {
 
   ngOnInit() {
     this.progressBar = new ProgressBar({
-      value: this.pokemonVariant.progress,
+      value: this.pokemonVariant.total_cards_owned,
       total: this.pokemonVariant.total_cards,
     });
   }

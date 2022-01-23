@@ -1,31 +1,31 @@
 <div *ngIf="appFormControl">
   <textbox
-    *ngIf="isTextbox()"
+    *ngIf="showTextbox"
     [textbox]="appFormControl.control"
     [formControlName]="appFormControl.formControlName"
   ></textbox>
   <app-textarea
-    *ngIf="isTextarea()"
+    *ngIf="showTextarea"
     [textarea]="appFormControl.control"
     [formControlName]="appFormControl.formControlName"
   ></app-textarea>
   <app-select
-    *ngIf="isSelect()"
+    *ngIf="showSelect"
     [select]="appFormControl.control"
     [formControlName]="appFormControl.formControlName"
   ></app-select>
   <editor
-    *ngIf="isEditor()"
+    *ngIf="showEditor"
     [editor]="appFormControl.control"
     [formControlName]="appFormControl.formControlName"
   ></editor>
   <checkbox
-    *ngIf="isCheckbox()"
+    *ngIf="showCheckbox"
     [checkbox]="appFormControl.control"
     [formControlName]="appFormControl.formControlName"
   ></checkbox>
   <toggle
-    *ngIf="isToggle()"
+    *ngIf="showToggle"
     [toggle]="appFormControl.control"
     [formControlName]="appFormControl.formControlName"
   ></toggle>

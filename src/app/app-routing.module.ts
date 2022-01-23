@@ -81,7 +81,7 @@ const routes: Routes = [
     component: CollectionComponent,
   },
   {
-    path: 'collection/:id',
+    path: 'collection/group/:id',
     component: CollectionComponent,
   },
   {

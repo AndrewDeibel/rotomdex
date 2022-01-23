@@ -143,4 +143,5 @@ export enum Icons {
   fileImport = 'file-import',
   download = 'download',
   upload = 'upload',
+  clipboardCheck = 'clipboard-check',
 }

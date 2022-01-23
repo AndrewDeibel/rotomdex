@@ -59,7 +59,7 @@ export class PokemonComponent implements OnInit {
           this.items.noResults =
             'No ' + this.pokemonVariant.name + ' cards found';
           this.progressBar = new ProgressBar({
-            value: pokemonVariant.progress,
+            value: pokemonVariant.total_cards_owned,
             total: pokemonVariant.total_cards,
           });
           this.getCards();

@@ -1,21 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Card } from '@app/pages/cards/card';
-import { ScannerService } from '@app/pages/scanner/scanner.service';
-import { MenuItem, Menu } from '@app/controls/menu';
-import { Textbox } from '@app/controls/textbox';
 import { Button } from '@app/controls/button';
+import { Menu, MenuItem } from '@app/controls/menu';
 import { Select } from '@app/controls/select';
-import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
-import { CardsService } from '@app/pages/cards';
+import { Textbox } from '@app/controls/textbox';
 import {
-  ItemsHeader,
-  ItemsFooter,
-  ItemsFilter,
   ItemGroup,
+  ItemsFilter,
+  ItemsFooter,
+  ItemsHeader,
 } from '@app/layout/main';
 import { Items } from '@app/layout/main/items/items';
 import { Icons } from '@app/models/icons';
-import { AuthenticationService } from '@app/pages/auth/auth.service';
+import { Card } from '@app/pages/cards/card';
+import { ScannerService } from '@app/pages/scanner/scanner.service';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
 @AutoUnsubscribe()
 @Component({
@@ -32,11 +30,7 @@ export class ScannerListComponent implements OnInit {
   items: Items;
   addToDeckMenuItem: MenuItem;
 
-  constructor(
-    private authenticationService: AuthenticationService,
-    private scannerService: ScannerService,
-    private cardsService: CardsService
-  ) {}
+  constructor(private scannerService: ScannerService) {}
 
   ngOnDestroy() {}
   ngOnInit() {
@@ -64,7 +58,7 @@ export class ScannerListComponent implements OnInit {
       },
     });
 
-    // Initalize cards
+    // Initialize cards
     this.items = new Items({
       buttonNoResults: new Button({
         text: 'Scan Cards',

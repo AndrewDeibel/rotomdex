@@ -23,6 +23,14 @@
       <items [items]="items" (outputGetItems)="getUserCards()"></items>
     </div>
 
+    <!-- Specific group -->
+    <div *ngIf="showGroup">
+      <items
+        [items]="groupItems"
+        (outputGetItems)="getUserCardGroupCards()"
+      ></items>
+    </div>
+
     <!-- Add group -->
     <div *ngIf="showAddGroup">
       <user-card-group class="padding-4 box"></user-card-group>

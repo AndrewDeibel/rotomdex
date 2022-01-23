@@ -13,27 +13,21 @@ import { Toggle } from '@app/controls/toggle';
 })
 export class FormControlComponent implements OnInit {
   @Input() appFormControl: FormControl;
+  showTextbox: boolean;
+  showTextarea: boolean;
+  showSelect: boolean;
+  showEditor: boolean;
+  showCheckbox: boolean;
+  showToggle: boolean;
 
   constructor() {}
 
-  ngOnInit() {}
-
-  isTextbox() {
-    return this.appFormControl.control instanceof Textbox;
-  }
-  isTextarea() {
-    return this.appFormControl.control instanceof Textarea;
-  }
-  isSelect() {
-    return this.appFormControl.control instanceof Select;
-  }
-  isEditor() {
-    return this.appFormControl.control instanceof Editor;
-  }
-  isCheckbox() {
-    return this.appFormControl.control instanceof Checkbox;
-  }
-  isToggle() {
-    return this.appFormControl.control instanceof Toggle;
+  ngOnInit() {
+    this.showTextbox = this.appFormControl.control instanceof Textbox;
+    this.showTextarea = this.appFormControl.control instanceof Textarea;
+    this.showSelect = this.appFormControl.control instanceof Select;
+    this.showEditor = this.appFormControl.control instanceof Editor;
+    this.showCheckbox = this.appFormControl.control instanceof Checkbox;
+    this.showToggle = this.appFormControl.control instanceof Toggle;
   }
 }
