@@ -1,0 +1,141 @@
+{
+  "configVersion": 1,
+  "timestamp": 1642914205121,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/main.42511ac519a2abff.js",
+        "/manifest.webmanifest",
+        "/polyfills.a90d0f9c1878eb88.js",
+        "/runtime.f167786c2dee8f61.js",
+        "/styles.5659426797a746b4.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/audio/soundeffect.mp3",
+        "/assets/default-card.png",
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/moltresgalar.jpg",
+        "/assets/placeholder.jpg",
+        "/assets/placeholder.psd",
+        "/assets/pokeball.png",
+        "/assets/symbols/cards-source.ai",
+        "/assets/symbols/cards.ai",
+        "/assets/symbols/cards.svg",
+        "/assets/symbols/colorless.svg",
+        "/assets/symbols/darkness.svg",
+        "/assets/symbols/discord.svg",
+        "/assets/symbols/dragon.svg",
+        "/assets/symbols/energy.ai",
+        "/assets/symbols/facebook.svg",
+        "/assets/symbols/fairy.svg",
+        "/assets/symbols/fighting.svg",
+        "/assets/symbols/fire.svg",
+        "/assets/symbols/grass.svg",
+        "/assets/symbols/lightning.svg",
+        "/assets/symbols/metal.svg",
+        "/assets/symbols/patreon.svg",
+        "/assets/symbols/pokeball.ai",
+        "/assets/symbols/pokeball.svg",
+        "/assets/symbols/psychic.svg",
+        "/assets/symbols/twitter.svg",
+        "/assets/symbols/water.svg",
+        "/assets/symbols/youtube.svg",
+        "/assets/user/placeholder-female.jpg",
+        "/assets/user/placeholder-male.jpg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/assets/audio/soundeffect.mp3": "fea7fef72545edb76dc6842a1bbfd68e82f044ce",
+    "/assets/default-card.png": "1cbcdc5e49c5a44c05c9ce92a6d91d379b29aa58",
+    "/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/assets/moltresgalar.jpg": "affebad713b5bf9c2099a163374823d300ca752c",
+    "/assets/placeholder.jpg": "fb7ac1e20fb8c8a9a49fb96d07d08dc429aebe34",
+    "/assets/placeholder.psd": "958ed398986c006d58a10ef61f649ac5199d13c0",
+    "/assets/pokeball.png": "a4a8892d5578957891cff895576adabd88b08839",
+    "/assets/symbols/cards-source.ai": "b5e1408e5ac1563164e99dd9c8bf311b0e3b2739",
+    "/assets/symbols/cards.ai": "b9cb27883495713cd5a434dc628314037fa69c44",
+    "/assets/symbols/cards.svg": "ce7ada10e75436cd2656a586d2cdbfd5e8631b13",
+    "/assets/symbols/colorless.svg": "6625e530b1ec9f911be83d660f667c50061e50dd",
+    "/assets/symbols/darkness.svg": "3fa1a9cbf1e66bf703045fa59246aff3520c2aee",
+    "/assets/symbols/discord.svg": "993d9bb8a9de5da821017de32775b7be5ee2dca9",
+    "/assets/symbols/dragon.svg": "04ac149bc099c8640514b579d85ee832149be7c4",
+    "/assets/symbols/energy.ai": "922add18361f9596c4b48d4f2c93c7fac91aa7f9",
+    "/assets/symbols/facebook.svg": "d8cafcf43545e245121004bf8b416d0282249e52",
+    "/assets/symbols/fairy.svg": "838110bfd11b21cfa342f061c4fb4b87697fd6b3",
+    "/assets/symbols/fighting.svg": "6f301683be50542d5900dfe42d5450e4542f8b8c",
+    "/assets/symbols/fire.svg": "a1ae0fdd8201bfe434b220fffd249c5e44ac3d66",
+    "/assets/symbols/grass.svg": "8906b68572acd90cfd03e2a6307258e29a7de274",
+    "/assets/symbols/lightning.svg": "53661d43a9821b3062f16b1d45da4c75635b447b",
+    "/assets/symbols/metal.svg": "0b0b0af6ab632fd8bad6c9d429a0c5cfb4df7273",
+    "/assets/symbols/patreon.svg": "9aa120390cd728c57b3b61935de394dfd97465e1",
+    "/assets/symbols/pokeball.ai": "c5481c380b24f3e773288b9036f44895512f66ac",
+    "/assets/symbols/pokeball.svg": "f7bb859a11df33dafd9258d006636ea599ba86a4",
+    "/assets/symbols/psychic.svg": "e332403da891a1737d205b2f664cc61848e9ffe6",
+    "/assets/symbols/twitter.svg": "82de45c5017bd21c17673f5fcc732096fa39759a",
+    "/assets/symbols/water.svg": "d6b411c19e54022e72f840f2c74c05b448023caf",
+    "/assets/symbols/youtube.svg": "a46fba4db8143291bac1400d85781096a0f3e90e",
+    "/assets/user/placeholder-female.jpg": "122888a5af26ba53f80b1e126581dec4fe83c208",
+    "/assets/user/placeholder-male.jpg": "36c06817aebb3e461e487c2ba27bfe2dc1398b4d",
+    "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/index.html": "4064f7636544f1f6b5d7cca09c4e10931d9a305f",
+    "/main.42511ac519a2abff.js": "94b5288665da674cc70f594f73db8bb4c4bb2d41",
+    "/manifest.webmanifest": "4368dae935bbe03b935aa8cc19e879b3ba9ad7fb",
+    "/polyfills.a90d0f9c1878eb88.js": "b4711754abbd131a24a1d0e6e162c19c5355a7b8",
+    "/runtime.f167786c2dee8f61.js": "212b0fd0750b44d04c912f68aff3e1ae5932d42a",
+    "/styles.5659426797a746b4.css": "62ea05350af3c818909bdbc47acdaf972f44ad86"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
