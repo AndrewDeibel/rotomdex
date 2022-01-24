@@ -144,4 +144,5 @@ export enum Icons {
   download = 'download',
   upload = 'upload',
   clipboardCheck = 'clipboard-check',
+  stars = 'stars',
 }

@@ -15,10 +15,10 @@ $heading-font-color: rgba(232, 232, 232);
 $white: white;
 $grey: grey;
 $black: black;
-$red: rgb(201, 35, 35);
+$red: #c92323;
 $orange: #f68603;
 $yellow: #f1c500;
-$green: rgb(58, 156, 58);
+$green: #3a9c3a;
 $teal: #1ba083;
 $blue: #247abb;
 $purple: #8936b7;
@@ -79,8 +79,8 @@ $shadow-error: 0 0 0 3px rgba($error, 0.2);
 // ========================================
 $t: ease 0.2s;
 $transition: $t color, $t border, $t background-color, $t box-shadow,
-	$t transform, $t max-width, $t opacity, $t margin, $t fill, $t top, $t left,
-	$t right, $t bottom;
+  $t transform, $t max-width, $t opacity, $t margin, $t fill, $t top, $t left,
+  $t right, $t bottom;
 
 // Screen
 // ========================================

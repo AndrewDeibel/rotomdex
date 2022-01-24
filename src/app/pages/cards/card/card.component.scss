@@ -134,6 +134,10 @@
   position: absolute;
   bottom: $spacing * 2;
   right: $spacing * 2;
+  @media (max-width: $screen-medium) {
+    position: static;
+    display: flex;
+  }
 }
 .img-card-image {
   cursor: zoom-in !important;

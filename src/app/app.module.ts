@@ -244,6 +244,7 @@ import {
   faUpload,
   faDownload,
   faClipboardCheck,
+  faStars,
 } from '@fortawesome/pro-duotone-svg-icons';
 import { environment } from '../environments/environment';
 
@@ -510,7 +511,8 @@ export class AppModule {
       faFileImport,
       faDownload,
       faUpload,
-      faClipboardCheck
+      faClipboardCheck,
+      faStars
     );
     faConfig.defaultPrefix = 'fad';
   }

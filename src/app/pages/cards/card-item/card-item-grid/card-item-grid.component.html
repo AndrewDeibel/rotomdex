@@ -19,12 +19,22 @@
       </div>
     </div>
 
-    <div class="card-information ellipsis">
-      <div class="card-number subheading">
-        {{ card.number }}
+    <div class="card-information ellipsis flex flex-nowrap flex-center">
+      <div class="box flex vertical">
+        <div class="card-number subheading">
+          {{ card.number }}
+        </div>
+        <div class="card-name ellipsis">
+          {{ card.name }}
+        </div>
       </div>
-      <div class="card-name ellipsis">
-        {{ card.name }}
+      <div *ngIf="card.total_cards_owned > 0">
+        <img
+          title="Owned"
+          class="pokeball"
+          style="width: 24px"
+          src="/assets/pokeball-green.png"
+        />
       </div>
     </div>
   </div>

@@ -170,6 +170,7 @@ progress-bar {
   left: 50%;
   transform: translateX(-50%);
   width: 200px;
+  z-index: 2;
   &.noEvolutionChain {
   }
 }

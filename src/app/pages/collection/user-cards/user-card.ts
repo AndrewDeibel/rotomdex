@@ -10,7 +10,8 @@ export class UserCard {
   printing: string;
   notes: string;
   date_obtained: Date;
-  purchase_price: Number;
+  purchase_price: number;
+  quantity: number;
 
   constructor(init?: Partial<UserCard>) {
     Object.assign(this, init);

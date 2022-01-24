@@ -1,32 +1,35 @@
 @import "settings";
 
 .progress {
-	width: 100%;
-	background: $input-bg;
-	border: $border;
-	border-radius: $border-radius;
-	height: 16px;
-	position: relative;
-	font-size: 12px;
-	.progress-bar {
-		background: $primary-color;
-		border-radius: $border-radius - 1px;
-		height: 14px;
-	}
-	.progress-value {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		font-weight: bold;
-		color: $font-color;
-		margin-top: -1px;
-		white-space: nowrap;
-		text-align: center;
-	}
-	&.complete {
-		.progress-bar {
-			background: $green;
-		}
-	}
+  width: 100%;
+  background: rgba(black, 0.5);
+  box-shadow: $shadow-inset;
+  border: $border;
+  border-radius: $border-radius;
+  height: 16px;
+  position: relative;
+  font-size: 12px;
+  overflow: hidden;
+  .progress-bar {
+    background: $primary-color;
+    border-radius: $border-radius - 1px;
+    height: 14px;
+    box-shadow: $shadow-sheen;
+  }
+  .progress-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    color: $font-color;
+    margin-top: -1px;
+    white-space: nowrap;
+    text-align: center;
+  }
+  &.complete {
+    .progress-bar {
+      background: $green;
+    }
+  }
 }

@@ -84,7 +84,7 @@
                   <!-- TCG Player -->
                   <div
                     class="width-12 medium-6 small-12"
-                    *ngIf="buttonTCGPlayer && false"
+                    *ngIf="buttonTCGPlayer"
                   >
                     <app-button [button]="buttonTCGPlayer"></app-button>
                   </div>
@@ -96,21 +96,14 @@
                   >
                     <app-button [button]="buttonEbay"></app-button>
                   </div>
-
-                  <!-- Admin -->
-                  <div class="admin-access" *ngIf="hasAdminAccess">
-                    <app-button [button]="buttonAdmin"></app-button>
-                  </div>
                 </div>
               </div>
 
-              <div
-                class="card-rarity flex flex-center padded-small"
-                *ngIf="tagRarity"
-              >
+              <div class="flex flex-center padded-small">
                 <!-- Rarity -->
-                <div>
+                <div *ngIf="tagRarity">
                   <a
+                    class="block rounded"
                     [routerLink]="
                       card.rarity &&
                       '/cards/rarity/' +
@@ -121,15 +114,10 @@
                   </a>
                 </div>
 
-                <!-- Number -->
-                <div class="subheading">
-                  <tag [tag]="tagNumber"></tag>
-                </div>
-
                 <!-- Artist -->
-                <div>
+                <div *ngIf="tagArtist">
                   <a
-                    class="artist-link"
+                    class="artist-link block rounded"
                     [routerLink]="
                       '/cards/artists/' +
                       card.artist.toLowerCase().replace(' ', '-')
@@ -138,6 +126,26 @@
                     <tag [tag]="tagArtist"></tag>
                   </a>
                 </div>
+
+                <!-- Number -->
+                <div *ngIf="tagNumber">
+                  <tag [tag]="tagNumber"></tag>
+                </div>
+
+                <!-- Number -->
+                <div *ngIf="tagShiny">
+                  <a
+                    class="artist-link block rounded"
+                    [routerLink]="'/cards/shiny/'"
+                  >
+                    <tag [tag]="tagShiny"></tag>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Admin -->
+              <div class="admin-access" *ngIf="hasAdminAccess">
+                <app-button [button]="buttonAdmin"></app-button>
               </div>
             </div>
           </div>

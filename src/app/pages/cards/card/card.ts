@@ -52,6 +52,9 @@ export class Card {
   user_cards: UserCard[] = [];
   nova_edit_url: string;
   on_wishlist: boolean;
+  total_cards_owned: number;
+  tcgplayer_url: string;
+  ebay_url: string;
 
   route: string;
   tempId: number;

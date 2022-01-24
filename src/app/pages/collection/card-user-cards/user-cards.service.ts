@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoaderService } from '@app/controls';
+import {
+  AlertType,
+  LoaderService,
+  Notification,
+  NotificationsService,
+} from '@app/controls';
 import { APIGetPaged, APIResponse, buildUrl } from '@app/models';
 import { Card, ResCards, UserCard } from '@app/pages';
 import { BehaviorSubject } from 'rxjs';
@@ -32,7 +37,11 @@ export class AddUserCard {
 
 @Injectable({ providedIn: 'root' })
 export class UserCardsService {
-  constructor(private http: HttpClient, private loaderService: LoaderService) {}
+  constructor(
+    private http: HttpClient,
+    private loaderService: LoaderService,
+    private notificationService: NotificationsService
+  ) {}
 
   // Get user cards
   private getUserCardsSubject = new BehaviorSubject<ResCards | null>(null);
@@ -85,7 +94,15 @@ export class UserCardsService {
     this.http
       .post<APIResponse>(buildUrl('user-cards/create'), userCard)
       .subscribe((res) => {
-        if (res.success) this.addUserCardSubject.next(userCard);
+        if (res.success) {
+          this.addUserCardSubject.next(userCard);
+          this.notificationService.addNotifications([
+            new Notification({
+              message: 'Card added to collection',
+              alertType: AlertType.success,
+            }),
+          ]);
+        }
         this.loaderService.clearItemLoading('addUserCard');
       });
   }

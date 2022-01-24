@@ -38,6 +38,7 @@ export class CardComponent implements OnInit {
   tagRarity: Tag;
   tagArtist: Tag;
   tagNumber: Tag;
+  tagShiny: Tag;
   buttonTCGPlayer: Button;
   buttonEbay: Button;
   buttonAdmin: Button;
@@ -82,20 +83,6 @@ export class CardComponent implements OnInit {
     this.expansionCards.showFilters = false;
     this.expansionCards.showFooter = false;
     SetSortByCards(this.expansionCards.filter);
-
-    // Buttons
-    this.buttonTCGPlayer = new Button({
-      icon: Icons.externalLink,
-      text: 'Buy on TCGPlayer',
-      classes: 'small width-12',
-      align: 'left',
-    });
-    this.buttonEbay = new Button({
-      icon: Icons.externalLink,
-      text: 'Buy on eBay',
-      classes: 'small width-12',
-      align: 'left',
-    });
   }
 
   getTypeImage(type: string) {
@@ -162,17 +149,43 @@ export class CardComponent implements OnInit {
         }
 
         // Artist
-        if (this.card.artist) {
+        if (this.card.artist)
           this.tagArtist = new Tag({
+            classes: 'artist-tag',
             text: this.card.artist,
             icon: Icons.paintBrush,
           });
-        }
 
         // Card number
         this.tagNumber = new Tag({
           text: this.card.number,
         });
+
+        // Shiny
+        if (this.card.is_shiny)
+          this.tagShiny = new Tag({
+            classes: 'shiny-tag',
+            text: 'Shiny',
+            icon: Icons.stars,
+          });
+
+        // Buttons
+        if (this.card.tcgplayer_url)
+          this.buttonTCGPlayer = new Button({
+            icon: Icons.externalLink,
+            text: 'Buy on TCGPlayer',
+            classes: 'small width-12',
+            align: 'left',
+            href: this.card.tcgplayer_url,
+            target: '_blank',
+          });
+        if (this.card.ebay_url)
+          this.buttonEbay = new Button({
+            icon: Icons.externalLink,
+            text: 'Buy on eBay',
+            classes: 'small width-12',
+            align: 'left',
+          });
 
         // Expansion name
         this.expansionCards.header.title = `${this.card.expansion.name} Cards`;
