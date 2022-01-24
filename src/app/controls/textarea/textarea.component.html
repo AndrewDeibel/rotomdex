@@ -2,12 +2,14 @@
   <label *ngIf="textarea.label" class="label">{{ textarea.label }}</label>
   <textarea
     [style.width]="textarea.width ? textarea.width + 'px' : null"
-    placeholder="{{ textarea.placeholder ? textarea.placeholder : null }}"
+    [attr.placeholder]="textarea.placeholder ? textarea.placeholder : null"
     class="textarea {{ textarea.classes }}"
     (keydown.enter)="keydownEnter()"
     (change)="change()"
-    [disabled]="textarea.disabled"
+    [attr.disabled]="textarea.disabled"
     [(ngModel)]="value"
+    [attr.rows]="textarea.rows"
+    [attr.formControlName]="textarea.formControlName"
   >
   </textarea>
 </div>

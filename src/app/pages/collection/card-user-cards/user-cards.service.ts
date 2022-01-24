@@ -91,6 +91,7 @@ export class UserCardsService {
   }
 
   // Remove user card
+  // TODO: make this observable and add success message here in service
   removeUserCard(user_card_id: number) {
     return this.http.post<APIResponse>(buildUrl('user-cards/delete'), {
       user_card_id,
@@ -98,6 +99,7 @@ export class UserCardsService {
   }
 
   // Update user card
+  // TODO: make this observable and add success message here in service
   updateUserCard(userCard: UserCard) {
     return this.http.post<APIResponse>(buildUrl('user-cards/update'), userCard);
   }

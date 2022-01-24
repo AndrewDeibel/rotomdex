@@ -5,8 +5,13 @@
 >
   <h2 *ngIf="form.title">{{ form.title }}</h2>
   <div class="flex padded vertical">
-    <div *ngFor="let formControlGroup of form.groups">
+    <div class="width-12" *ngFor="let formControlGroup of form.groups">
       <form-group [formControlGroup]="formControlGroup"></form-group>
+    </div>
+    <div *ngIf="form.buttons" class="flex padded space-between">
+      <div *ngFor="let button of form.buttons">
+        <app-button [button]="button"></app-button>
+      </div>
     </div>
   </div>
 </form>

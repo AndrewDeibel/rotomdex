@@ -177,6 +177,9 @@ export class CardUserCardComponent implements OnInit {
           CardUserCardNotesDialogComponent,
           new DialogConfig({
             title: 'Notes',
+            data: {
+              userCard: this.item,
+            },
           })
         );
       },
