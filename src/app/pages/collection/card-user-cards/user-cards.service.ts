@@ -1,10 +1,9 @@
-import { LoaderService } from './../../../controls/loader/loader.service';
-import { APIGetPaged, APIResponse, buildUrl } from '@app/models';
-import { ResCards, Card } from '@app/pages';
-import { BehaviorSubject } from 'rxjs';
-import { UserCard } from './user-card';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { LoaderService } from '@app/controls';
+import { APIGetPaged, APIResponse, buildUrl } from '@app/models';
+import { Card, ResCards, UserCard } from '@app/pages';
+import { BehaviorSubject } from 'rxjs';
 
 export class UpdateUserCard {
   user_card_id: number;

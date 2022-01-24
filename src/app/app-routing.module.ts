@@ -1,25 +1,28 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-// Pages
+import { RouterModule, Routes } from '@angular/router';
 import {
   CardComponent,
   CardsComponent,
-  HomeComponent,
-  ExpansionsComponent,
+  CollectionComponent,
+  DashboardComponent,
+  EditUserComponent,
   ExpansionComponent,
+  ExpansionsComponent,
+  ForgotComponent,
+  HomeComponent,
+  ImportCardsComponent,
+  PokemonComponent,
+  PokemonsComponent,
+  ResetComponent,
   ScannerComponent,
   ScannerListComponent,
-  PokemonsComponent,
-  PokemonComponent,
-  CollectionComponent,
   SignInComponent,
   SignUpComponent,
-  ForgotComponent,
-  ResetComponent,
-  EditUserComponent,
-  ImportCardsComponent,
   VerifyComponent,
+  WishlistComponent,
+  UserCardsComponent,
+  AddUserCardGroupComponent,
+  UserCardGroupComponent,
 } from '@app/pages';
 
 const routes: Routes = [
@@ -67,26 +70,32 @@ const routes: Routes = [
   {
     path: 'collection',
     component: CollectionComponent,
-  },
-  {
-    path: 'collection/dashboard',
-    component: CollectionComponent,
-  },
-  {
-    path: 'collection/wishlist',
-    component: CollectionComponent,
-  },
-  {
-    path: 'collection/add',
-    component: CollectionComponent,
-  },
-  {
-    path: 'collection/group/:id',
-    component: CollectionComponent,
-  },
-  {
-    path: 'collection/import',
-    component: ImportCardsComponent,
+    children: [
+      {
+        path: '',
+        component: UserCardsComponent,
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+      },
+      {
+        path: 'wishlist',
+        component: WishlistComponent,
+      },
+      {
+        path: 'add',
+        component: AddUserCardGroupComponent,
+      },
+      {
+        path: 'group/:id',
+        component: UserCardGroupComponent,
+      },
+      {
+        path: 'import',
+        component: ImportCardsComponent,
+      },
+    ],
   },
 
   // Scanner

@@ -4,10 +4,10 @@ import { Form, FormControl, FormControlGroup, Textarea } from '@app/controls';
 import { DialogConfig, DialogRef } from '@app/controls/dialog';
 
 @Component({
-  selector: 'user-card-notes-dialog',
+  selector: 'card-user-card-notes-dialog',
   template: `<app-form [form]="form"></app-form>`,
 })
-export class UserCardNotesDialogComponent {
+export class CardUserCardNotesDialogComponent {
   formNotes: FormGroup = this.formBuilder.group({
     notesControl: [''],
   });

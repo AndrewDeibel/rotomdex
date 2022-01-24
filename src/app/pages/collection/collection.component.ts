@@ -1,14 +1,13 @@
-import {
-  UserCardGroupService,
-  ResUserCardGroups,
-} from './user-card-group/user-card-group.services';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Menu, MenuItem, ProgressBar } from '@app/controls';
-import { ItemGroup, Items } from '@app/layout';
-import { Icons, Symbols, APIGetPaged } from '@app/models';
-import { AuthenticationService } from '@app/pages/auth';
-import { UserCardsService, UserCardGroup } from '@app/pages/collection';
+import { Items } from '@app/layout';
+import { APIGetPaged, Icons, Symbols } from '@app/models';
+import {
+  UserCardGroup,
+  UserCardGroupService,
+  AuthenticationService,
+} from '@app/pages';
 
 @Component({
   selector: 'collection',
@@ -24,67 +23,22 @@ export class CollectionComponent implements OnInit {
   groupItems: Items = new Items();
 
   constructor(
-    private userCardsService: UserCardsService,
     private userCardGroupService: UserCardGroupService,
     private authenticationService: AuthenticationService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
+    private router: Router
   ) {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigateByUrl('/');
     }
   }
 
-  showDashboard: boolean;
-  showImport: boolean;
-  showWishlist: boolean;
-  showAll: boolean;
-  showGroup: boolean;
-  showAddGroup: boolean;
-  id: number;
-
   ngOnInit() {
-    this.showHideTabs();
-    this.handleParams();
     this.setupSubscriptions();
     this.setupControls();
     this.getUserCardGroups();
   }
 
-  showHideTabs() {
-    // TODO: move this logic to child routes
-    this.showDashboard = window.location.pathname === '/collection/dashboard';
-    this.showImport = window.location.pathname === '/collection/import';
-    this.showWishlist = window.location.pathname === '/collection/wishlist';
-    this.showAll = window.location.pathname === '/collection';
-    this.showAddGroup = window.location.pathname === '/collection/add';
-  }
-
-  handleParams() {
-    this.activatedRoute.params.subscribe((params) => {
-      if (params['id']) {
-        this.id = Number(params['id']);
-        this.showGroup = true;
-      }
-    });
-  }
-
   setupSubscriptions() {
-    this.userCardsService.getUserCardsObservable().subscribe((res: any) => {
-      if (res) {
-        this.items.footer.totalPages = res.total_pages;
-        this.items.footer.totalItems = res.total_results;
-        if (res.cards && res.cards.length) {
-          this.items.itemGroups = [
-            new ItemGroup({
-              items: res.cards,
-            }),
-          ];
-        } else {
-          this.items.itemGroups = [];
-        }
-      }
-    });
     this.userCardGroupService.getUserCardGroupsObservable().subscribe((res) => {
       if (res) {
         this.menuSidebar.items.push(
@@ -105,21 +59,6 @@ export class CollectionComponent implements OnInit {
             exactMatch: true,
           })
         );
-      }
-    });
-    this.userCardsService.getUserCardsObservable().subscribe((res) => {
-      if (res) {
-        this.groupItems.footer.totalPages = res.total_pages;
-        this.groupItems.footer.totalItems = res.total_results;
-        if (res.cards && res.cards.length) {
-          this.groupItems.itemGroups = [
-            new ItemGroup({
-              items: res.cards,
-            }),
-          ];
-        } else {
-          this.groupItems.itemGroups = [];
-        }
       }
     });
   }
@@ -175,33 +114,6 @@ export class CollectionComponent implements OnInit {
       new APIGetPaged({
         page: 1,
         page_size: 100,
-      })
-    );
-  }
-
-  getUserCardGroupCards() {
-    this.userCardsService.getUserCards(
-      new APIGetPaged({
-        page: this.groupItems.footer.page,
-        page_size: this.groupItems.footer.pageSize,
-        query: this.groupItems.filter.textboxSearch.value,
-        sort_by: this.groupItems.filter.selectSortBy.value,
-        sort_direction: this.groupItems.filter.selectSortDirection.value,
-        user_id: this.authenticationService.currentUserValue?.id,
-        card_group_id: this.id,
-      })
-    );
-  }
-
-  getUserCards() {
-    this.userCardsService.getUserCards(
-      new APIGetPaged({
-        page: this.items.footer.page,
-        page_size: this.items.footer.pageSize,
-        query: this.items.filter.textboxSearch.value,
-        sort_by: this.items.filter.selectSortBy.value,
-        sort_direction: this.items.filter.selectSortDirection.value,
-        user_id: this.authenticationService.currentUserValue?.id,
       })
     );
   }

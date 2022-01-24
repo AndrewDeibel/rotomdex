@@ -44,7 +44,7 @@
         </div>
       </div>
       <div class="flex padded-large vertical">
-        <user-card
+        <card-user-card
           class="box"
           *ngFor="let userCard of userCards"
           [item]="userCard"
@@ -52,7 +52,7 @@
           (updated)="updateItem($event)"
           [userCardGroups]="userCardGroups"
         >
-        </user-card>
+        </card-user-card>
       </div>
       <empty *ngIf="userCards.length === 0" [empty]="empty"></empty>
       <div class="width-12" *ngIf="userCards.length">

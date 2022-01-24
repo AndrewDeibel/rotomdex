@@ -71,15 +71,17 @@ import {
   PokemonComponent,
   CollectionComponent,
   DashboardComponent,
-  UserCardGroupComponent,
-  UserCardsComponent,
-  UserCardComponent,
+  AddUserCardGroupComponent,
+  CardUserCardsComponent,
+  CardUserCardComponent,
   EditUserComponent,
   CardImageDialogComponent,
-  UserCardNotesDialogComponent,
+  CardUserCardNotesDialogComponent,
   ChangePasswordDialogComponent,
   ImportCardsComponent,
   WishlistComponent,
+  UserCardsComponent,
+  UserCardGroupComponent,
 } from './pages';
 
 // Page
@@ -285,10 +287,10 @@ import { environment } from '../environments/environment';
     ItemsGridComponent,
     ItemsListComponent,
     ItemsGroupsComponent,
-    UserCardGroupComponent,
+    AddUserCardGroupComponent,
     DashboardComponent,
     CardImageDialogComponent,
-    UserCardNotesDialogComponent,
+    CardUserCardNotesDialogComponent,
     ChangePasswordDialogComponent,
 
     // Pages
@@ -313,13 +315,15 @@ import { environment } from '../environments/environment';
     PokmeonItemListComponent,
     PokemonComponent,
     UserMenuComponent,
-    UserCardComponent,
-    UserCardsComponent,
+    CardUserCardComponent,
+    CardUserCardsComponent,
     CollectionComponent,
     ScannerComponent,
     ScannerListComponent,
     ImportCardsComponent,
     WishlistComponent,
+    UserCardsComponent,
+    UserCardGroupComponent,
 
     // Helpers
     ClickOutsideDirective,

@@ -1,1 +1,1 @@
-export * from './collection-dashboard.component';
+export * from './dashboard.component';

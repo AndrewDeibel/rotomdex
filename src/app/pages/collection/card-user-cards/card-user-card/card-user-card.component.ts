@@ -1,7 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Button } from '@app/controls/button';
-import { DialogConfig, DialogService } from '@app/controls/dialog';
-import { Select, SelectOption, SelectOptionGroup } from '@app/controls/select';
+import {
+  Button,
+  DialogConfig,
+  DialogService,
+  Select,
+  SelectOption,
+  SelectOptionGroup,
+} from '@app/controls';
 import {
   Condition,
   ConditionGraded,
@@ -9,15 +14,18 @@ import {
   Icons,
   Printings,
 } from '@app/models';
-import { UserCard, UserCardGroup } from './user-card';
-import { UserCardNotesDialogComponent } from './user-card-notes-dialog.component';
+import {
+  CardUserCardNotesDialogComponent,
+  UserCard,
+  UserCardGroup,
+} from '@app/pages';
 
 @Component({
-  selector: 'user-card',
-  templateUrl: './user-card.component.html',
-  styleUrls: ['./user-card.component.scss'],
+  selector: 'card-user-card',
+  templateUrl: './card-user-card.component.html',
+  styleUrls: ['./card-user-card.component.scss'],
 })
-export class UserCardComponent implements OnInit {
+export class CardUserCardComponent implements OnInit {
   @Input() item: UserCard;
   @Input() userCardGroups: UserCardGroup[];
   @Output() deleted: EventEmitter<boolean> = new EventEmitter();
@@ -166,7 +174,7 @@ export class UserCardComponent implements OnInit {
       width: '100%',
       click: () => {
         this.dialogService.open(
-          UserCardNotesDialogComponent,
+          CardUserCardNotesDialogComponent,
           new DialogConfig({
             title: 'Notes',
           })

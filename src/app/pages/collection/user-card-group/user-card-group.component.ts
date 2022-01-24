@@ -1,136 +1,70 @@
-import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import {
-  Button,
-  ButtonType,
-  Select,
-  SelectOption,
-  Textarea,
-  Textbox,
-  Toggle,
-} from '@app/controls';
-import { Icons } from '@app/models';
-import { UserCardGroup } from '@app/pages';
+import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
-import { UserCardGroupService } from './user-card-group.services';
+import { UserCardsService } from '@app/pages/collection';
+import { Component, OnInit } from '@angular/core';
+import { ItemGroup, Items } from '@app/layout';
+import { APIGetPaged } from '@app/models';
 
 @Component({
   selector: 'user-card-group',
-  templateUrl: 'user-card-group.component.html',
-  styleUrls: ['./user-card-group.component.scss'],
+  template: `<items
+    [items]="items"
+    (outputGetItems)="getUserCardGroup()"
+  ></items>`,
 })
 export class UserCardGroupComponent implements OnInit {
-  form: FormGroup;
-  textboxName: Textbox;
-  selectType: Select;
-  textareaDescription: Textarea;
-  togglePublic: Toggle;
-  buttonSave: Button;
-  buttonCancel: Button;
+  items: Items = new Items();
+  id: number;
+
   constructor(
-    private formBuilder: FormBuilder,
+    private userCardsService: UserCardsService,
     private authenticationService: AuthenticationService,
-    private router: Router,
-    private userCardGroupService: UserCardGroupService,
-    private location: Location
-  ) {
-    if (!this.authenticationService.currentUserValue) {
-      this.router.navigateByUrl('/');
-    }
+    private activatedRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.handleRoute();
+    this.setupSubscriptions();
   }
 
-  ngOnInit() {
-    this.setupSubscriptions();
-    this.setupControls();
+  handleRoute() {
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['id']) {
+        const idChanged = this.id;
+        this.id = Number(params['id']);
+        if (idChanged) this.getUserCardGroup();
+      }
+    });
   }
 
   setupSubscriptions() {
-    this.userCardGroupService
-      .addUserCardGroupObservable()
-      .subscribe((userCardGroup) => {
-        if (userCardGroup) {
-          this.router.navigateByUrl('/collection/dashboard');
+    this.userCardsService.getUserCardsObservable().subscribe((res) => {
+      if (res) {
+        this.items.footer.totalPages = res.total_pages;
+        this.items.footer.totalItems = res.total_results;
+        if (res.cards && res.cards.length) {
+          this.items.itemGroups = [
+            new ItemGroup({
+              items: res.cards,
+            }),
+          ];
+        } else {
+          this.items.itemGroups = [];
         }
-      });
-  }
-
-  setupControls() {
-    this.form = this.formBuilder.group({
-      nameControl: ['', Validators.required],
-      selectType: ['', Validators.required],
-      selectIcon: [''],
-      descriptionControl: [''],
-      publicControl: [''],
-    });
-    this.textboxName = new Textbox({
-      label: 'Name',
-    });
-    this.selectType = new Select({
-      label: 'Type',
-      advancedSelect: true,
-      multiple: false,
-      placeholder: 'Select type...',
-      options: [
-        new SelectOption({
-          text: 'Binder',
-          icon: Icons.binder,
-          value: 'binder',
-        }),
-        new SelectOption({
-          text: 'Deck',
-          icon: Icons.deck,
-          value: 'deck',
-        }),
-        new SelectOption({
-          text: 'Trades',
-          icon: Icons.exchange,
-          value: 'trades',
-        }),
-        new SelectOption({
-          text: 'Box',
-          icon: Icons.archive,
-          value: 'box',
-        }),
-        new SelectOption({
-          text: 'Group',
-          icon: Icons.folder,
-          value: 'group',
-        }),
-      ],
-    });
-    this.textareaDescription = new Textarea({
-      label: 'Description',
-    });
-    this.togglePublic = new Toggle({
-      text: 'Private',
-      textChecked: 'Public',
-    });
-    this.buttonSave = new Button({
-      text: 'Save',
-      type: ButtonType.submit,
-    });
-    this.buttonCancel = new Button({
-      text: 'Cancel',
-      classes: 'secondary',
-      click: () => {
-        this.location.back();
-      },
+      }
     });
   }
 
-  submit() {
-    if (this.form.invalid) {
-      return;
-    }
-
-    this.userCardGroupService.addUserCardGroup(
-      new UserCardGroup({
-        name: this.form.controls['nameControl'].value,
-        type: this.form.controls['selectType'].value,
-        description: this.form.controls['descriptionControl'].value,
-        public: this.form.controls['publicControl'].value,
+  getUserCardGroup() {
+    this.userCardsService.getUserCards(
+      new APIGetPaged({
+        page: this.items.footer.page,
+        page_size: this.items.footer.pageSize,
+        query: this.items.filter.textboxSearch.value,
+        sort_by: this.items.filter.selectSortBy.value,
+        sort_direction: this.items.filter.selectSortDirection.value,
+        user_id: this.authenticationService.currentUserValue?.id,
+        card_group_id: this.id,
       })
     );
   }
