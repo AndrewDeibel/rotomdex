@@ -22,9 +22,11 @@ export class Attack {
 }
 
 export class Card {
-  placeholder: boolean;
+  // Both can be used
   id: number;
   card_id: number;
+
+  // Data
   name: string;
   slug: string;
   pokemon: Pokemon;
@@ -48,16 +50,29 @@ export class Card {
   has_shadowless: boolean;
   has_reverse_holo: boolean;
   types: string[] = [];
-  last_prices: CardLastPrices;
+
+  // Prices
+  last_prices: CardLastPrices[] = [];
+
+  // Collection
   user_cards: UserCard[] = [];
-  nova_edit_url: string;
   on_wishlist: boolean;
   total_cards_owned: number;
+
+  // Purchase links
   tcgplayer_url: string;
   ebay_url: string;
 
+  // Route
   route: string;
+
+  // Admin
+  nova_edit_url: string;
+
+  // Scanner
   tempId: number;
+  placeholder: boolean;
+  other_results: Card[] = [];
 
   private getCardNumber(): string {
     // IS number
@@ -94,18 +109,20 @@ export class Card {
 }
 
 export class CardLastPrices {
+  id: number;
   card_id: number;
+  variation: string;
   condition: string;
   created_at: Date;
+  updated_at: Date;
+
+  // Prices
+  market_price: number;
   direct_price: string;
   high_price: number;
-  id: number;
-  low_price: number;
-  market_price: number;
   mid_price: number;
+  low_price: number;
   source: string;
-  updated_at: Date;
-  variation: string;
 
   constructor(init?: Partial<CardLastPrices>) {
     Object.assign(this, init);

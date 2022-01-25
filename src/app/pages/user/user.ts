@@ -12,6 +12,9 @@ export class User {
   email_verify_token: string;
   hasNovaAccess: boolean;
 
+  // Scanner
+  device_id: string;
+
   public constructor(init?: Partial<User>) {
     Object.assign(this, init);
   }

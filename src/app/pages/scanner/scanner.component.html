@@ -8,6 +8,7 @@
       [videoOptions]="videoOptions"
       [imageQuality]="1"
       (imageCapture)="handleWebcamImage($event)"
+      (cameraSwitched)="cameraWasSwitched($event)"
       (initError)="handleWebcamInitError($event)"
     ></webcam>
   </div>
@@ -26,7 +27,7 @@
         <img
           class="scanner-result-image"
           [src]="card.image"
-          onerror="this.src='./assets/placeholder.jpg';"
+          onerror="this.src='./assets/placeholder.png';"
         />
         <loader [active]="card.placeholder"></loader>
       </div>

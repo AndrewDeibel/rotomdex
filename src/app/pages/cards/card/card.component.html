@@ -19,8 +19,8 @@
                 src="{{ card.image }}"
                 class="img-card-image border-radius-card shadow transition"
                 (click)="createDialogCardImage()"
+                onerror="this.src='./assets/placeholder.png';"
               />
-              <img src="{{ this.card.image_high_res }}" style="display: none" />
             </div>
           </figure>
         </div>

@@ -6,31 +6,35 @@ import { ItemGroup } from './items-groups/item-group';
 import { Icons } from '@app/models';
 
 export class Items {
-	showHeader: boolean = true;
-	showFilters: boolean = true;
-	showFooter: boolean = true;
-	header: ItemsHeader = new ItemsHeader();
-	filter: ItemsFilter = new ItemsFilter();
-	footer: ItemsFooter = new ItemsFooter();
+  showHeader: boolean = true;
+  showFilters: boolean = true;
+  showFooter: boolean = true;
+  header: ItemsHeader = new ItemsHeader();
+  filter: ItemsFilter = new ItemsFilter();
+  footer: ItemsFooter = new ItemsFooter();
 
-	itemClasses: string;
+  itemClasses: string;
 
-	itemDisplayType: ItemDisplayType = ItemDisplayType.grid;
-	itemGroups: ItemGroup[] = [];
-	getItems: (_this: any) => void;
+  itemDisplayType: ItemDisplayType = ItemDisplayType.grid;
+  itemGroups: ItemGroup[] = [];
+  getItems: (_this: any) => void;
 
-	_this: any;
+  _this: any;
 
-	buttonNoResults: Button;
-	noResults: string = "No items found";
-	noResultsIcon: string = Icons.archive;
-	noResultsImage: string;
+  buttonNoResults: Button;
+  noResults: string = 'No items found';
+  noResultsIcon: string = Icons.archive;
+  noResultsImage: string;
 
-    constructor(init?:Partial<Items>) {
-		Object.assign(this, init);
-		this.header.getItems = this.getItems;
-		this.footer.getItems = this.getItems;
-		this.header._this = this._this;
-		this.footer._this = this._this;
-	}
+  resetPage() {
+    this.footer.page = 1;
+  }
+
+  constructor(init?: Partial<Items>) {
+    Object.assign(this, init);
+    this.header.getItems = this.getItems;
+    this.footer.getItems = this.getItems;
+    this.header._this = this._this;
+    this.footer._this = this._this;
+  }
 }

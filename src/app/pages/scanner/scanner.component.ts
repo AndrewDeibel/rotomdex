@@ -1,3 +1,4 @@
+import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { AppSettings } from '@app/app';
@@ -8,6 +9,7 @@ import { ScannerService } from '@app/pages/scanner/scanner.service';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { last, Observable, Subject } from 'rxjs';
+import { User } from '..';
 
 @AutoUnsubscribe()
 @Component({
@@ -19,7 +21,8 @@ export class ScannerComponent implements OnInit {
   constructor(
     private titleService: Title,
     private scannerService: ScannerService,
-    private notificationService: NotificationsService
+    private notificationService: NotificationsService,
+    private authenticationService: AuthenticationService
   ) {}
 
   // Webcam options
@@ -42,24 +45,34 @@ export class ScannerComponent implements OnInit {
 
   ngOnInit() {
     this.setupControls();
-    this.setupService();
+    this.setupSubscriptions();
+  }
+
+  goToRearCamera() {
+    WebcamUtil.getAvailableVideoInputs().then(
+      (mediaDevices: MediaDeviceInfo[]) => {
+        if (!this.deviceId) {
+          this.multipleWebcamsAvailable =
+            mediaDevices && mediaDevices.length > 1;
+          if (this.authenticationService.currentUserValue?.device_id) {
+            this.showNextWebcam(
+              this.authenticationService.currentUserValue.device_id
+            );
+          } else if (this.multipleWebcamsAvailable) {
+            this.showNextWebcam(mediaDevices[1].deviceId);
+          }
+        }
+      }
+    );
   }
 
   setupControls() {
+    this.goToRearCamera();
+
     // Load sound effect
     this.soundEffect = new Audio();
     this.soundEffect.src = '../../assets/audio/soundeffect.mp3';
     this.soundEffect.load();
-
-    // Go to rear camera
-    WebcamUtil.getAvailableVideoInputs().then(
-      (mediaDevices: MediaDeviceInfo[]) => {
-        this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
-        if (this.multipleWebcamsAvailable) {
-          this.showNextWebcam(mediaDevices[1].deviceId);
-        }
-      }
-    );
 
     // Page title
     this.titleService.setTitle(AppSettings.titlePrefix + 'Scanner');
@@ -69,7 +82,7 @@ export class ScannerComponent implements OnInit {
       this.scans = this.scannerService.scans;
   }
 
-  setupService() {
+  setupSubscriptions() {
     this.scannerService.scansObservable().subscribe((scans) => {
       this.scans = scans;
       // Limit visible to 6
@@ -99,6 +112,14 @@ export class ScannerComponent implements OnInit {
     this.soundEffect.play();
     const kilobytes = (webcamImage.imageAsBase64.length * (3 / 4) - 2) / 1000;
     this.scannerService.scan(webcamImage.imageAsBase64);
+  }
+
+  cameraWasSwitched(device_id: string): void {
+    this.deviceId = device_id;
+    this.authenticationService.currentUserValue = new User({
+      ...this.authenticationService.currentUserValue,
+      device_id,
+    });
   }
 
   get triggerObservable(): Observable<void> {

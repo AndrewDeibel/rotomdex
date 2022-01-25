@@ -50,6 +50,12 @@
     left: 0;
   }
 
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   $promo: black;
   $common: grey;
   $uncommon: darken(white, 10%);
@@ -113,8 +119,8 @@
       content: "";
       display: inline-block;
       margin-right: 4px;
-      width: 12px;
-      height: 12px;
+      min-width: 12px;
+      min-height: 12px;
       clip-path: polygon(
         50% 0%,
         61% 35%,

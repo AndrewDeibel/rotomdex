@@ -4,15 +4,19 @@
       <loader [active]="imageLoading"></loader>
       <img
         src="{{ card.image }}"
-        onerror="this.src='./assets/placeholder.jpg';"
+        onerror="this.src='./assets/placeholder.png';"
         [hidden]="imageLoading"
         (load)="onLoad()"
       />
       <div
         class="money-tag"
-        *ngIf="false && card.last_prices && card.last_prices.market_price"
+        *ngIf="
+          card.last_prices &&
+          card.last_prices.length &&
+          card.last_prices[0].market_price
+        "
       >
-        {{ card.last_prices.market_price | currency }}
+        {{ card.last_prices[0].market_price | currency }}
       </div>
       <div class="collection">
         <textbox [textbox]="textbox"></textbox>

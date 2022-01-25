@@ -35,7 +35,12 @@ export class ScannerService {
         this.removeScan(tempId);
         if (res.success) {
           this.addScan(
-            new Card({ ...res.data.card.card, tempId: this.getTempId() })
+            new Card({
+              ...res.data.results[0].card,
+              other_results:
+                res.data.results.length > 1 ? res.data.results.splice(1) : [],
+              tempId: this.getTempId(),
+            })
           );
         } else {
           this.notificationService.addNotifications([

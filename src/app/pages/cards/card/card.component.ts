@@ -21,6 +21,7 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { Card, SetSortByCards } from './card';
 import { CardImageDialogComponent } from './card-image-dialog.component';
 import { CardService } from './card.service';
+import { CardsService } from '..';
 
 @AutoUnsubscribe()
 @Component({
@@ -47,6 +48,7 @@ export class CardComponent implements OnInit {
   constructor(
     private titleService: Title,
     private cardService: CardService,
+    private cardsService: CardsService,
     private route: ActivatedRoute,
     private expansionService: ExpansionService,
     private dialogService: DialogService,
@@ -113,11 +115,19 @@ export class CardComponent implements OnInit {
         // Data
         this.card = card;
 
-        // Related cards
+        // Related pokemon cards
         if (this.card.pokemon) {
           this.relatedCards.header.title = `${this.card.pokemon.variant.name} Cards`;
           this.relatedCards.header.titleRoute = this.card.pokemon.route;
           this.relatedCards.noResults = `No ${this.card.pokemon.variant.name} cards found`;
+        }
+        // Related sub type cards
+        else if (this.card.sub_type) {
+          this.relatedCards.header.title = `${this.card.sub_type} Cards`;
+        }
+        // Related super type cards
+        else if (this.card.super_type) {
+          this.relatedCards.header.title = `${this.card.super_type} Cards`;
         }
 
         // Admin button
@@ -194,9 +204,9 @@ export class CardComponent implements OnInit {
         this.expansionCards.header.titleRoute = this.card.expansion.route;
 
         // Prices
-        if (this.card.last_prices) {
-          this.buttonTCGPlayer.price = this.card.last_prices.market_price;
-          this.buttonEbay.price = this.card.last_prices.market_price;
+        if (this.card.last_prices.length) {
+          this.buttonTCGPlayer.price = this.card.last_prices[0].market_price;
+          this.buttonEbay.price = this.card.last_prices[0].market_price;
         }
       }
     });
@@ -210,8 +220,19 @@ export class CardComponent implements OnInit {
         }
       });
 
-    // Response get related cards
+    // Response get related pokemon cards
     this.pokemonService.getPokemonVariantCardsObservable().subscribe((res) => {
+      if (res) {
+        this.relatedCards.itemGroups = [
+          new ItemGroup({
+            items: res.cards,
+          }),
+        ];
+      }
+    });
+
+    // Response get related sub type/supertype cards
+    this.cardsService.getCardsFilteredObservable().subscribe((res) => {
       if (res) {
         this.relatedCards.itemGroups = [
           new ItemGroup({
@@ -246,17 +267,46 @@ export class CardComponent implements OnInit {
   }
 
   getRelatedCards() {
-    if (this.card && this.card.pokemon) {
-      this.pokemonService.getPokemonVariantCards(
-        new APIGetPaged({
-          page: this.relatedCards.footer.page,
-          slug: this.card.pokemon.variant.slug,
-          page_size: this.relatedCards.footer.pageSize,
-          sort_by: this.relatedCards.filter.selectSortBy.value,
-          sort_direction: this.relatedCards.filter.selectSortDirection.value,
-          query: this.relatedCards.filter.textboxSearch.value,
-        })
-      );
+    if (this.card) {
+      // Related pokemon cards
+      if (this.card.pokemon) {
+        this.pokemonService.getPokemonVariantCards(
+          new APIGetPaged({
+            page: this.relatedCards.footer.page,
+            slug: this.card.pokemon.variant.slug,
+            page_size: this.relatedCards.footer.pageSize,
+            sort_by: this.relatedCards.filter.selectSortBy.value,
+            sort_direction: this.relatedCards.filter.selectSortDirection.value,
+            query: this.relatedCards.filter.textboxSearch.value,
+          })
+        );
+      }
+      // Related sub types
+      else if (this.card.sub_type) {
+        this.cardsService.getCardsFiltered(
+          new APIGetPaged({
+            page: this.relatedCards.footer.page,
+            page_size: this.relatedCards.footer.pageSize,
+            sort_by: this.relatedCards.filter.selectSortBy.value,
+            sort_direction: this.relatedCards.filter.selectSortDirection.value,
+            query: this.relatedCards.filter.textboxSearch.value,
+            subtype: this.card.sub_type,
+          })
+        );
+      }
+      // Related super types
+      else if (this.card.sub_type) {
+        this.cardsService.getCardsFiltered(
+          new APIGetPaged({
+            page: this.relatedCards.footer.page,
+            page_size: this.relatedCards.footer.pageSize,
+            sort_by: this.relatedCards.filter.selectSortBy.value,
+            sort_direction: this.relatedCards.filter.selectSortDirection.value,
+            query: this.relatedCards.filter.textboxSearch.value,
+            supertype: this.card.super_type,
+          })
+        );
+      }
     }
   }
 

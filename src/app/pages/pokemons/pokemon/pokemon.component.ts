@@ -51,17 +51,27 @@ export class PokemonComponent implements OnInit {
       .getPokemonVariantObservable()
       .subscribe((pokemonVariant) => {
         if (pokemonVariant) {
+          this.pokemonVariant = pokemonVariant;
+
+          // Title
           this.titleService.setTitle(
             AppSettings.titlePrefix + pokemonVariant.pokemon.name
           );
-          this.loaderService.clearItemLoading('getPokemon');
-          this.pokemonVariant = pokemonVariant;
+
+          // No results
           this.items.noResults =
             'No ' + this.pokemonVariant.name + ' cards found';
+
+          // Progress bar
           this.progressBar = new ProgressBar({
             value: pokemonVariant.total_cards_owned,
             total: pokemonVariant.total_cards,
           });
+
+          // Reset page number
+          this.items.resetPage();
+
+          // Get Pokemon cards
           this.getCards();
 
           // Dex button

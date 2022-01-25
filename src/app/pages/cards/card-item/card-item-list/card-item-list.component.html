@@ -3,32 +3,57 @@
     class="flex padded flex-center"
     [routerLink]="card.route ? card.route : []"
   >
-    <div style="max-width: 64px">
+    <div style="max-width: 80px">
       <div class="card-image" [class.placeholder]="!card.image">
         <loader *ngIf="false" [active]="imageLoading"></loader>
-        <img src="{{ card.image }}" [hidden]="imageLoading" (load)="onLoad()" />
+        <img
+          src="{{ card.image }}"
+          onerror="this.src='./assets/placeholder.png';"
+          [hidden]="imageLoading"
+          (load)="onLoad()"
+        />
       </div>
     </div>
 
     <div class="box">
       <div class="flex padded flex-center">
-        <div class="width-3">
+        <div class="width-4 small-12">
           <h6>{{ card.name }}</h6>
-        </div>
-        <div class="width-3">
           {{ card.expansion.name }}
         </div>
-        <div class="width-2">
-          {{ card.number }}
+        <div class="width-2 small-3 flex">
+          <!-- Number -->
+          <div *ngIf="tagNumber" class="small-12">
+            <tag [tag]="tagNumber"></tag>
+          </div>
         </div>
-        <div class="width-2">
-          {{ card.rarity }}
+        <div class="width-3 small-3 flex">
+          <!-- Rarity -->
+          <div *ngIf="tagRarity" class="small-12">
+            <a
+              class="block rounded"
+              [routerLink]="
+                card.rarity &&
+                '/cards/rarity/' + card.rarity.toLowerCase().replace(' ', '-')
+              "
+            >
+              <tag [tag]="tagRarity"></tag>
+            </a>
+          </div>
         </div>
-        <!-- <div class="width-2">
-					<div class="money-tag" *ngIf="card.last_prices">
-						{{ card.last_prices.market_price | currency }}
-					</div>
-				</div> -->
+        <div class="width-2 small-3">
+          <div
+            class="money-tag small-12 align-center"
+            *ngIf="card.last_prices && card.last_prices.length"
+          >
+            {{ card.last_prices[0].market_price | currency }}
+          </div>
+        </div>
+        <div class="width-1 small-3 flex">
+          <div class="width-12">
+            <textbox [textbox]="textbox"></textbox>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -93,12 +93,12 @@ export class CollectionComponent implements OnInit {
           route: '/collection/wishlist',
           exactMatch: true,
         }),
-        new MenuItem({
-          text: 'Favorites',
-          icon: Icons.heart,
-          route: '/collection/favorites',
-          exactMatch: true,
-        }),
+        // new MenuItem({
+        //   text: 'Favorites',
+        //   icon: Icons.heart,
+        //   route: '/collection/favorites',
+        //   exactMatch: true,
+        // }),
         new MenuItem({
           text: 'All Cards',
           symbol: Symbols.cards,
