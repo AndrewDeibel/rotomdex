@@ -1,10 +1,19 @@
 @import "settings";
 
 .alert {
-	padding: $spacing ($spacing * 2);
-	border: $border;
-	border-radius: $border-radius-small;
-	background: rgba($grey, 0.5);
-	box-shadow: $shadow-sheen;
-	color: rgba(black, 0.6);
+  padding: $spacing ($spacing * 2);
+  border: $border;
+  border-radius: $border-radius-small;
+  background: rgba($grey, 0.5);
+  box-shadow: $shadow-sheen;
+  color: rgba(black, 0.6);
+  display: flex;
+  align-items: center;
+  fa-icon {
+    width: 10px;
+    margin-right: 8px;
+  }
+  span {
+    flex: 1;
+  }
 }

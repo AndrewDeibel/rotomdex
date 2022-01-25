@@ -1,3 +1,9 @@
+<div *ngIf="showAlert" class="max relative">
+  <div class="absolute z-2 width-12 flex justify-center">
+    <alert [alert]="alertInstructions"></alert>
+  </div>
+</div>
+
 <div class="scanner">
   <!-- Webcam -->
   <div class="scanner-camera-wrapper" (click)="runScan()">

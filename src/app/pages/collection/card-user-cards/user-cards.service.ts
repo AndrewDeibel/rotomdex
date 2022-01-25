@@ -108,16 +108,48 @@ export class UserCardsService {
   }
 
   // Remove user card
-  // TODO: make this observable and add success message here in service
+  private removeUserCardSubject = new BehaviorSubject<number | null>(null);
+  removeUserCardObservable() {
+    this.removeUserCardSubject = new BehaviorSubject<number | null>(null);
+    return this.removeUserCardSubject.asObservable();
+  }
   removeUserCard(user_card_id: number) {
-    return this.http.post<APIResponse>(buildUrl('user-cards/delete'), {
-      user_card_id,
-    });
+    this.http
+      .post<APIResponse>(buildUrl('user-cards/delete'), {
+        user_card_id,
+      })
+      .subscribe((res) => {
+        if (res.success) {
+          this.removeUserCardSubject.next(user_card_id);
+          this.notificationService.addNotifications([
+            new Notification({
+              message: 'Card removed from collection',
+              alertType: AlertType.success,
+            }),
+          ]);
+        }
+      });
   }
 
   // Update user card
-  // TODO: make this observable and add success message here in service
+  private updateUserCardSubject = new BehaviorSubject<UserCard | null>(null);
+  updateUserCardObservable() {
+    this.updateUserCardSubject = new BehaviorSubject<UserCard | null>(null);
+    return this.updateUserCardSubject.asObservable();
+  }
   updateUserCard(userCard: UserCard) {
-    return this.http.post<APIResponse>(buildUrl('user-cards/update'), userCard);
+    this.http
+      .post<APIResponse>(buildUrl('user-cards/update'), userCard)
+      .subscribe((res) => {
+        if (res.success) {
+          this.updateUserCardSubject.next(userCard);
+          this.notificationService.addNotifications([
+            new Notification({
+              message: 'Card updated',
+              alertType: AlertType.success,
+            }),
+          ]);
+        }
+      });
   }
 }

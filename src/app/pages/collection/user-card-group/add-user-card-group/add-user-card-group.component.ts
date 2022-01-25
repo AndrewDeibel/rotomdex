@@ -39,6 +39,12 @@ export class AddUserCardGroupComponent implements OnInit {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigateByUrl('/');
     }
+    this.form = this.formBuilder.group({
+      nameControl: ['', Validators.required],
+      selectType: ['', Validators.required],
+      descriptionControl: [''],
+      publicControl: [''],
+    });
   }
 
   ngOnInit() {
@@ -57,17 +63,12 @@ export class AddUserCardGroupComponent implements OnInit {
   }
 
   setupControls() {
-    this.form = this.formBuilder.group({
-      nameControl: ['', Validators.required],
-      selectType: ['', Validators.required],
-      selectIcon: [''],
-      descriptionControl: [''],
-      publicControl: [''],
-    });
     this.textboxName = new Textbox({
+      name: 'nameControl',
       label: 'Name',
     });
     this.selectType = new Select({
+      name: 'selectType',
       label: 'Type',
       advancedSelect: true,
       multiple: false,
@@ -101,9 +102,11 @@ export class AddUserCardGroupComponent implements OnInit {
       ],
     });
     this.textareaDescription = new Textarea({
+      name: 'descriptionControl',
       label: 'Description',
     });
     this.togglePublic = new Toggle({
+      name: 'publicControl',
       text: 'Private',
       textChecked: 'Public',
     });

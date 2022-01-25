@@ -12,7 +12,7 @@
         <div id="expansion-logos">
           <div class="flex padded relative">
             <div
-              class="width-3 small-2 flex vertical justify-center"
+              class="width-3 flex vertical justify-center"
               *ngFor="let expansion of featured.expansions"
             >
               <a [routerLink]="expansion.route">
@@ -54,7 +54,7 @@
       <div class="width-6 small-12">
         <div id="cards">
           <div class="flex padded relative">
-            <div class="width-2 small-2" *ngFor="let card of featured.cards">
+            <div class="width-2 small-3" *ngFor="let card of featured.cards">
               <a [routerLink]="card.route">
                 <img
                   class="card hover-zoom-large hover-z-1"
@@ -77,7 +77,7 @@
         <div id="pokemon">
           <div class="flex padded relative">
             <div
-              class="width-2 small-2"
+              class="width-2 small-3"
               *ngFor="let pokemon of featured.pokemon"
             >
               <a [routerLink]="pokemon.route" class="pokemon-link">
@@ -100,8 +100,7 @@
         <h2>Pokemon</h2>
         <p>
           View the cards featuring your favorite Pokemon and explore the
-          ever-growing Pokedex. With 1,000+ Pokemon species, and 14,000+ unique
-          cards there is always a new Pokemon card to learn about.
+          ever-growing Pokedex.
         </p>
         <app-button [button]="pokemonButton"></app-button>
       </div>

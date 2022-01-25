@@ -22,6 +22,7 @@ export class Textbox {
   dark: boolean;
   size: Size;
   formControlName: string;
+  name: string;
 
   keyup: (value: string) => void;
   keydown: (value: string) => void;

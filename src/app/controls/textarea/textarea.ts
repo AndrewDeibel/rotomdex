@@ -7,6 +7,7 @@ export class Textarea {
   disabled: boolean;
   rows: number;
   formControlName: string;
+  name: string;
 
   keydownEnter: (value: string) => void;
   change: (value: string) => void;

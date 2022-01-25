@@ -24,6 +24,7 @@ export class DialogService {
   ) {}
 
   public open(componentType: Type<any>, config: DialogConfig): DialogRef {
+    document.body.className += ' dialog-open';
     const dialogRef = this.appendDialogComponentToBody(config);
     this.dialogComponentRef.instance.childComponentType = componentType;
     return dialogRef;
@@ -61,6 +62,10 @@ export class DialogService {
   }
 
   private removeDialogComponentFromBody(): void {
+    document.body.className = document.body.className.replace(
+      'dialog-open',
+      ''
+    );
     if (this.dialogComponentRef) {
       this.appRef.detachView(this.dialogComponentRef.hostView);
       this.dialogComponentRef.destroy();

@@ -2,7 +2,12 @@ import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { AppSettings } from '@app/app';
-import { AlertType, Notification, NotificationsService } from '@app/controls';
+import {
+  Alert,
+  AlertType,
+  Notification,
+  NotificationsService,
+} from '@app/controls';
 import { Menu } from '@app/controls/menu';
 import { Card } from '@app/pages/cards/card';
 import { ScannerService } from '@app/pages/scanner/scanner.service';
@@ -10,6 +15,7 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { last, Observable, Subject } from 'rxjs';
 import { User } from '..';
+import { Icons } from '@app/models';
 
 @AutoUnsubscribe()
 @Component({
@@ -40,6 +46,8 @@ export class ScannerComponent implements OnInit {
   scans: Card[] = [];
   scansVisible: Card[] = [];
   soundEffect: HTMLAudioElement;
+  alertInstructions: Alert;
+  showAlert: boolean;
 
   ngOnDestroy() {}
 
@@ -87,6 +95,28 @@ export class ScannerComponent implements OnInit {
       this.scans = scans;
       // Limit visible to 6
       this.scansVisible = this.scans.slice(0, 6);
+    });
+    this.authenticationService.currentUserObservable().subscribe((user) => {
+      if (user && !user.closed_scanner_instructions) {
+        this.showAlert = true;
+        this.alertInstructions = new Alert({
+          message:
+            'Tap your screen to scan for cards. For best results align one card at a time with all text visible.',
+          classes: 'square',
+          type: AlertType.info,
+          icon: Icons.close,
+          clickIcon: () => {
+            this.alertInstructions;
+            this.showAlert = false;
+
+            // Save preference
+            this.authenticationService.currentUserValue = new User({
+              ...this.authenticationService.currentUserValue,
+              closed_scanner_instructions: true,
+            });
+          },
+        });
+      }
     });
   }
 

@@ -1,4 +1,7 @@
-<div
-	class="alert {{alert.type}}"
-	[innerHtml]="alert.message">
+<div class="alert {{ alert.type }} {{ alert.classes }}">
+  <fa-icon
+    [icon]="alert.icon"
+    (click)="alert.clickIcon && alert.clickIcon()"
+  ></fa-icon>
+  <span [innerHtml]="alert.message"></span>
 </div>

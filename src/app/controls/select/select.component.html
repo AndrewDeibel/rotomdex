@@ -5,6 +5,7 @@
 <div *ngIf="!select.advancedSelect" class="select" [class.dark]="select.dark">
   <fa-icon icon="caret-down"></fa-icon>
   <select
+    [attr.name]="select.name"
     [(ngModel)]="value"
     (change)="change($event)"
     class="{{ select.classes ? select.classes : '' }}"

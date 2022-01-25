@@ -206,7 +206,7 @@ export class CardComponent implements OnInit {
         // Prices
         if (this.card.last_prices.length) {
           this.buttonTCGPlayer.price = this.card.last_prices[0].market_price;
-          this.buttonEbay.price = this.card.last_prices[0].market_price;
+          //this.buttonEbay.price = this.card.last_prices[0].market_price;
         }
       }
     });

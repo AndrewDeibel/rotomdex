@@ -14,6 +14,7 @@ export class User {
 
   // Scanner
   device_id: string;
+  closed_scanner_instructions: boolean;
 
   public constructor(init?: Partial<User>) {
     Object.assign(this, init);

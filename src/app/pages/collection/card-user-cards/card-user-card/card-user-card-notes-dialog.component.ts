@@ -30,10 +30,7 @@ export class CardUserCardNotesDialogComponent {
           ...this.config.data.userCard,
           notes: (this.form.groups[0].controls[0].control as Textarea).value,
         };
-        this.userCardsService.updateUserCard(userCard).subscribe((res) => {
-          if (res.success) {
-          }
-        });
+        this.userCardsService.updateUserCard(userCard);
         this.dialog.close();
       },
       groups: [

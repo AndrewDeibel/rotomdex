@@ -109,9 +109,31 @@ export class CardUserCardsComponent implements OnInit {
   }
 
   setupSubscriptions() {
+    // Card added
     this.userCardsService.addUserCardObservable().subscribe((addedCard) => {
       if (addedCard) this.userCards.push(addedCard);
     });
+
+    // Card removed
+    this.userCardsService
+      .removeUserCardObservable()
+      .subscribe((user_card_id) => {
+        if (user_card_id) {
+          this.userCards = this.userCards.filter(
+            (userCard) => userCard.id !== user_card_id
+          );
+        }
+      });
+
+    // Card update
+    this.userCardsService.updateUserCardObservable().subscribe((userCard) => {
+      if (userCard)
+        this.userCards = this.userCards.map((_userCard) =>
+          _userCard.id === userCard.id ? userCard : _userCard
+        );
+    });
+
+    // Get groups list
     this.userCardGroupService.getUserCardGroupsObservable().subscribe((res) => {
       if (res) this.userCardGroups = res.user_card_groups;
     });
@@ -126,20 +148,10 @@ export class CardUserCardsComponent implements OnInit {
   }
 
   deleteItem(userCard: UserCard) {
-    this.userCardsService.removeUserCard(userCard.id).subscribe((res) => {
-      if (res.success)
-        this.userCards = this.userCards.filter(
-          (_userCard) => _userCard.id !== userCard.id
-        );
-    });
+    this.userCardsService.removeUserCard(userCard.id);
   }
 
   updateItem(userCard: UserCard) {
-    this.userCardsService.updateUserCard(userCard).subscribe((res) => {
-      if (res.success)
-        this.userCards = this.userCards.map((_userCard) =>
-          _userCard.id === userCard.id ? userCard : _userCard
-        );
-    });
+    this.userCardsService.updateUserCard(userCard);
   }
 }

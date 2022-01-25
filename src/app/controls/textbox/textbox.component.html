@@ -20,6 +20,7 @@
     (keydown.enter)="keydownEnter()"
     (change)="change($event)"
     [value]="value"
+    [attr.name]="textbox.name"
     [attr.readOnly]="textbox.readOnly"
     [attr.min]="textbox.min"
     [attr.max]="textbox.max"
@@ -41,6 +42,7 @@
     (keydown.enter)="keydownEnter()"
     (change)="change($event)"
     [value]="value"
+    [attr.name]="textbox.name"
     [attr.readOnly]="textbox.readOnly"
     [attr.min]="textbox.min"
     [attr.max]="textbox.max"
@@ -51,6 +53,7 @@
     [(colorPicker)]="textbox.value"
     (colorPickerChange)="colorPickerChange($event)"
     [cpOutputFormat]="'hex'"
+    [attr.formControlName]="textbox.formControlName"
   />
 
   <!-- Icon -->
