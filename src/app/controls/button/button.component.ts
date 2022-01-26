@@ -13,4 +13,8 @@ export class ButtonComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  click(e: any) {
+    if (this.button.click) this.button.click(e);
+  }
 }

@@ -23,8 +23,15 @@
     padding: 2px 8px;
     font-size: 12px;
     line-height: 1;
+    min-height: 24px;
     .symbol + .text {
       margin-left: 4px;
+    }
+    .icon {
+      fa-icon {
+        width: 10px !important;
+        height: 10px !important;
+      }
     }
   }
 

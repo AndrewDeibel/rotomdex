@@ -22,7 +22,7 @@ export class Button {
   align: string;
   label: string;
 
-  public click: () => void;
+  public click: (e: any) => void;
 
   public constructor(init?: Partial<Button>) {
     Object.assign(this, init);

@@ -22,12 +22,13 @@ export class CardItemListComponent implements OnInit {
   ngOnInit() {
     this.previousValue = this.card.total_cards_owned;
     this.textbox = new Textbox({
+      showPlusMinus: true,
       type: 'number',
       wrapperClasses: 'small',
       value: this.card.total_cards_owned.toString(),
       min: this.card.total_cards_owned,
-      classes: 'width-12',
-      change: (value) => {
+      classes: 'square',
+      blur: (value) => {
         const newValue = Number(value);
         this.textbox.min = newValue;
         if (newValue > this.previousValue) {

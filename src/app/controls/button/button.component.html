@@ -1,4 +1,4 @@
-<label *ngIf="button.label" class="label">
+<label *ngIf="button && button.label" class="label">
   {{ button.label }}
 </label>
 <button
@@ -9,7 +9,7 @@
   [attr.disabled]="button.disabled || disabled ? true : null"
   [routerLink]="button.route"
   [attr.target]="button.target"
-  (click)="button.click ? button.click() : null"
+  (click)="click($event)"
 >
   <span class="icon" *ngIf="button.icon">
     <fa-icon [icon]="button.icon"></fa-icon>
@@ -32,7 +32,7 @@
   [style.width]="button.width"
   [attr.disabled]="button.disabled || disabled ? true : null"
   [attr.target]="button.target"
-  (click)="button.click ? button.click() : null"
+  (click)="click($event)"
 >
   <span class="icon" *ngIf="button.icon">
     <fa-icon [icon]="button.icon"></fa-icon>

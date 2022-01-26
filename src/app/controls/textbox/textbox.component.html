@@ -1,55 +1,73 @@
 <div
   *ngIf="textbox"
-  class="textbox-wrapper {{ textbox.wrapperClasses }} {{ textbox.size }}"
+  class="textbox-wrapper {{ textbox.wrapperClasses }} {{ textbox.size }} {{
+    textbox.showPlusMinus ? 'showPlusMinus' : ''
+  }}"
   [class.dark]="textbox.dark"
 >
   <label *ngIf="textbox.label" class="label">
     {{ textbox.label }}
   </label>
 
-  <!-- Not color picker -->
-  <input
-    *ngIf="!textbox.colorPicker"
-    #textboxEl
-    [style.width]="textbox.width ? textbox.width + 'px' : null"
-    class="textbox {{ textbox.classes }}"
-    (click)="click($event)"
-    (keydown)="keydown($event)"
-    (keydown.enter)="keydownEnter($event)"
-    (keyup)="keyup($event)"
-    (change)="change($event)"
-    [value]="value"
-    [attr.readOnly]="textbox.readOnly"
-    [attr.min]="textbox.min"
-    [attr.max]="textbox.max"
-    [attr.autocomplete]="textbox.autoComplete"
-    [attr.disabled]="textbox.disabled"
-    [attr.placeholder]="textbox.placeholder"
-    [attr.type]="textbox.type"
-  />
+  <div class="textbox-inner">
+    <!-- Plus/minus -->
+    <app-button
+      [button]="buttonMinus"
+      *ngIf="textbox.showPlusMinus"
+    ></app-button>
 
-  <!-- Color picker -->
-  <input
-    *ngIf="textbox.colorPicker"
-    [style.width]="textbox.width ? textbox.width + 'px' : null"
-    class="textbox {{ textbox.classes }}"
-    (click)="click($event)"
-    (keydown)="keydown($event)"
-    (keydown.enter)="keydownEnter($event)"
-    (keyup)="keyup($event)"
-    (change)="change($event)"
-    [value]="value"
-    [attr.readOnly]="textbox.readOnly"
-    [attr.min]="textbox.min"
-    [attr.max]="textbox.max"
-    [attr.autocomplete]="textbox.autoComplete"
-    [attr.disabled]="textbox.disabled"
-    [attr.placeholder]="textbox.placeholder"
-    [attr.type]="textbox.type"
-    [(colorPicker)]="textbox.value"
-    (colorPickerChange)="colorPickerChange($event)"
-    [cpOutputFormat]="'hex'"
-  />
+    <!-- Not color picker -->
+    <input
+      *ngIf="!textbox.colorPicker"
+      #textboxEl
+      [style.width]="textbox.width ? textbox.width + 'px' : null"
+      class="textbox {{ textbox.classes }}"
+      (click)="click($event)"
+      (keydown)="keydown($event)"
+      (keydown.enter)="keydownEnter($event)"
+      (keyup)="keyup($event)"
+      (change)="change($event)"
+      (blur)="blur($event)"
+      [value]="value"
+      [attr.readOnly]="textbox.readOnly"
+      [attr.min]="textbox.min"
+      [attr.max]="textbox.max"
+      [attr.autocomplete]="textbox.autoComplete"
+      [attr.disabled]="textbox.disabled"
+      [attr.placeholder]="textbox.placeholder"
+      [attr.type]="textbox.type"
+    />
+
+    <!-- Color picker -->
+    <input
+      *ngIf="textbox.colorPicker"
+      [style.width]="textbox.width ? textbox.width + 'px' : null"
+      class="textbox {{ textbox.classes }}"
+      (click)="click($event)"
+      (keydown)="keydown($event)"
+      (keydown.enter)="keydownEnter($event)"
+      (keyup)="keyup($event)"
+      (change)="change($event)"
+      (blur)="blur($event)"
+      [value]="value"
+      [attr.readOnly]="textbox.readOnly"
+      [attr.min]="textbox.min"
+      [attr.max]="textbox.max"
+      [attr.autocomplete]="textbox.autoComplete"
+      [attr.disabled]="textbox.disabled"
+      [attr.placeholder]="textbox.placeholder"
+      [attr.type]="textbox.type"
+      [(colorPicker)]="textbox.value"
+      (colorPickerChange)="colorPickerChange($event)"
+      [cpOutputFormat]="'hex'"
+    />
+
+    <!-- Plus/minus -->
+    <app-button
+      [button]="buttonPlus"
+      *ngIf="textbox.showPlusMinus"
+    ></app-button>
+  </div>
 
   <!-- Icon -->
   <fa-icon

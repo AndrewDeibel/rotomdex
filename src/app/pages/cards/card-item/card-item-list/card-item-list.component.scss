@@ -21,4 +21,15 @@
       z-index: $i;
     }
   }
+  .collection {
+    background: lighten(black, 5%);
+    border-radius: $border-radius;
+    box-shadow: $shadow;
+    width: 86px;
+    ::ng-deep {
+      .textbox {
+        width: 30px;
+      }
+    }
+  }
 }

@@ -26,11 +26,13 @@ export class CardItemGridComponent implements OnInit {
   setupControls() {
     this.previousValue = this.card.total_cards_owned;
     this.textbox = new Textbox({
+      showPlusMinus: true,
       type: 'number',
       wrapperClasses: 'small',
+      classes: 'square',
       value: this.card.total_cards_owned.toString(),
       min: this.card.total_cards_owned,
-      change: (value) => {
+      blur: (value) => {
         const newValue = Number(value);
         this.textbox.min = newValue;
         if (newValue > this.previousValue) {

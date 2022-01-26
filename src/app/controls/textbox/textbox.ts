@@ -21,12 +21,14 @@ export class Textbox {
   autoComplete: boolean;
   dark: boolean;
   size: Size;
+  showPlusMinus: boolean;
 
   keyup: (value: string) => void;
   keydown: (value: string) => void;
   keydownEnter: (value: string) => void;
   clickIcon: (value: string) => void;
   change: (value: string) => void;
+  blur: (value: string) => void;
 
   clickClear: () => void;
   clear = () => {

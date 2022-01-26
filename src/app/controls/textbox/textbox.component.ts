@@ -1,10 +1,13 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Button } from './../button/button';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import {
   ControlValueAccessor,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 import { Textbox } from './textbox';
+import { Icons, Size } from '@app/models';
+import { AlertType, Notification, NotificationsService } from '..';
 
 @Component({
   selector: 'textbox',
@@ -23,7 +26,7 @@ import { Textbox } from './textbox';
     },
   ],
 })
-export class TextboxComponent implements ControlValueAccessor {
+export class TextboxComponent implements ControlValueAccessor, OnInit {
   onChange: any = () => {};
   onTouched: any = () => {};
   registerOnChange(fn: any) {
@@ -50,6 +53,57 @@ export class TextboxComponent implements ControlValueAccessor {
   }
 
   @Input() textbox: Textbox;
+  buttonMinus: Button;
+  buttonPlus: Button;
+
+  constructor(private notificationService: NotificationsService) {}
+
+  ngOnInit(): void {
+    this.setupControls();
+  }
+
+  setupControls() {
+    // Plus/minus
+    if (this.textbox.showPlusMinus) {
+      this.buttonMinus = new Button({
+        icon: Icons.minus,
+        size: Size.xsmall,
+        classes: 'square-right',
+        click: (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const newValue = Number(this.value) - 1;
+          if (!this.textbox.min || newValue >= this.textbox.min) {
+            this.value = newValue.toString();
+            this.textbox.blur(this.value);
+          } else {
+            this.notificationService.addNotifications([
+              new Notification({
+                message:
+                  'To remove cards from your collection, visit the card details',
+                alertType: AlertType.error,
+              }),
+            ]);
+          }
+        },
+      });
+      this.buttonPlus = new Button({
+        icon: Icons.plus,
+        size: Size.xsmall,
+        classes: 'square-left',
+        click: (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const newValue = Number(this.value) + 1;
+          if (!this.textbox.max || newValue <= this.textbox.max) {
+            this.value = newValue.toString();
+            this.textbox.blur(this.value);
+          }
+        },
+      });
+    }
+  }
+
   click = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -71,6 +125,11 @@ export class TextboxComponent implements ControlValueAccessor {
   keydownEnter(e: any) {
     this.value = e.target?.value;
     if (this.textbox.keydownEnter) this.textbox.keydownEnter(this.value);
+  }
+
+  blur(e: any) {
+    this.value = e.target?.value;
+    if (this.textbox.blur) this.textbox.blur(this.value);
   }
 
   clickIcon() {

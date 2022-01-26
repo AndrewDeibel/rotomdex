@@ -28,6 +28,20 @@
       }
     }
   }
+  &.showPlusMinus {
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .textbox {
+      -moz-appearance: textfield;
+    }
+  }
+}
+.textbox-inner {
+  display: flex;
+  align-items: center;
 }
 .textbox {
   border-radius: $border-radius;
