@@ -2,7 +2,7 @@
 
 :host {
   position: relative;
-  z-index: 3;
+  z-index: 1;
   &::ng-deep {
     .symbol {
       filter: none !important;

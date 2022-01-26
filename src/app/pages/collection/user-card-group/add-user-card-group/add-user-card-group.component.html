@@ -10,16 +10,28 @@
         <h1>Add Group</h1>
       </div>
       <div>
-        <textbox [textbox]="textboxName" ngModel></textbox>
+        <textbox
+          [textbox]="textboxName"
+          formControlName="nameControl"
+        ></textbox>
       </div>
       <div class="relative z-3">
-        <app-select [select]="selectType" ngModel></app-select>
+        <app-select
+          [select]="selectType"
+          formControlName="selectType"
+        ></app-select>
       </div>
       <div class="relative z-1">
-        <app-textarea [textarea]="textareaDescription" ngModel></app-textarea>
+        <app-textarea
+          [textarea]="textareaDescription"
+          formControlName="descriptionControl"
+        ></app-textarea>
       </div>
       <div class="relative z-1">
-        <toggle [toggle]="togglePublic" ngModel></toggle>
+        <toggle
+          [toggle]="togglePublic"
+          formControlName="publicControl"
+        ></toggle>
       </div>
       <div>
         <div class="flex">

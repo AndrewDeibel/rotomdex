@@ -21,7 +21,7 @@
   background-color: $main-bg;
   flex: 1;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   @media (max-width: $screen-medium) {
     padding-top: $header-height;
   }

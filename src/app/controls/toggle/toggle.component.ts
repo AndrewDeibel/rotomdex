@@ -6,7 +6,6 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
   selector: 'toggle',
   templateUrl: 'toggle.component.html',
   styleUrls: ['./toggle.component.scss'],
-
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -27,18 +26,22 @@ export class ToggleComponent implements ControlValueAccessor {
   writeValue(event: any) {
     this.value = event;
   }
+  setDisabledState(isDisabled: boolean) {
+    this.toggle.disabled = isDisabled;
+  }
   get value() {
     return this.toggle.checked;
   }
-  set value(_value) {
-    this.toggle.checked = _value;
-    this.onChange(_value);
+  set value(value) {
+    this.toggle.checked = value;
+    if (this.toggle.change) this.toggle.change(value);
+    this.onChange(value);
     this.onTouched();
   }
 
   @Input() toggle: Toggle;
 
-  constructor() {}
-
-  change() {}
+  change(event?: any) {
+    this.value = event?.currentTarget?.checked;
+  }
 }

@@ -1,34 +1,27 @@
-import { AuthenticationService } from '@app/pages/auth/auth.service';
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { AppSettings } from '@app/app';
-import {
-  Button,
-  DialogConfig,
-  DialogService,
-  LoaderService,
-  Tag,
-} from '@app/controls';
+import { Button, DialogConfig, DialogService, Tag } from '@app/controls';
 import '@app/helpers/string.extensions';
 import { ItemGroup, Items } from '@app/layout/main';
 import { APIGetPaged } from '@app/models';
 import { Icons, Symbols } from '@app/models/icons';
+import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { UserCard, UserCardsService } from '@app/pages/collection';
 import { ExpansionService } from '@app/pages/expansions/expansion/expansion.service';
 import { PokemonService } from '@app/pages/pokemons';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+import { CardsService } from '..';
 import { Card, SetSortByCards } from './card';
 import { CardImageDialogComponent } from './card-image-dialog.component';
 import { CardService } from './card.service';
-import { CardsService } from '..';
 
 @AutoUnsubscribe()
 @Component({
   selector: 'card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class CardComponent implements OnInit {
   @Input() card: Card | null;

@@ -4,7 +4,7 @@ export class Toggle {
   textChecked: string;
   label: string;
   disabled: boolean;
-  name: string;
+  change: (value: boolean) => void;
 
   public constructor(init?: Partial<Toggle>) {
     Object.assign(this, init);

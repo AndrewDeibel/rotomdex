@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Notification } from './notification';
 import { NotificationsService } from './notifications.service';
 
@@ -6,7 +6,6 @@ import { NotificationsService } from './notifications.service';
   selector: 'notifications',
   templateUrl: 'notifications.component.html',
   styleUrls: ['./notifications.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class NotificationsComponent implements OnInit {
   notifications: Notification[] = [];

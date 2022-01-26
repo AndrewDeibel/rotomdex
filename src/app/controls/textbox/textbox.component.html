@@ -1,5 +1,4 @@
 <div
-  (click)="click($event)"
   *ngIf="textbox"
   class="textbox-wrapper {{ textbox.wrapperClasses }} {{ textbox.size }}"
   [class.dark]="textbox.dark"
@@ -15,12 +14,11 @@
     [style.width]="textbox.width ? textbox.width + 'px' : null"
     class="textbox {{ textbox.classes }}"
     (click)="click($event)"
-    (keyup)="keyup($event)"
     (keydown)="keydown($event)"
     (keydown.enter)="keydownEnter($event)"
+    (keyup)="keyup($event)"
     (change)="change($event)"
     [value]="value"
-    [attr.name]="textbox.name"
     [attr.readOnly]="textbox.readOnly"
     [attr.min]="textbox.min"
     [attr.max]="textbox.max"
@@ -28,7 +26,6 @@
     [attr.disabled]="textbox.disabled"
     [attr.placeholder]="textbox.placeholder"
     [attr.type]="textbox.type"
-    [attr.formControlName]="textbox.formControlName"
   />
 
   <!-- Color picker -->
@@ -37,12 +34,11 @@
     [style.width]="textbox.width ? textbox.width + 'px' : null"
     class="textbox {{ textbox.classes }}"
     (click)="click($event)"
-    (keyup)="keyup($event)"
     (keydown)="keydown($event)"
     (keydown.enter)="keydownEnter($event)"
+    (keyup)="keyup($event)"
     (change)="change($event)"
     [value]="value"
-    [attr.name]="textbox.name"
     [attr.readOnly]="textbox.readOnly"
     [attr.min]="textbox.min"
     [attr.max]="textbox.max"
@@ -53,7 +49,6 @@
     [(colorPicker)]="textbox.value"
     (colorPickerChange)="colorPickerChange($event)"
     [cpOutputFormat]="'hex'"
-    [attr.formControlName]="textbox.formControlName"
   />
 
   <!-- Icon -->
@@ -72,5 +67,3 @@
   >
   </fa-icon>
 </div>
-
-<alert *ngIf="alert" [alert]="alert"></alert>

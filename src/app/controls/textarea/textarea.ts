@@ -1,13 +1,11 @@
 export class Textarea {
-  value: string;
+  value: string = '';
   label: string;
   placeholder: string;
   width: number;
   classes: string;
   disabled: boolean;
   rows: number;
-  formControlName: string;
-  name: string;
 
   keydownEnter: (value: string) => void;
   change: (value: string) => void;

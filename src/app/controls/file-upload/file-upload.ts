@@ -5,7 +5,6 @@ export class FileUpload {
   classes: string;
   disabled: boolean;
   readOnly: boolean;
-  formControlName: string;
 
   clear = () => {
     this.value = '';

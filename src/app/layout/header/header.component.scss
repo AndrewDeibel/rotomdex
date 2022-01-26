@@ -2,7 +2,7 @@
 
 :host {
   position: relative;
-  z-index: 1;
+  z-index: 3;
 }
 
 .menu-wrapper {
@@ -132,7 +132,7 @@
   @media (max-width: $screen-medium) {
     padding: 0;
     background: $header-bg;
-    .menu {
+    ::ng-deep .menu {
       border: 0 !important;
       li {
         max-width: 20%;
@@ -150,7 +150,7 @@
     }
   }
   @media (max-width: $screen-small) {
-    .menu {
+    ::ng-deep .menu {
       display: flex;
       justify-content: center;
       ul {
@@ -170,7 +170,7 @@
 }
 
 @media (max-width: $screen-medium) {
-  #menu .menu {
+  #menu ::ng-deep .menu {
     > ul {
       > li {
         flex: 1;

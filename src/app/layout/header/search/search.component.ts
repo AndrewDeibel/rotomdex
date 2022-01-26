@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Textbox } from '@app/controls';
 import { Icons } from '@app/models';
 
@@ -7,7 +7,6 @@ import { Icons } from '@app/models';
   selector: 'search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class SearchComponent implements OnInit {
   query: string = '';

@@ -1,23 +1,15 @@
-import { Router, RouterStateSnapshot } from '@angular/router';
-import {
-  Component,
-  HostListener,
-  Input,
-  OnInit,
-  ViewEncapsulation,
-} from '@angular/core';
-import { Icons, Symbols } from '@app/models/icons';
-import { Menu, MenuItem } from '@app/controls/menu';
-
-import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Location } from '@angular/common';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Menu, MenuItem } from '@app/controls/menu';
+import { Icons, Symbols } from '@app/models/icons';
+import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { User } from '@app/pages/user';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent implements OnInit {
   menu: Menu = new Menu();

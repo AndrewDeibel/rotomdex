@@ -43,12 +43,10 @@ export class SignInComponent implements OnInit {
     });
     this.textboxEmail = new Textbox({
       label: 'Email',
-      formControlName: 'emailControl',
     });
     this.textboxPassword = new Textbox({
       label: 'Password',
       type: 'password',
-      formControlName: 'passwordControl',
     });
     this.rememberMeCheckbox = new Checkbox({
       text: 'Remember Me',

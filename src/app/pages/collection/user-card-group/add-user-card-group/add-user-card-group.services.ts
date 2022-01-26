@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
+  AlertType,
   LoaderService,
   Notification,
   NotificationsService,
@@ -66,6 +67,7 @@ export class UserCardGroupService {
           this.notificationService.addNotifications([
             new Notification({
               message: `Added ${userCardGroup.name}`,
+              alertType: AlertType.success,
             }),
           ]);
           this.loaderService.clearItemLoading('user-card-group');

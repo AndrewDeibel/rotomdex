@@ -40,6 +40,7 @@ export class UserCardGroupComponent implements OnInit {
   setupSubscriptions() {
     this.userCardsService.getUserCardsObservable().subscribe((res) => {
       if (res) {
+        this.items.header.subtitle = `${res.total_results} Cards`;
         this.items.footer.totalPages = res.total_pages;
         this.items.footer.totalItems = res.total_results;
         if (res.cards && res.cards.length) {

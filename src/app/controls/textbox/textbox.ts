@@ -1,5 +1,5 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { Size } from './../../models/size';
+import { Size } from '@app/models/size';
 
 export class Textbox {
   value: string = '';
@@ -21,8 +21,6 @@ export class Textbox {
   autoComplete: boolean;
   dark: boolean;
   size: Size;
-  formControlName: string;
-  name: string;
 
   keyup: (value: string) => void;
   keydown: (value: string) => void;

@@ -37,7 +37,6 @@ export class CardUserCardNotesDialogComponent {
         new FormControlGroup({
           controls: [
             new FormControl({
-              formControlName: 'notesControl',
               control: new Textarea({
                 width: 400,
                 rows: 6,

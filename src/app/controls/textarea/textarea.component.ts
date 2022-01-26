@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  forwardRef,
-  Input,
-  Output,
-} from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Textarea } from './textarea';
 
@@ -36,28 +30,25 @@ export class TextareaComponent implements ControlValueAccessor {
   get value() {
     return this.textarea.value;
   }
-  set value(_value) {
-    this.textarea.value = _value;
-    this.onChange(_value);
+  set value(value) {
+    this.textarea.value = value;
+    if (this.textarea.change) this.textarea.change(value);
+    this.onChange(value);
     this.onTouched();
   }
 
   @Input() textarea: Textarea;
-  @Output() outputKeydownEnter: EventEmitter<string> = new EventEmitter();
-  @Output() clickIcon: EventEmitter<string> = new EventEmitter();
 
-  keydownEnter() {
-    this.outputKeydownEnter.emit(this.value);
-    if (this.textarea.keydownEnter) {
-      this.textarea.keydownEnter(this.value);
-    }
+  keydown(e: any) {
+    this.value = e.target?.value;
   }
 
-  change() {
-    if (this.textarea.change) {
-      this.textarea.change(this.value);
-    }
+  keydownEnter(e: any) {
+    this.value = e.target?.value;
+    if (this.textarea.keydownEnter) this.textarea.keydownEnter(this.value);
   }
 
-  constructor() {}
+  change(e?: any) {
+    this.value = e?.target?.value;
+  }
 }

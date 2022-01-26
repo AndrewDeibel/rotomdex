@@ -1,14 +1,13 @@
-import { Component, Input, OnInit, forwardRef } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Textbox } from '@app/controls';
 import { Icons, Size } from '@app/models';
 import { Select, SelectOption } from './select';
-import { Textbox } from '@app/controls';
 
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
-
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -19,7 +18,6 @@ import { Textbox } from '@app/controls';
 })
 export class SelectComponent implements ControlValueAccessor {
   constructor() {}
-
   onChange: any = () => {};
   onTouched: any = () => {};
   registerOnChange(fn: any) {
@@ -34,17 +32,18 @@ export class SelectComponent implements ControlValueAccessor {
   get value() {
     return this.select.value;
   }
-  set value(_value) {
-    this.select.value = _value;
+  set value(value) {
+    this.select.value = value;
     this.select.options.forEach((option) => {
-      option.selected = option.value === _value;
+      option.selected = option.value === value;
     });
     this.select.optionGroups.forEach((group) => {
       group.options.forEach((option) => {
-        option.selected = option.value === _value;
+        option.selected = option.value === value;
       });
     });
-    this.onChange(_value);
+    if (this.select.change) this.select.change(this.select.value);
+    this.onChange(value);
     this.onTouched();
   }
 
@@ -75,7 +74,6 @@ export class SelectComponent implements ControlValueAccessor {
 
   change(event?: any) {
     this.value = event?.currentTarget?.value;
-    if (this.select.change) this.select.change(this.select.value);
   }
 
   selectOption(option: SelectOption) {

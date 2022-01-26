@@ -3,6 +3,7 @@ import { ItemGroup, Items } from '@app/layout';
 import { Component } from '@angular/core';
 import { WishlistService } from '.';
 import { APIGetPaged } from '@app/models';
+import { ResCards } from '@app/pages';
 
 @Component({
   selector: 'wishlist',
@@ -19,21 +20,24 @@ export class WishlistComponent {
   }
 
   setupSubscriptions() {
-    this.wishlistService.getWishlistCardsObservable().subscribe((res: any) => {
-      if (res) {
-        this.items.footer.totalPages = res.total_pages;
-        this.items.footer.totalItems = res.total_results;
-        if (res.cards && res.cards.length) {
-          this.items.itemGroups = [
-            new ItemGroup({
-              items: res.cards,
-            }),
-          ];
-        } else {
-          this.items.itemGroups = [];
+    this.wishlistService
+      .getWishlistCardsObservable()
+      .subscribe((res: ResCards | null) => {
+        if (res) {
+          this.items.header.subtitle = `${res.total_results} Cards`;
+          this.items.footer.totalPages = res.total_pages;
+          this.items.footer.totalItems = res.total_results;
+          if (res.cards && res.cards.length) {
+            this.items.itemGroups = [
+              new ItemGroup({
+                items: res.cards,
+              }),
+            ];
+          } else {
+            this.items.itemGroups = [];
+          }
         }
-      }
-    });
+      });
   }
 
   setupControls() {

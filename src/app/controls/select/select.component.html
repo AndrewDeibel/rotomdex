@@ -5,8 +5,7 @@
 <div *ngIf="!select.advancedSelect" class="select" [class.dark]="select.dark">
   <fa-icon icon="caret-down"></fa-icon>
   <select
-    [attr.name]="select.name"
-    [(ngModel)]="value"
+    [value]="value"
     (change)="change($event)"
     class="{{ select.classes ? select.classes : '' }}"
   >
@@ -30,6 +29,7 @@
   (click)="click()"
   (clickOutside)="clickOutside()"
 >
+  <input type="hidden" (change)="change($event)" [value]="value" />
   <div class="placeholder" *ngIf="select.getSelectedOptions().length <= 0">
     {{ select.placeholder }}
   </div>

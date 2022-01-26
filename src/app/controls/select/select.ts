@@ -17,7 +17,6 @@ export class Select {
   open: boolean;
   searchValue: string;
   size: Size;
-  name: string;
   change: (value: string) => void;
 
   getSelectedOptions = () => {

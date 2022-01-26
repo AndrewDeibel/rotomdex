@@ -25,14 +25,12 @@ export class CardItemListComponent implements OnInit {
       type: 'number',
       wrapperClasses: 'small',
       value: this.card.total_cards_owned.toString(),
-      min: 0,
+      min: this.card.total_cards_owned,
       classes: 'width-12',
       change: (value) => {
         const newValue = Number(value);
-        // Prevent decreasing value
-        if (newValue < this.previousValue)
-          this.textbox.value = this.previousValue.toString();
-        else {
+        this.textbox.min = newValue;
+        if (newValue > this.previousValue) {
           const quantity = newValue - this.previousValue;
           this.addItem(quantity);
         }

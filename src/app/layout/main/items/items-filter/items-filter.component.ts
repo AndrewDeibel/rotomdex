@@ -1,21 +1,13 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  ViewEncapsulation,
-} from '@angular/core';
-import { ItemsFilter, ItemDisplayType } from './items-filter';
-import { Menu, MenuItem } from '@app/controls/menu';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Menu, MenuItem } from '@app/controls/menu';
 import { Icons } from '@app/models/icons';
+import { ItemDisplayType, ItemsFilter } from './items-filter';
 
 @Component({
   selector: 'items-filter',
   templateUrl: 'items-filter.component.html',
   styleUrls: ['./items-filter.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class ItemsFilterComponent implements OnInit {
   @Input() itemsFilter: ItemsFilter;

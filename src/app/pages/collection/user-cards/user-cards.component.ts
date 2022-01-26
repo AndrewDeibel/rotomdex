@@ -18,11 +18,13 @@ export class UserCardsComponent implements OnInit {
 
   ngOnInit(): void {
     this.setupSubscriptions();
+    this.setupControls();
   }
 
   setupSubscriptions() {
     this.userCardsService.getUserCardsObservable().subscribe((res: any) => {
       if (res) {
+        this.items.header.subtitle = `${res.total_results} Cards`;
         this.items.footer.totalPages = res.total_pages;
         this.items.footer.totalItems = res.total_results;
         if (res.cards && res.cards.length) {
@@ -36,6 +38,10 @@ export class UserCardsComponent implements OnInit {
         }
       }
     });
+  }
+
+  setupControls() {
+    this.items.header.title = 'All Cards';
   }
 
   getUserCards() {

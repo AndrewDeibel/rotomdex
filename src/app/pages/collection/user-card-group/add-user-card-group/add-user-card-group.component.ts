@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import {
   Button,
   ButtonType,
+  Notification,
+  NotificationsService,
   Select,
   SelectOption,
   Textarea,
@@ -43,7 +45,7 @@ export class AddUserCardGroupComponent implements OnInit {
       nameControl: ['', Validators.required],
       selectType: ['', Validators.required],
       descriptionControl: [''],
-      publicControl: [''],
+      publicControl: [false],
     });
   }
 
@@ -64,11 +66,9 @@ export class AddUserCardGroupComponent implements OnInit {
 
   setupControls() {
     this.textboxName = new Textbox({
-      name: 'nameControl',
       label: 'Name',
     });
     this.selectType = new Select({
-      name: 'selectType',
       label: 'Type',
       advancedSelect: true,
       multiple: false,
@@ -102,11 +102,9 @@ export class AddUserCardGroupComponent implements OnInit {
       ],
     });
     this.textareaDescription = new Textarea({
-      name: 'descriptionControl',
       label: 'Description',
     });
     this.togglePublic = new Toggle({
-      name: 'publicControl',
       text: 'Private',
       textChecked: 'Public',
     });
@@ -124,17 +122,16 @@ export class AddUserCardGroupComponent implements OnInit {
   }
 
   submit() {
-    if (this.form.invalid) {
-      return;
+    this.form.markAsDirty();
+    if (!this.form.invalid) {
+      this.userCardGroupService.addUserCardGroup(
+        new UserCardGroup({
+          name: this.form.controls['nameControl'].value,
+          type: this.form.controls['selectType'].value,
+          description: this.form.controls['descriptionControl'].value,
+          public: this.form.controls['publicControl'].value,
+        })
+      );
     }
-
-    this.userCardGroupService.addUserCardGroup(
-      new UserCardGroup({
-        name: this.form.controls['nameControl'].value,
-        type: this.form.controls['selectType'].value,
-        description: this.form.controls['descriptionControl'].value,
-        public: this.form.controls['publicControl'].value,
-      })
-    );
   }
 }

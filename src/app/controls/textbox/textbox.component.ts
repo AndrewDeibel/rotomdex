@@ -1,12 +1,9 @@
+import { Component, forwardRef, Input } from '@angular/core';
 import {
-  Component,
-  EventEmitter,
-  forwardRef,
-  Input,
-  Output,
-} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Alert } from '../alert';
+  ControlValueAccessor,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 import { Textbox } from './textbox';
 
 @Component({
@@ -19,10 +16,14 @@ import { Textbox } from './textbox';
       useExisting: forwardRef(() => TextboxComponent),
       multi: true,
     },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => TextboxComponent),
+      multi: true,
+    },
   ],
 })
 export class TextboxComponent implements ControlValueAccessor {
-  constructor() {}
   onChange: any = () => {};
   onTouched: any = () => {};
   registerOnChange(fn: any) {
@@ -37,7 +38,6 @@ export class TextboxComponent implements ControlValueAccessor {
   setDisabledState(isDisabled: boolean) {
     this.textbox.disabled = isDisabled;
   }
-
   previousValue: string;
   get value() {
     return this.textbox.value;
@@ -50,11 +50,6 @@ export class TextboxComponent implements ControlValueAccessor {
   }
 
   @Input() textbox: Textbox;
-  @Input() alert: Alert;
-  @Output() outputKeydownEnter: EventEmitter<string> = new EventEmitter();
-  @Output() outputClickIcon: EventEmitter<string> = new EventEmitter();
-  @Output() outputClickClear: EventEmitter<string> = new EventEmitter();
-
   click = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -75,23 +70,16 @@ export class TextboxComponent implements ControlValueAccessor {
 
   keydownEnter(e: any) {
     this.value = e.target?.value;
-    this.outputKeydownEnter.emit(this.value);
     if (this.textbox.keydownEnter) this.textbox.keydownEnter(this.value);
   }
 
   clickIcon() {
-    this.outputClickIcon.emit(this.value);
     if (this.textbox.clickIcon) this.textbox.clickIcon(this.value);
   }
 
   clickClear() {
     this.textbox.clear();
-    this.outputClickClear.emit(this.value);
     if (this.textbox.clickClear) this.textbox.clickClear();
-  }
-
-  setPreviousValue() {
-    this.value = this.previousValue;
   }
 
   validate() {
@@ -130,10 +118,10 @@ export class TextboxComponent implements ControlValueAccessor {
     return this.textbox.valid;
   }
 
-  change(event?: any) {
+  change(e?: any) {
     // If valid
-    if (this.validate()) this.value = event?.currentTarget?.value;
-    else this.setPreviousValue();
+    if (this.validate()) this.value = e?.target?.value;
+    else this.value = this.previousValue;
 
     // Set previous value after change
     this.previousValue = this.value;

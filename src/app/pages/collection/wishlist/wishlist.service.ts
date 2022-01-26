@@ -26,8 +26,8 @@ export class WishlistService {
     this.http.get<APIResponse>(params.buildUrl('wishlist')).subscribe((res) => {
       this.getWishlistCardsSubject.next({
         cards: res.data.map((userCard: any) => new Card(userCard.card)),
-        total_pages: res.data.last_page,
-        total_results: res.data.total,
+        total_pages: res.meta.last_page,
+        total_results: res.meta.total,
       });
       this.loaderService.clearItemLoading('getWishlistCards');
     });
