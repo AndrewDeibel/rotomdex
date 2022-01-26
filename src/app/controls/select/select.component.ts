@@ -54,8 +54,14 @@ export class SelectComponent implements ControlValueAccessor {
     type: 'search',
     icon: Icons.search,
     size: Size.small,
-    keyup: (_value) => {
-      this.select.searchValue = _value;
+    classes: 'width-12',
+    wrapperClasses: 'width-12',
+    preventDefault: true,
+    keyup: (value) => {
+      this.select.searchValue = value;
+    },
+    keydownEnter: (value) => {
+      this.select.search(value);
     },
   });
 

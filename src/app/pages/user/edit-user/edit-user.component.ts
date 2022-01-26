@@ -48,13 +48,19 @@ export class EditUserComponent implements OnInit {
   ngOnInit(): void {
     this.setupControls();
     this.setupSubscriptions();
+    this.getPokemonVariants();
+  }
+
+  getPokemonVariants(query = '') {
     this.pokemonsService.getPokemonVariants(
       new APIGetPaged({
         page: 1,
         page_size: 24,
         sort_by: 'pokemon.order',
         sort_direction: 'asc',
-      })
+        query: query,
+      }),
+      false
     );
   }
 
@@ -69,11 +75,15 @@ export class EditUserComponent implements OnInit {
     this.textboxEmail = new Textbox({
       label: 'Email',
       type: 'email',
+      classes: 'width-12',
+      wrapperClasses: 'width-12',
       readOnly: true,
       value: this.authenticationService.currentUserValue?.email,
     });
     this.textboxUsername = new Textbox({
       label: 'Username',
+      classes: 'width-12',
+      wrapperClasses: 'width-12',
       readOnly: true,
       value: this.authenticationService.currentUserValue?.name,
     });
@@ -88,6 +98,9 @@ export class EditUserComponent implements OnInit {
       multiple: false,
       options: [],
       label: 'Favorite Pokemon',
+      search: (search) => {
+        this.getPokemonVariants(search);
+      },
     });
     this.togglePublic = new Toggle({
       label: 'Visibility',
@@ -129,6 +142,7 @@ export class EditUserComponent implements OnInit {
               new SelectOption({
                 text: pokemonVariant.name,
                 value: pokemonVariant.id.toString(),
+                image: pokemonVariant.sprites.official,
               })
           ) || [];
       }

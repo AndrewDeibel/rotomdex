@@ -5,16 +5,28 @@
         <h1>Sign Up</h1>
       </div>
       <div>
-        <textbox [textbox]="textboxEmail"></textbox>
+        <textbox
+          [textbox]="textboxEmail"
+          formControlName="emailControl"
+        ></textbox>
       </div>
       <div>
-        <textbox [textbox]="textboxUsername"></textbox>
+        <textbox
+          [textbox]="textboxUsername"
+          formControlName="usernameControl"
+        ></textbox>
       </div>
       <div>
-        <textbox [textbox]="textboxPassword"></textbox>
+        <textbox
+          [textbox]="textboxPassword"
+          formControlName="passwordControl"
+        ></textbox>
       </div>
       <div>
-        <textbox [textbox]="textboxConfirmPassword"></textbox>
+        <textbox
+          [textbox]="textboxConfirmPassword"
+          formControlName="passwordConfirmControl"
+        ></textbox>
       </div>
       <div>
         <app-button [button]="buttonSubmit"></app-button>

@@ -125,6 +125,7 @@ export class TextboxComponent implements ControlValueAccessor, OnInit {
   keydownEnter(e: any) {
     this.value = e.target?.value;
     if (this.textbox.keydownEnter) this.textbox.keydownEnter(this.value);
+    if (this.textbox.preventDefault) e.preventDefault();
   }
 
   blur(e: any) {

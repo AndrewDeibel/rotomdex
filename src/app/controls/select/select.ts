@@ -12,11 +12,12 @@ export class Select {
   classes: string;
   dark: boolean;
   multiple: boolean;
-  advancedSelect: boolean = false;
+  advancedSelect: boolean;
   placeholder: string = 'Select option';
   open: boolean;
   searchValue: string;
   size: Size;
+  search: (search: string) => void;
   change: (value: string) => void;
 
   getSelectedOptions = () => {
@@ -58,8 +59,9 @@ export class SelectOption {
   value: string;
   selected: boolean;
   icon: IconProp;
+  image: string;
 
-  public constructor(init?: Partial<SelectOption>) {
+  constructor(init?: Partial<SelectOption>) {
     Object.assign(this, init);
   }
 }
@@ -68,7 +70,7 @@ export class SelectOptionGroup {
   label: string;
   options: SelectOption[] = [];
 
-  public constructor(init?: Partial<SelectOptionGroup>) {
+  constructor(init?: Partial<SelectOptionGroup>) {
     Object.assign(this, init);
   }
 }

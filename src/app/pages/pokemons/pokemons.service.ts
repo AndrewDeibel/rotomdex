@@ -25,8 +25,8 @@ export class PokemonsService {
       new BehaviorSubject<ResPokemonVariants | null>(null);
     return this.getPokemonVariantsSubject.asObservable();
   }
-  getPokemonVariants(params: APIGetPaged) {
-    this.loaderService.addItemLoading('getPokemon');
+  getPokemonVariants(params: APIGetPaged, showLoading = true) {
+    if (showLoading) this.loaderService.addItemLoading('getPokemon');
     this.http
       .get<APIResponse>(params.buildUrl('pokemon-variants'))
       .subscribe((res) => {
@@ -37,7 +37,7 @@ export class PokemonsService {
             (pokemonVariant: any) => new PokemonVariant(pokemonVariant)
           ),
         });
-        this.loaderService.clearItemLoading('getPokemon');
+        if (showLoading) this.loaderService.clearItemLoading('getPokemon');
       });
   }
 }

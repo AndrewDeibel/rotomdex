@@ -67,6 +67,8 @@ export class AddUserCardGroupComponent implements OnInit {
   setupControls() {
     this.textboxName = new Textbox({
       label: 'Name',
+      classes: 'width-12',
+      wrapperClasses: 'width-12',
     });
     this.selectType = new Select({
       label: 'Type',
