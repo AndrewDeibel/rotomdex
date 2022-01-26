@@ -75,7 +75,6 @@ export class CardsComponent implements OnInit {
   }
 
   setupControls() {
-    this.items;
     this.items.noResults = 'No cards found';
     this.items.noResultsImage = Symbols.cards;
     this.titleService.setTitle(AppSettings.titlePrefix + 'All Cards');

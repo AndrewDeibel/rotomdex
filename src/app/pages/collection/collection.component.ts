@@ -1,3 +1,4 @@
+import { User } from './../user/user';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Menu, MenuItem, ProgressBar } from '@app/controls';
@@ -38,6 +39,23 @@ export class CollectionComponent implements OnInit {
     this.getUserCardGroups();
   }
 
+  getIcon(type: string) {
+    switch (type) {
+      case 'binder':
+        return Icons.binder;
+      case 'deck':
+        return Icons.deck;
+      case 'trades':
+        return Icons.exchange;
+      case 'box':
+        return Icons.archive;
+      case 'group':
+        return Icons.folder;
+      default:
+        return Icons.folder;
+    }
+  }
+
   setupSubscriptions() {
     this.userCardGroupService.getUserCardGroupsObservable().subscribe((res) => {
       if (res) {
@@ -50,6 +68,7 @@ export class CollectionComponent implements OnInit {
               new MenuItem({
                 text: item.name,
                 route: `/collection/group/${item.id}`,
+                icon: this.getIcon(item.type),
               })
           ),
           new MenuItem({

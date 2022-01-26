@@ -8,6 +8,9 @@
   right: 0;
   z-index: 9999;
   pointer-events: none;
+  @media (max-width: $screen-medium) {
+    top: $header-height;
+  }
 }
 .notifications {
   position: relative;

@@ -3,6 +3,7 @@ import { UserCardsService } from '@app/pages/collection';
 import { Component, OnInit } from '@angular/core';
 import { ItemGroup, Items } from '@app/layout';
 import { APIGetPaged } from '@app/models';
+import { SetSortByUserCards } from '.';
 
 @Component({
   selector: 'user-cards',
@@ -42,6 +43,7 @@ export class UserCardsComponent implements OnInit {
 
   setupControls() {
     this.items.header.title = 'All Cards';
+    SetSortByUserCards(this.items.filter);
   }
 
   getUserCards() {
