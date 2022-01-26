@@ -93,7 +93,7 @@ export class ScannerComponent implements OnInit {
     this.scannerService.scansObservable().subscribe((scans) => {
       this.scans = scans;
       // Limit visible to 6
-      this.scansVisible = this.scans.slice(0, 6);
+      this.scansVisible = this.scans.slice(Math.max(this.scans.length - 6, 1));
     });
     this.authenticationService.currentUserObservable().subscribe((user) => {
       if (user && !user.closed_scanner_instructions) {
