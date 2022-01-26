@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
   templateUrl: 'form.component.html',
 })
 export class FormComponent implements OnInit {
-  @Input() form: Form;
+  @Input() appForm: Form;
 
   constructor() {}
 

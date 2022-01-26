@@ -90,21 +90,30 @@ export class UserCardsService {
     return this.addUserCardSubject.asObservable();
   }
   addUserCard(userCard: UserCard) {
-    this.loaderService.addItemLoading('addUserCard');
-    this.http
-      .post<APIResponse>(buildUrl('user-cards/create'), userCard)
-      .subscribe((res) => {
-        if (res.success) {
-          this.addUserCardSubject.next(userCard);
-          this.notificationService.addNotifications([
-            new Notification({
-              message: 'Card added to collection',
-              alertType: AlertType.success,
-            }),
-          ]);
-        }
-        this.loaderService.clearItemLoading('addUserCard');
-      });
+    if (userCard.quantity > 10) {
+      this.notificationService.addNotifications([
+        new Notification({
+          message: 'To add more than 10 at a time use the import tool',
+          alertType: AlertType.error,
+        }),
+      ]);
+    } else {
+      this.loaderService.addItemLoading('addUserCard');
+      this.http
+        .post<APIResponse>(buildUrl('user-cards/create'), userCard)
+        .subscribe((res) => {
+          if (res.success) {
+            this.addUserCardSubject.next(userCard);
+            this.notificationService.addNotifications([
+              new Notification({
+                message: 'Card added to collection',
+                alertType: AlertType.success,
+              }),
+            ]);
+          }
+          this.loaderService.clearItemLoading('addUserCard');
+        });
+    }
   }
 
   // Remove user card

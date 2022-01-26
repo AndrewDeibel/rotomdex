@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Form, FormControl, FormControlGroup, Textarea } from '@app/controls';
 import { DialogConfig, DialogRef } from '@app/controls/dialog';
@@ -7,9 +7,9 @@ import { UserCardsService } from '@app/pages/collection';
 
 @Component({
   selector: 'card-user-card-notes-dialog',
-  template: `<app-form [form]="form"></app-form>`,
+  template: `<app-form [appForm]="form"></app-form>`,
 })
-export class CardUserCardNotesDialogComponent {
+export class CardUserCardNotesDialogComponent implements OnInit {
   formNotes: FormGroup = this.formBuilder.group({
     notesControl: [''],
   });
@@ -19,7 +19,8 @@ export class CardUserCardNotesDialogComponent {
     public dialog: DialogRef,
     private formBuilder: FormBuilder,
     private userCardsService: UserCardsService
-  ) {
+  ) {}
+  ngOnInit(): void {
     this.form = new Form({
       formGroup: this.formNotes,
       cancel: () => {
@@ -37,6 +38,7 @@ export class CardUserCardNotesDialogComponent {
         new FormControlGroup({
           controls: [
             new FormControl({
+              formControlName: 'notesControl',
               control: new Textarea({
                 width: 400,
                 rows: 6,

@@ -27,7 +27,7 @@ import {
 })
 export class CardUserCardComponent implements OnInit {
   @Input() item: UserCard;
-  @Input() userCardGroups: UserCardGroup[];
+  @Input() userCardGroups: UserCardGroup[] = [];
   @Output() deleted: EventEmitter<boolean> = new EventEmitter();
   @Output() updated: EventEmitter<UserCard> = new EventEmitter();
   selectCondition: Select;
@@ -47,20 +47,34 @@ export class CardUserCardComponent implements OnInit {
   ngOnChanges(): void {
     // Group
     this.selectGroup = new Select({
+      value: this.item.card_groups
+        .map((userCardGroup) => (userCardGroup as UserCard).id)
+        .join(','),
       classes: 'square small-round-right',
       multiple: true,
-      options: this.userCardGroups?.map(
-        (userCardGroup) =>
-          new SelectOption({
-            text: userCardGroup.name,
-            value: userCardGroup.id?.toString(),
-          })
-      ),
+      advancedSelect: true,
+      options: this.userCardGroups
+        ? this.userCardGroups?.map(
+            (userCardGroup) =>
+              new SelectOption({
+                text: userCardGroup.name,
+                value: userCardGroup.id?.toString(),
+                selected: this.item.card_groups
+                  .map((userCardGroup) => (userCardGroup as UserCard).id)
+                  .includes(userCardGroup.id),
+              })
+          )
+        : [],
       change: (value) => {
         this.updated.emit(
           new UserCard({
             ...this.item,
-            card_group_id: Number(value),
+            card_groups: [
+              ...this.item.card_groups.map(
+                (userCardGroup) => (userCardGroup as UserCard).id
+              ),
+              Number(value),
+            ],
           })
         );
       },

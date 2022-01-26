@@ -58,6 +58,15 @@ select {
   cursor: pointer;
   background: $input-bg;
   user-select: none;
+  &.square {
+    .available-options {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+  &.open {
+    z-index: 100;
+  }
   &:hover {
     border-color: $primary-color;
   }

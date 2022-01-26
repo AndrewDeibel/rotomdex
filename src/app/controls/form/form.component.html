@@ -1,15 +1,15 @@
 <form
-  *ngIf="form"
-  [formGroup]="form.formGroup"
-  (ngSubmit)="onSubmit(form.formGroup)"
+  *ngIf="appForm?.formGroup"
+  [formGroup]="appForm.formGroup"
+  (ngSubmit)="onSubmit(appForm.formGroup)"
 >
-  <h2 *ngIf="form.title">{{ form.title }}</h2>
+  <h2 *ngIf="appForm.title">{{ appForm.title }}</h2>
   <div class="flex padded vertical">
-    <div class="width-12" *ngFor="let formControlGroup of form.groups">
+    <div class="width-12" *ngFor="let formControlGroup of appForm.groups">
       <form-group [formControlGroup]="formControlGroup"></form-group>
     </div>
-    <div *ngIf="form.buttons" class="flex padded space-between">
-      <div *ngFor="let button of form.buttons">
+    <div *ngIf="appForm.buttons" class="flex padded space-between">
+      <div *ngFor="let button of appForm.buttons">
         <app-button [button]="button"></app-button>
       </div>
     </div>

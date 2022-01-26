@@ -25,7 +25,7 @@
 
 <div
   *ngIf="select.advancedSelect"
-  class="select-advanced"
+  class="select-advanced {{ select.open ? 'open' : '' }} {{ select.classes }}"
   (click)="click()"
   (clickOutside)="clickOutside()"
 >
@@ -38,7 +38,7 @@
       class="select-option"
       *ngFor="let option of select.getSelectedOptions()"
     >
-      <fa-icon [icon]="option.icon"></fa-icon>
+      <fa-icon *ngIf="option.icon" [icon]="option.icon"></fa-icon>
       <span class="text">{{ option.text }}</span>
       <fa-icon (click)="unselectOption(option)" icon="times"></fa-icon>
     </div>
