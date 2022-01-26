@@ -9,26 +9,23 @@
         <h1>Edit Profile</h1>
       </div>
       <div>
-        <textbox
-          [textbox]="textboxEmail"
-          formControlName="emailControl"
-        ></textbox>
+        <textbox [textbox]="textboxEmail"></textbox>
       </div>
       <div>
-        <textbox
-          [textbox]="textboxUsername"
-          formControlName="usernameControl"
-        ></textbox>
+        <textbox [textbox]="textboxUsername"></textbox>
       </div>
-      <div class="z-2">
+      <div>
+        <app-select
+          [select]="selectUserAvatar"
+          formControlName="userAvatarControl"
+        ></app-select>
+      </div>
+      <div>
         <app-select
           [select]="selectFavoritePokemon"
           formControlName="favoritePokemonControl"
         ></app-select>
       </div>
-      <!-- <div class="z-1">
-        <app-select [select]="selectUserIcon"></app-select>
-      </div> -->
       <div>
         <toggle
           [toggle]="togglePublic"

@@ -1,3 +1,4 @@
+import { APIResponse } from './../../models/api';
 import { Router } from '@angular/router';
 import { AlertType } from './../../controls/alert/alert';
 import { buildUrl } from '@app/models';
@@ -34,10 +35,10 @@ export class AuthenticationService {
   public get currentUserValue(): User | null {
     return this.currentUserSubject?.value;
   }
-  public set currentUserValue(user: User | null) {
-    if (user) {
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      this.currentUserSubject.next(user);
+  public set currentUserValue(currentUser: User | null) {
+    if (currentUser) {
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      this.currentUserSubject.next(currentUser);
     }
   }
 
@@ -133,5 +134,33 @@ export class AuthenticationService {
     let query = new HttpParams();
     if (token && token.length) query = query.set('code', token);
     return this.http.get<any>(buildUrl('verify', query.toString()));
+  }
+
+  // Update
+  // ====================
+  private updateUserSubject = new BehaviorSubject<User | null>(null);
+  updateUserObservable() {
+    this.updateUserSubject = new BehaviorSubject<User | null>(null);
+    return this.updateUserSubject.asObservable();
+  }
+  updateUser(user: User) {
+    this.http
+      .post<APIResponse>(buildUrl('user-update'), user)
+      .subscribe((res) => {
+        if (res.success) {
+          const updatedUser = new User({
+            ...res.data,
+            token: this.currentUserValue?.token,
+          });
+          this.updateUserSubject.next(updatedUser);
+          this.currentUserSubject.next(updatedUser);
+          this.notificationService.addNotifications([
+            new Notification({
+              message: 'User updated',
+              alertType: AlertType.success,
+            }),
+          ]);
+        }
+      });
   }
 }

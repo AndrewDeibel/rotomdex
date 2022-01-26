@@ -59,16 +59,18 @@
   font-family: $font-family;
   cursor: text;
   background: $input-bg;
-  &:focus {
-    border-color: $primary-color;
-    box-shadow: $shadow-focus, $shadow-focus-inset;
-  }
-  &:hover {
-    border-color: $primary-color;
-  }
-  &[type="number"] {
-    padding: 0 0 0 16px;
-    line-height: 40px;
+  &:not(:read-only):not(:disabled) {
+    &:focus {
+      border-color: $primary-color;
+      box-shadow: $shadow-focus, $shadow-focus-inset;
+    }
+    &:hover {
+      border-color: $primary-color;
+    }
+    &[type="number"] {
+      padding: 0 0 0 16px;
+      line-height: 40px;
+    }
   }
 }
 

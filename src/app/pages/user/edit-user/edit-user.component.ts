@@ -1,3 +1,4 @@
+import { getUserAvatars } from './../user';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -12,7 +13,7 @@ import {
 } from '@app/controls';
 import { Button, ButtonType } from '@app/controls/button';
 import { APIGetPaged } from '@app/models';
-import { PokemonsService } from '@app/pages';
+import { PokemonsService, User } from '@app/pages';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { ChangePasswordDialogComponent } from './change-password-dialog.component';
 
@@ -28,7 +29,7 @@ export class EditUserComponent implements OnInit {
   togglePublic: Toggle;
   buttonSubmit: Button;
   buttonCancel: Button;
-  selectUserIcon: Select;
+  selectUserAvatar: Select;
   selectFavoritePokemon: Select;
   buttonChangePassword: Button;
 
@@ -66,11 +67,12 @@ export class EditUserComponent implements OnInit {
 
   setupControls() {
     this.form = this.formBuilder.group({
-      emailControl: [''],
-      usernameControl: [''],
-      userIconControl: [''],
-      favoritePokemonControl: [''],
-      publicControl: [''],
+      userAvatarControl: [this.authenticationService.currentUserValue?.avatar],
+      favoritePokemonControl: [
+        this.authenticationService.currentUserValue
+          ?.favorite_pokemon_variant_id,
+      ],
+      publicControl: [this.authenticationService.currentUserValue?.public],
     });
     this.textboxEmail = new Textbox({
       label: 'Email',
@@ -87,17 +89,19 @@ export class EditUserComponent implements OnInit {
       readOnly: true,
       value: this.authenticationService.currentUserValue?.name,
     });
-    this.selectUserIcon = new Select({
+    this.selectUserAvatar = new Select({
       advancedSelect: true,
       multiple: false,
-      options: [],
+      options: getUserAvatars(),
       label: 'Avatar',
+      placeholder: 'Select avatar...',
     });
     this.selectFavoritePokemon = new Select({
       advancedSelect: true,
       multiple: false,
       options: [],
       label: 'Favorite Pokemon',
+      placeholder: 'Select favorite pokemon...',
       search: (search) => {
         this.getPokemonVariants(search);
       },
@@ -150,8 +154,15 @@ export class EditUserComponent implements OnInit {
   }
 
   submit() {
-    if (this.form.invalid) {
-      return;
+    if (!this.form.invalid) {
+      this.authenticationService.updateUser(
+        new User({
+          avatar: this.form.controls['userAvatarControl'].value,
+          favorite_pokemon_variant_id:
+            this.form.controls['favoritePokemonControl'].value,
+          public: this.form.controls['publicControl'].value,
+        })
+      );
     }
   }
 }

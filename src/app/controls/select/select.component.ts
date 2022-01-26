@@ -86,10 +86,12 @@ export class SelectComponent implements ControlValueAccessor {
 
   selectOption(option: SelectOption) {
     option.selected = true;
-    let values = this.value ? this.value.split(',') : [];
-    if (!values.includes(option.value)) {
-      values.push(option.value);
-      this.value = values.join(',');
+    if (this.select.multiple) {
+      let values = this.value ? this.value.split(',') : [];
+      if (!values.includes(option.value)) {
+        values.push(option.value);
+        this.value = values.join(',');
+      }
     }
   }
 
