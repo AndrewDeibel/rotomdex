@@ -39,11 +39,13 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
-    this.router.navigate(['/cards'], {
-      queryParams: {
-        search: this.query,
-      },
-    });
+    if (this.query) {
+      this.router.navigate(['/cards'], {
+        queryParams: {
+          search: this.query,
+        },
+      });
+    }
   }
 
   clear(textboxEl: HTMLElement) {

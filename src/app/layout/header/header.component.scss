@@ -134,6 +134,9 @@
     background: $header-bg;
     .menu {
       border: 0 !important;
+      li {
+        max-width: 20%;
+      }
       .text {
         padding-left: 0;
         padding-top: $spacing / 2;
@@ -143,6 +146,24 @@
       }
       .symbol {
         filter: contrast(0) brightness(10);
+      }
+    }
+  }
+  @media (max-width: $screen-small) {
+    .menu {
+      display: flex;
+      justify-content: center;
+      ul {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .text {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 120%;
       }
     }
   }

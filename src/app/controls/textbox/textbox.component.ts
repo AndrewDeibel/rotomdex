@@ -60,15 +60,21 @@ export class TextboxComponent implements ControlValueAccessor {
     e.stopPropagation();
   };
 
-  keyup() {
-    if (this.textbox.keyup) this.textbox.keyup(this.value);
+  keyup(e: any) {
+    if (this.textbox.keyup) {
+      this.textbox.keyup(this.value);
+    }
   }
 
-  keydown() {
-    if (this.textbox.keydown) this.textbox.keydown(this.value);
+  keydown(e: any) {
+    this.value = e.target?.value;
+    if (this.textbox.keydown) {
+      this.textbox.keydown(this.value);
+    }
   }
 
-  keydownEnter() {
+  keydownEnter(e: any) {
+    this.value = e.target?.value;
     this.outputKeydownEnter.emit(this.value);
     if (this.textbox.keydownEnter) this.textbox.keydownEnter(this.value);
   }

@@ -1,4 +1,3 @@
-import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { AppSettings } from '@app/app';
@@ -8,14 +7,14 @@ import {
   Notification,
   NotificationsService,
 } from '@app/controls';
-import { Menu } from '@app/controls/menu';
+import { Icons } from '@app/models';
+import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Card } from '@app/pages/cards/card';
 import { ScannerService } from '@app/pages/scanner/scanner.service';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
-import { last, Observable, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { User } from '..';
-import { Icons } from '@app/models';
 
 @AutoUnsubscribe()
 @Component({

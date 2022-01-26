@@ -46,6 +46,7 @@ export class CardItemGridComponent implements OnInit {
   setupSubscriptions() {
     this.userCardsService.addUserCardObservable().subscribe((res) => {
       if (res) {
+        this.card.total_cards_owned = this.previousValue + res.quantity;
       }
     });
   }
