@@ -23,9 +23,10 @@ export class SearchComponent implements OnInit {
     });
 
     this.textbox = new Textbox({
+      wrapperClasses: 'width-12',
       placeholder: 'Search Cards...',
       icon: Icons.search,
-      classes: 'bg-white color-dark',
+      classes: 'bg-white color-dark width-12',
       keydownEnter: (value) => {
         this.query = value;
         this.search();
