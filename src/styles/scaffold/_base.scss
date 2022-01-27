@@ -104,15 +104,19 @@ img {
 // Alerts
 .success {
   background: $success !important;
+  border-color: $success !important;
 }
 .info {
   background: $info !important;
+  border-color: $info !important;
 }
 .warning {
   background: $warning !important;
+  border-color: $warning !important;
 }
 .error {
   background: $error !important;
+  border-color: $error !important;
 }
 
 // Color

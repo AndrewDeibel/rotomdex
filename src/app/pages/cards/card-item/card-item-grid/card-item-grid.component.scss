@@ -106,5 +106,11 @@
       padding-bottom: 4px;
       margin-bottom: -4px;
     }
+    .card-number {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 }

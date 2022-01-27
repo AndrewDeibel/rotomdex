@@ -1,8 +1,5 @@
-import { UserCard } from '@app/pages/collection';
-import { SelectOption, SelectOptionGroup } from '@app/controls';
 import '@app/helpers/string.extensions';
-import { ItemsFilter } from '@app/layout';
-import { Icons } from '@app/models';
+import { UserCard } from '@app/pages/collection';
 import { Expansion } from '@app/pages/expansions';
 import { Pokemon } from '@app/pages/pokemons/pokemon/pokemon';
 
@@ -137,33 +134,4 @@ export class CardCount {
   constructor(init?: Partial<CardCount>) {
     Object.assign(this, init);
   }
-}
-
-export function SetSortByCards(itemFilter: ItemsFilter) {
-  itemFilter.selectSortBy.optionGroups[0] = new SelectOptionGroup({
-    label: 'Sort By',
-    options: [
-      new SelectOption({
-        text: 'Number',
-        value: 'number',
-      }),
-      new SelectOption({
-        text: 'Name',
-        value: 'name',
-      }),
-      // new SelectOption({
-      // 	text: 'Price',
-      // 	value: 'price',
-      // }),
-      new SelectOption({
-        text: 'Release Date',
-        value: 'release_date',
-      }),
-      // new SelectOption({
-      // 	text: 'Rarity',
-      // 	value: 'rarity',
-      // }),
-    ],
-  });
-  itemFilter.selectSortBy.value = 'number';
 }

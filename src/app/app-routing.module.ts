@@ -21,7 +21,7 @@ import {
   VerifyComponent,
   WishlistComponent,
   UserCardsComponent,
-  AddUserCardGroupComponent,
+  AddUserCardGroupComponent as AddEditUserCardGroupComponent,
   UserCardGroupComponent,
 } from '@app/pages';
 
@@ -84,8 +84,12 @@ const routes: Routes = [
         component: WishlistComponent,
       },
       {
-        path: 'add',
-        component: AddUserCardGroupComponent,
+        path: 'group/add',
+        component: AddEditUserCardGroupComponent,
+      },
+      {
+        path: 'group/edit/:id',
+        component: AddEditUserCardGroupComponent,
       },
       {
         path: 'group/:id',

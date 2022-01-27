@@ -59,6 +59,7 @@ export class CollectionComponent implements OnInit {
   setupSubscriptions() {
     this.userCardGroupService.getUserCardGroupsObservable().subscribe((res) => {
       if (res) {
+        this.buildMenu();
         this.menuSidebar.items.push(
           new MenuItem({
             separator: true,
@@ -74,7 +75,7 @@ export class CollectionComponent implements OnInit {
           new MenuItem({
             text: 'Add Group',
             icon: Icons.plus,
-            route: '/collection/add',
+            route: '/collection/group/add',
             exactMatch: true,
           })
         );
@@ -82,15 +83,7 @@ export class CollectionComponent implements OnInit {
     });
   }
 
-  setupControls() {
-    this.items.header.title = 'All Cards';
-    this.progressBar = new ProgressBar({
-      total: 80,
-      value: 20,
-    });
-    this.symbolCards = Symbols.cards;
-    this.symbolPokemon = Symbols.pokeball;
-
+  buildMenu() {
     this.menuSidebar = new Menu({
       round: false,
       items: [
@@ -126,6 +119,17 @@ export class CollectionComponent implements OnInit {
         }),
       ],
     });
+  }
+
+  setupControls() {
+    this.items.header.title = 'All Cards';
+    this.progressBar = new ProgressBar({
+      total: 80,
+      value: 20,
+    });
+    this.symbolCards = Symbols.cards;
+    this.symbolPokemon = Symbols.pokeball;
+    this.buildMenu();
   }
 
   getUserCardGroups() {

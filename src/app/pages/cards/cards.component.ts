@@ -5,7 +5,7 @@ import { AppSettings } from '@app/app';
 import '@app/helpers/string.extensions';
 import { ItemGroup, Items } from '@app/layout/main';
 import { APIGetPaged, Symbols } from '@app/models';
-import { SetSortByCards } from './card/card';
+import { SetSortByGlobal } from '@app/pages/cards/';
 import { CardsService, ResCards } from './cards.service';
 
 @Component({
@@ -81,7 +81,7 @@ export class CardsComponent implements OnInit {
     this.items.showHeader = false;
     this.items.filter.textboxSearch.placeholder = 'Search Cards...';
     this.items.filter.selectSortDirection.value = 'asc';
-    SetSortByCards(this.items.filter);
+    SetSortByGlobal(this.items.filter);
   }
 
   getCards() {

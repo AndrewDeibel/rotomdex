@@ -1,15 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ExpansionService } from '@app/pages/expansions/expansion/expansion.service';
-import { SetPageSize, SetSortByExpansion } from './expansion';
-import { CardsComponent, SetSortByCards } from '@app/pages/cards';
 import { DatePipe } from '@angular/common';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { LoaderService, Menu, MenuItem } from '@app/controls';
-import { ItemGroup, Items } from '@app/layout/main';
+import { ActivatedRoute } from '@angular/router';
 import { AppSettings } from '@app/app';
 import { ProgressBar } from '@app/controls/progress-bar/progress-bar';
+import { ItemGroup, Items } from '@app/layout/main';
 import { APIGetPaged } from '@app/models';
+import { CardsComponent, SetSortByExpansionCards } from '@app/pages/cards';
+import { ExpansionService } from '@app/pages/expansions/expansion/expansion.service';
+import { SetPageSize, SetSortByExpansion } from './expansion';
 
 @Component({
   selector: 'expansion',
@@ -22,7 +21,6 @@ export class ExpansionComponent implements OnInit {
   code: string;
 
   constructor(
-    private loaderService: LoaderService,
     private titleService: Title,
     private datePipe: DatePipe,
     private expansionService: ExpansionService,
@@ -77,7 +75,7 @@ export class ExpansionComponent implements OnInit {
   }
 
   setupControls() {
-    SetSortByCards(this.items.filter);
+    SetSortByExpansionCards(this.items.filter);
   }
 
   handleParams() {

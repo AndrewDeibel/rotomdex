@@ -12,8 +12,8 @@ import { UserCard, UserCardsService } from '@app/pages/collection';
 import { ExpansionService } from '@app/pages/expansions/expansion/expansion.service';
 import { PokemonService } from '@app/pages/pokemons';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
-import { CardsService } from '..';
-import { Card, SetSortByCards } from './card';
+import { CardsService, SetSortByCards, SetSortByGlobal } from '..';
+import { Card } from './card';
 import { CardImageDialogComponent } from './card-image-dialog.component';
 import { CardService } from './card.service';
 
@@ -69,7 +69,7 @@ export class CardComponent implements OnInit {
     this.relatedCards.itemClasses = 'width-2 medium-3 small-6';
     this.relatedCards.showFilters = false;
     this.relatedCards.showFooter = false;
-    SetSortByCards(this.relatedCards.filter);
+    SetSortByGlobal(this.relatedCards.filter);
 
     // Expansion cards
     this.expansionCards.footer.pageSize = 12;
@@ -77,7 +77,6 @@ export class CardComponent implements OnInit {
     this.expansionCards.itemClasses = 'width-2 medium-3 small-6';
     this.expansionCards.showFilters = false;
     this.expansionCards.showFooter = false;
-    SetSortByCards(this.expansionCards.filter);
   }
 
   getTypeImage(type: string) {
@@ -197,7 +196,7 @@ export class CardComponent implements OnInit {
         this.expansionCards.header.titleRoute = this.card.expansion.route;
 
         // Prices
-        if (this.card.last_prices.length) {
+        if (this.card.last_prices && this.card.last_prices.length) {
           this.buttonTCGPlayer.price = this.card.last_prices[0].market_price;
           //this.buttonEbay.price = this.card.last_prices[0].market_price;
         }

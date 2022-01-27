@@ -92,6 +92,8 @@ export class SelectComponent implements ControlValueAccessor {
         values.push(option.value);
         this.value = values.join(',');
       }
+    } else {
+      this.value = option.value;
     }
   }
 
