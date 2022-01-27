@@ -1,5 +1,5 @@
 <form
-  *ngIf="appForm?.formGroup"
+  *ngIf="appForm && appForm.formGroup"
   [formGroup]="appForm.formGroup"
   (ngSubmit)="onSubmit(appForm.formGroup)"
 >

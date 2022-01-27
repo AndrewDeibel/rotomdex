@@ -2,31 +2,31 @@
   <textbox
     *ngIf="showTextbox"
     [textbox]="appFormControl.control"
-    formControlName="{{ appFormControl.formControlName }}"
+    [formControlName]="appFormControl.formControlName"
   ></textbox>
   <app-textarea
     *ngIf="showTextarea"
     [textarea]="appFormControl.control"
-    formControlName="{{ appFormControl.formControlName }}"
+    [formControlName]="appFormControl.formControlName"
   ></app-textarea>
   <app-select
     *ngIf="showSelect"
     [select]="appFormControl.control"
-    formControlName="{{ appFormControl.formControlName }}"
+    [formControlName]="appFormControl.formControlName"
   ></app-select>
   <editor
     *ngIf="showEditor"
     [editor]="appFormControl.control"
-    formControlName="{{ appFormControl.formControlName }}"
+    [formControlName]="appFormControl.formControlName"
   ></editor>
   <checkbox
     *ngIf="showCheckbox"
     [checkbox]="appFormControl.control"
-    formControlName="{{ appFormControl.formControlName }}"
+    [formControlName]="appFormControl.formControlName"
   ></checkbox>
   <toggle
     *ngIf="showToggle"
     [toggle]="appFormControl.control"
-    formControlName="{{ appFormControl.formControlName }}"
+    [formControlName]="appFormControl.formControlName"
   ></toggle>
 </div>

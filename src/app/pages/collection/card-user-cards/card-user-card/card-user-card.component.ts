@@ -66,15 +66,11 @@ export class CardUserCardComponent implements OnInit {
           )
         : [],
       change: (value) => {
+        const values = value.split(',').map(Number);
         this.updated.emit(
           new UserCard({
             ...this.item,
-            card_groups: [
-              ...this.item.card_groups.map(
-                (userCardGroup) => (userCardGroup as UserCard).id
-              ),
-              Number(value),
-            ],
+            card_groups: values,
           })
         );
       },
@@ -187,15 +183,19 @@ export class CardUserCardComponent implements OnInit {
       classes: 'square secondary small-round-left',
       width: '100%',
       click: () => {
-        this.dialogService.open(
+        const ref = this.dialogService.open(
           CardUserCardNotesDialogComponent,
           new DialogConfig({
             title: 'Notes',
             data: {
-              userCard: this.item,
+              notes: this.item.notes,
             },
           })
         );
+        ref.afterClosed.subscribe((data) => {
+          this.item.notes = data.notes;
+          this.updated.emit(this.item);
+        });
       },
     });
 

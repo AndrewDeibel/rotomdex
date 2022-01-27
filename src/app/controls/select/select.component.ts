@@ -70,7 +70,8 @@ export class SelectComponent implements ControlValueAccessor {
       (this.select.multiple ||
         !this.select.value ||
         !this.select.value?.length) &&
-      !this.select.open
+      !this.select.open &&
+      this.select.getUnselectedOptions().length > 0
     )
       this.select.open = true;
     else this.select.open = false;

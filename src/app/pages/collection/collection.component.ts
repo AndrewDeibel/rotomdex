@@ -9,6 +9,7 @@ import {
   UserCardGroupService,
   AuthenticationService,
 } from '@app/pages';
+import { getIcon } from '.';
 
 @Component({
   selector: 'collection',
@@ -39,23 +40,6 @@ export class CollectionComponent implements OnInit {
     this.getUserCardGroups();
   }
 
-  getIcon(type: string) {
-    switch (type) {
-      case 'binder':
-        return Icons.binder;
-      case 'deck':
-        return Icons.deck;
-      case 'trades':
-        return Icons.exchange;
-      case 'box':
-        return Icons.archive;
-      case 'group':
-        return Icons.folder;
-      default:
-        return Icons.folder;
-    }
-  }
-
   setupSubscriptions() {
     this.userCardGroupService.getUserCardGroupsObservable().subscribe((res) => {
       if (res) {
@@ -69,7 +53,7 @@ export class CollectionComponent implements OnInit {
               new MenuItem({
                 text: item.name,
                 route: `/collection/group/${item.id}`,
-                icon: this.getIcon(item.type),
+                icon: getIcon(item.type),
               })
           ),
           new MenuItem({

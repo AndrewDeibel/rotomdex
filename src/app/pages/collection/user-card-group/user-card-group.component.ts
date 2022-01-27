@@ -1,14 +1,13 @@
-import { Icons } from './../../../models/icons';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { ImportCardsComponent } from './../import-cards/import-cards.component';
-import { UserCardGroupService } from './user-card-group.services';
-import { ActivatedRoute } from '@angular/router';
-import { AuthenticationService } from '@app/pages/auth/auth.service';
-import { UserCardsService, UserCardGroup } from '@app/pages/collection';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Menu, MenuItem } from '@app/controls';
 import { ItemGroup, Items } from '@app/layout';
 import { APIGetPaged } from '@app/models';
-import { Menu, MenuItem } from '@app/controls';
+import { AuthenticationService } from '@app/pages/auth/auth.service';
+import { UserCardGroup, UserCardsService } from '@app/pages/collection';
+import { getIcon } from '.';
+import { Icons } from './../../../models/icons';
+import { UserCardGroupService } from './user-card-group.services';
 
 @Component({
   selector: 'user-card-group',
@@ -82,9 +81,7 @@ export class UserCardGroupComponent implements OnInit {
     this.items.header.title = userCardGroup.name;
 
     // Icon
-    for (let icon in Icons)
-      if (icon === userCardGroup.type)
-        this.items.header.icon = icon as IconProp;
+    this.items.header.icon = getIcon(userCardGroup.type);
 
     // Edit menu
     this.items.header.menu = new Menu({

@@ -34,7 +34,6 @@ export class CardItemGridComponent implements OnInit {
       min: this.card.total_cards_owned,
       blur: (value) => {
         const newValue = Number(value);
-        this.textbox.min = newValue;
         if (newValue > this.previousValue) {
           const quantity = newValue - this.previousValue;
           this.addItem(quantity);
@@ -47,6 +46,7 @@ export class CardItemGridComponent implements OnInit {
     this.userCardsService.addUserCardObservable().subscribe((res) => {
       if (res) {
         this.card.total_cards_owned = this.previousValue + res.quantity;
+        this.textbox.min = this.card.total_cards_owned;
       }
     });
   }

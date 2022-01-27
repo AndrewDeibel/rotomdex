@@ -147,11 +147,17 @@ export class UserCardsService {
     return this.updateUserCardSubject.asObservable();
   }
   updateUserCard(userCard: UserCard) {
+    const _userCard = new UserCard({
+      ...userCard,
+      card_groups: userCard.card_groups.map((card_group) =>
+        card_group instanceof Object ? card_group.id : card_group
+      ),
+    });
     this.http
-      .post<APIResponse>(buildUrl('user-cards/update'), userCard)
+      .post<APIResponse>(buildUrl('user-cards/update'), _userCard)
       .subscribe((res) => {
         if (res.success) {
-          this.updateUserCardSubject.next(userCard);
+          this.updateUserCardSubject.next(_userCard);
           this.notificationService.addNotifications([
             new Notification({
               message: 'Card updated',

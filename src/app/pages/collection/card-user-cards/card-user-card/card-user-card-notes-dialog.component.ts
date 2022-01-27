@@ -2,37 +2,32 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Form, FormControl, FormControlGroup, Textarea } from '@app/controls';
 import { DialogConfig, DialogRef } from '@app/controls/dialog';
-import { UserCard } from '@app/pages';
-import { UserCardsService } from '@app/pages/collection';
 
 @Component({
   selector: 'card-user-card-notes-dialog',
   template: `<app-form [appForm]="form"></app-form>`,
 })
 export class CardUserCardNotesDialogComponent implements OnInit {
-  formNotes: FormGroup = this.formBuilder.group({
-    notesControl: [''],
-  });
+  formNotes: FormGroup;
   public form: Form;
   constructor(
     public config: DialogConfig,
     public dialog: DialogRef,
-    private formBuilder: FormBuilder,
-    private userCardsService: UserCardsService
+    private formBuilder: FormBuilder
   ) {}
   ngOnInit(): void {
+    this.formNotes = this.formBuilder.group({
+      notesControl: this.formBuilder.control(this.config.data.notes),
+    });
     this.form = new Form({
       formGroup: this.formNotes,
       cancel: () => {
         this.dialog.close();
       },
       save: () => {
-        const userCard: UserCard = {
-          ...this.config.data.userCard,
+        this.dialog.close({
           notes: (this.form.groups[0].controls[0].control as Textarea).value,
-        };
-        this.userCardsService.updateUserCard(userCard);
-        this.dialog.close();
+        });
       },
       groups: [
         new FormControlGroup({
