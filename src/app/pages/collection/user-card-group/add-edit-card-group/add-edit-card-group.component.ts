@@ -72,6 +72,7 @@ export class AddUserCardGroupComponent implements OnInit {
   }
 
   setupSubscriptions() {
+    // Add group
     this.userCardGroupService
       .addUserCardGroupObservable()
       .subscribe((userCardGroup) => {
@@ -80,6 +81,8 @@ export class AddUserCardGroupComponent implements OnInit {
           this.getUserCardGroups();
         }
       });
+
+    // Get group
     this.userCardGroupService
       .getUserCardGroupObservable()
       .subscribe((userCardGroup) => {
@@ -110,6 +113,20 @@ export class AddUserCardGroupComponent implements OnInit {
           });
         }
       });
+
+    // Update group
+    this.userCardGroupService
+      .updateUserCardGroupObservable()
+      .subscribe((res) => {
+        this.userCardGroupService.getUserCardGroups(
+          new APIGetPaged({
+            user_id: this.authenticationService.currentUserValue?.id,
+            page_size: 100,
+          })
+        );
+      });
+
+    // Remove group
     this.userCardGroupService
       .removeUserCardGroupObservable()
       .subscribe((card_group_id) => {
@@ -200,7 +217,7 @@ export class AddUserCardGroupComponent implements OnInit {
             type: this.form.controls['selectType'].value,
             description: this.form.controls['descriptionControl'].value,
             public: this.form.controls['publicControl'].value,
-            id: this.id,
+            card_group_id: this.id,
           })
         );
       }

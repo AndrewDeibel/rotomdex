@@ -9,7 +9,9 @@ import {
   UserCard,
   UserCardsService,
 } from '@app/pages';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'card-user-cards',
   templateUrl: './card-user-cards.component.html',
@@ -38,6 +40,7 @@ export class CardUserCardsComponent implements OnInit {
   ngOnChange() {
     this.setupControls();
   }
+  ngOnDestroy() {}
 
   ngOnInit(): void {
     this.setupControls();
@@ -110,20 +113,20 @@ export class CardUserCardsComponent implements OnInit {
 
   setupSubscriptions() {
     // Card added
-    this.userCardsService.addUserCardObservable().subscribe((addedCard) => {
-      if (addedCard) this.userCards.push(addedCard);
+    this.userCardsService.addUserCardsObservable().subscribe((addedCards) => {
+      if (addedCards) {
+        this.userCards.push(...addedCards);
+      }
     });
 
     // Card removed
-    this.userCardsService
-      .removeUserCardObservable()
-      .subscribe((user_card_id) => {
-        if (user_card_id) {
-          this.userCards = this.userCards.filter(
-            (userCard) => userCard.id !== user_card_id
-          );
-        }
-      });
+    this.userCardsService.removeUserCardObservable().subscribe((userCard) => {
+      if (userCard) {
+        this.userCards = this.userCards.filter(
+          (_userCard) => _userCard.id !== userCard.id
+        );
+      }
+    });
 
     // Card update
     this.userCardsService.updateUserCardObservable().subscribe((userCard) => {
@@ -144,11 +147,11 @@ export class CardUserCardsComponent implements OnInit {
       card_id: this.card_id,
     })
   ) {
-    this.userCardsService.addUserCard(userCard);
+    this.userCardsService.addUserCards(userCard);
   }
 
   deleteItem(userCard: UserCard) {
-    this.userCardsService.removeUserCard(userCard.id);
+    this.userCardsService.removeUserCard(userCard);
   }
 
   updateItem(userCard: UserCard) {

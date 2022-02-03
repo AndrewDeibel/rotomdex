@@ -80,7 +80,7 @@ export class UserCardGroupService {
       .subscribe((res) => {
         this.loaderService.clearItemLoading('addUserCardGroup');
         if (res.success) {
-          this.addUserCardGroupSubject.next(userCardGroup);
+          this.addUserCardGroupSubject.next(new UserCardGroup(res.data));
           this.notificationService.addNotifications([
             new Notification({
               message: `Added ${userCardGroup.name}`,

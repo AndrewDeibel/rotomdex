@@ -4,7 +4,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Textbox } from '@app/controls';
 import { UserCard } from '@app/pages';
 import { Card } from '../../card/card';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+import { Subscription } from 'rxjs';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'card-item-grid',
   templateUrl: 'card-item-grid.component.html',
@@ -15,6 +18,8 @@ export class CardItemGridComponent implements OnInit {
   imageLoading: boolean = true;
   textbox: Textbox;
   previousValue: number;
+  addUserCardSubscription: Subscription;
+  removeUserCardSubscription: Subscription;
 
   constructor(private userCardsService: UserCardsService) {}
 
@@ -22,6 +27,7 @@ export class CardItemGridComponent implements OnInit {
     this.setupControls();
     this.setupSubscriptions();
   }
+  ngOnDestroy() {}
 
   setupControls() {
     this.previousValue = this.card.total_cards_owned;
@@ -38,21 +44,36 @@ export class CardItemGridComponent implements OnInit {
           const quantity = newValue - this.previousValue;
           this.addItem(quantity);
         }
+        this.previousValue = newValue;
       },
     });
   }
 
   setupSubscriptions() {
-    this.userCardsService.addUserCardObservable().subscribe((res) => {
-      if (res) {
-        this.card.total_cards_owned = this.previousValue + res.quantity;
-        this.textbox.min = this.card.total_cards_owned;
-      }
-    });
+    if (!this.addUserCardSubscription)
+      this.addUserCardSubscription = this.userCardsService
+        .addUserCardsObservable()
+        .subscribe((res) => {
+          if (res && this.card.id === res[0].card.id) {
+            this.card.total_cards_owned++;
+            this.textbox.min = this.card.total_cards_owned;
+            this.textbox.value = this.card.total_cards_owned.toString();
+          }
+        });
+    if (!this.removeUserCardSubscription)
+      this.removeUserCardSubscription = this.userCardsService
+        .removeUserCardObservable()
+        .subscribe((res) => {
+          if (res && this.card.id === res.card.id) {
+            this.card.total_cards_owned--;
+            this.textbox.min = this.card.total_cards_owned;
+            this.textbox.value = this.card.total_cards_owned.toString();
+          }
+        });
   }
 
   addItem(quantity: number) {
-    this.userCardsService.addUserCard(
+    this.userCardsService.addUserCards(
       new UserCard({
         card_id: this.card.id,
         quantity,

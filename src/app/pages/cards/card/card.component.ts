@@ -12,7 +12,7 @@ import { UserCard, UserCardsService } from '@app/pages/collection';
 import { ExpansionService } from '@app/pages/expansions/expansion/expansion.service';
 import { PokemonService } from '@app/pages/pokemons';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
-import { CardsService, SetSortByCards, SetSortByGlobal } from '..';
+import { CardsService, SetSortByGlobal } from '..';
 import { Card } from './card';
 import { CardImageDialogComponent } from './card-image-dialog.component';
 import { CardService } from './card.service';

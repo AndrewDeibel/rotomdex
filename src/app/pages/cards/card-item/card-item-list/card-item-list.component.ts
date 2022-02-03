@@ -61,7 +61,7 @@ export class CardItemListComponent implements OnInit {
   }
 
   addItem(quantity: number) {
-    this.userCardsService.addUserCard(
+    this.userCardsService.addUserCards(
       new UserCard({
         card_id: this.card.id,
         quantity,

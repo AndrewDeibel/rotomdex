@@ -84,12 +84,11 @@ export class UserCardsService {
   }
 
   // Add user card
-  private addUserCardSubject = new BehaviorSubject<UserCard | null>(null);
-  addUserCardObservable() {
-    this.addUserCardSubject = new BehaviorSubject<UserCard | null>(null);
-    return this.addUserCardSubject.asObservable();
+  private addUserCardsSubject = new BehaviorSubject<UserCard[] | null>(null);
+  addUserCardsObservable() {
+    return this.addUserCardsSubject.asObservable();
   }
-  addUserCard(userCard: UserCard) {
+  addUserCards(userCard: UserCard) {
     if (userCard.quantity > 10) {
       this.notificationService.addNotifications([
         new Notification({
@@ -103,7 +102,9 @@ export class UserCardsService {
         .post<APIResponse>(buildUrl('user-cards/create'), userCard)
         .subscribe((res) => {
           if (res.success) {
-            this.addUserCardSubject.next(userCard);
+            this.addUserCardsSubject.next(
+              res.data.map((userCard: any) => new UserCard(userCard))
+            );
             this.notificationService.addNotifications([
               new Notification({
                 message: 'Card added to collection',
@@ -117,19 +118,18 @@ export class UserCardsService {
   }
 
   // Remove user card
-  private removeUserCardSubject = new BehaviorSubject<number | null>(null);
+  private removeUserCardSubject = new BehaviorSubject<UserCard | null>(null);
   removeUserCardObservable() {
-    this.removeUserCardSubject = new BehaviorSubject<number | null>(null);
     return this.removeUserCardSubject.asObservable();
   }
-  removeUserCard(user_card_id: number) {
+  removeUserCard(userCard: UserCard) {
     this.http
       .post<APIResponse>(buildUrl('user-cards/delete'), {
-        user_card_id,
+        user_card_id: userCard.id,
       })
       .subscribe((res) => {
         if (res.success) {
-          this.removeUserCardSubject.next(user_card_id);
+          this.removeUserCardSubject.next(userCard);
           this.notificationService.addNotifications([
             new Notification({
               message: 'Card removed from collection',

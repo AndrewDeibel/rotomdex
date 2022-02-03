@@ -8,6 +8,7 @@ export class UserCardGroup {
   cards: Card[] = [];
   count: number = 0;
   id: number;
+  card_group_id: number;
   public: boolean;
   description: string;
   constructor(init?: Partial<UserCardGroup>) {

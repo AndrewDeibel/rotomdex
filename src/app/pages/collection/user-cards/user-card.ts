@@ -1,3 +1,4 @@
+import { Card } from './../../cards/card/card';
 import { ItemsFilter } from '@app/layout/main';
 import { SelectOption } from '@app/controls';
 import { SelectOptionGroup } from './../../../controls/select/select';
@@ -15,10 +16,12 @@ export class UserCard {
   date_obtained: Date;
   purchase_price: number;
   quantity: number = 1;
+  card: Card;
 
   constructor(init?: Partial<UserCard>) {
     Object.assign(this, init);
     this.user_card_id = this.id;
+    if (init && init.card) this.card = new Card(init.card);
   }
 }
 
