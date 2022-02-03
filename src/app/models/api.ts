@@ -32,6 +32,7 @@ export class APIGetPaged {
   card_group_id: number;
   slug: string;
   code: string;
+  name: string;
 
   url: string;
 
@@ -62,6 +63,10 @@ export class APIGetPaged {
     if (this.query && this.query.length)
       query = query.set('search', this.query);
     else query = query.delete('search');
+
+    // Name
+    if (this.name && this.name.length) query = query.set('name', this.name);
+    else query = query.delete('name');
 
     // Artist
     if (this.artist && this.artist.length)

@@ -193,8 +193,10 @@ export class CardUserCardComponent implements OnInit {
           })
         );
         ref.afterClosed.subscribe((data) => {
-          this.item.notes = data.notes;
-          this.updated.emit(this.item);
+          if (data) {
+            this.item.notes = data.notes;
+            this.updated.emit(this.item);
+          }
         });
       },
     });

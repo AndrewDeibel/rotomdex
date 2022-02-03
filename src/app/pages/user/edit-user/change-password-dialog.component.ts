@@ -1,6 +1,5 @@
-import { DialogRef } from '@app/controls/dialog';
 import { Component } from '@angular/core';
-import { DialogConfig, Textbox, Button } from '@app/controls';
+import { DialogConfig, Textbox, Button, DialogRef } from '@app/controls';
 
 @Component({
   selector: 'change-password-dialog',

@@ -1,47 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Form, FormControl, FormControlGroup, Textarea } from '@app/controls';
-import { DialogConfig, DialogRef } from '@app/controls/dialog';
+import { DialogConfig, DialogRef, Button, Textarea } from '@app/controls';
 
 @Component({
   selector: 'card-user-card-notes-dialog',
-  template: `<app-form [appForm]="form"></app-form>`,
+  template: `<form class="flex vertical padded">
+    <div><app-textarea [textarea]="textareaNotes"></app-textarea></div>
+    <div class="flex justify-end">
+      <app-button [button]="buttonSubmit"></app-button>
+    </div>
+  </form>`,
 })
 export class CardUserCardNotesDialogComponent implements OnInit {
-  formNotes: FormGroup;
-  public form: Form;
-  constructor(
-    public config: DialogConfig,
-    public dialog: DialogRef,
-    private formBuilder: FormBuilder
-  ) {}
-  ngOnInit(): void {
-    this.formNotes = this.formBuilder.group({
-      notesControl: this.formBuilder.control(this.config.data.notes),
+  textareaNotes: Textarea;
+  buttonSubmit: Button;
+  constructor(public config: DialogConfig, public dialog: DialogRef) {
+    this.textareaNotes = new Textarea({
+      placeholder: 'Notes...',
+      width: 400,
+      rows: 6,
+      value: config.data.notes,
     });
-    this.form = new Form({
-      formGroup: this.formNotes,
-      cancel: () => {
-        this.dialog.close();
-      },
-      save: () => {
+    this.buttonSubmit = new Button({
+      text: 'Save',
+      click: () => {
         this.dialog.close({
-          notes: (this.form.groups[0].controls[0].control as Textarea).value,
+          notes: this.textareaNotes.value,
         });
       },
-      groups: [
-        new FormControlGroup({
-          controls: [
-            new FormControl({
-              formControlName: 'notesControl',
-              control: new Textarea({
-                width: 400,
-                rows: 6,
-              }),
-            }),
-          ],
-        }),
-      ],
     });
   }
+  ngOnInit(): void {}
 }

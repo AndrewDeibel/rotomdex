@@ -105,7 +105,7 @@ export class ExpansionComponent implements OnInit {
         code: this.code,
         page: this.items.footer.page,
         page_size: this.items.footer.pageSize,
-        query: this.items.filter.textboxSearch.value,
+        name: this.items.filter.textboxSearch.value,
         sort_by: this.items.filter.selectSortBy.value,
         sort_direction: this.items.filter.selectSortDirection.value,
       })
