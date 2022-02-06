@@ -32,7 +32,7 @@ export class ResetComponent implements OnInit {
 
   ngOnInit(): void {
     // Get token
-    this.activatedRoute.params.subscribe((params) => {
+    this.activatedRoute.queryParams.subscribe((params) => {
       this.token = params['token'];
     });
 

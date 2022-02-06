@@ -78,6 +78,7 @@ export class AuthenticationService {
   // Register
   // ====================
   register(
+    code: string,
     email: string,
     username: string,
     password: string,
@@ -86,13 +87,14 @@ export class AuthenticationService {
     this.loaderService.addItemLoading('register');
     return this.http
       .post<any>(buildUrl('register'), {
+        code,
         email,
-        username,
+        name: username,
         password,
         password_confirmation,
       })
-      .pipe(
-        map((res) => {
+      .subscribe((res) => {
+        if (res.success) {
           const user: User = new User({
             ...res.data.user,
             token: res.data.token,
@@ -100,8 +102,8 @@ export class AuthenticationService {
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
           this.loaderService.clearItemLoading('register');
-        })
-      );
+        }
+      });
   }
 
   // Forgot

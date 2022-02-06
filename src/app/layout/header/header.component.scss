@@ -134,6 +134,10 @@
     background: $header-bg;
     ::ng-deep .menu {
       border: 0 !important;
+      ul {
+        display: flex;
+        justify-content: center;
+      }
       li {
         max-width: 20%;
       }

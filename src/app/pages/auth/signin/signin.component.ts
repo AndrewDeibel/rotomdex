@@ -18,6 +18,7 @@ export class SignInComponent implements OnInit {
   textboxPassword: Textbox;
   rememberMeCheckbox: Checkbox;
   buttonSubmit: Button;
+  buttonRegister: Button;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -59,6 +60,11 @@ export class SignInComponent implements OnInit {
     this.buttonSubmit = new Button({
       text: 'Sign In',
       type: ButtonType.submit,
+    });
+
+    this.buttonRegister = new Button({
+      text: 'Register',
+      route: '/signup',
     });
 
     // Get return url from route params, else default to /

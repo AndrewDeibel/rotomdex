@@ -2,6 +2,7 @@
   class="padding-y-8 flex vertical flex-center"
   [formGroup]="form"
   (ngSubmit)="submit()"
+  style="max-width: 320px; margin: 0 auto"
 >
   <div class="flex vertical padded-2">
     <div>
@@ -28,6 +29,15 @@
           <a routerLink="/forgot">Forgot Password?</a>
         </div>
       </div>
+    </div>
+    <div><hr /></div>
+    <div>
+      <h1>Register</h1>
+      <p>
+        Rotomdex is currently in closed beta, you must receive an invite code to
+        sign up during this stage.
+      </p>
+      <app-button [button]="buttonRegister"></app-button>
     </div>
   </div>
 </form>

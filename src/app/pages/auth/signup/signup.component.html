@@ -1,8 +1,21 @@
-<div id="page-register">
-  <form class="padding-large" [formGroup]="form" (ngSubmit)="submit()">
-    <div class="flex vertical padded flex-center">
+<div id="page-register" style="max-width: 320px; margin: 0 auto">
+  <form class="padding-y-8" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="flex vertical padded">
       <div>
         <h1>Sign Up</h1>
+        <p>
+          Rotomdex is currently in closed beta, you must receive an invite code
+          to sign up during this stage.
+        </p>
+      </div>
+      <div>
+        <hr />
+      </div>
+      <div>
+        <textbox
+          [textbox]="textboxCode"
+          formControlName="codeControl"
+        ></textbox>
       </div>
       <div>
         <textbox

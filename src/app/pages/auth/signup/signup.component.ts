@@ -17,18 +17,15 @@ export class SignUpComponent implements OnInit {
   textboxUsername: Textbox;
   textboxPassword: Textbox;
   textboxConfirmPassword: Textbox;
+  textboxCode: Textbox;
   buttonSubmit: Button;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private authenticationService: AuthenticationService
-  ) {
-    if (this.authenticationService.currentUserValue) {
-      this.router.navigateByUrl('/');
-    }
-  }
+  ) {}
 
   ngOnInit(): void {
     this.setupControls();
@@ -37,10 +34,16 @@ export class SignUpComponent implements OnInit {
 
   setupControls() {
     this.form = this.formBuilder.group({
+      codeControl: ['', Validators.required],
       emailControl: ['', Validators.required],
       usernameControl: ['', Validators.required],
       passwordControl: ['', Validators.required],
       passwordConfirmControl: ['', Validators.required],
+    });
+    this.textboxCode = new Textbox({
+      label: 'Beta Code',
+      classes: 'width-12',
+      wrapperClasses: 'width-12',
     });
     this.textboxEmail = new Textbox({
       label: 'Email',
@@ -71,13 +74,20 @@ export class SignUpComponent implements OnInit {
     });
 
     // Get return url from route params, else default to /
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl =
+      this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
   }
 
   setupSubscriptions() {
     this.authenticationService.currentUserObservable().subscribe((user) => {
       if (user) {
         this.router.navigateByUrl(this.returnUrl);
+      }
+    });
+    this.activatedRoute.queryParams.subscribe((params) => {
+      const code = params['code'];
+      if (code) {
+        this.form.controls['codeControl'].setValue(code);
       }
     });
   }
@@ -87,6 +97,7 @@ export class SignUpComponent implements OnInit {
       return;
     }
     this.authenticationService.register(
+      this.textboxCode.value,
       this.textboxEmail.value,
       this.textboxUsername.value,
       this.textboxPassword.value,
