@@ -56,7 +56,17 @@ export class HeaderComponent implements OnInit {
     this.menu.clearActiveClickOutside = true;
     this.menu.horizontal = true;
     this.menu.classes = 'medium-12 medium-stacked medium-square';
-    this.menu.items.push(
+    this.buildMenuItems();
+
+    if (!this.authenticationService.currentUserValue) {
+      this.authenticationService.currentUserObservable().subscribe((user) => {
+        this.buildMenuItems();
+      });
+    }
+  }
+
+  buildMenuItems() {
+    this.menu.items = [
       new MenuItem({
         icon: Icons.box,
         text: 'Expansions',
@@ -100,8 +110,8 @@ export class HeaderComponent implements OnInit {
               },
             }),
           ]
-        : [])
-    );
+        : []),
+    ];
   }
 
   @HostListener('window:scroll', [])
