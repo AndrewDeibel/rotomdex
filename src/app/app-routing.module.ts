@@ -20,6 +20,7 @@ import {
   SignUpComponent,
   VerifyComponent,
   WishlistComponent,
+  FavoritesComponent,
   UserCardsComponent,
   AddUserCardGroupComponent as AddEditUserCardGroupComponent,
   UserCardGroupComponent,
@@ -42,8 +43,12 @@ const routes: Routes = [
     component: CardsComponent,
   },
   {
-    path: 'cards/:slug',
+    path: 'card/:slug',
     component: CardComponent,
+  },
+  {
+    path: 'cards/:filter',
+    component: CardsComponent,
   },
   {
     path: 'cards/types/:type',
@@ -82,6 +87,10 @@ const routes: Routes = [
       {
         path: 'wishlist',
         component: WishlistComponent,
+      },
+      {
+        path: 'favorites',
+        component: FavoritesComponent,
       },
       {
         path: 'group/add',

@@ -28,6 +28,7 @@ export class APIGetPaged {
   supertype: string;
   subtype: string;
   rarity: string;
+  shiny: boolean;
   user_id: number;
   card_group_id: number;
   slug: string;
@@ -91,6 +92,10 @@ export class APIGetPaged {
     if (this.rarity && this.rarity.length)
       query = query.set('rarity', this.rarity);
     else query = query.delete('rarity');
+
+    // Shiny
+    if (this.shiny) query = query.set('shiny', this.shiny);
+    else query = query.delete('shiny');
 
     // User ID
     if (this.user_id && this.user_id.toString().length)

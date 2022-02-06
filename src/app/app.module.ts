@@ -80,6 +80,7 @@ import {
   ChangePasswordDialogComponent,
   ImportCardsComponent,
   WishlistComponent,
+  FavoritesComponent,
   UserCardsComponent,
   UserCardGroupComponent,
 } from './pages';
@@ -323,6 +324,7 @@ import { environment } from '../environments/environment';
     ScannerListComponent,
     ImportCardsComponent,
     WishlistComponent,
+    FavoritesComponent,
     UserCardsComponent,
     UserCardGroupComponent,
 

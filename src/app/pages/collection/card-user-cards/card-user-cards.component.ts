@@ -1,3 +1,4 @@
+import { FavoritesService } from './../favorites/favorites.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Button, Checkbox, Empty } from '@app/controls';
 import { APIGetPaged, Icons } from '@app/models';
@@ -20,6 +21,7 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 export class CardUserCardsComponent implements OnInit {
   @Input() card_id: number;
   @Input() on_wishlist: boolean;
+  @Input() is_favorite: boolean;
   @Input() userCards: UserCard[] = [];
   buttonAdd: Button;
   checkboxWishlist: Checkbox;
@@ -34,7 +36,8 @@ export class CardUserCardsComponent implements OnInit {
     private userCardsService: UserCardsService,
     private userCardGroupService: UserCardGroupService,
     private authenticationService: AuthenticationService,
-    private wishlistService: WishlistService
+    private wishlistService: WishlistService,
+    private favoritesService: FavoritesService
   ) {}
 
   ngOnChange() {
@@ -96,8 +99,8 @@ export class CardUserCardsComponent implements OnInit {
     // Checkbox wish list
     this.checkboxWishlist = new Checkbox({
       id: 'wishlist',
-      checked: this.on_wishlist,
       text: 'Wishlist',
+      checked: this.on_wishlist,
       change: (checked) => {
         if (checked) this.wishlistService.addWishlistCard(this.card_id);
         else this.wishlistService.removeWishlistCard(this.card_id);
@@ -108,6 +111,11 @@ export class CardUserCardsComponent implements OnInit {
     this.checkboxFavorite = new Checkbox({
       id: 'favorite',
       text: 'Favorite',
+      checked: this.is_favorite,
+      change: (checked) => {
+        if (checked) this.favoritesService.addFavoriteCard(this.card_id);
+        else this.favoritesService.removeFavoriteCard(this.card_id);
+      },
     });
   }
 

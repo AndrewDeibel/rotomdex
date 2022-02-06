@@ -20,6 +20,7 @@ export class CardsComponent implements OnInit {
   supertype: string;
   subtype: string;
   rarity: string;
+  shiny: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,12 +39,15 @@ export class CardsComponent implements OnInit {
       this.supertype = params['supertype']?.replace('-', ' ');
       this.subtype = params['subtype']?.replace('-', ' ');
       this.rarity = params['rarity']?.replace('-', ' ');
+      const filters = params['filter'];
+      this.shiny = filters === 'shiny';
       if (
         this.type ||
         this.artist ||
         this.supertype ||
         this.subtype ||
-        this.rarity
+        this.rarity ||
+        this.shiny
       ) {
         this.getFilteredCards();
       } else {
@@ -110,6 +114,7 @@ export class CardsComponent implements OnInit {
         artist: this.artist,
         subtype: this.subtype,
         supertype: this.supertype,
+        shiny: this.shiny,
       })
     );
   }

@@ -43,6 +43,7 @@ export class Card {
   is_promo: boolean;
   is_full_art: boolean;
   is_gold: boolean;
+  is_favorite: boolean;
   has_first_edition: boolean;
   has_shadowless: boolean;
   has_reverse_holo: boolean;
@@ -91,7 +92,7 @@ export class Card {
     Object.assign(this, init);
 
     // Route
-    this.route = '/cards/' + this.slug;
+    this.route = '/card/' + this.slug;
     this.number = this.getCardNumber();
 
     // ID

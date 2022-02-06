@@ -6,3 +6,4 @@ export * from './user-cards';
 export * from './dashboard';
 export * from './import-cards';
 export * from './wishlist';
+export * from './favorites';
