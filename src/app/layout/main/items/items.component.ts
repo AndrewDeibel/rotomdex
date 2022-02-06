@@ -85,11 +85,31 @@ export class ItemsComponent implements OnInit {
     return this.items.itemGroups.length > 0;
   }
 
+  resetPage() {
+    this.items.footer.page = 1;
+  }
+
+  searchChanged(search: string) {
+    this.resetPage();
+  }
+
   displayModeChanged(itemDisplayType: ItemDisplayType) {
     this.items.itemDisplayType = itemDisplayType;
     this.items.filter.displayMode = this.items.itemDisplayType;
     this.outputDisplayModeChanged.emit(itemDisplayType);
     this.updateQueryParams();
+  }
+
+  sortByChanged(sortBy: string) {
+    this.resetPage();
+  }
+
+  sortDirectionChanged(sortDirection: string) {
+    this.resetPage();
+  }
+
+  pageSizeChanged(pageSize: number) {
+    this.resetPage();
   }
 
   _outputGetItems() {

@@ -1,10 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ItemsFooter } from './items-footer';
-import { SelectOptionGroup, SelectOption, Select } from '@app/controls/select';
-import { Textbox } from '@app/controls/textbox';
-import { Button } from '@app/controls/button';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SelectOption, SelectOptionGroup } from '@app/controls/select';
 import { Icons } from '@app/models/icons';
+import { ItemsFooter } from './items-footer';
 
 @Component({
   selector: 'items-footer',
@@ -15,8 +12,9 @@ export class ItemsFooterComponent implements OnInit {
   @Input() itemsFooter: ItemsFooter;
 
   @Output() outputGetItems: EventEmitter<void> = new EventEmitter();
+  @Output() outputPageSizeChanged: EventEmitter<number> = new EventEmitter();
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor() {}
 
   ngOnInit() {
     this.setupDefaultControls();
@@ -29,6 +27,7 @@ export class ItemsFooterComponent implements OnInit {
     this.itemsFooter.textboxPage.max = this.itemsFooter.totalPages;
     this.itemsFooter.textboxPage.change = (value) => {
       this.itemsFooter.page = +value;
+      this.outputPageSizeChanged.emit(this.itemsFooter.page);
       this.outputGetItems.emit();
     };
 

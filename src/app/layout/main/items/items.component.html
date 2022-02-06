@@ -8,6 +8,9 @@
     *ngIf="items.showFilters"
     [itemsFilter]="items.filter"
     (outputGetItems)="_outputGetItems()"
+    (outputSearchChanged)="searchChanged($event)"
+    (outputSortByChanged)="sortByChanged($event)"
+    (outputSortDirectionChanged)="sortDirectionChanged($event)"
     (outputDisplayModeChanged)="displayModeChanged($event)"
   >
   </items-filter>
@@ -29,6 +32,7 @@
     *ngIf="items.itemGroups.length && items.showFooter"
     [itemsFooter]="items.footer"
     (outputGetItems)="_outputGetItems()"
+    (outputPageSizeChanged)="pageSizeChanged($event)"
   >
   </items-footer>
 </div>

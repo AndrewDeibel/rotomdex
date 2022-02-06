@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Menu, MenuItem } from '@app/controls/menu';
 import { Icons } from '@app/models/icons';
 import { ItemDisplayType, ItemsFilter } from './items-filter';
@@ -12,10 +11,14 @@ import { ItemDisplayType, ItemsFilter } from './items-filter';
 export class ItemsFilterComponent implements OnInit {
   @Input() itemsFilter: ItemsFilter;
   @Output() outputGetItems: EventEmitter<string> = new EventEmitter();
+  @Output() outputSearchChanged: EventEmitter<string> = new EventEmitter();
+  @Output() outputSortByChanged: EventEmitter<string> = new EventEmitter();
+  @Output() outputSortDirectionChanged: EventEmitter<string> =
+    new EventEmitter();
   @Output() outputDisplayModeChanged: EventEmitter<ItemDisplayType> =
     new EventEmitter();
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor() {}
 
   ngOnInit() {
     this.setupDefaultControls();
@@ -24,6 +27,7 @@ export class ItemsFilterComponent implements OnInit {
   setupDefaultControls() {
     // Search
     this.itemsFilter.textboxSearch.keydownEnter = (value) => {
+      this.outputSearchChanged.emit(value);
       this.outputGetItems.emit();
     };
     this.itemsFilter.textboxSearch.clickIcon = (value) => {
@@ -35,11 +39,13 @@ export class ItemsFilterComponent implements OnInit {
 
     // Sort by
     this.itemsFilter.selectSortBy.change = (value) => {
+      this.outputSortByChanged.emit(value);
       this.outputGetItems.emit();
     };
 
     // Sort direction
     this.itemsFilter.selectSortDirection.change = (value) => {
+      this.outputSortDirectionChanged.emit(value);
       this.outputGetItems.emit();
     };
 
