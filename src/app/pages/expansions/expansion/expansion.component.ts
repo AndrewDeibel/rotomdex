@@ -40,6 +40,7 @@ export class ExpansionComponent implements OnInit {
   subscribeExpansion() {
     this.expansionService.getExpansionObservable().subscribe((expansion) => {
       if (expansion) {
+        this.items.filter.textboxSearch.placeholder = `Search ${expansion.name} cards...`;
         this.titleService.setTitle(AppSettings.titlePrefix + expansion.name);
         this.items.header.symbol = expansion.logo;
         this.items.header.progressBar = new ProgressBar({

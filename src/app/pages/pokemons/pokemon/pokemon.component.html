@@ -1,5 +1,5 @@
 <div *ngIf="pokemonVariant" class="pokemon-details">
-  <div class="flex justify-center hero {{ pokemonVariant.types[0] }}">
+  <div class="hero {{ pokemonVariant.types[0] }}">
     <!-- Prev -->
     <a
       class="prev-pokemon"
@@ -51,7 +51,7 @@
       *ngIf="pokemonVariant.pokemon.evolution_chain.length > 1"
       class="pokemon-evolution-chain"
     >
-      <div class="flex padded-2">
+      <div class="flex padded-2 flex-nowrap">
         <div
           class="pokemon-evolution-wrapper"
           *ngFor="let evolution of pokemonVariant.pokemon.evolution_chain"
@@ -111,15 +111,4 @@
       <items [items]="items" (outputGetItems)="getCards()"></items>
     </div>
   </div>
-</div>
-
-<div>
-  <ng-template #dialogDex>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque blanditiis
-      asperiores aperiam quasi! Aperiam ipsum fugiat corporis accusantium
-      cupiditate, modi sequi deleniti optio? Assumenda culpa incidunt pariatur!
-      Nam, laboriosam tempora?
-    </p>
-  </ng-template>
 </div>

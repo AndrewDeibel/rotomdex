@@ -47,6 +47,8 @@ export class CardUserCardComponent implements OnInit {
   ngOnChanges(): void {
     // Group
     this.selectGroup = new Select({
+      label: 'Group',
+      placeholder: 'Select groups...',
       value: this.item.card_groups
         .map((userCardGroup) => (userCardGroup as UserCard).id)
         .join(','),
@@ -80,6 +82,7 @@ export class CardUserCardComponent implements OnInit {
   buildControls() {
     // Condition
     this.selectCondition = new Select({
+      label: 'Condition',
       value: this.item.condition,
       classes: 'square-right',
       optionGroups: [
@@ -124,6 +127,7 @@ export class CardUserCardComponent implements OnInit {
 
     // Grading company
     this.selectGradingCompany = new Select({
+      label: 'Graded By',
       value: this.item.graded_by,
       classes: 'square',
       optionGroups: [
@@ -151,6 +155,7 @@ export class CardUserCardComponent implements OnInit {
 
     // Printing
     this.selectPrinting = new Select({
+      label: 'Printing',
       value: this.item.printing,
       classes: 'square',
       optionGroups: [

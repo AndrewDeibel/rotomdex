@@ -13,7 +13,7 @@ export class Select {
   dark: boolean;
   multiple: boolean;
   advancedSelect: boolean;
-  placeholder: string = 'Select option';
+  placeholder: string;
   open: boolean;
   searchValue: string;
   size: Size;
@@ -48,6 +48,9 @@ export class Select {
     );
 
   public constructor(init?: Partial<Select>) {
+    this.placeholder = init?.multiple
+      ? 'Select options...'
+      : 'Select option...';
     Object.assign(this, init);
     this.optionGroupsVisible = this.optionGroups;
     this.optionsVisible = this.options;

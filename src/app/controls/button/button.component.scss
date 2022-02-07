@@ -82,6 +82,12 @@
     }
   }
 
+  .text {
+    + .money-tag {
+      margin-left: $spacing;
+    }
+  }
+
   // States
   &:focus {
     box-shadow: $shadow-focus;

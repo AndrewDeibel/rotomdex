@@ -25,16 +25,18 @@
       border-right: 0;
     }
   }
-  > .pokeball {
+  > .bg-type {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 1000px;
+    width: 800px;
     opacity: 0.1;
     z-index: 1;
-    pointer-events: none;
-    max-width: 120%;
+    max-width: 100%;
+    @media (max-width: $screen-medium) {
+      top: 25%;
+    }
   }
   @media (max-width: $screen-medium) {
     padding-left: 0;
@@ -129,15 +131,6 @@
 }
 .artist-link {
   color: white;
-}
-.admin-access {
-  position: absolute;
-  bottom: $spacing * 2;
-  right: $spacing * 2;
-  @media (max-width: $screen-medium) {
-    position: static;
-    display: flex;
-  }
 }
 .img-card-image {
   cursor: zoom-in !important;

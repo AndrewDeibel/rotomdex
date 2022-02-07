@@ -1,6 +1,6 @@
 <!-- Empty -->
-<div class="empty">
-  <fa-icon *ngIf="!empty.image" [icon]="empty.icon"> </fa-icon>
+<div class="empty {{ empty.size }}">
+  <fa-icon *ngIf="!empty.image && empty.icon" [icon]="empty.icon"> </fa-icon>
   <img *ngIf="empty.image" [src]="empty.image" />
   <p>{{ empty.text }}</p>
   <app-button *ngIf="empty.button" [button]="empty.button"></app-button>

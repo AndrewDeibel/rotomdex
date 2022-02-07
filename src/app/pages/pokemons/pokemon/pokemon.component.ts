@@ -131,7 +131,7 @@ export class PokemonComponent implements OnInit {
         this.items.footer.totalPages = res.total_pages;
         this.items.footer.totalItems = res.total_results;
         this.items.filter.textboxSearch.placeholder = `Search ${this.pokemonVariant.name} cards...`;
-        if (res.cards) {
+        if (res.cards && res.cards.length) {
           this.items.itemGroups = [
             new ItemGroup({
               items: res.cards,

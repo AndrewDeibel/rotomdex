@@ -175,7 +175,7 @@ export class CardComponent implements OnInit {
         if (this.card.tcgplayer_url)
           this.buttonTCGPlayer = new Button({
             icon: Icons.externalLink,
-            text: 'Buy on TCGPlayer',
+            text: 'TCGPlayer',
             classes: 'small width-12',
             align: 'left',
             href: this.card.tcgplayer_url,
@@ -184,7 +184,7 @@ export class CardComponent implements OnInit {
         if (this.card.ebay_url)
           this.buttonEbay = new Button({
             icon: Icons.externalLink,
-            text: 'Buy on eBay',
+            text: 'eBay',
             classes: 'small width-12',
             align: 'left',
           });

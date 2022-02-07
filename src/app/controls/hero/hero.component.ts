@@ -1,3 +1,4 @@
+import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,7 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hero.component.scss'],
 })
 export class HeroComponent implements OnInit {
-  constructor() {}
+  message: string;
 
-  ngOnInit() {}
+  constructor(private authenticationService: AuthenticationService) {}
+
+  ngOnInit() {
+    this.authenticationService.currentUserObservable().subscribe((user) => {
+      if (user)
+        this.message = `Hello ${user.name}, welcome to Rotomdex! Rotomdex is a Pokemon card management app.`;
+      else
+        this.message =
+          'Rotomdex is a Pokemon card management app. Sign up today, and start managing your collection!';
+    });
+  }
 }

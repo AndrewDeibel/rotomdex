@@ -1,7 +1,8 @@
+import { Router } from '@angular/router';
 import { FavoritesService } from './../favorites/favorites.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Button, Checkbox, Empty } from '@app/controls';
-import { APIGetPaged, Icons } from '@app/models';
+import { APIGetPaged, Icons, Size } from '@app/models';
 import {
   AuthenticationService,
   WishlistService,
@@ -37,7 +38,8 @@ export class CardUserCardsComponent implements OnInit {
     private userCardGroupService: UserCardGroupService,
     private authenticationService: AuthenticationService,
     private wishlistService: WishlistService,
-    private favoritesService: FavoritesService
+    private favoritesService: FavoritesService,
+    private router: Router
   ) {}
 
   ngOnChange() {
@@ -59,14 +61,21 @@ export class CardUserCardsComponent implements OnInit {
 
   setupControls() {
     this.empty = new Empty({
-      text: 'This card is not in your collection',
-      icon: Icons.box,
+      size: Size.small,
       button: new Button({
         text: 'Add to Collection',
         icon: Icons.plus,
-        click: () => {
-          this.addItem();
-        },
+        click: this.authenticationService.currentUserValue
+          ? () => {
+              this.addItem();
+            }
+          : () => {
+              this.router.navigate(['/signin'], {
+                queryParams: {
+                  returnUrl: this.router.routerState.snapshot.url,
+                },
+              });
+            },
       }),
     });
 

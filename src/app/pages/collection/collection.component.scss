@@ -1,5 +1,14 @@
+@import "settings";
+
 .symbol {
-	display: block;
-	filter: contrast(0) sepia(100%) hue-rotate(164deg) brightness(1) saturate(2);
-	width: 32px;
+  display: block;
+  filter: contrast(0) sepia(100%) hue-rotate(164deg) brightness(1) saturate(2);
+  width: 32px;
+}
+.collection-menu {
+  @media (max-width: $screen-medium) {
+    max-height: 320px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
 }

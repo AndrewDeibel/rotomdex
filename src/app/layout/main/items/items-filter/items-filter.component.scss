@@ -9,14 +9,16 @@
     app-menu {
       width: 100%;
       display: block;
-      ul {
-        display: flex;
-        li {
-          flex: 1;
-          a {
-            justify-content: center;
-            .text {
-              flex: initial !important;
+      ::ng-deep {
+        ul {
+          display: flex;
+          li {
+            flex: 1;
+            a {
+              justify-content: center;
+              .text {
+                flex: initial !important;
+              }
             }
           }
         }

@@ -16,9 +16,10 @@ export class CardUserCardNotesDialogComponent implements OnInit {
   constructor(public config: DialogConfig, public dialog: DialogRef) {
     this.textareaNotes = new Textarea({
       placeholder: 'Notes...',
-      width: 400,
       rows: 6,
+      width: 400,
       value: config.data.notes,
+      classes: 'small-12',
     });
     this.buttonSubmit = new Button({
       text: 'Save',

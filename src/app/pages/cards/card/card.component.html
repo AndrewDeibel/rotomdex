@@ -6,8 +6,12 @@
     }} flex z-2 padding-y-4 padding-x-2 relative flex-wrap flex-start"
     *ngIf="card"
   >
-    <!-- Pokeball -->
-    <img class="pokeball" src="/assets/pokeball.png" />
+    <!-- Type bg -->
+    <img
+      *ngIf="card.types.length"
+      class="bg-type"
+      [src]="getTypeImage(card.types[0])"
+    />
 
     <div class="max flex width-12 z-3 relative">
       <div class="flex padded-2 box justify-center small-vertical">
@@ -79,26 +83,6 @@
                 </div>
               </div>
 
-              <div class="width-12">
-                <div class="flex padded-small">
-                  <!-- TCG Player -->
-                  <div
-                    class="width-12 medium-6 small-12"
-                    *ngIf="buttonTCGPlayer"
-                  >
-                    <app-button [button]="buttonTCGPlayer"></app-button>
-                  </div>
-
-                  <!-- Ebay -->
-                  <div
-                    class="width-12 medium-6 small-12"
-                    *ngIf="buttonEbay && false"
-                  >
-                    <app-button [button]="buttonEbay"></app-button>
-                  </div>
-                </div>
-              </div>
-
               <div class="flex flex-center padded-small">
                 <!-- Rarity -->
                 <div *ngIf="tagRarity">
@@ -143,9 +127,23 @@
                 </div>
               </div>
 
-              <!-- Admin -->
-              <div class="admin-access" *ngIf="hasAdminAccess">
-                <app-button [button]="buttonAdmin"></app-button>
+              <div class="width-12">
+                <div class="flex padded-small">
+                  <!-- TCG Player -->
+                  <div *ngIf="buttonTCGPlayer">
+                    <app-button [button]="buttonTCGPlayer"></app-button>
+                  </div>
+
+                  <!-- Ebay -->
+                  <div *ngIf="buttonEbay && false">
+                    <app-button [button]="buttonEbay"></app-button>
+                  </div>
+
+                  <!-- Admin -->
+                  <div class="admin-access" *ngIf="hasAdminAccess">
+                    <app-button [button]="buttonAdmin"></app-button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

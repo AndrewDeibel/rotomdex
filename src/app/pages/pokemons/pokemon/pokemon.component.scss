@@ -133,13 +133,19 @@
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   //background: rgba($menu-bg, .5);
+  max-width: 100%;
   z-index: 2;
-  padding: $spacing;
   position: relative;
   display: flex;
   margin: auto;
   color: white;
+  overflow-x: auto;
+  overflow-y: hidden;
   .pokemon-evolution-wrapper {
+    flex: 1 0 0;
+    img {
+      max-width: none;
+    }
     &:not(:last-child) {
       fa-icon {
         position: absolute;
