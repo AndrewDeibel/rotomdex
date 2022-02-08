@@ -18,7 +18,7 @@
       >
         {{ card.last_prices[0].market_price | currency }}
       </div>
-      <div class="collection">
+      <div class="collection" *ngIf="!card.scan">
         <textbox [textbox]="textbox"></textbox>
       </div>
     </div>

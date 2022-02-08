@@ -1,14 +1,24 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { APIResponse, buildUrl } from '@app/models';
-import { ScannerList, Card } from '@app/pages';
+import { Injectable } from '@angular/core';
 import {
-  NotificationsService,
-  Notification,
   AlertType,
   defaultDuration,
+  Notification,
+  NotificationsService,
 } from '@app/controls';
+import { APIResponse, buildUrl } from '@app/models';
+import { ScanCard } from '@app/pages';
+import { BehaviorSubject } from 'rxjs';
+import { LoaderService } from './../../controls/loader/loader.service';
+import { APIGetPaged } from './../../models/api';
+import { ProcessScan } from './scan-card';
+
+export interface ResScans {
+  total_value?: number;
+  total_results: number;
+  total_pages: number;
+  scans?: ScanCard[];
+}
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +26,8 @@ import {
 export class ScannerService {
   constructor(
     private http: HttpClient,
-    private notificationService: NotificationsService
+    private notificationService: NotificationsService,
+    private loaderService: LoaderService
   ) {}
 
   // TempId
@@ -27,18 +38,13 @@ export class ScannerService {
 
   // Scan single card
   scan(image: string) {
-    const tempId = this.getTempId();
-    this.addScan(new Card({ placeholder: true, tempId }));
     this.http
       .post<APIResponse>(buildUrl('scanner/detect'), { image })
       .subscribe((res) => {
-        this.removeScan(tempId);
         if (res.success) {
           this.addScan(
-            new Card({
-              ...res.data.results[0].card,
-              other_results:
-                res.data.results.length > 1 ? res.data.results.splice(1) : [],
+            new ScanCard({
+              ...res.data.results.result,
               tempId: this.getTempId(),
             })
           );
@@ -54,28 +60,91 @@ export class ScannerService {
       });
   }
 
-  // Scanned cards
-  private scansSubject = new BehaviorSubject<Card[]>([]);
-  scansObservable() {
-    return this.scansSubject.asObservable();
+  // Recent scans (locally cache)
+  private recentScansSubject = new BehaviorSubject<ScanCard[]>([]);
+  recentScansObservable() {
+    return this.recentScansSubject.asObservable();
   }
-  clearScans() {
-    this.scansSubject = new BehaviorSubject<Card[]>([]);
-  }
-  addScan(scan: Card) {
-    const scans = [...this.scansSubject.value, scan];
-    this.scansSubject.next(scans);
-  }
-  removeScan(tempId: number) {
-    const scans = this.scansSubject.value.filter(
-      (scan) => scan.tempId !== tempId
+  get recentScans() {
+    // Limit recent scans to 6
+    this.recentScansSubject.next(
+      this.recentScansSubject.value.slice(
+        Math.max(this.recentScansSubject.value.length - 6, 0)
+      )
     );
-    this.scansSubject.next(scans);
+    return this.recentScansSubject.value;
   }
-  get scans() {
-    return this.scansSubject.value;
+  set recentScans(scans: ScanCard[]) {
+    this.recentScansSubject.next(scans);
   }
-  set scans(scans: Card[]) {
-    this.scansSubject.next(scans);
+  addScan(scan: ScanCard) {
+    this.recentScansSubject.next([...this.recentScansSubject.value, scan]);
+  }
+
+  // Get scans
+  private getScansSubject = new BehaviorSubject<ResScans | null>(null);
+  getScansObservable() {
+    return this.getScansSubject.asObservable();
+  }
+  getScans(params: APIGetPaged) {
+    this.loaderService.addItemLoading('getScans');
+    this.http
+      .get<APIResponse>(params.buildUrl('scanner/scans'))
+      .subscribe((res) => {
+        const scans = res.data.map((scan: any) => new ScanCard(scan));
+        this.getScansSubject.next({
+          scans,
+          total_pages: res.meta.last_page,
+          total_results: res.meta.total,
+        });
+        this.recentScansSubject.next(scans);
+        this.loaderService.clearItemLoading('getScans');
+      });
+  }
+
+  // Update scan
+  private updateScanSubject = new BehaviorSubject<ScanCard | null>(null);
+  updateScanObservable() {
+    return this.updateScanSubject.asObservable();
+  }
+  updateScan(scan: ScanCard) {
+    this.loaderService.addItemLoading('updateScan');
+    this.http
+      .post<APIResponse>(buildUrl('scanner/update'), scan)
+      .subscribe((res) => {
+        this.loaderService.clearItemLoading('updateScan');
+        if (res.success) {
+          this.updateScanSubject.next(scan);
+          this.notificationService.addNotifications([
+            new Notification({
+              message: 'Updated',
+              alertType: AlertType.success,
+            }),
+          ]);
+        }
+      });
+  }
+
+  // Process scans
+  private processScansSubject = new BehaviorSubject<boolean | null>(null);
+  processScansObservable() {
+    return this.processScansSubject.asObservable();
+  }
+  processScans(scans: ProcessScan[]) {
+    this.loaderService.addItemLoading('processScans');
+    this.http
+      .post<APIResponse>(buildUrl('scanner/process'), { scans })
+      .subscribe((res) => {
+        this.loaderService.clearItemLoading('processScans');
+        this.processScansSubject.next(res.success);
+        if (res.success) {
+          this.notificationService.addNotifications([
+            new Notification({
+              message: 'Cards added',
+              alertType: AlertType.success,
+            }),
+          ]);
+        }
+      });
   }
 }

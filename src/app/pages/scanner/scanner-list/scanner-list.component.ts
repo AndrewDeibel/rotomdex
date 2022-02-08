@@ -10,10 +10,12 @@ import {
   ItemsHeader,
 } from '@app/layout/main';
 import { Items } from '@app/layout/main/items/items';
+import { APIGetPaged } from '@app/models';
 import { Icons } from '@app/models/icons';
 import { Card } from '@app/pages/cards/card';
 import { ScannerService } from '@app/pages/scanner/scanner.service';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+import { ScanCard } from '..';
 
 @AutoUnsubscribe()
 @Component({
@@ -80,8 +82,8 @@ export class ScannerListComponent implements OnInit {
                     icon: Icons.close,
                     click: () => {
                       this.items.header.menu.clearActive();
-                      this.items.itemGroups = [];
-                      this.scannerService.clearScans();
+                      // this.items.itemGroups = [];
+                      // this.scannerService.clearScans();
                     },
                   }),
                 ],
@@ -140,31 +142,42 @@ export class ScannerListComponent implements OnInit {
     });
 
     // Response from get scans request
-    this.scannerService.scansObservable().subscribe((scans) => {
-      if (scans) this.setScans(scans);
-    });
-
-    // Request scans
-    this.setScans(this.scannerService.scans);
-  }
-
-  setScans(scans: Card[]) {
-    scans.forEach((card) => {
-      this.buildCardMenu(card);
-    });
-    this.items.itemGroups = [
-      new ItemGroup({
-        items: scans,
-      }),
-    ];
-    this.items.header.subtitle = 'cards: ' + scans.length;
-    let price: number = 0;
-    this.items.itemGroups[0].items.forEach((card) => {
-      if (card.price) {
-        price += card.price;
+    this.scannerService.getScansObservable().subscribe((res) => {
+      if (res && res.scans) {
+        res.scans.forEach((scan) => {
+          this.buildCardMenu(scan.result);
+        });
+        this.items.itemGroups = [
+          new ItemGroup({
+            items: res.scans.map(
+              (scan) => new Card({ ...scan.result, scan: true })
+            ),
+          }),
+        ];
+        this.items.header.subtitle = 'cards: ' + res.total_results;
+        this.items.footer.totalPages = res.total_pages;
+        this.items.footer.totalItems = res.total_results;
+        let price: number = 0;
+        this.items.itemGroups[0].items.forEach((card) => {
+          if (card.price) {
+            price += card.price;
+          }
+        });
+        this.items.header.price = price;
       }
     });
-    this.items.header.price = price;
+  }
+
+  getScans() {
+    this.scannerService.getScans(
+      new APIGetPaged({
+        page: this.items.footer.page,
+        page_size: this.items.footer.pageSize,
+        query: this.items.filter.textboxSearch.value,
+        sort_by: this.items.filter.selectSortBy.value,
+        sort_direction: this.items.filter.selectSortDirection.value,
+      })
+    );
   }
 
   buildCardMenu(card: Card) {
@@ -173,12 +186,12 @@ export class ScannerListComponent implements OnInit {
       text: 'Remove',
       click: (event: Event) => {
         event.stopPropagation();
-        this.scannerService.removeScan(card.tempId);
-        this.items.itemGroups = [
-          new ItemGroup({
-            items: this.scannerService.scans,
-          }),
-        ];
+        // this.scannerService.removeScan(card.tempId);
+        // this.items.itemGroups = [
+        //   new ItemGroup({
+        //     items: this.scannerService.scans,
+        //   }),
+        // ];
       },
     });
 
@@ -192,21 +205,21 @@ export class ScannerListComponent implements OnInit {
   }
 
   search() {
-    if (this.query.length) {
-      const searchCards = this.scannerService.scans.filter((card) => {
-        return card.name.toLowerCase().includes(this.query.toLowerCase());
-      });
-      this.items.itemGroups = [
-        new ItemGroup({
-          items: searchCards,
-        }),
-      ];
-    } else {
-      this.items.itemGroups = [
-        new ItemGroup({
-          items: this.scannerService.scans,
-        }),
-      ];
-    }
+    // if (this.query.length) {
+    //   const searchCards = this.scannerService.scans.filter((card) => {
+    //     return card.name.toLowerCase().includes(this.query.toLowerCase());
+    //   });
+    //   this.items.itemGroups = [
+    //     new ItemGroup({
+    //       items: searchCards,
+    //     }),
+    //   ];
+    // } else {
+    //   this.items.itemGroups = [
+    //     new ItemGroup({
+    //       items: this.scannerService.scans,
+    //     }),
+    //   ];
+    // }
   }
 }

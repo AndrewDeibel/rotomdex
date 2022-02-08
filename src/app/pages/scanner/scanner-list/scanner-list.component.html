@@ -1,1 +1,5 @@
-<items title="Scan Results" [items]="items"> </items>
+<items
+  title="Scan Results"
+  [items]="items"
+  (outputGetItems)="getScans()"
+></items>

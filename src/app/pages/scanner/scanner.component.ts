@@ -7,13 +7,14 @@ import {
   Notification,
   NotificationsService,
 } from '@app/controls';
-import { Icons } from '@app/models';
+import { APIGetPaged, Icons } from '@app/models';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Card } from '@app/pages/cards/card';
 import { ScannerService } from '@app/pages/scanner/scanner.service';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { Observable, Subject } from 'rxjs';
+import { ScanCard } from '.';
 import { User } from '..';
 
 @AutoUnsubscribe()
@@ -42,8 +43,8 @@ export class ScannerComponent implements OnInit {
   >();
 
   // Options
-  scans: Card[] = [];
-  scansVisible: Card[] = [];
+  scans: ScanCard[] = [];
+  recentScans: ScanCard[] = [];
   soundEffect: HTMLAudioElement;
   alertInstructions: Alert;
   showAlert: boolean;
@@ -53,6 +54,16 @@ export class ScannerComponent implements OnInit {
   ngOnInit() {
     this.setupControls();
     this.setupSubscriptions();
+    this.getInitData();
+  }
+
+  getInitData() {
+    this.scannerService.getScans(
+      new APIGetPaged({
+        page: 1,
+        page_size: 12,
+      })
+    );
   }
 
   goToRearCamera() {
@@ -85,15 +96,18 @@ export class ScannerComponent implements OnInit {
     this.titleService.setTitle(AppSettings.titlePrefix + 'Scanner');
 
     // Cached results
-    if (this.scannerService.scans.length)
-      this.scans = this.scannerService.scans;
+    if (this.scannerService.recentScans.length)
+      this.recentScans = this.scannerService.recentScans;
   }
 
   setupSubscriptions() {
-    this.scannerService.scansObservable().subscribe((scans) => {
-      this.scans = scans;
-      // Limit visible to 6
-      this.scansVisible = this.scans.slice(Math.max(this.scans.length - 6, 0));
+    this.scannerService.getScansObservable().subscribe((res) => {
+      if (res && res.scans) {
+        this.scans = res?.scans;
+      }
+    });
+    this.scannerService.recentScansObservable().subscribe((scans) => {
+      this.recentScans = scans;
     });
     this.authenticationService.currentUserObservable().subscribe((user) => {
       if (user && !user.closed_scanner_instructions) {

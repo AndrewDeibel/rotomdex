@@ -23,19 +23,19 @@
   <a
     [routerLink]="'/scanner/list'"
     class="scanner-results-wrapper animated fadeInUp"
-    *ngIf="scansVisible.length > 0"
+    *ngIf="recentScans.length > 0"
   >
     <div class="scanner-results">
       <div
-        *ngFor="let card of scansVisible"
+        *ngFor="let card of recentScans"
         class="scanner-result animated zoomIn"
       >
         <img
           class="scanner-result-image"
-          [src]="card.image"
+          [src]="card.result.image"
           onerror="this.src='./assets/placeholder.png';"
         />
-        <loader [active]="card.placeholder"></loader>
+        <!-- <loader [active]="card.placeholder"></loader> -->
       </div>
       <div class="scanner-results-count">
         <span>{{ scans.length }}</span>

@@ -68,6 +68,7 @@ export class Card {
   nova_edit_url: string;
 
   // Scanner
+  scan: boolean;
   tempId: number;
   placeholder: boolean;
   other_results: Card[] = [];
