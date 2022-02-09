@@ -1,3 +1,4 @@
+import { Card } from '@app/pages/cards';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
@@ -94,8 +95,9 @@ export class ScannerService {
   }
 
   // Update scan
-  private updateScanSubject = new BehaviorSubject<ScanCard | null>(null);
+  private updateScanSubject = new BehaviorSubject<Card | null>(null);
   updateScanObservable() {
+    this.updateScanSubject = new BehaviorSubject<Card | null>(null);
     return this.updateScanSubject.asObservable();
   }
   updateScan(scan: ScanCard) {
@@ -105,7 +107,7 @@ export class ScannerService {
       .subscribe((res) => {
         this.loaderService.clearItemLoading('updateScan');
         if (res.success) {
-          this.updateScanSubject.next(scan);
+          this.updateScanSubject.next(new Card(res.data));
           this.notificationService.addNotifications([
             new Notification({
               message: 'Updated',

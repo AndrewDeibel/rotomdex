@@ -1,4 +1,8 @@
-<a class="card-grid" [routerLink]="card.route ? card.route : null">
+<a
+  class="card-grid"
+  [routerLink]="card.route ? card.route : null"
+  (click)="click()"
+>
   <div class="card-image-wrapper" *ngIf="card.image">
     <!-- Image -->
     <div class="card-image {{ card.gfx ? 'gfx' : '' }}">

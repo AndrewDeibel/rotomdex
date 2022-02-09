@@ -1,8 +1,12 @@
-<label *ngIf="select.label" class="label">
+<label *ngIf="select && select.label" class="label">
   {{ select.label }}
 </label>
 
-<div *ngIf="!select.advancedSelect" class="select" [class.dark]="select.dark">
+<div
+  *ngIf="select && !select.advancedSelect"
+  class="select"
+  [class.dark]="select.dark"
+>
   <fa-icon icon="caret-down"></fa-icon>
   <select
     [(ngModel)]="value"
@@ -24,8 +28,10 @@
 </div>
 
 <div
-  *ngIf="select.advancedSelect"
-  class="select-advanced {{ select.open ? 'open' : '' }} {{ select.classes }}"
+  *ngIf="select && select.advancedSelect"
+  class="select-advanced {{ select.open ? 'open' : '' }} {{ select.classes }} {{
+    select.anchor ? 'anchor-' + select.anchor : ''
+  }}"
   (click)="click()"
   (clickOutside)="clickOutside()"
 >

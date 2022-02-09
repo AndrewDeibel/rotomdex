@@ -83,6 +83,7 @@ import {
   FavoritesComponent,
   UserCardsComponent,
   UserCardGroupComponent,
+  ScanDialogComponent,
 } from './pages';
 
 // Page
@@ -327,6 +328,7 @@ import { environment } from '../environments/environment';
     FavoritesComponent,
     UserCardsComponent,
     UserCardGroupComponent,
+    ScanDialogComponent,
 
     // Helpers
     ClickOutsideDirective,

@@ -45,4 +45,5 @@ export function SetSortByUserCards(itemFilter: ItemsFilter) {
     ],
   });
   itemFilter.selectSortBy.value = 'user_cards.created_at';
+  itemFilter.selectSortDirection.value = 'desc';
 }

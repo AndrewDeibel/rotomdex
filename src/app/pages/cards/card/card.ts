@@ -70,6 +70,7 @@ export class Card {
 
   // Scanner
   scan: boolean;
+  scan_id: number;
   tempId: number;
   placeholder: boolean;
   other_results: Card[] = [];

@@ -26,6 +26,7 @@
           *ngIf="showGrid(group)"
           [itemClasses]="itemClasses"
           [items]="group.items"
+          (outputClickItem)="clickItem($event)"
         >
         </items-grid>
       </div>

@@ -5,7 +5,11 @@
     </expansion-item-grid>
 
     <!-- Card -->
-    <card-item-grid *ngIf="isCard(item)" [card]="item"></card-item-grid>
+    <card-item-grid
+      *ngIf="isCard(item)"
+      [card]="item"
+      (outputClickCard)="clickItem($event)"
+    ></card-item-grid>
 
     <!-- Pokemon variant -->
     <pokemon-item-grid *ngIf="isPokemonVariant(item)" [pokemonVariant]="item">

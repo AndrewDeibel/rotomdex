@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Pokemon, PokemonVariant } from '@app/pages';
 import { Card } from '@app/pages';
 import { Expansion } from '@app/pages';
@@ -11,6 +11,7 @@ import { Expansion } from '@app/pages';
 export class ItemsGridComponent implements OnInit {
   @Input() items: any[] = [];
   @Input() itemClasses: string;
+  @Output() outputClickItem: EventEmitter<any> = new EventEmitter();
 
   constructor() {}
 
@@ -27,5 +28,9 @@ export class ItemsGridComponent implements OnInit {
   }
   isPokemonVariant(item: any) {
     return item instanceof PokemonVariant;
+  }
+
+  clickItem(item: any) {
+    this.outputClickItem.emit(item);
   }
 }

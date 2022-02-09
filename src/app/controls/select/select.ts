@@ -17,6 +17,7 @@ export class Select {
   open: boolean;
   searchValue: string;
   size: Size;
+  anchor: string;
   search: (search: string) => void;
   change: (value: string) => void;
 

@@ -4,10 +4,12 @@ import { Card } from '@app/pages';
 
 export class ScanCard {
   id: number;
+  scan_id: number;
   result: Card;
   processed: boolean;
   user_success: boolean;
   user_correction?: Card;
+  user_correction_id: number;
   other_options: Card[] = [];
   created_at: Date;
   temp_id: number;

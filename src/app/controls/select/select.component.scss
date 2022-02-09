@@ -116,6 +116,8 @@ select {
     border-radius: $border-radius;
     border: $border;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     .select-option {
       padding: 8px 16px;
       background: $input-bg;
@@ -126,6 +128,15 @@ select {
     .available-options-inner {
       overflow-y: auto;
       max-height: 300px;
+    }
+  }
+  &.anchor-bottom {
+    .available-options {
+      top: auto;
+      bottom: 100%;
+    }
+    .search-options {
+      order: 2;
     }
   }
   .search-options {

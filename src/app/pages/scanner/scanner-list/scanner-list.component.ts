@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DialogConfig, DialogService } from '@app/controls';
 import { Button } from '@app/controls/button';
 import { Menu, MenuItem } from '@app/controls/menu';
 import { Select } from '@app/controls/select';
@@ -16,6 +17,7 @@ import { Card } from '@app/pages/cards/card';
 import { ScannerService } from '@app/pages/scanner/scanner.service';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { ScanCard, SetSortByScans } from '..';
+import { ScanDialogComponent } from './scan-dialog.component';
 
 @AutoUnsubscribe()
 @Component({
@@ -31,8 +33,12 @@ export class ScannerListComponent implements OnInit {
   loading: boolean;
   items: Items;
   addToDeckMenuItem: MenuItem;
+  scans: ScanCard[] = [];
 
-  constructor(private scannerService: ScannerService) {}
+  constructor(
+    private scannerService: ScannerService,
+    private dialogService: DialogService
+  ) {}
 
   ngOnDestroy() {}
   ngOnInit() {
@@ -132,13 +138,22 @@ export class ScannerListComponent implements OnInit {
     // Response from get scans request
     this.scannerService.getScansObservable().subscribe((res) => {
       if (res && res.scans) {
-        res.scans.forEach((scan) => {
-          this.buildCardMenu(scan.result);
-        });
+        // res.scans.forEach((scan) => {
+        //   this.buildCardMenu(scan.result);
+        // });
+        this.scans = res.scans;
         this.items.itemGroups = [
           new ItemGroup({
             items: res.scans.map(
-              (scan) => new Card({ ...scan.result, scan: true })
+              (scanCard) =>
+                new Card({
+                  ...(scanCard.user_correction
+                    ? scanCard.user_correction
+                    : scanCard.result),
+                  scan: true,
+                  other_results: scanCard.other_options,
+                  scan_id: scanCard.id,
+                })
             ),
           }),
         ];
@@ -190,5 +205,18 @@ export class ScannerListComponent implements OnInit {
     });
 
     cardMenuItem.menu?.items.push(removeMenuItem);
+  }
+
+  clickCard(card: Card) {
+    this.dialogService.open(
+      ScanDialogComponent,
+      new DialogConfig({
+        title: 'Edit Scan Result',
+        data: {
+          card: card,
+          scan_id: card.scan_id,
+        },
+      })
+    );
   }
 }

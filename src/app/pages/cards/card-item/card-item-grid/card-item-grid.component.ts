@@ -1,6 +1,6 @@
 import { UserCardsService } from '@app/pages/collection';
 // Angular
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Textbox } from '@app/controls';
 import { UserCard } from '@app/pages';
 import { Card } from '../../card/card';
@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class CardItemGridComponent implements OnInit {
   @Input() card: Card;
+  @Output() outputClickCard: EventEmitter<Card> = new EventEmitter();
   imageLoading: boolean = true;
   textbox: Textbox;
   previousValue: number;
@@ -83,5 +84,9 @@ export class CardItemGridComponent implements OnInit {
 
   onLoad() {
     this.imageLoading = false;
+  }
+
+  click() {
+    this.outputClickCard.emit(this.card);
   }
 }

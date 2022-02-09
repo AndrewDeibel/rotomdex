@@ -19,6 +19,7 @@ export class ItemsComponent implements OnInit {
   @Output() outputGetItems: EventEmitter<void> = new EventEmitter();
   @Output() outputDisplayModeChanged: EventEmitter<ItemDisplayType> =
     new EventEmitter();
+  @Output() outputClickItem: EventEmitter<any> = new EventEmitter();
   empty: Empty;
 
   constructor(private route: ActivatedRoute, private router: Router) {}
@@ -115,5 +116,9 @@ export class ItemsComponent implements OnInit {
   _outputGetItems() {
     this.outputGetItems.emit();
     this.updateQueryParams();
+  }
+
+  clickItem(item: any) {
+    this.outputClickItem.emit(item);
   }
 }
