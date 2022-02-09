@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'card-image-dialog',
-  template: `<img
-    class="card-image"
-    src="{{ config.data.image }}"
-    onerror="this.src='./assets/placeholder.png';"
-  />`,
+  template: `<div class="card-image {{ config.data.gfx ? 'gfx' : '' }}">
+    <img
+      src="{{ config.data.image }}"
+      onerror="this.src='./assets/placeholder.png';"
+    />
+  </div>`,
 })
 export class CardImageDialogComponent {
   constructor(public config: DialogConfig, public dialog: DialogRef) {}

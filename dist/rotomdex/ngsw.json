@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1644283649789,
+  "timestamp": 1644381359966,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,11 +13,11 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.9ac684a76a66b48b.js",
+        "/main.82c8ae300f60a0ea.js",
         "/manifest.webmanifest",
         "/polyfills.a90d0f9c1878eb88.js",
         "/runtime.f167786c2dee8f61.js",
-        "/styles.cd2282d2dcb5816d.css"
+        "/styles.cb6599dc44804581.css"
       ],
       "patterns": []
     },
@@ -30,6 +30,7 @@
       },
       "urls": [
         "/assets/audio/soundeffect.mp3",
+        "/assets/holo.png",
         "/assets/icons/icon-128x128.png",
         "/assets/icons/icon-144x144.png",
         "/assets/icons/icon-152x152.png",
@@ -43,6 +44,7 @@
         "/assets/placeholder.png",
         "/assets/pokeball-green.png",
         "/assets/pokeball.png",
+        "/assets/stars.gif",
         "/assets/symbols/cards-source.ai",
         "/assets/symbols/cards.ai",
         "/assets/symbols/cards.svg",
@@ -74,6 +76,7 @@
   "dataGroups": [],
   "hashTable": {
     "/assets/audio/soundeffect.mp3": "fea7fef72545edb76dc6842a1bbfd68e82f044ce",
+    "/assets/holo.png": "9bb6d9523a203437a5e8f304919dd5e91d5e1f3f",
     "/assets/icons/icon-128x128.png": "586cfedda83b2d57ee8467561697bd724a1d3b36",
     "/assets/icons/icon-144x144.png": "d5969a08336728bff26f1dd6453575ee88f2af74",
     "/assets/icons/icon-152x152.png": "33412ff6c682c85edb468e507463eed7caf0010d",
@@ -87,6 +90,7 @@
     "/assets/placeholder.png": "cd21ca33bc394503a31204c1b374912998555ddf",
     "/assets/pokeball-green.png": "2c2a26125a40e4d6b6a4086474644ad61a65cb27",
     "/assets/pokeball.png": "a4a8892d5578957891cff895576adabd88b08839",
+    "/assets/stars.gif": "ff13eb8789ea4505edb128360516f12beaec414b",
     "/assets/symbols/cards-source.ai": "b5e1408e5ac1563164e99dd9c8bf311b0e3b2739",
     "/assets/symbols/cards.ai": "b9cb27883495713cd5a434dc628314037fa69c44",
     "/assets/symbols/cards.svg": "ce7ada10e75436cd2656a586d2cdbfd5e8631b13",
@@ -112,12 +116,12 @@
     "/assets/user/placeholder-female.jpg": "122888a5af26ba53f80b1e126581dec4fe83c208",
     "/assets/user/placeholder-male.jpg": "36c06817aebb3e461e487c2ba27bfe2dc1398b4d",
     "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "599b87dc5568477e2e2dbbd249807aa3848f51bc",
-    "/main.9ac684a76a66b48b.js": "75e6702a948f92ec1ce655279186c1fa37859fa9",
+    "/index.html": "6b6ca931dde7326227720ffc0e0f91f6cd3c8fe0",
+    "/main.82c8ae300f60a0ea.js": "2c7da9638142d1f3161fff702143e0a3c2ed3e90",
     "/manifest.webmanifest": "4368dae935bbe03b935aa8cc19e879b3ba9ad7fb",
     "/polyfills.a90d0f9c1878eb88.js": "b4711754abbd131a24a1d0e6e162c19c5355a7b8",
     "/runtime.f167786c2dee8f61.js": "212b0fd0750b44d04c912f68aff3e1ae5932d42a",
-    "/styles.cd2282d2dcb5816d.css": "0ef83d9dd5b2782d75bdbf9817d41054ae2282e2"
+    "/styles.cb6599dc44804581.css": "144dadfed06fd7dec0c995872624fbcc1edc18fa"
   },
   "navigationUrls": [
     {

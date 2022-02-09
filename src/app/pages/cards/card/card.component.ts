@@ -37,6 +37,7 @@ export class CardComponent implements OnInit {
   buttonEbay: Button;
   buttonAdmin: Button;
   hasAdminAccess: boolean;
+  gfx: boolean;
 
   constructor(
     private titleService: Title,
@@ -91,6 +92,7 @@ export class CardComponent implements OnInit {
           title: `${this.card.name} - ${this.card.expansion.name}`,
           data: {
             image: this.card.image_high_res,
+            gfx: this.card.gfx,
           },
         })
       );

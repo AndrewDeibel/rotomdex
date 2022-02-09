@@ -79,7 +79,7 @@ $shadow-error: 0 0 0 3px rgba($error, 0.2);
 $t: ease 0.2s;
 $transition: $t color, $t border, $t background-color, $t box-shadow,
   $t transform, $t max-width, $t opacity, $t margin, $t fill, $t top, $t left,
-  $t right, $t bottom;
+  $t right, $t bottom, $t background-size;
 
 // Screen
 // ========================================

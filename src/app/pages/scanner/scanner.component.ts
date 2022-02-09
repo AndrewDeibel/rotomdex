@@ -43,7 +43,7 @@ export class ScannerComponent implements OnInit {
   >();
 
   // Options
-  scans: ScanCard[] = [];
+  totalScans: number;
   recentScans: ScanCard[] = [];
   soundEffect: HTMLAudioElement;
   alertInstructions: Alert;
@@ -94,16 +94,12 @@ export class ScannerComponent implements OnInit {
 
     // Page title
     this.titleService.setTitle(AppSettings.titlePrefix + 'Scanner');
-
-    // Cached results
-    if (this.scannerService.recentScans.length)
-      this.recentScans = this.scannerService.recentScans;
   }
 
   setupSubscriptions() {
     this.scannerService.getScansObservable().subscribe((res) => {
       if (res && res.scans) {
-        this.scans = res?.scans;
+        this.totalScans = res?.total_results;
       }
     });
     this.scannerService.recentScansObservable().subscribe((scans) => {

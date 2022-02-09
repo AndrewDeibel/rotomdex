@@ -35,10 +35,9 @@
           [src]="card.result.image"
           onerror="this.src='./assets/placeholder.png';"
         />
-        <!-- <loader [active]="card.placeholder"></loader> -->
       </div>
       <div class="scanner-results-count">
-        <span>{{ scans.length }}</span>
+        <span>{{ totalScans }}</span>
       </div>
     </div>
   </a>

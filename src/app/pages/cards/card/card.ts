@@ -48,6 +48,7 @@ export class Card {
   has_shadowless: boolean;
   has_reverse_holo: boolean;
   types: string[] = [];
+  gfx: boolean;
 
   // Prices
   last_prices: CardLastPrices[] = [];
@@ -93,7 +94,9 @@ export class Card {
     Object.assign(this, init);
 
     // Route
-    this.route = '/card/' + this.slug;
+    if (!this.scan) this.route = '/card/' + this.slug;
+
+    // Number formatting
     this.number = this.getCardNumber();
 
     // ID
@@ -104,6 +107,17 @@ export class Card {
 
     // Initalize pokemon
     if (init?.pokemon) this.pokemon = new Pokemon(init.pokemon);
+
+    // GFX
+    if (this.rarity) {
+      const r = this.rarity.toLocaleLowerCase();
+      this.gfx =
+        r === 'rare holo v' ||
+        r === 'rare ultra' ||
+        r === 'rare holo vmax' ||
+        r === 'rare holo' ||
+        r === 'rare secret';
+    }
   }
 }
 

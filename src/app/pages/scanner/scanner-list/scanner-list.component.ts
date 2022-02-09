@@ -15,7 +15,7 @@ import { Icons } from '@app/models/icons';
 import { Card } from '@app/pages/cards/card';
 import { ScannerService } from '@app/pages/scanner/scanner.service';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
-import { ScanCard } from '..';
+import { ScanCard, SetSortByScans } from '..';
 
 @AutoUnsubscribe()
 @Component({
@@ -96,25 +96,15 @@ export class ScannerListComponent implements OnInit {
         textboxSearch: new Textbox({
           icon: Icons.search,
           placeholder: 'Search Scanner Results...',
-          clickIcon: (value) => {
-            this.query = value;
-            this.search();
-          },
-          keydownEnter: (value) => {
-            this.query = value;
-            this.search();
-          },
         }),
         selectSortBy: new Select({
           change: (value) => {
             this.sortBy = value;
-            // this.getcards();
           },
         }),
         selectSortDirection: new Select({
           change: (value) => {
             this.sortDirection = value;
-            // this.getCards();
           },
         }),
       }),
@@ -122,24 +112,22 @@ export class ScannerListComponent implements OnInit {
         buttonPrev: new Button({
           click: () => {
             this.page--;
-            // this.getCards();
           },
         }),
         buttonNext: new Button({
           click: () => {
             this.page++;
-            //this.nextPage();
           },
         }),
         selectPageSize: new Select({
           change: (value) => {
             this.pageSize = +value;
-            // this.getCards();
           },
         }),
         textboxPage: new Textbox({}),
       }),
     });
+    SetSortByScans(this.items.filter);
 
     // Response from get scans request
     this.scannerService.getScansObservable().subscribe((res) => {
@@ -202,24 +190,5 @@ export class ScannerListComponent implements OnInit {
     });
 
     cardMenuItem.menu?.items.push(removeMenuItem);
-  }
-
-  search() {
-    // if (this.query.length) {
-    //   const searchCards = this.scannerService.scans.filter((card) => {
-    //     return card.name.toLowerCase().includes(this.query.toLowerCase());
-    //   });
-    //   this.items.itemGroups = [
-    //     new ItemGroup({
-    //       items: searchCards,
-    //     }),
-    //   ];
-    // } else {
-    //   this.items.itemGroups = [
-    //     new ItemGroup({
-    //       items: this.scannerService.scans,
-    //     }),
-    //   ];
-    // }
   }
 }

@@ -1,13 +1,17 @@
-<a class="card-grid" [routerLink]="card.route ? card.route : []">
+<a class="card-grid" [routerLink]="card.route ? card.route : null">
   <div class="card-image-wrapper" *ngIf="card.image">
-    <div class="card-image">
+    <!-- Image -->
+    <div class="card-image {{ card.gfx ? 'gfx' : '' }}">
       <loader [active]="imageLoading"></loader>
+      <div class="placeholder"></div>
       <img
         src="{{ card.image }}"
         onerror="this.src='./assets/placeholder.png';"
         [hidden]="imageLoading"
         (load)="onLoad()"
       />
+
+      <!-- Price -->
       <div
         class="money-tag"
         *ngIf="
@@ -18,6 +22,8 @@
       >
         {{ card.last_prices[0].market_price | currency }}
       </div>
+
+      <!-- Collection qty -->
       <div class="collection" *ngIf="!card.scan">
         <textbox [textbox]="textbox"></textbox>
       </div>

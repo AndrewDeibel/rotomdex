@@ -65,17 +65,8 @@ export class ScannerService {
   recentScansObservable() {
     return this.recentScansSubject.asObservable();
   }
-  get recentScans() {
-    // Limit recent scans to 6
-    this.recentScansSubject.next(
-      this.recentScansSubject.value.slice(
-        Math.max(this.recentScansSubject.value.length - 6, 0)
-      )
-    );
-    return this.recentScansSubject.value;
-  }
   set recentScans(scans: ScanCard[]) {
-    this.recentScansSubject.next(scans);
+    this.recentScansSubject.next(scans.slice(Math.max(scans.length - 6, 0)));
   }
   addScan(scan: ScanCard) {
     this.recentScansSubject.next([...this.recentScansSubject.value, scan]);
@@ -97,7 +88,7 @@ export class ScannerService {
           total_pages: res.meta.last_page,
           total_results: res.meta.total,
         });
-        this.recentScansSubject.next(scans);
+        this.recentScans = scans;
         this.loaderService.clearItemLoading('getScans');
       });
   }
