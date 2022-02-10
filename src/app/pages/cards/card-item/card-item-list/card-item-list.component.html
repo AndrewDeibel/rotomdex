@@ -18,8 +18,20 @@
     <div class="box">
       <div class="flex padded flex-center">
         <div class="width-4 small-12">
-          <h6>{{ card.name }}</h6>
-          {{ card.expansion.name }}
+          <div class="flex padded">
+            <div>
+              <h6>{{ card.name }}</h6>
+              {{ card.expansion.name }}
+            </div>
+            <div *ngIf="card.total_cards_owned > 0">
+              <img
+                title="Owned"
+                class="pokeball"
+                style="width: 24px"
+                src="/assets/pokeball-green.png"
+              />
+            </div>
+          </div>
         </div>
         <div class="width-2 small-3 flex">
           <!-- Number -->
@@ -41,7 +53,7 @@
             </a>
           </div>
         </div>
-        <div class="width-2 small-3">
+        <div class="width-1 small-3">
           <div
             class="money-tag small-12 align-center"
             *ngIf="
@@ -53,8 +65,8 @@
             {{ card.last_prices[0].market_price | currency }}
           </div>
         </div>
-        <div class="width-1 small-3 flex">
-          <div class="width-12 collection">
+        <div class="width-2 small-3 flex">
+          <div class="collection">
             <textbox [textbox]="textbox"></textbox>
           </div>
         </div>

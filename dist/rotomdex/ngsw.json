@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1644390115624,
+  "timestamp": 1644475482468,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.db5d010f326d9aea.js",
+        "/main.5b6e20ac1cabf9cd.js",
         "/manifest.webmanifest",
         "/polyfills.a90d0f9c1878eb88.js",
         "/runtime.f167786c2dee8f61.js",
@@ -45,6 +45,7 @@
         "/assets/pokeball-green.png",
         "/assets/pokeball.png",
         "/assets/stars.gif",
+        "/assets/stars.mp4",
         "/assets/symbols/cards-source.ai",
         "/assets/symbols/cards.ai",
         "/assets/symbols/cards.svg",
@@ -91,6 +92,7 @@
     "/assets/pokeball-green.png": "2c2a26125a40e4d6b6a4086474644ad61a65cb27",
     "/assets/pokeball.png": "a4a8892d5578957891cff895576adabd88b08839",
     "/assets/stars.gif": "ff13eb8789ea4505edb128360516f12beaec414b",
+    "/assets/stars.mp4": "99b6397493d02cd28c585b9db8d65b0c15c3c2e9",
     "/assets/symbols/cards-source.ai": "b5e1408e5ac1563164e99dd9c8bf311b0e3b2739",
     "/assets/symbols/cards.ai": "b9cb27883495713cd5a434dc628314037fa69c44",
     "/assets/symbols/cards.svg": "ce7ada10e75436cd2656a586d2cdbfd5e8631b13",
@@ -115,9 +117,9 @@
     "/assets/symbols/youtube.svg": "a46fba4db8143291bac1400d85781096a0f3e90e",
     "/assets/user/placeholder-female.jpg": "122888a5af26ba53f80b1e126581dec4fe83c208",
     "/assets/user/placeholder-male.jpg": "36c06817aebb3e461e487c2ba27bfe2dc1398b4d",
-    "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "d92fd8f55c06383a27a148dc416ca0a059fe720e",
-    "/main.db5d010f326d9aea.js": "bd253489fa3e7cc8ed463df0d89f1180a844d078",
+    "/favicon.ico": "3924ed03dc092dcae1515a682e4fbb9c84f2214e",
+    "/index.html": "55fe626cb0b9f147e8262647f88f168ed0731496",
+    "/main.5b6e20ac1cabf9cd.js": "c12abe8bc2354f5d8c18ed071ef29013f98ca9df",
     "/manifest.webmanifest": "4368dae935bbe03b935aa8cc19e879b3ba9ad7fb",
     "/polyfills.a90d0f9c1878eb88.js": "b4711754abbd131a24a1d0e6e162c19c5355a7b8",
     "/runtime.f167786c2dee8f61.js": "212b0fd0750b44d04c912f68aff3e1ae5932d42a",

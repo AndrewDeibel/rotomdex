@@ -1,3 +1,4 @@
+import { DialogRef } from './../../../controls/dialog/dialog';
 import { Component, OnInit } from '@angular/core';
 import { DialogConfig, DialogService } from '@app/controls';
 import { Button } from '@app/controls/button';
@@ -34,6 +35,7 @@ export class ScannerListComponent implements OnInit {
   items: Items;
   addToDeckMenuItem: MenuItem;
   scans: ScanCard[] = [];
+  dialog: DialogRef;
 
   constructor(
     private scannerService: ScannerService,
@@ -42,6 +44,11 @@ export class ScannerListComponent implements OnInit {
 
   ngOnDestroy() {}
   ngOnInit() {
+    this.setupControls();
+    this.setupSubscriptions();
+  }
+
+  setupControls() {
     const addToMenuItem = new MenuItem({
       text: 'Add to...',
       icon: Icons.plus,
@@ -74,7 +81,7 @@ export class ScannerListComponent implements OnInit {
         route: '/scanner',
       }),
       header: new ItemsHeader({
-        title: 'Scanner Results',
+        title: 'Scans',
         icon: Icons.scanner,
         menu: new Menu({
           items: [
@@ -99,10 +106,6 @@ export class ScannerListComponent implements OnInit {
         }),
       }),
       filter: new ItemsFilter({
-        textboxSearch: new Textbox({
-          icon: Icons.search,
-          placeholder: 'Search Scanner Results...',
-        }),
         selectSortBy: new Select({
           change: (value) => {
             this.sortBy = value;
@@ -133,9 +136,12 @@ export class ScannerListComponent implements OnInit {
         textboxPage: new Textbox({}),
       }),
     });
+    this.items.filter.textboxSearch.placeholder = 'Search scans...';
     SetSortByScans(this.items.filter);
+  }
 
-    // Response from get scans request
+  setupSubscriptions() {
+    // Scans
     this.scannerService.getScansObservable().subscribe((res) => {
       if (res && res.scans) {
         // res.scans.forEach((scan) => {
@@ -167,6 +173,21 @@ export class ScannerListComponent implements OnInit {
           }
         });
         this.items.header.price = price;
+      }
+    });
+
+    // Scans processed
+    this.scannerService.processScansObservable().subscribe((scan) => {
+      if (scan) {
+        this.dialog.close();
+        this.getScans();
+      }
+    });
+
+    // Scan updated
+    this.scannerService.updateScanObservable().subscribe((scan) => {
+      if (scan) {
+        this.getScans();
       }
     });
   }
@@ -208,7 +229,7 @@ export class ScannerListComponent implements OnInit {
   }
 
   clickCard(card: Card) {
-    this.dialogService.open(
+    this.dialog = this.dialogService.open(
       ScanDialogComponent,
       new DialogConfig({
         title: 'Edit Scan Result',

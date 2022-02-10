@@ -200,13 +200,12 @@
   }
   &.rare-rainbow {
     background: linear-gradient(
-      to left,
-      #fae521,
-      #ef3594,
-      #60469c,
-      #3dc4e6,
-      #42b64a,
-      #fae521
+      110deg,
+      #f7f44d,
+      #80d36e,
+      #62b2f0,
+      #585fdb,
+      #f08362
     );
     color: white;
     text-shadow: $text-shadow;

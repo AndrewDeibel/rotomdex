@@ -97,14 +97,19 @@ export class ScannerComponent implements OnInit {
   }
 
   setupSubscriptions() {
+    // Receive scans
     this.scannerService.getScansObservable().subscribe((res) => {
       if (res && res.scans) {
         this.totalScans = res?.total_results;
       }
     });
+
+    // Receive recent scans
     this.scannerService.recentScansObservable().subscribe((scans) => {
       this.recentScans = scans;
     });
+
+    // Receive user
     this.authenticationService.currentUserObservable().subscribe((user) => {
       if (user && !user.closed_scanner_instructions) {
         this.showAlert = true;

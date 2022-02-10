@@ -22,6 +22,17 @@
   .card-image-wrapper {
     width: 100%;
     position: relative;
+    .shiny-icon {
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      z-index: 50;
+      border-radius: 6px;
+      background: #202020;
+      padding: 4px;
+      width: 20px;
+      color: white;
+    }
     &:after {
       display: none;
     }

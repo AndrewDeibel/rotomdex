@@ -1,3 +1,4 @@
+import { ProgressBar } from './../../../../controls/progress-bar/progress-bar';
 import { Component, OnInit, Input } from '@angular/core';
 import { Expansion } from '../../expansion/expansion';
 
@@ -9,7 +10,14 @@ import { Expansion } from '../../expansion/expansion';
 export class ExpansionItemListComponent implements OnInit {
   @Input() expansion: Expansion;
 
+  progressBar: ProgressBar;
+
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.progressBar = new ProgressBar({
+      value: this.expansion.total_cards_owned,
+      total: this.expansion.total_cards,
+    });
+  }
 }

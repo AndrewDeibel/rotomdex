@@ -41,12 +41,7 @@ export class Card {
   artist: string;
   is_shiny: boolean;
   is_promo: boolean;
-  is_full_art: boolean;
-  is_gold: boolean;
   is_favorite: boolean;
-  has_first_edition: boolean;
-  has_shadowless: boolean;
-  has_reverse_holo: boolean;
   types: string[] = [];
   gfx: boolean;
 

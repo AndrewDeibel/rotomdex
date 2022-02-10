@@ -2,35 +2,41 @@
   class="item-list-pokemon flex"
   [routerLink]="pokemonVariant.route ? pokemonVariant.route : []"
 >
-  <div class="flex padded flex-center box">
-    <div>
-      <figure class="pokemon-image">
-        <img
-          *ngIf="getSprite(pokemonVariant)"
-          src="{{ getSprite(pokemonVariant) }}"
-        />
-      </figure>
-    </div>
-    <div class="box">
-      <figcaption class="pokemon-info">
-        <div class="flex padded flex-center">
-          <span class="width-6 pokemon-name">
-            {{ pokemonVariant.name }}
-          </span>
-          <span class="width-3 expansion-release-date subheading">
-            #{{ pokemonVariant.pokemon.national_dex_number }}
-          </span>
-          <span class="width-3 expansion-total-cards subheading">
-            <div class="pokemon-types flex" *ngIf="pokemonVariant.types">
-              <div class="flex padded">
-                <div *ngFor="let type of pokemonVariant.types">
-                  <type-tag [type]="type"></type-tag>
+  <div class="padding box flex">
+    <div class="flex padded flex-center box">
+      <div>
+        <figure class="pokemon-image">
+          <img
+            *ngIf="getSprite(pokemonVariant)"
+            src="{{ getSprite(pokemonVariant) }}"
+          />
+        </figure>
+      </div>
+      <div class="box">
+        <figcaption class="pokemon-info">
+          <div class="flex padded flex-center">
+            <span class="width-6 small-12 pokemon-name">
+              #{{ pokemonVariant.pokemon.national_dex_number }} -
+              {{ pokemonVariant.name }}
+              <div class="pokemon-region subheading">
+                {{ pokemonVariant.pokemon.generation.region }}
+              </div>
+            </span>
+            <span class="width-3 small-12 expansion-total-cards subheading">
+              <div class="pokemon-types flex" *ngIf="pokemonVariant.types">
+                <div class="flex padded">
+                  <div *ngFor="let type of pokemonVariant.types">
+                    <type-tag [type]="type"></type-tag>
+                  </div>
                 </div>
               </div>
-            </div>
-          </span>
-        </div>
-      </figcaption>
+            </span>
+            <span class="width-3 small-12 expansion-release-date subheading">
+              <progress-bar [progressBar]="progressBar"> </progress-bar>
+            </span>
+          </div>
+        </figcaption>
+      </div>
     </div>
   </div>
 </a>

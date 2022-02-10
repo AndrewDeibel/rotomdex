@@ -10,7 +10,6 @@ import { PokemonVariant } from '../../pokemon/pokemon';
 export class PokemonItemGridComponent implements OnInit {
   @Input() pokemonVariant: PokemonVariant;
   @Input() size: string;
-
   progressBar: ProgressBar;
 
   constructor() {}

@@ -4,6 +4,14 @@
   (click)="click()"
 >
   <div class="card-image-wrapper" *ngIf="card.image">
+    <!-- Shiny -->
+    <fa-icon
+      *ngIf="card.is_shiny"
+      class="shiny-icon"
+      icon="stars"
+      title="Shiny"
+    ></fa-icon>
+
     <!-- Image -->
     <div class="card-image {{ card.gfx ? 'gfx' : '' }}">
       <loader [active]="imageLoading"></loader>

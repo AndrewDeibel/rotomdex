@@ -6,6 +6,7 @@ import { APIGetPaged } from '@app/models';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { UserCardGroup, UserCardsService } from '@app/pages/collection';
 import { getIcon } from '.';
+import { SetSortByUserCards } from '../user-cards';
 import { Icons } from './../../../models/icons';
 import { UserCardGroupService } from './user-card-group.services';
 
@@ -30,6 +31,7 @@ export class UserCardGroupComponent implements OnInit {
 
   ngOnInit(): void {
     this.handleRoute();
+    this.setupControls();
     this.setupSubscriptions();
   }
 
@@ -44,6 +46,10 @@ export class UserCardGroupComponent implements OnInit {
         }
       }
     });
+  }
+
+  setupControls() {
+    SetSortByUserCards(this.items.filter);
   }
 
   setupSubscriptions() {

@@ -102,4 +102,10 @@
   &:active {
     box-shadow: $shadow-sheen, $shadow-focus, $shadow-focus-inset;
   }
+
+  // Types
+  &.error {
+    background: $error;
+    border: 1px solid darken($error, 10%);
+  }
 }

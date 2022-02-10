@@ -39,9 +39,11 @@ export class ScannerService {
 
   // Scan single card
   scan(image: string) {
+    this.loaderService.addItemLoading('scan');
     this.http
       .post<APIResponse>(buildUrl('scanner/detect'), { image })
       .subscribe((res) => {
+        this.loaderService.addItemLoading('scan');
         if (res.success) {
           this.addScan(
             new ScanCard({
@@ -67,10 +69,10 @@ export class ScannerService {
     return this.recentScansSubject.asObservable();
   }
   set recentScans(scans: ScanCard[]) {
-    this.recentScansSubject.next(scans.slice(Math.max(scans.length - 6, 0)));
+    this.recentScansSubject.next(scans.slice(Math.max(scans.length - 12, 0)));
   }
   addScan(scan: ScanCard) {
-    this.recentScansSubject.next([...this.recentScansSubject.value, scan]);
+    this.recentScans = [scan, ...this.recentScansSubject.value];
   }
 
   // Get scans
@@ -95,9 +97,8 @@ export class ScannerService {
   }
 
   // Update scan
-  private updateScanSubject = new BehaviorSubject<Card | null>(null);
+  private updateScanSubject = new BehaviorSubject<ScanCard | null>(null);
   updateScanObservable() {
-    this.updateScanSubject = new BehaviorSubject<Card | null>(null);
     return this.updateScanSubject.asObservable();
   }
   updateScan(scan: ScanCard) {
@@ -107,19 +108,28 @@ export class ScannerService {
       .subscribe((res) => {
         this.loaderService.clearItemLoading('updateScan');
         if (res.success) {
-          this.updateScanSubject.next(new Card(res.data));
-          this.notificationService.addNotifications([
-            new Notification({
-              message: 'Updated',
-              alertType: AlertType.success,
-            }),
-          ]);
+          this.updateScanSubject.next(new ScanCard(res.data));
+          if (scan.processed) {
+            this.notificationService.addNotifications([
+              new Notification({
+                message: 'Removed scan',
+                alertType: AlertType.success,
+              }),
+            ]);
+          } else {
+            this.notificationService.addNotifications([
+              new Notification({
+                message: 'Updated scan',
+                alertType: AlertType.success,
+              }),
+            ]);
+          }
         }
       });
   }
 
   // Process scans
-  private processScansSubject = new BehaviorSubject<boolean | null>(null);
+  private processScansSubject = new BehaviorSubject<ProcessScan[] | null>(null);
   processScansObservable() {
     return this.processScansSubject.asObservable();
   }
@@ -129,11 +139,11 @@ export class ScannerService {
       .post<APIResponse>(buildUrl('scanner/process'), { scans })
       .subscribe((res) => {
         this.loaderService.clearItemLoading('processScans');
-        this.processScansSubject.next(res.success);
+        this.processScansSubject.next(scans);
         if (res.success) {
           this.notificationService.addNotifications([
             new Notification({
-              message: 'Cards added',
+              message: 'Added to collection',
               alertType: AlertType.success,
             }),
           ]);

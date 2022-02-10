@@ -4,14 +4,14 @@ import { Card, ScanCard } from '@app/pages';
 import { DialogConfig, DialogRef } from '@app/controls/dialog';
 import { Component, OnInit } from '@angular/core';
 import { Button, Select, SelectOption } from '@app/controls';
-import { APIGetPaged } from '@app/models';
+import { APIGetPaged, Icons } from '@app/models';
 import { ProcessScan } from '..';
 
 @Component({
   selector: 'scan-dialog',
   template: `<div
     class="flex vertical padded"
-    style="width: 320px; max-width: 100%;"
+    style="width: 340px; max-width: 100%;"
     *ngIf="this.card"
   >
     <div class="flex justify-center">
@@ -44,8 +44,16 @@ import { ProcessScan } from '..';
     <div>
       <app-select [select]="selectBinder"></app-select>
     </div>
+    <div><hr /></div>
     <div>
-      <app-button [button]="buttonMoveToCollection"></app-button>
+      <div class="flex padded">
+        <div class="box">
+          <app-button [button]="buttonMoveToCollection"></app-button>
+        </div>
+        <div>
+          <app-button [button]="buttonRemove"></app-button>
+        </div>
+      </div>
     </div>
   </div>`,
 })
@@ -53,6 +61,7 @@ export class ScanDialogComponent implements OnInit {
   selectResults: Select;
   selectBinder: Select;
   buttonMoveToCollection: Button;
+  buttonRemove: Button;
   card: Card;
   constructor(
     public config: DialogConfig,
@@ -75,6 +84,7 @@ export class ScanDialogComponent implements OnInit {
   }
 
   setupControls() {
+    // Select result
     this.selectResults = new Select({
       label: 'Possible Results',
       options: [
@@ -116,23 +126,44 @@ export class ScanDialogComponent implements OnInit {
       },
     });
     this.selectResults.value = this.card.id.toString();
-    this.buttonMoveToCollection = new Button({
-      text: 'Move to Collection',
-      click: () => {
-        this.scannerService.processScans([
-          new ProcessScan({
-            card_groups: [],
-            scan_id: this.card.scan_id,
-          }),
-        ]);
-      },
-    });
+
+    // Select group
     this.selectBinder = new Select({
       label: 'Groups',
       multiple: true,
       advancedSelect: true,
       anchor: 'bottom',
       placeholder: 'Select group(s)...',
+    });
+
+    // Move to collection
+    this.buttonMoveToCollection = new Button({
+      text: 'Move to Collection',
+      icon: Icons.arrowRight,
+      click: () => {
+        this.scannerService.processScans([
+          new ProcessScan({
+            card_groups: this.selectBinder.value.split(',').map(Number),
+            scan_id: this.card.scan_id,
+          }),
+        ]);
+      },
+    });
+
+    // Remove
+    this.buttonRemove = new Button({
+      icon: Icons.trash,
+      text: 'Remove',
+      classes: 'error',
+      click: () => {
+        this.scannerService.updateScan(
+          new ScanCard({
+            scan_id: this.card.scan_id,
+            processed: true,
+            user_success: false,
+          })
+        );
+      },
     });
   }
 
@@ -152,18 +183,19 @@ export class ScanDialogComponent implements OnInit {
       }
     });
 
-    // Result updated
-    this.scannerService.updateScanObservable().subscribe((card) => {
-      if (card) {
-        this.card = card;
-        this.setupControls();
-      }
-    });
+    // Updated
+    this.scannerService.updateScanObservable().subscribe((scan) => {
+      if (scan) {
+        // Removed
+        if (scan.processed) {
+          this.dialog.close(scan);
+        }
 
-    // Card processed
-    this.scannerService.processScansObservable().subscribe((result) => {
-      if (result) {
-        window.location.reload();
+        // Result updated
+        else {
+          this.card = scan.result;
+          this.setupControls();
+        }
       }
     });
   }
