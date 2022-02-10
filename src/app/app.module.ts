@@ -84,6 +84,7 @@ import {
   UserCardsComponent,
   UserCardGroupComponent,
   ScanDialogComponent,
+  AddToCollectionDialogComponent,
 } from './pages';
 
 // Page
@@ -329,6 +330,7 @@ import { environment } from '../environments/environment';
     UserCardsComponent,
     UserCardGroupComponent,
     ScanDialogComponent,
+    AddToCollectionDialogComponent,
 
     // Helpers
     ClickOutsideDirective,

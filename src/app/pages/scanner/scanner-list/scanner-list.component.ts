@@ -1,3 +1,4 @@
+import { AddToCollectionDialogComponent } from './add-to-collection-dialog.component';
 import { DialogRef } from './../../../controls/dialog/dialog';
 import { Component, OnInit } from '@angular/core';
 import { DialogConfig, DialogService } from '@app/controls';
@@ -36,6 +37,7 @@ export class ScannerListComponent implements OnInit {
   addToDeckMenuItem: MenuItem;
   scans: ScanCard[] = [];
   dialog: DialogRef;
+  dialogMoveAll: DialogRef;
 
   constructor(
     private scannerService: ScannerService,
@@ -49,30 +51,6 @@ export class ScannerListComponent implements OnInit {
   }
 
   setupControls() {
-    const addToMenuItem = new MenuItem({
-      text: 'Add to...',
-      icon: Icons.plus,
-      click: () => {
-        this.addToDeckMenuItem = new MenuItem({
-          text: 'Deck',
-          icon: Icons.deck,
-          menu: new Menu({
-            maxHeight: '320px',
-          }),
-        });
-
-        const addToBinderMenuItem = new MenuItem({
-          text: 'Binder',
-          icon: Icons.binders,
-          click: () => {},
-        });
-        addToMenuItem.menu = new Menu({
-          classes: 'anchor-right',
-          items: [this.addToDeckMenuItem, addToBinderMenuItem],
-        });
-      },
-    });
-
     // Initialize cards
     this.items = new Items({
       buttonNoResults: new Button({
@@ -89,14 +67,28 @@ export class ScannerListComponent implements OnInit {
               menu: new Menu({
                 classes: 'anchor-right',
                 items: [
-                  addToMenuItem,
+                  new MenuItem({
+                    text: 'Add to Collection',
+                    icon: Icons.plus,
+                    click: () => {
+                      this.dialogMoveAll = this.dialogService.open(
+                        AddToCollectionDialogComponent,
+                        new DialogConfig({
+                          title: 'Move All Scans To Collection',
+                          overflow: false,
+                          data: {
+                            totalScans: this.items.footer.totalItems,
+                          },
+                        })
+                      );
+                    },
+                  }),
                   new MenuItem({
                     text: 'Clear Scans',
                     icon: Icons.close,
                     click: () => {
                       this.items.header.menu.clearActive();
-                      // this.items.itemGroups = [];
-                      // this.scannerService.clearScans();
+                      //this.scannerService.processAllScans();
                     },
                   }),
                 ],
@@ -104,36 +96,6 @@ export class ScannerListComponent implements OnInit {
             }),
           ],
         }),
-      }),
-      filter: new ItemsFilter({
-        selectSortBy: new Select({
-          change: (value) => {
-            this.sortBy = value;
-          },
-        }),
-        selectSortDirection: new Select({
-          change: (value) => {
-            this.sortDirection = value;
-          },
-        }),
-      }),
-      footer: new ItemsFooter({
-        buttonPrev: new Button({
-          click: () => {
-            this.page--;
-          },
-        }),
-        buttonNext: new Button({
-          click: () => {
-            this.page++;
-          },
-        }),
-        selectPageSize: new Select({
-          change: (value) => {
-            this.pageSize = +value;
-          },
-        }),
-        textboxPage: new Textbox({}),
       }),
     });
     this.items.filter.textboxSearch.placeholder = 'Search scans...';
@@ -144,9 +106,6 @@ export class ScannerListComponent implements OnInit {
     // Scans
     this.scannerService.getScansObservable().subscribe((res) => {
       if (res && res.scans) {
-        // res.scans.forEach((scan) => {
-        //   this.buildCardMenu(scan.result);
-        // });
         this.scans = res.scans;
         this.items.itemGroups = [
           new ItemGroup({
@@ -173,13 +132,15 @@ export class ScannerListComponent implements OnInit {
           }
         });
         this.items.header.price = price;
+      } else {
+        this.items.itemGroups = [];
       }
     });
 
     // Scans processed
     this.scannerService.processScansObservable().subscribe((scan) => {
       if (scan) {
-        this.dialog.close();
+        if (this.dialog) this.dialog.close();
         this.getScans();
       }
     });
@@ -187,6 +148,17 @@ export class ScannerListComponent implements OnInit {
     // Scan updated
     this.scannerService.updateScanObservable().subscribe((scan) => {
       if (scan) {
+        if (scan.processed) {
+          this.dialog.close();
+        }
+        this.getScans();
+      }
+    });
+
+    // All scans processed
+    this.scannerService.processAllScansObservable().subscribe((res) => {
+      if (res) {
+        if (this.dialogMoveAll) this.dialogMoveAll.close();
         this.getScans();
       }
     });
@@ -202,30 +174,6 @@ export class ScannerListComponent implements OnInit {
         sort_direction: this.items.filter.selectSortDirection.value,
       })
     );
-  }
-
-  buildCardMenu(card: Card) {
-    const removeMenuItem = new MenuItem({
-      icon: Icons.trash,
-      text: 'Remove',
-      click: (event: Event) => {
-        event.stopPropagation();
-        // this.scannerService.removeScan(card.tempId);
-        // this.items.itemGroups = [
-        //   new ItemGroup({
-        //     items: this.scannerService.scans,
-        //   }),
-        // ];
-      },
-    });
-
-    const cardMenuItem = new MenuItem({
-      menu: new Menu({
-        classes: 'anchor-bottom anchor-left',
-      }),
-    });
-
-    cardMenuItem.menu?.items.push(removeMenuItem);
   }
 
   clickCard(card: Card) {

@@ -33,6 +33,7 @@ export class DialogConfig {
   title: string;
   active: boolean;
   buttons: Button[] = [];
+  overflow: boolean = true;
   data?: any;
 
   public constructor(init?: Partial<DialogConfig>) {

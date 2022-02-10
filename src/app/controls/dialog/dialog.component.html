@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <div class="dialog-content">
+    <div class="dialog-content {{ config.overflow ? 'dialog-overflow' : '' }}">
       <ng-template appInsertion></ng-template>
     </div>
     <!-- <div class="dialog-footer" *ngIf="dialog.buttons.length">

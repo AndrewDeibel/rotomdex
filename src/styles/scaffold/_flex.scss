@@ -102,7 +102,6 @@
   @for $i from 1 through 12 {
     .small-#{$i} {
       width: percentage($i/12) !important;
-      flex: auto;
     }
     .small-min-#{$i} {
       min-width: percentage($i/12) !important;

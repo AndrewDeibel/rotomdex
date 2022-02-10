@@ -6,7 +6,7 @@
   width: 32px;
 }
 .collection-menu {
-  @media (max-width: $screen-medium) {
+  @media (max-width: $screen-small) {
     max-height: 320px;
     overflow-y: scroll;
     overflow-x: hidden;

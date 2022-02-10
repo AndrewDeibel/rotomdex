@@ -152,4 +152,52 @@ $poke-types: (
       }
     }
   }
+  &.gfx-mobile {
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0.5;
+      mix-blend-mode: color-dodge;
+      transition: $transition;
+      pointer-events: none;
+    }
+    &:before {
+      background-position: 50% 50%;
+      background-size: 300% 300%;
+      background-image: linear-gradient(
+        115deg,
+        transparent 0%,
+        rgb(0, 231, 255) 25%,
+        transparent 47%,
+        transparent 53%,
+        rgb(255, 0, 231) 75%,
+        transparent 100%
+      );
+      filter: brightness(0.5) contrast(1);
+      z-index: 1;
+    }
+    &:after {
+      background-image: url("/assets/stars.gif"), url("/assets/holo.png"),
+        linear-gradient(
+          125deg,
+          #ff008450 15%,
+          #fca40040 30%,
+          #ffff0030 40%,
+          #00ff8a20 60%,
+          #00cfff40 70%,
+          #cc4cfa50 85%
+        );
+      background-position: center;
+      background-size: 160%;
+      background-blend-mode: overlay;
+      z-index: 2;
+      mix-blend-mode: color-dodge;
+      opacity: 1;
+    }
+  }
 }

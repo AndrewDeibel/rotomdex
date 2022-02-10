@@ -43,11 +43,11 @@ export class ScannerService {
     this.http
       .post<APIResponse>(buildUrl('scanner/detect'), { image })
       .subscribe((res) => {
-        this.loaderService.addItemLoading('scan');
+        this.loaderService.clearItemLoading('scan');
         if (res.success) {
           this.addScan(
             new ScanCard({
-              ...res.data.results.result,
+              ...res.data.results,
               tempId: this.getTempId(),
             })
           );
@@ -144,6 +144,29 @@ export class ScannerService {
           this.notificationService.addNotifications([
             new Notification({
               message: 'Added to collection',
+              alertType: AlertType.success,
+            }),
+          ]);
+        }
+      });
+  }
+
+  // Process all scans
+  private processAllScansSubject = new BehaviorSubject<boolean | null>(null);
+  processAllScansObservable() {
+    return this.processAllScansSubject.asObservable();
+  }
+  processAllScans(card_groups?: number[]) {
+    this.loaderService.addItemLoading('processAllScans');
+    this.http
+      .post<APIResponse>(buildUrl('scanner/process-all'), { card_groups })
+      .subscribe((res) => {
+        this.loaderService.clearItemLoading('processAllScans');
+        this.processAllScansSubject.next(res.success);
+        if (res.success) {
+          this.notificationService.addNotifications([
+            new Notification({
+              message: 'Scans cleared',
               alertType: AlertType.success,
             }),
           ]);

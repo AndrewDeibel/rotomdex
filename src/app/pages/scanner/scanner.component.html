@@ -27,12 +27,12 @@
   >
     <div class="scanner-results">
       <div
-        *ngFor="let card of recentScans"
+        *ngFor="let scan of recentScans"
         class="scanner-result animated zoomIn"
       >
         <img
           class="scanner-result-image"
-          [src]="card.result.image"
+          [src]="scan.result.image"
           onerror="this.src='./assets/placeholder.png';"
         />
       </div>

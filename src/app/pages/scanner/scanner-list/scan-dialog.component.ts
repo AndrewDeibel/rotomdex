@@ -42,7 +42,7 @@ import { ProcessScan } from '..';
       <app-select [select]="selectResults"></app-select>
     </div>
     <div>
-      <app-select [select]="selectBinder"></app-select>
+      <app-select [select]="selectGroups"></app-select>
     </div>
     <div><hr /></div>
     <div>
@@ -59,7 +59,7 @@ import { ProcessScan } from '..';
 })
 export class ScanDialogComponent implements OnInit {
   selectResults: Select;
-  selectBinder: Select;
+  selectGroups: Select;
   buttonMoveToCollection: Button;
   buttonRemove: Button;
   card: Card;
@@ -128,7 +128,7 @@ export class ScanDialogComponent implements OnInit {
     this.selectResults.value = this.card.id.toString();
 
     // Select group
-    this.selectBinder = new Select({
+    this.selectGroups = new Select({
       label: 'Groups',
       multiple: true,
       advancedSelect: true,
@@ -143,7 +143,7 @@ export class ScanDialogComponent implements OnInit {
       click: () => {
         this.scannerService.processScans([
           new ProcessScan({
-            card_groups: this.selectBinder.value.split(',').map(Number),
+            card_groups: this.selectGroups.value.split(',').map(Number),
             scan_id: this.card.scan_id,
           }),
         ]);
@@ -171,7 +171,7 @@ export class ScanDialogComponent implements OnInit {
     // Received card groups
     this.userCardGroupService.getUserCardGroupsObservable().subscribe((res) => {
       if (res) {
-        this.selectBinder.options = res?.user_card_groups
+        this.selectGroups.options = res?.user_card_groups
           ? res?.user_card_groups.map(
               (group) =>
                 new SelectOption({
@@ -187,12 +187,7 @@ export class ScanDialogComponent implements OnInit {
     this.scannerService.updateScanObservable().subscribe((scan) => {
       if (scan) {
         // Removed
-        if (scan.processed) {
-          this.dialog.close(scan);
-        }
-
-        // Result updated
-        else {
+        if (!scan.processed) {
           this.card = scan.result;
           this.setupControls();
         }
