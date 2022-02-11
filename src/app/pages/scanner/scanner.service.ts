@@ -101,6 +101,9 @@ export class ScannerService {
   updateScanObservable() {
     return this.updateScanSubject.asObservable();
   }
+  clearUpdateScanObservable() {
+    this.updateScanSubject = new BehaviorSubject<ScanCard | null>(null);
+  }
   updateScan(scan: ScanCard) {
     this.loaderService.addItemLoading('updateScan');
     this.http

@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class CardItemGridComponent implements OnInit {
   @Input() card: Card;
+  @Input() hideQuantity: boolean;
   @Output() outputClickCard: EventEmitter<Card> = new EventEmitter();
   imageLoading: boolean = true;
   textbox: Textbox;

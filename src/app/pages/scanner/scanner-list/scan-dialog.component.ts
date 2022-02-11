@@ -1,3 +1,5 @@
+import { CustomResultDialogComponent } from './custom-result-dialog.component';
+import { DialogService } from './../../../controls/dialog/dialog.service';
 import { ScannerService } from '@app/pages/scanner/scanner.service';
 import { UserCardGroupService } from './../../collection/user-card-group/user-card-group.services';
 import { Card, ScanCard } from '@app/pages';
@@ -63,11 +65,13 @@ export class ScanDialogComponent implements OnInit {
   buttonMoveToCollection: Button;
   buttonRemove: Button;
   card: Card;
+  customResultDialog: DialogRef;
   constructor(
     public config: DialogConfig,
     public dialog: DialogRef,
     private userCardGroupService: UserCardGroupService,
-    private scannerService: ScannerService
+    private scannerService: ScannerService,
+    private dialogService: DialogService
   ) {
     this.card = this.config.data.card;
   }
@@ -108,20 +112,40 @@ export class ScanDialogComponent implements OnInit {
         // No match
         new SelectOption({
           text: 'None of these matched',
+          value: 'none',
         }),
       ],
       change: (value) => {
-        const newCard = this.card.other_results.find(
-          (card) => card.id.toString() === value
-        );
-        if (newCard) {
-          this.scannerService.updateScan(
-            new ScanCard({
-              scan_id: this.card.scan_id,
-              user_correction_id: newCard.id,
-              user_success: false,
+        if (value === 'none') {
+          this.customResultDialog = this.dialogService.open(
+            CustomResultDialogComponent,
+            new DialogConfig({
+              title: 'Card Search',
             })
           );
+          this.customResultDialog.afterClosed.subscribe((res) => {
+            if (res.card) {
+              this.scannerService.updateScan(
+                new ScanCard({
+                  scan_id: this.card.scan_id,
+                  user_correction_id: res.card.id,
+                })
+              );
+            }
+          });
+        } else {
+          const newCard = this.card.other_results.find(
+            (card) => card.id.toString() === value
+          );
+          if (newCard) {
+            this.scannerService.updateScan(
+              new ScanCard({
+                scan_id: this.card.scan_id,
+                user_correction_id: newCard.id,
+                user_success: false,
+              })
+            );
+          }
         }
       },
     });
@@ -165,6 +189,10 @@ export class ScanDialogComponent implements OnInit {
         );
       },
     });
+
+    this.dialog.afterClosed.subscribe(() => {
+      this.scannerService.clearUpdateScanObservable();
+    });
   }
 
   setupSubscriptions() {
@@ -187,8 +215,16 @@ export class ScanDialogComponent implements OnInit {
     this.scannerService.updateScanObservable().subscribe((scan) => {
       if (scan) {
         // Removed
-        if (!scan.processed) {
-          this.card = scan.result;
+        if (scan.processed) {
+          this.dialog.close({ reload: true });
+        }
+        // Updated
+        else if (scan.user_correction) {
+          this.card = new Card({
+            ...scan.user_correction,
+            other_results: this.card.other_results,
+            scan_id: this.card.scan_id,
+          });
           this.setupControls();
         }
       }

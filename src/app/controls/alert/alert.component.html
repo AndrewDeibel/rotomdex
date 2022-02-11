@@ -1,5 +1,6 @@
 <div class="alert {{ alert.type }} {{ alert.classes }}">
   <fa-icon
+    *ngIf="alert.icon"
     [icon]="alert.icon"
     (click)="alert.clickIcon && alert.clickIcon()"
   ></fa-icon>

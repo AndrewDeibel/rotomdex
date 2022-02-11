@@ -145,16 +145,6 @@ export class ScannerListComponent implements OnInit {
       }
     });
 
-    // Scan updated
-    this.scannerService.updateScanObservable().subscribe((scan) => {
-      if (scan) {
-        if (scan.processed) {
-          this.dialog.close();
-        }
-        this.getScans();
-      }
-    });
-
     // All scans processed
     this.scannerService.processAllScansObservable().subscribe((res) => {
       if (res) {
@@ -187,5 +177,8 @@ export class ScannerListComponent implements OnInit {
         },
       })
     );
+    this.dialog.afterClosed.subscribe((res) => {
+      this.getScans();
+    });
   }
 }

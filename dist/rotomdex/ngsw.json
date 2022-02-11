@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1644480739436,
+  "timestamp": 1644558678319,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.2b05e4459413420e.js",
+        "/main.b20df118a5b21901.js",
         "/manifest.webmanifest",
         "/polyfills.a90d0f9c1878eb88.js",
         "/runtime.f167786c2dee8f61.js",
@@ -30,6 +30,8 @@
       },
       "urls": [
         "/assets/audio/soundeffect.mp3",
+        "/assets/favicon.ico",
+        "/assets/favicon.psd",
         "/assets/holo.png",
         "/assets/icons/icon-128x128.png",
         "/assets/icons/icon-144x144.png",
@@ -77,6 +79,8 @@
   "dataGroups": [],
   "hashTable": {
     "/assets/audio/soundeffect.mp3": "fea7fef72545edb76dc6842a1bbfd68e82f044ce",
+    "/assets/favicon.ico": "1f1ca830c194ab0818ce656bdae624f02f4cb88c",
+    "/assets/favicon.psd": "0c763d3e6f634fc52a7661988753c39a40a1ea8c",
     "/assets/holo.png": "9bb6d9523a203437a5e8f304919dd5e91d5e1f3f",
     "/assets/icons/icon-128x128.png": "586cfedda83b2d57ee8467561697bd724a1d3b36",
     "/assets/icons/icon-144x144.png": "d5969a08336728bff26f1dd6453575ee88f2af74",
@@ -117,9 +121,9 @@
     "/assets/symbols/youtube.svg": "a46fba4db8143291bac1400d85781096a0f3e90e",
     "/assets/user/placeholder-female.jpg": "122888a5af26ba53f80b1e126581dec4fe83c208",
     "/assets/user/placeholder-male.jpg": "36c06817aebb3e461e487c2ba27bfe2dc1398b4d",
-    "/favicon.ico": "3924ed03dc092dcae1515a682e4fbb9c84f2214e",
-    "/index.html": "32595e564e1c61c58d417ad337ad3168397375c4",
-    "/main.2b05e4459413420e.js": "88ec5583eb8091a43068009036503faec81c74e4",
+    "/favicon.ico": "1f1ca830c194ab0818ce656bdae624f02f4cb88c",
+    "/index.html": "62e8642cc58779621b99b888f50ac6004719cf35",
+    "/main.b20df118a5b21901.js": "daf9975b366942cc871a7ed5237ad9ec9f04e3bf",
     "/manifest.webmanifest": "4368dae935bbe03b935aa8cc19e879b3ba9ad7fb",
     "/polyfills.a90d0f9c1878eb88.js": "b4711754abbd131a24a1d0e6e162c19c5355a7b8",
     "/runtime.f167786c2dee8f61.js": "212b0fd0750b44d04c912f68aff3e1ae5932d42a",

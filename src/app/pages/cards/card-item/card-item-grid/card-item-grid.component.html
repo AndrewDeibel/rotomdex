@@ -36,7 +36,7 @@
       </div>
 
       <!-- Collection qty -->
-      <div class="collection" *ngIf="!card.scan">
+      <div class="collection" *ngIf="!card.scan && !hideQuantity">
         <textbox [textbox]="textbox"></textbox>
       </div>
     </div>
