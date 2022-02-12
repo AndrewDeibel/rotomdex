@@ -74,6 +74,7 @@
         border-radius: $border-radius;
         box-shadow: $shadow;
         width: 86px;
+        z-index: 3;
         ::ng-deep {
           .textbox {
             width: 30px;

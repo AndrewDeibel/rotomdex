@@ -112,7 +112,7 @@ export class CardComponent implements OnInit {
         // Related pokemon cards
         if (this.card.pokemon) {
           this.relatedCards.header.title = `${this.card.pokemon.variant.name} Cards`;
-          this.relatedCards.header.titleRoute = this.card.pokemon.route;
+          this.relatedCards.header.titleRoute = this.card.pokemon.variant.route;
           this.relatedCards.noResults = `No ${this.card.pokemon.variant.name} cards found`;
         }
         // Related sub type cards

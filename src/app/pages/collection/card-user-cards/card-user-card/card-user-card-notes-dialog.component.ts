@@ -1,3 +1,4 @@
+import { ButtonType } from './../../../../controls/button/button';
 import { Component, OnInit } from '@angular/core';
 import { DialogConfig, DialogRef, Button, Textarea } from '@app/controls';
 
@@ -23,6 +24,7 @@ export class CardUserCardNotesDialogComponent implements OnInit {
     });
     this.buttonSubmit = new Button({
       text: 'Save',
+      type: ButtonType.submit,
       click: () => {
         this.dialog.close({
           notes: this.textareaNotes.value,

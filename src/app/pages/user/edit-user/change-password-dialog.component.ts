@@ -1,5 +1,15 @@
-import { Component } from '@angular/core';
-import { DialogConfig, Textbox, Button, DialogRef } from '@app/controls';
+import { NotificationsService } from './../../../controls/notifications/notifications.service';
+import { AuthenticationService } from './../../auth/auth.service';
+import { Component, OnInit } from '@angular/core';
+import {
+  DialogConfig,
+  Textbox,
+  Button,
+  DialogRef,
+  Notification,
+  AlertType,
+  ButtonType,
+} from '@app/controls';
 
 @Component({
   selector: 'change-password-dialog',
@@ -18,21 +28,55 @@ import { DialogConfig, Textbox, Button, DialogRef } from '@app/controls';
     </div>
   </form>`,
 })
-export class ChangePasswordDialogComponent {
-  textboxCurrentPassword: Textbox = new Textbox({
-    label: 'Current Password',
-    type: 'password',
-  });
-  textboxNewPassword: Textbox = new Textbox({
-    label: 'New Password',
-    type: 'password',
-  });
-  textboxConfirmNewPassword: Textbox = new Textbox({
-    label: 'Confirm New Password',
-    type: 'password',
-  });
-  buttonSubmit: Button = new Button({
-    text: 'Save',
-  });
-  constructor(public config: DialogConfig, public dialog: DialogRef) {}
+export class ChangePasswordDialogComponent implements OnInit {
+  textboxCurrentPassword: Textbox;
+  textboxNewPassword: Textbox;
+  textboxConfirmNewPassword: Textbox;
+  buttonSubmit: Button;
+  constructor(
+    public config: DialogConfig,
+    public dialog: DialogRef,
+    private authenticationService: AuthenticationService,
+    private notificationService: NotificationsService
+  ) {}
+  ngOnInit(): void {
+    this.buildControls();
+  }
+  buildControls() {
+    this.textboxCurrentPassword = new Textbox({
+      label: 'Current Password',
+      type: 'password',
+    });
+    this.textboxNewPassword = new Textbox({
+      label: 'New Password',
+      type: 'password',
+    });
+    this.textboxConfirmNewPassword = new Textbox({
+      label: 'Confirm New Password',
+      type: 'password',
+    });
+    this.buttonSubmit = new Button({
+      text: 'Save',
+      type: ButtonType.submit,
+      click: () => {
+        this.authenticationService
+          .changePassword(
+            this.textboxCurrentPassword.value,
+            this.textboxNewPassword.value,
+            this.textboxConfirmNewPassword.value
+          )
+          .subscribe((res) => {
+            if (res.success) {
+              this.notificationService.addNotifications([
+                new Notification({
+                  message: 'Password changed',
+                  alertType: AlertType.success,
+                }),
+              ]);
+              this.dialog.close();
+            }
+          });
+      },
+    });
+  }
 }

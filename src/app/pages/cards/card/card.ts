@@ -112,7 +112,10 @@ export class Card {
         r === 'rare ultra' ||
         r === 'rare holo vmax' ||
         r === 'rare holo' ||
-        r === 'rare secret';
+        r === 'rare secret' ||
+        r === 'rare rainbow' ||
+        r === 'rare holo ex' ||
+        r === 'rare holo gx';
     }
   }
 }

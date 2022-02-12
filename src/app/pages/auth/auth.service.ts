@@ -130,6 +130,20 @@ export class AuthenticationService {
     });
   }
 
+  // Change password
+  // ====================
+  changePassword(
+    old_password: string,
+    password: string,
+    password_confirmation: string
+  ) {
+    return this.http.post<any>(buildUrl('update-password'), {
+      old_password,
+      password,
+      password_confirmation,
+    });
+  }
+
   // Verify
   // ====================
   verify(token: string = '') {
