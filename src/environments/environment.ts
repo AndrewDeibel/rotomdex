@@ -1,21 +1,13 @@
+// Default
+import { environment as stage } from './environment.stage';
+
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-class Environment {
-  production: boolean;
-  api: string;
-  images: string;
-  constructor(init?: Partial<Environment>) {
-    Object.assign(this, init);
-  }
-}
-
-export const environment = new Environment({
-  production: false,
-  api: 'https://api.rotomdex.app/api/',
-  images: 'https://images.rotomdex.app/',
-});
+export const environment = {
+  ...stage,
+};
 
 /*
  * For easier debugging in development mode, you can import the following file
