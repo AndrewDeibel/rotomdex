@@ -37,7 +37,6 @@ export class PokemonComponent implements OnInit {
   constructor(
     private titleService: Title,
     private pokemonService: PokemonService,
-    private loaderService: LoaderService,
     private route: ActivatedRoute,
     private router: Router,
     private dialogService: DialogService
@@ -125,7 +124,7 @@ export class PokemonComponent implements OnInit {
         }
       });
 
-    // Response get pokemon cards
+    // Response pokemon cards
     this.pokemonService.getPokemonVariantCardsObservable().subscribe((res) => {
       if (res) {
         this.items.footer.totalPages = res.total_pages;
@@ -143,7 +142,7 @@ export class PokemonComponent implements OnInit {
       }
     });
 
-    // Request get pokemon
+    // Request pokemon
     this.route.params.subscribe((params) => {
       this.slug = params['slug'];
       this.pokemonService.getPokemonVariant(this.slug);

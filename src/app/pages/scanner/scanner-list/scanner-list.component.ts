@@ -87,8 +87,16 @@ export class ScannerListComponent implements OnInit {
                     text: 'Clear Scans',
                     icon: Icons.close,
                     click: () => {
-                      this.items.header.menu.clearActive();
-                      //this.scannerService.processAllScans();
+                      if (
+                        confirm(
+                          `Are you sure you want to remove all ${this.items.footer.totalItems} scans?`
+                        )
+                      ) {
+                        this.items.header.menu.clearActive();
+                        this.scannerService.clearAllScans(() => {
+                          this.getScans();
+                        });
+                      }
                     },
                   }),
                 ],

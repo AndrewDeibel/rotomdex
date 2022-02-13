@@ -129,7 +129,8 @@ export class TextboxComponent implements ControlValueAccessor, OnInit {
   }
 
   blur(e: any) {
-    this.value = e.target?.value;
+    const newValue = e.target?.value;
+    if (this.value !== newValue) this.value = newValue;
     if (this.textbox.blur) this.textbox.blur(this.value);
   }
 

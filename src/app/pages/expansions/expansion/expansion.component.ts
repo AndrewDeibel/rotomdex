@@ -44,7 +44,7 @@ export class ExpansionComponent implements OnInit {
         this.titleService.setTitle(AppSettings.titlePrefix + expansion.name);
         this.items.header.symbol = expansion.logo;
         this.items.header.progressBar = new ProgressBar({
-          value: 12,
+          value: expansion.total_cards_owned,
           total: expansion.total_cards,
         });
         if (expansion.series.name === expansion.name) {

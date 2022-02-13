@@ -27,7 +27,6 @@ export class ItemsFooterComponent implements OnInit {
     this.itemsFooter.textboxPage.max = this.itemsFooter.totalPages;
     this.itemsFooter.textboxPage.change = (value) => {
       this.itemsFooter.page = +value;
-      this.outputPageSizeChanged.emit(this.itemsFooter.page);
       this.outputGetItems.emit();
     };
 
@@ -38,6 +37,7 @@ export class ItemsFooterComponent implements OnInit {
       this.itemsFooter.pageSize = +value;
       this.itemsFooter.page = 1;
       this.itemsFooter.textboxPage.value = this.itemsFooter.page.toString();
+      this.outputPageSizeChanged.emit(this.itemsFooter.page);
       this.outputGetItems.emit();
     };
 

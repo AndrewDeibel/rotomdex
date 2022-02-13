@@ -49,30 +49,15 @@ export class EditUserComponent implements OnInit {
   ngOnInit(): void {
     this.setupControls();
     this.setupSubscriptions();
-    this.getPokemonVariants();
-  }
-
-  getPokemonVariants(query = '') {
-    this.pokemonsService.getPokemonVariants(
-      new APIGetPaged({
-        page: 1,
-        page_size: 24,
-        sort_by: 'pokemon.order',
-        sort_direction: 'asc',
-        query: query,
-      }),
-      false
-    );
+    //this.getPokemonVariants();
   }
 
   setupControls() {
+    const user = this.authenticationService.currentUserValue;
     this.form = this.formBuilder.group({
-      userAvatarControl: [this.authenticationService.currentUserValue?.avatar],
-      favoritePokemonControl: [
-        this.authenticationService.currentUserValue
-          ?.favorite_pokemon_variant_id,
-      ],
-      publicControl: [this.authenticationService.currentUserValue?.public],
+      userAvatarControl: [user?.avatar],
+      favoritePokemonControl: [user?.favorite_pokemon_variant_id],
+      publicControl: [user?.public],
     });
     this.textboxEmail = new Textbox({
       label: 'Email',
@@ -80,14 +65,14 @@ export class EditUserComponent implements OnInit {
       classes: 'width-12',
       wrapperClasses: 'width-12',
       readOnly: true,
-      value: this.authenticationService.currentUserValue?.email,
+      value: user?.email,
     });
     this.textboxUsername = new Textbox({
       label: 'Username',
       classes: 'width-12',
       wrapperClasses: 'width-12',
       readOnly: true,
-      value: this.authenticationService.currentUserValue?.name,
+      value: user?.name,
     });
     this.selectUserAvatar = new Select({
       advancedSelect: true,
@@ -95,6 +80,7 @@ export class EditUserComponent implements OnInit {
       options: getUserAvatars(),
       label: 'Avatar',
       placeholder: 'Select avatar...',
+      value: user?.avatar,
     });
     this.selectFavoritePokemon = new Select({
       advancedSelect: true,
@@ -102,10 +88,14 @@ export class EditUserComponent implements OnInit {
       options: [],
       label: 'Favorite Pokemon',
       placeholder: 'Select favorite pokemon...',
+      value: user?.favorite_pokemon_variant_id,
       search: (search) => {
         this.getPokemonVariants(search);
       },
     });
+    if (user?.favorite_pokemon_variant_id) {
+      this.getPokemonVariants();
+    }
     this.togglePublic = new Toggle({
       label: 'Visibility',
       text: 'Private',
@@ -138,6 +128,7 @@ export class EditUserComponent implements OnInit {
   }
 
   setupSubscriptions() {
+    // Receive pokemon
     this.pokemonsService.getPokemonVariantsObservable().subscribe((res) => {
       if (res) {
         this.selectFavoritePokemon.options =
@@ -151,6 +142,19 @@ export class EditUserComponent implements OnInit {
           ) || [];
       }
     });
+  }
+
+  getPokemonVariants(query = '') {
+    this.pokemonsService.getPokemonVariants(
+      new APIGetPaged({
+        page: 1,
+        page_size: 24,
+        sort_by: 'pokemon.order',
+        sort_direction: 'asc',
+        query: query,
+      }),
+      false
+    );
   }
 
   submit() {

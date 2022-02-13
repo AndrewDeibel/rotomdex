@@ -169,10 +169,29 @@ export class ScannerService {
         if (res.success) {
           this.notificationService.addNotifications([
             new Notification({
+              message: 'Cards added to collection',
+              alertType: AlertType.success,
+            }),
+          ]);
+        }
+      });
+  }
+
+  // Clear all scans
+  clearAllScans(onSuccess: any) {
+    this.loaderService.addItemLoading('clearAllScans');
+    this.http
+      .post<APIResponse>(buildUrl('scanner/clear'), {})
+      .subscribe((res) => {
+        this.loaderService.clearItemLoading('clearAllScans');
+        if (res.success) {
+          this.notificationService.addNotifications([
+            new Notification({
               message: 'Scans cleared',
               alertType: AlertType.success,
             }),
           ]);
+          onSuccess();
         }
       });
   }

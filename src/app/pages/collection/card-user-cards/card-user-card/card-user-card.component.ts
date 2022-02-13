@@ -68,11 +68,12 @@ export class CardUserCardComponent implements OnInit {
           )
         : [],
       change: (value) => {
-        const values = value.split(',').map(Number);
+        const groupIds = value.length ? value.split(',').map(Number) : [];
+        //const groups = this.userCardGroups.filter(group => groupIds.includes(group.id);
         this.updated.emit(
           new UserCard({
             ...this.item,
-            card_groups: values,
+            card_groups: groupIds,
           })
         );
       },

@@ -79,7 +79,11 @@ export class ItemsComponent implements OnInit {
   }
 
   showEmpty() {
-    return this.items.itemGroups.length == 0;
+    return (
+      this.items.itemGroups.length === 0 ||
+      // TODO: sometimes itemGroups has an empty group
+      this.items.itemGroups[0].items.length === 0
+    );
   }
 
   showGroups() {
