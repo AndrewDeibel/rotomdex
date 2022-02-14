@@ -146,9 +146,8 @@ export class CardComponent implements OnInit {
           });
         } else if (this.card.rarity) {
           this.tagRarity = new Tag({
-            text: this.card.rarity,
-            classes:
-              'card-rarity ' + this.card.rarity.toLowerCase().replace(' ', '-'),
+            text: this.card.rarity.name,
+            classes: 'card-rarity ' + this.card.rarity.slug,
           });
         }
 

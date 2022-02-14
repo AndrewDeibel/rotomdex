@@ -20,6 +20,11 @@
     color: inherit;
   }
 
+  &.card-rarity {
+    min-width: 20px;
+    min-height: 20px;
+  }
+
   &.card-rarity,
   &.artist-tag,
   &.shiny-tag {
@@ -71,6 +76,10 @@
     "rare": $rare-non-holo,
     "rare-holo": $rare-holo,
     "rare-ultra": $rare-ultra,
+    "rare-holo-ex": $rare-ultra,
+    "rare-holo-gx": $rare-ultra,
+    "rare-holo-v": $rare-ultra,
+    "rare-holo-vmax": $rare-ultra,
     "rare-secret": $rare-secret,
     "rare-prime": $rare-ultra,
   );
@@ -114,7 +123,8 @@
   &.promo,
   &.rare,
   &.rare-ultra,
-  &.rare-holo {
+  &.rare-holo,
+  &.gold-star {
     &:before {
       content: "";
       display: inline-block;
@@ -161,6 +171,64 @@
         2% 35%,
         39% 35%
       );
+    }
+  }
+  &.rare-holo-lvx {
+    color: lighten($rare-ultra, 50%);
+    background: $rare-ultra;
+    &.icon-only {
+      &:before {
+        content: "Lv.X";
+        display: inline-block;
+        font-weight: bold;
+      }
+    }
+  }
+  &.rare-holo-ex {
+    &.icon-only {
+      &:before {
+        background: none;
+        content: "EX";
+        display: inline-block;
+        font-weight: bold;
+      }
+    }
+  }
+  &.rare-holo-gx {
+    &.icon-only {
+      &:before {
+        background: none;
+        content: "GX";
+        display: inline-block;
+        font-weight: bold;
+      }
+    }
+  }
+  &.rare-holo-v {
+    &.icon-only {
+      &:before {
+        background: none;
+        content: "V";
+        display: inline-block;
+        font-weight: bold;
+      }
+    }
+  }
+  &.rare-holo-vmax {
+    &.icon-only {
+      &:before {
+        background: none;
+        content: "VMAX";
+        display: inline-block;
+        font-weight: bold;
+      }
+    }
+  }
+  &.gold-star {
+    background: black;
+    color: #d5b338;
+    &:before {
+      background-color: #d5b338;
     }
   }
   &.amazing-rare {
@@ -231,6 +299,34 @@
         2% 35%,
         39% 35%
       );
+    }
+  }
+  &.legend {
+    font-style: italic;
+    font-weight: bold;
+    background: #d5b338;
+    span {
+      padding-right: 1px;
+      color: white;
+      text-shadow: 0 0 2px rgba(black, 0.8);
+      span {
+        font-size: 0.8em;
+      }
+    }
+    &.icon-only {
+      &:before {
+        color: white;
+        background: none;
+        content: "L";
+        display: inline-block;
+        font-weight: bold;
+      }
+    }
+  }
+  &.icon-only {
+    padding: 4px;
+    &:before {
+      margin-right: 0;
     }
   }
 }

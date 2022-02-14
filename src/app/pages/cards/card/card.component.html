@@ -91,7 +91,7 @@
                     [routerLink]="
                       card.rarity &&
                       '/cards/rarity/' +
-                        card.rarity.toLowerCase().replace(' ', '-')
+                        card.rarity.name.toLowerCase().replace(' ', '-')
                     "
                   >
                     <tag [tag]="tagRarity"></tag>

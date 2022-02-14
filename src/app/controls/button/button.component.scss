@@ -1,8 +1,9 @@
 @import "settings";
 
 .button {
-  padding: 11px 16px;
-  line-height: 16px;
+  height: 40px;
+  line-height: 38px;
+  padding: 0 16px;
   border: 1px solid darken($primary-color, 10%);
   border-radius: 999px;
   background: $primary-color;
@@ -20,10 +21,10 @@
   justify-content: center;
 
   &.xsmall {
-    padding: 2px 8px;
+    padding: 0px 8px;
     font-size: 12px;
-    line-height: 1;
-    min-height: 24px;
+    height: 24px;
+    line-height: 22px;
     .symbol + .text {
       margin-left: 4px;
     }
@@ -36,11 +37,18 @@
   }
 
   &.small {
-    padding: 6px 8px;
+    padding: 0 12px;
     font-size: 14px;
-    line-height: 1;
+    height: 32px;
+    line-height: 30px;
     .symbol + .text {
       margin-left: 4px;
+    }
+    .icon {
+      fa-icon {
+        width: 12px !important;
+        height: 12px !important;
+      }
     }
   }
   &.left {
