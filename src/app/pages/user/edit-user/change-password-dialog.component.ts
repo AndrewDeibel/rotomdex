@@ -1,3 +1,4 @@
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationsService } from './../../../controls/notifications/notifications.service';
 import { AuthenticationService } from './../../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,15 +14,28 @@ import {
 
 @Component({
   selector: 'change-password-dialog',
-  template: `<form class="flex vertical padded">
+  template: `<form
+    class="flex vertical padded"
+    [formGroup]="form"
+    (ngSubmit)="submit()"
+  >
     <div>
-      <textbox [textbox]="textboxCurrentPassword"></textbox>
+      <textbox
+        [textbox]="textboxCurrentPassword"
+        formControlName="currentPasswordControl"
+      ></textbox>
     </div>
     <div>
-      <textbox [textbox]="textboxNewPassword"></textbox>
+      <textbox
+        [textbox]="textboxNewPassword"
+        formControlName="newPasswordControl"
+      ></textbox>
     </div>
     <div>
-      <textbox [textbox]="textboxConfirmNewPassword"></textbox>
+      <textbox
+        [textbox]="textboxConfirmNewPassword"
+        formControlName="confirmPasswordControl"
+      ></textbox>
     </div>
     <div>
       <app-button [button]="buttonSubmit"></app-button>
@@ -33,16 +47,23 @@ export class ChangePasswordDialogComponent implements OnInit {
   textboxNewPassword: Textbox;
   textboxConfirmNewPassword: Textbox;
   buttonSubmit: Button;
+  form: FormGroup;
   constructor(
     public config: DialogConfig,
     public dialog: DialogRef,
     private authenticationService: AuthenticationService,
-    private notificationService: NotificationsService
+    private notificationService: NotificationsService,
+    private formBuilder: FormBuilder
   ) {}
   ngOnInit(): void {
     this.buildControls();
   }
   buildControls() {
+    this.form = this.formBuilder.group({
+      currentPasswordControl: ['', Validators.required],
+      newPasswordControl: ['', Validators.required],
+      confirmPasswordControl: ['', Validators.required],
+    });
     this.textboxCurrentPassword = new Textbox({
       label: 'Current Password',
       type: 'password',
@@ -58,25 +79,28 @@ export class ChangePasswordDialogComponent implements OnInit {
     this.buttonSubmit = new Button({
       text: 'Save',
       type: ButtonType.submit,
-      click: () => {
-        this.authenticationService
-          .changePassword(
-            this.textboxCurrentPassword.value,
-            this.textboxNewPassword.value,
-            this.textboxConfirmNewPassword.value
-          )
-          .subscribe((res) => {
-            if (res.success) {
-              this.notificationService.addNotifications([
-                new Notification({
-                  message: 'Password changed',
-                  alertType: AlertType.success,
-                }),
-              ]);
-              this.dialog.close();
-            }
-          });
-      },
     });
+  }
+
+  submit() {
+    if (!this.form.invalid) {
+      this.authenticationService
+        .changePassword(
+          this.form.controls['currentPasswordControl'].value,
+          this.form.controls['newPasswordControl'].value,
+          this.form.controls['confirmPasswordControl'].value
+        )
+        .subscribe((res) => {
+          if (res.success) {
+            this.notificationService.addNotifications([
+              new Notification({
+                message: 'Password changed',
+                alertType: AlertType.success,
+              }),
+            ]);
+            this.dialog.close();
+          }
+        });
+    }
   }
 }

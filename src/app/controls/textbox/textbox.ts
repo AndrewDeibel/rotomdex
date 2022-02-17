@@ -23,6 +23,7 @@ export class Textbox {
   size: Size;
   showPlusMinus: boolean;
   preventDefault: boolean;
+  fullWidth: boolean;
 
   keyup: (value: string) => void;
   keydown: (value: string) => void;

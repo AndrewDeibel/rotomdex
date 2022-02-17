@@ -17,4 +17,20 @@
   span {
     flex: 1;
   }
+  &.warning {
+    color: $font-color;
+    background: rgba($warning, 0.2) !important;
+  }
+  &.error {
+    color: $font-color;
+    background: rgba($error, 0.2) !important;
+  }
+  &.success {
+    color: $font-color;
+    background: rgba($success, 0.2) !important;
+  }
+  &.info {
+    color: $font-color;
+    background: rgba($info, 0.2) !important;
+  }
 }

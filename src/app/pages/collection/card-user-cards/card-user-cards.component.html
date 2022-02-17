@@ -42,7 +42,7 @@
           </div>
         </div>
       </div> -->
-      <div class="flex padded-large vertical">
+      <div class="flex padded-large vertical" *ngIf="showUserCards">
         <card-user-card
           class="box"
           *ngFor="let userCard of userCards"

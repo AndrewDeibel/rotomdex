@@ -44,41 +44,7 @@ export class CardUserCardComponent implements OnInit {
     this.buildControls();
   }
 
-  ngOnChanges(): void {
-    // Group
-    this.selectGroup = new Select({
-      label: 'Group',
-      placeholder: 'Select groups...',
-      value: this.item.card_groups
-        .map((userCardGroup) => (userCardGroup as UserCard).id)
-        .join(','),
-      classes: 'square small-round-right',
-      multiple: true,
-      advancedSelect: true,
-      options: this.userCardGroups
-        ? this.userCardGroups?.map(
-            (userCardGroup) =>
-              new SelectOption({
-                text: userCardGroup.name,
-                value: userCardGroup.id?.toString(),
-                selected: this.item.card_groups
-                  .map((userCardGroup) => (userCardGroup as UserCard).id)
-                  .includes(userCardGroup.id),
-              })
-          )
-        : [],
-      change: (value) => {
-        const groupIds = value.length ? value.split(',').map(Number) : [];
-        //const groups = this.userCardGroups.filter(group => groupIds.includes(group.id);
-        this.updated.emit(
-          new UserCard({
-            ...this.item,
-            card_groups: groupIds,
-          })
-        );
-      },
-    });
-  }
+  ngOnChanges(): void {}
 
   buildControls() {
     // Condition
@@ -181,6 +147,51 @@ export class CardUserCardComponent implements OnInit {
         })
       );
     }
+
+    // Group
+    this.selectGroup = new Select({
+      label: 'Group',
+      placeholder: 'Select groups...',
+      value: this.item.card_groups
+        ? this.item.card_groups[0] instanceof Object
+          ? this.item.card_groups
+              .map((userCardGroup) => (userCardGroup as UserCard).id)
+              .join(',')
+          : this.item.card_groups.join(',')
+        : '',
+      classes: 'square small-round-right',
+      multiple: true,
+      advancedSelect: true,
+      options: this.userCardGroups
+        ? this.userCardGroups?.map((userCardGroup) =>
+            this.item.card_groups[0] instanceof Object
+              ? new SelectOption({
+                  text: userCardGroup.name,
+                  value: userCardGroup.id?.toString(),
+                  selected: this.item.card_groups
+                    .map((userCardGroup) => (userCardGroup as UserCard).id)
+                    .includes(userCardGroup.id),
+                })
+              : new SelectOption({
+                  text: userCardGroup.name,
+                  value: userCardGroup.id?.toString(),
+                  selected: this.item.card_groups
+                    .map((userCardGroup) => userCardGroup as Number)
+                    .includes(userCardGroup.id),
+                })
+          )
+        : [],
+      change: (value) => {
+        const groupIds = value.length ? value.split(',').map(Number) : [];
+        //const groups = this.userCardGroups.filter(group => groupIds.includes(group.id);
+        this.updated.emit(
+          new UserCard({
+            ...this.item,
+            card_groups: groupIds,
+          })
+        );
+      },
+    });
 
     // Notes
     this.buttonNotes = new Button({

@@ -31,6 +31,7 @@ export class CardUserCardsComponent implements OnInit {
   empty: Empty;
   buttonNotes: Button;
   buttonDelete: Button;
+  showUserCards: boolean;
   userCardGroups: UserCardGroup[];
 
   constructor(
@@ -155,7 +156,10 @@ export class CardUserCardsComponent implements OnInit {
 
     // Get groups list
     this.userCardGroupService.getUserCardGroupsObservable().subscribe((res) => {
-      if (res) this.userCardGroups = res.user_card_groups;
+      if (res) {
+        this.userCardGroups = res.user_card_groups;
+        this.showUserCards = true;
+      }
     });
   }
 

@@ -25,6 +25,7 @@ export class Items {
   noResults: string = 'No items found';
   noResultsIcon: string = Icons.archive;
   noResultsImage: string;
+  initialLoad: boolean = true;
 
   resetPage() {
     this.footer.page = 1;

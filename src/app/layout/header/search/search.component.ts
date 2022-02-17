@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit {
       wrapperClasses: 'width-12',
       placeholder: 'Search Cards...',
       icon: Icons.search,
-      classes: 'bg-white color-dark width-12',
+      classes: 'color-dark width-12',
       keydownEnter: (value) => {
         this.query = value;
         this.search();

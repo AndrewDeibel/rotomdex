@@ -6,7 +6,6 @@ import {
   Button,
   DialogConfig,
   DialogService,
-  LoaderService,
   ProgressBar,
   Select,
   SelectOption,
@@ -70,8 +69,7 @@ export class PokemonComponent implements OnInit {
           // Reset page number
           this.items.resetPage();
 
-          // Get Pokemon cards
-          this.getCards();
+          //this.getCards();
 
           // Dex button
           this.buttonDex = new Button({

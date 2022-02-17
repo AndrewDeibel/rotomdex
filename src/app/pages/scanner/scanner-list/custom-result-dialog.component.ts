@@ -53,6 +53,7 @@ export class CustomResultDialogComponent implements OnInit {
     });
     this.textboxSearch = new Textbox({
       placeholder: 'Search cards...',
+      fullWidth: true,
       icon: Icons.search,
       keydownEnter: (value) => {
         this.searchCards(value);
