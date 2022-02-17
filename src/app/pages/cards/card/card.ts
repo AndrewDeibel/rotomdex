@@ -18,6 +18,15 @@ export class Attack {
   convertedEnergyCost: number;
 }
 
+export class Rarity {
+  id: number;
+  name: string;
+  slug: string;
+  constructor(init?: Partial<Rarity>) {
+    Object.assign(this, init);
+  }
+}
+
 export class Card {
   // Both can be used
   id: number;
@@ -29,7 +38,7 @@ export class Card {
   pokemon: Pokemon;
   expansion: Expansion;
   number: string;
-  rarity: string;
+  rarity: Rarity;
   image: string;
   image_high_res?: string;
   super_type: string;
@@ -106,7 +115,7 @@ export class Card {
 
     // GFX
     if (this.rarity) {
-      const r = this.rarity.toLocaleLowerCase();
+      const r = this.rarity.name.toLocaleLowerCase();
       this.gfx =
         r === 'rare holo v' ||
         r === 'rare ultra' ||

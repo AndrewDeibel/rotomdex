@@ -48,7 +48,7 @@ export class Series {
   }
 }
 
-export function SetSortByExpansions(itemFilter: ItemsFilter) {
+export function SetSortExpansions(itemFilter: ItemsFilter) {
   itemFilter.selectSortBy.optionGroups[0] = new SelectOptionGroup({
     label: 'Sort By',
     options: [
@@ -59,6 +59,7 @@ export function SetSortByExpansions(itemFilter: ItemsFilter) {
     ],
   });
   itemFilter.selectSortBy.value = 'expansion.release_date';
+  itemFilter.selectSortDirection.value = 'desc';
 }
 
 export function SetSortByExpansion(itemFilter: ItemsFilter) {

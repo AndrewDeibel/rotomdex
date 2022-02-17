@@ -9,9 +9,14 @@
         <app-menu id="menuBack" [menu]="menuBack"></app-menu>
       </div>
       <div class="width-6 flex justify-center">
-        <a class="logo" routerLink="">
-          <span><b>Rotom</b>dex</span>
-        </a>
+        <div class="relative">
+          <a class="logo" routerLink="">
+            <img src="/assets/logo.png" />
+            <span><b>Rotom</b>dex</span>
+          </a>
+
+          <search></search>
+        </div>
       </div>
       <div
         *ngIf="signedIn"

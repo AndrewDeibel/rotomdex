@@ -46,7 +46,8 @@
               class="block rounded"
               [routerLink]="
                 card.rarity &&
-                '/cards/rarity/' + card.rarity.toLowerCase().replace(' ', '-')
+                '/cards/rarity/' +
+                  card.rarity.name.toLowerCase().replace(' ', '-')
               "
             >
               <tag [tag]="tagRarity"></tag>

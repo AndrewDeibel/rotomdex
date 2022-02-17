@@ -1,4 +1,5 @@
 <div *ngIf="tag" class="tag {{ tag.classes }}" [routerLink]="tag.route">
   <fa-icon *ngIf="tag.icon" [icon]="tag.icon"> </fa-icon>
-  <span>{{ tag.text }}</span>
+  <span *ngIf="tag.text && tag.text !== 'LEGEND'">{{ tag.text }}</span>
+  <span *ngIf="tag.text && tag.text === 'LEGEND'"> L<span>EGEND</span> </span>
 </div>

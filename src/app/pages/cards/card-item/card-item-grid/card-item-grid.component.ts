@@ -1,3 +1,4 @@
+import { Tag } from './../../../../controls/tag/tag';
 import { UserCardsService } from '@app/pages/collection';
 // Angular
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -6,6 +7,7 @@ import { UserCard } from '@app/pages';
 import { Card } from '../../card/card';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { Subscription } from 'rxjs';
+import { Size } from '@app/models';
 
 @AutoUnsubscribe()
 @Component({
@@ -20,6 +22,7 @@ export class CardItemGridComponent implements OnInit {
   imageLoading: boolean = true;
   textbox: Textbox;
   previousValue: number;
+  tagRarity: Tag;
   addUserCardSubscription: Subscription;
   removeUserCardSubscription: Subscription;
 
@@ -33,10 +36,12 @@ export class CardItemGridComponent implements OnInit {
 
   setupControls() {
     this.previousValue = this.card.total_cards_owned;
+
+    // Collection qty
     this.textbox = new Textbox({
       showPlusMinus: true,
       type: 'number',
-      wrapperClasses: 'small',
+      size: Size.small,
       classes: 'square',
       value: this.card.total_cards_owned.toString(),
       min: this.card.total_cards_owned,
@@ -49,6 +54,18 @@ export class CardItemGridComponent implements OnInit {
         this.previousValue = newValue;
       },
     });
+
+    // Rarity
+    if (this.card.expansion.name.toLowerCase().includes('promo')) {
+      this.tagRarity = new Tag({
+        classes: 'promo icon-only card-rarity justify-center',
+      });
+    } else if (this.card.rarity) {
+      this.tagRarity = new Tag({
+        classes:
+          'card-rarity icon-only justify-center ' + this.card.rarity.slug,
+      });
+    }
   }
 
   setupSubscriptions() {

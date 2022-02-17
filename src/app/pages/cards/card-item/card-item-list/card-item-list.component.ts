@@ -3,6 +3,7 @@ import { UserCardsService } from '@app/pages/collection';
 import { Textbox } from '@app/controls';
 import { Component, OnInit, Input } from '@angular/core';
 import { Card, UserCard } from '@app/pages';
+import { Size } from '@app/models';
 
 @Component({
   selector: 'card-item-list',
@@ -21,10 +22,12 @@ export class CardItemListComponent implements OnInit {
 
   ngOnInit() {
     this.previousValue = this.card.total_cards_owned;
+
+    // Collection
     this.textbox = new Textbox({
       showPlusMinus: true,
       type: 'number',
-      wrapperClasses: 'small',
+      size: Size.small,
       value: this.card.total_cards_owned.toString(),
       min: this.card.total_cards_owned,
       classes: 'square',
@@ -46,10 +49,10 @@ export class CardItemListComponent implements OnInit {
       });
     } else if (this.card.rarity) {
       this.tagRarity = new Tag({
-        text: this.card.rarity,
+        text: this.card.rarity.name,
         classes:
           'card-rarity justify-center ' +
-          this.card.rarity.toLowerCase().replace(' ', '-'),
+          this.card.rarity.name.toLowerCase().replace(' ', '-'),
       });
     }
 

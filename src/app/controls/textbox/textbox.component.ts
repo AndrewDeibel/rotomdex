@@ -67,7 +67,7 @@ export class TextboxComponent implements ControlValueAccessor, OnInit {
     if (this.textbox.showPlusMinus) {
       this.buttonMinus = new Button({
         icon: Icons.minus,
-        size: Size.xsmall,
+        size: this.textbox.size,
         classes: 'square-right',
         click: (e) => {
           e.preventDefault();
@@ -89,7 +89,7 @@ export class TextboxComponent implements ControlValueAccessor, OnInit {
       });
       this.buttonPlus = new Button({
         icon: Icons.plus,
-        size: Size.xsmall,
+        size: this.textbox.size,
         classes: 'square-left',
         click: (e) => {
           e.preventDefault();

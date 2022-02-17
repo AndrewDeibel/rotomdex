@@ -23,40 +23,63 @@
         (load)="onLoad()"
       />
 
-      <!-- Price -->
-      <div
-        class="money-tag"
-        *ngIf="
-          card.last_prices &&
-          card.last_prices.length &&
-          card.last_prices[0].market_price
-        "
-      >
-        {{ card.last_prices[0].market_price | currency }}
-      </div>
-
       <!-- Collection qty -->
       <div class="collection" *ngIf="!card.scan && !hideQuantity">
         <textbox [textbox]="textbox"></textbox>
       </div>
     </div>
 
-    <div class="card-information flex flex-nowrap flex-center">
-      <div class="box ellipsis">
-        <div class="card-number subheading">
-          {{ card.number }} - {{ card.expansion.name }}
+    <div class="card-information">
+      <div class="flex padded vertical">
+        <div>
+          <div class="flex padded-small flex-nowrap">
+            <!-- Rarity -->
+            <div *ngIf="tagRarity">
+              <a
+                class="block rounded"
+                [routerLink]="
+                  card.rarity && '/cards/rarity/' + card.rarity.slug
+                "
+              >
+                <tag [tag]="tagRarity"></tag>
+              </a>
+            </div>
+            <!-- Owned pokeball -->
+            <div class="box">
+              <img
+                *ngIf="card.total_cards_owned > 0"
+                title="Owned"
+                class="pokeball"
+                style="width: 20px"
+                src="/assets/pokeball-green.png"
+              />
+            </div>
+            <!-- Price -->
+            <div
+              *ngIf="
+                card.last_prices &&
+                card.last_prices.length &&
+                card.last_prices[0].market_price
+              "
+            >
+              <div class="money-tag">
+                {{ card.last_prices[0].market_price | currency }}
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="card-name ellipsis">
-          {{ card.name }}
+        <div class="ellipsis">
+          <div class="flex flex-nowrap flex-center ellipsis">
+            <div class="box ellipsis">
+              <div class="card-number subheading ellipsis">
+                {{ card.number }} - {{ card.expansion.name }}
+              </div>
+              <div class="card-name ellipsis">
+                {{ card.name }}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div *ngIf="card.total_cards_owned > 0">
-        <img
-          title="Owned"
-          class="pokeball"
-          style="width: 24px"
-          src="/assets/pokeball-green.png"
-        />
       </div>
     </div>
   </div>

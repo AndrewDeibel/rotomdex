@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { AppSettings } from '@app/app';
 import { Items } from '@app/layout';
 import { APIGetPaged, Icons } from '@app/models';
-import { Series, SetSortByExpansions } from './expansion/expansion';
+import { Series, SetSortExpansions } from './expansion/expansion';
 import { ExpansionsService } from './expansions.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { ExpansionsService } from './expansions.service';
   templateUrl: './expansions.component.html',
 })
 export class ExpansionsComponent implements OnInit {
-  items: Items = new Items();
+  items: Items;
 
   constructor(
     private titleService: Title,
@@ -41,6 +41,7 @@ export class ExpansionsComponent implements OnInit {
   }
 
   setupControls() {
+    this.items = new Items();
     this.items.noResults = 'No expansions found';
     this.items.noResultsIcon = Icons.box;
     this.titleService.setTitle(AppSettings.titlePrefix + 'Expansions');
@@ -48,9 +49,8 @@ export class ExpansionsComponent implements OnInit {
     this.items.showFooter = false;
     this.items.itemClasses = 'width-3 medium-4 small-6';
     this.items.filter.textboxSearch.placeholder = 'Search Expansions...';
-    this.items.filter.selectSortDirection.value = 'desc';
     this.items.footer.pageSize = 100;
-    SetSortByExpansions(this.items.filter);
+    SetSortExpansions(this.items.filter);
   }
 
   getItems() {
