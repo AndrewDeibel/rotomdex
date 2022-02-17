@@ -32,6 +32,7 @@ export class PokemonComponent implements OnInit {
   selectVariants: Select;
   tagHeight: Tag;
   tagWeight: Tag;
+  initial: boolean = true;
 
   constructor(
     private titleService: Title,
@@ -69,7 +70,8 @@ export class PokemonComponent implements OnInit {
           // Reset page number
           this.items.resetPage();
 
-          //this.getCards();
+          if (!this.initial) this.getCards();
+          this.initial = false;
 
           // Dex button
           this.buttonDex = new Button({
@@ -154,6 +156,7 @@ export class PokemonComponent implements OnInit {
     this.items.footer.selectPageSize.value =
       this.items.footer.pageSize.toString();
     this.items.noResultsImage = Symbols.cards;
+    this.items.initialLoad = false;
 
     // Variants
     this.selectVariants = new Select({
