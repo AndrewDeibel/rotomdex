@@ -84,6 +84,11 @@
     }
     search {
       display: none;
+      &::ng-deep {
+        .textbox {
+          background: rgba(white, 0.2);
+        }
+      }
     }
     .logo {
       position: relative;

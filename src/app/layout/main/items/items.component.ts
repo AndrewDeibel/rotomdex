@@ -52,10 +52,13 @@ export class ItemsComponent implements OnInit {
 
       if (params['page']) {
         this.items.footer.page = +params['page'];
+      } else {
+        this.items.footer.page = 1;
+        this.items.footer.textboxPage.value = '1';
       }
-    });
 
-    this.outputGetItems.emit();
+      this.outputGetItems.emit();
+    });
 
     this.empty = new Empty({
       text: this.items.noResults,
@@ -118,7 +121,6 @@ export class ItemsComponent implements OnInit {
   }
 
   _outputGetItems() {
-    this.outputGetItems.emit();
     this.updateQueryParams();
   }
 

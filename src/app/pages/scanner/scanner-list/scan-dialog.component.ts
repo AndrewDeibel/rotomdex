@@ -167,7 +167,9 @@ export class ScanDialogComponent implements OnInit {
       click: () => {
         this.scannerService.processScans([
           new ProcessScan({
-            card_groups: this.selectGroups.value.split(',').map(Number),
+            card_groups: this.selectGroups.value
+              ? this.selectGroups.value.split(',').map(Number)
+              : undefined,
             scan_id: this.card.scan_id,
           }),
         ]);

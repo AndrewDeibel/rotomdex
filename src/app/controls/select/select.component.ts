@@ -34,14 +34,16 @@ export class SelectComponent implements ControlValueAccessor {
   }
   set value(value) {
     this.select.value = value;
-    this.select.options.forEach((option) => {
-      option.selected = option.value === value;
-    });
-    this.select.optionGroups.forEach((group) => {
-      group.options.forEach((option) => {
+    if (value.length) {
+      this.select.options.forEach((option) => {
         option.selected = option.value === value;
       });
-    });
+      this.select.optionGroups.forEach((group) => {
+        group.options.forEach((option) => {
+          option.selected = option.value === value;
+        });
+      });
+    }
     if (this.select.change) this.select.change(this.select.value);
     this.onChange(value);
     this.onTouched();
@@ -86,7 +88,7 @@ export class SelectComponent implements ControlValueAccessor {
   }
 
   selectOption(option: SelectOption) {
-    option.selected = true;
+    //option.selected = true;
     if (this.select.multiple) {
       let values = this.value ? this.value.split(',') : [];
       if (!values.includes(option.value)) {
@@ -99,11 +101,13 @@ export class SelectComponent implements ControlValueAccessor {
   }
 
   unselectOption(option: SelectOption) {
-    option.selected = false;
+    //option.selected = false;
     let values = this.value ? this.value.split(',') : [];
-    if (values.includes(option.value)) {
+    if (values.length && values.includes(option.value)) {
       values = values.filter((value) => value !== option.value);
       this.value = values.join(',');
+    } else {
+      this.value = this.value;
     }
   }
 }

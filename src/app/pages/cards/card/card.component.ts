@@ -70,6 +70,7 @@ export class CardComponent implements OnInit {
     this.relatedCards.itemClasses = 'width-2 medium-3 small-6';
     this.relatedCards.showFilters = false;
     this.relatedCards.showFooter = false;
+    this.relatedCards.initialLoad = false;
     SetSortByGlobal(this.relatedCards.filter);
 
     // Expansion cards
@@ -78,6 +79,7 @@ export class CardComponent implements OnInit {
     this.expansionCards.itemClasses = 'width-2 medium-3 small-6';
     this.expansionCards.showFilters = false;
     this.expansionCards.showFooter = false;
+    this.expansionCards.initialLoad = false;
   }
 
   getTypeImage(type: string) {
@@ -201,6 +203,11 @@ export class CardComponent implements OnInit {
           this.buttonTCGPlayer.price = this.card.last_prices[0].market_price;
           //this.buttonEbay.price = this.card.last_prices[0].market_price;
         }
+
+        // Related cards
+        this.getRelatedCards();
+        // Expansion cards
+        this.getExpansionCards();
       }
     });
 

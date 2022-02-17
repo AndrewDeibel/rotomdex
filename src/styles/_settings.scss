@@ -28,10 +28,10 @@ $secondary-color: rgba(white, 0.2);
 
 // Section colors
 // ========================================
-$header-bg: linear-gradient($red, darken($red, 10%));
 $header-color: white;
 $menu-bg: rgba(24, 24, 24);
 $main-bg: rgba(32, 32, 32);
+$header-bg: lighten($menu-bg, 5%);
 $footer-bg: $menu-bg;
 $panel-bg: rgba(64, 64, 64);
 $input-bg: rgba(white, 0.05);

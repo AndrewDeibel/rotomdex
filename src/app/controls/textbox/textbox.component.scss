@@ -51,6 +51,11 @@
       -moz-appearance: textfield;
     }
   }
+  &.fullWidth,
+  .textbox-inner,
+  .textbox {
+    width: 100%;
+  }
 }
 .textbox-inner {
   flex: 1;

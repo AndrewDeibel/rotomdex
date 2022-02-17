@@ -2,7 +2,7 @@
   *ngIf="textbox"
   class="textbox-wrapper {{ textbox.wrapperClasses }} {{ textbox.size }} {{
     textbox.showPlusMinus ? 'showPlusMinus' : ''
-  }}"
+  }} {{ textbox.fullWidth ? 'fullWidth' : '' }}"
   [class.dark]="textbox.dark"
 >
   <label *ngIf="textbox.label" class="label">

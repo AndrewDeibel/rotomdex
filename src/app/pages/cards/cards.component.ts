@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AppSettings } from '@app/app';
 import '@app/helpers/string.extensions';
 import { ItemGroup, Items } from '@app/layout/main';
@@ -25,14 +25,24 @@ export class CardsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private titleService: Title,
-    private cardsService: CardsService
+    private cardsService: CardsService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.setupControls();
+
+    // Handle clicking back from page 2 w/ query params
+    // this.router.events.subscribe((event: any) => {
+    //   if (event instanceof NavigationEnd) {
+    //     if (window.location.toString().endsWith('/cards')) {
+    //       this.getCards();
+    //     }
+    //   }
+    // });
   }
 
-  _getCards() {
+  outputGetCards() {
     this.route.params.subscribe((params) => {
       this.type = params['type']?.replace('-', ' ');
       this.artist = params['artist']?.replace('-', ' ');
