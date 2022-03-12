@@ -1,7 +1,15 @@
+import { LoaderService } from './../../../controls/loader/loader.service';
+import { NotificationsService } from './../../../controls/notifications/notifications.service';
 import { Router } from '@angular/router';
 import { FavoritesService } from './../favorites/favorites.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { Button, Checkbox, Empty } from '@app/controls';
+import {
+  AlertType,
+  Button,
+  Checkbox,
+  Empty,
+  Notification,
+} from '@app/controls';
 import { APIGetPaged, Icons, Size } from '@app/models';
 import {
   AuthenticationService,
@@ -40,7 +48,9 @@ export class CardUserCardsComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private wishlistService: WishlistService,
     private favoritesService: FavoritesService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationsService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnChange() {
@@ -130,22 +140,6 @@ export class CardUserCardsComponent implements OnInit {
   }
 
   setupSubscriptions() {
-    // Card added
-    this.userCardsService.addUserCardsObservable().subscribe((addedCards) => {
-      if (addedCards) {
-        this.userCards.push(...addedCards);
-      }
-    });
-
-    // Card removed
-    this.userCardsService.removeUserCardObservable().subscribe((userCard) => {
-      if (userCard) {
-        this.userCards = this.userCards.filter(
-          (_userCard) => _userCard.id !== userCard.id
-        );
-      }
-    });
-
     // Card update
     this.userCardsService.updateUserCardObservable().subscribe((userCard) => {
       if (userCard)
@@ -168,11 +162,40 @@ export class CardUserCardsComponent implements OnInit {
       card_id: this.card_id,
     })
   ) {
-    this.userCardsService.addUserCards(userCard);
+    this.userCardsService.addUserCards(userCard)?.subscribe((res) => {
+      if (res) {
+        this.loaderService.clearItemLoading('addUserCard');
+        if (res.success) {
+          this.notificationService.addNotifications([
+            new Notification({
+              message: 'Card added to collection',
+              alertType: AlertType.success,
+            }),
+          ]);
+          if (this.card_id === res.data[0].card.id) {
+            this.userCards.push(new UserCard(res.data));
+          }
+        }
+      }
+    });
   }
 
   deleteItem(userCard: UserCard) {
-    this.userCardsService.removeUserCard(userCard);
+    this.userCardsService.removeUserCard(userCard).subscribe((res) => {
+      if (res.success) {
+        this.notificationService.addNotifications([
+          new Notification({
+            message: 'Card removed from collection',
+            alertType: AlertType.success,
+          }),
+        ]);
+        if (userCard) {
+          this.userCards = this.userCards.filter(
+            (_userCard) => _userCard.id !== userCard.id
+          );
+        }
+      }
+    });
   }
 
   updateItem(userCard: UserCard) {

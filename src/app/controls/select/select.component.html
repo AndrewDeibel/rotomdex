@@ -12,14 +12,22 @@
     (change)="change($event)"
     class="{{ select.classes ? select.classes : '' }}"
   >
-    <option *ngFor="let option of select.options" [value]="option.value">
+    <option
+      *ngFor="let option of select.options"
+      [value]="option.value"
+      [selected]="option.selected"
+    >
       {{ option.text }}
     </option>
     <optgroup
       *ngFor="let optionGroup of select.optionGroups"
       [label]="optionGroup.label"
     >
-      <option *ngFor="let option of optionGroup.options" [value]="option.value">
+      <option
+        *ngFor="let option of optionGroup.options"
+        [value]="option.value"
+        [selected]="option.selected"
+      >
         {{ option.text }}
       </option>
     </optgroup>

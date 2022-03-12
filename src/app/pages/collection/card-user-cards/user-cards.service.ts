@@ -84,10 +84,6 @@ export class UserCardsService {
   }
 
   // Add user card
-  private addUserCardsSubject = new BehaviorSubject<UserCard[] | null>(null);
-  addUserCardsObservable() {
-    return this.addUserCardsSubject.asObservable();
-  }
   addUserCards(userCard: UserCard) {
     if (userCard.quantity > 10) {
       this.notificationService.addNotifications([
@@ -97,47 +93,19 @@ export class UserCardsService {
         }),
       ]);
     } else {
-      this.loaderService.addItemLoading('addUserCard');
-      this.http
-        .post<APIResponse>(buildUrl('user-cards/create'), userCard)
-        .subscribe((res) => {
-          if (res.success) {
-            this.addUserCardsSubject.next(
-              res.data.map((userCard: any) => new UserCard(userCard))
-            );
-            this.notificationService.addNotifications([
-              new Notification({
-                message: 'Card added to collection',
-                alertType: AlertType.success,
-              }),
-            ]);
-          }
-          this.loaderService.clearItemLoading('addUserCard');
-        });
+      return this.http.post<APIResponse>(
+        buildUrl('user-cards/create'),
+        userCard
+      );
     }
+    return;
   }
 
   // Remove user card
-  private removeUserCardSubject = new BehaviorSubject<UserCard | null>(null);
-  removeUserCardObservable() {
-    return this.removeUserCardSubject.asObservable();
-  }
   removeUserCard(userCard: UserCard) {
-    this.http
-      .post<APIResponse>(buildUrl('user-cards/delete'), {
-        user_card_id: userCard.id,
-      })
-      .subscribe((res) => {
-        if (res.success) {
-          this.removeUserCardSubject.next(userCard);
-          this.notificationService.addNotifications([
-            new Notification({
-              message: 'Card removed from collection',
-              alertType: AlertType.success,
-            }),
-          ]);
-        }
-      });
+    return this.http.post<APIResponse>(buildUrl('user-cards/delete'), {
+      user_card_id: userCard.id,
+    });
   }
 
   // Update user card

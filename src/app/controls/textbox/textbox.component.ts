@@ -73,7 +73,7 @@ export class TextboxComponent implements ControlValueAccessor, OnInit {
           e.preventDefault();
           e.stopPropagation();
           const newValue = Number(this.value) - 1;
-          if (!this.textbox.min || newValue >= this.textbox.min) {
+          if (this.textbox.min === undefined || newValue >= this.textbox.min) {
             this.value = newValue.toString();
             this.textbox.blur(this.value);
           } else {

@@ -50,7 +50,6 @@ export class CardUserCardComponent implements OnInit {
     // Condition
     this.selectCondition = new Select({
       label: 'Condition',
-      value: this.item.condition,
       classes: 'square-right',
       optionGroups: [
         new SelectOptionGroup({
@@ -91,11 +90,11 @@ export class CardUserCardComponent implements OnInit {
         })
       );
     }
+    this.selectCondition.value = this.item.condition;
 
     // Grading company
     this.selectGradingCompany = new Select({
       label: 'Graded By',
-      value: this.item.graded_by,
       classes: 'square',
       optionGroups: [
         new SelectOptionGroup({
@@ -116,14 +115,16 @@ export class CardUserCardComponent implements OnInit {
         new SelectOption({
           text: (GradingCompany as any)[gradingCompany],
           value: (GradingCompany as any)[gradingCompany],
+          selected:
+            (GradingCompany as any)[gradingCompany] === this.item.graded_by,
         })
       );
     }
+    this.selectGradingCompany.value = this.item.graded_by;
 
     // Printing
     this.selectPrinting = new Select({
       label: 'Printing',
-      value: this.item.printing,
       classes: 'square',
       optionGroups: [
         new SelectOptionGroup({
@@ -144,21 +145,15 @@ export class CardUserCardComponent implements OnInit {
         new SelectOption({
           text: (Printings as any)[printVersion],
           value: (Printings as any)[printVersion],
+          selected: (Printings as any)[printVersion] === this.item.printing,
         })
       );
     }
-
+    this.selectPrinting.value = this.item.printing;
     // Group
     this.selectGroup = new Select({
       label: 'Group',
       placeholder: 'Select groups...',
-      value: this.item.card_groups
-        ? this.item.card_groups[0] instanceof Object
-          ? this.item.card_groups
-              .map((userCardGroup) => (userCardGroup as UserCard).id)
-              .join(',')
-          : this.item.card_groups.join(',')
-        : '',
       classes: 'square small-round-right',
       multiple: true,
       advancedSelect: true,
@@ -192,6 +187,13 @@ export class CardUserCardComponent implements OnInit {
         );
       },
     });
+    this.selectGroup.value = this.item.card_groups
+      ? this.item.card_groups[0] instanceof Object
+        ? this.item.card_groups
+            .map((userCardGroup) => (userCardGroup as UserCard).id)
+            .join(',')
+        : this.item.card_groups.join(',')
+      : '';
 
     // Notes
     this.buttonNotes = new Button({
