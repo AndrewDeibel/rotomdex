@@ -2,6 +2,14 @@ import { ItemsFilter } from '@app/layout/main';
 import { SelectOption, SelectOptionGroup } from '@app/controls';
 import { Card } from '@app/pages';
 
+export class ScanResult {
+  id: number;
+  image: string;
+  constructor(init?: Partial<ScanResult>) {
+    Object.assign(this, init);
+  }
+}
+
 export class ScanCard {
   id: number;
   scan_id: number;

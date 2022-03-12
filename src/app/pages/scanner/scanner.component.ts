@@ -16,6 +16,7 @@ import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { Observable, Subject } from 'rxjs';
 import { ScanCard } from '.';
 import { User } from '..';
+import { ScanResult } from './scan-card';
 
 @AutoUnsubscribe()
 @Component({
@@ -44,7 +45,7 @@ export class ScannerComponent implements OnInit {
 
   // Options
   totalScans: number;
-  recentScans: ScanCard[] = [];
+  recentScans: ScanResult[] = [];
   soundEffect: HTMLAudioElement;
   alertInstructions: Alert;
   showAlert: boolean;

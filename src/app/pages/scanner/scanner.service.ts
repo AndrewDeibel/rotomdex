@@ -12,7 +12,7 @@ import { ScanCard } from '@app/pages';
 import { BehaviorSubject } from 'rxjs';
 import { LoaderService } from './../../controls/loader/loader.service';
 import { APIGetPaged } from './../../models/api';
-import { ProcessScan } from './scan-card';
+import { ProcessScan, ScanResult } from './scan-card';
 
 export interface ResScans {
   total_value?: number;
@@ -46,8 +46,8 @@ export class ScannerService {
         this.loaderService.clearItemLoading('scan');
         if (res.success) {
           this.addScan(
-            new ScanCard({
-              ...res.data.results,
+            new ScanResult({
+              ...res.data.results.card,
               tempId: this.getTempId(),
             })
           );
@@ -64,14 +64,14 @@ export class ScannerService {
   }
 
   // Recent scans (locally cache)
-  private recentScansSubject = new BehaviorSubject<ScanCard[]>([]);
+  private recentScansSubject = new BehaviorSubject<ScanResult[]>([]);
   recentScansObservable() {
     return this.recentScansSubject.asObservable();
   }
-  set recentScans(scans: ScanCard[]) {
+  set recentScans(scans: ScanResult[]) {
     this.recentScansSubject.next(scans.slice(Math.max(scans.length - 12, 0)));
   }
-  addScan(scan: ScanCard) {
+  addScan(scan: ScanResult) {
     this.recentScans = [scan, ...this.recentScansSubject.value];
   }
 
@@ -91,7 +91,13 @@ export class ScannerService {
           total_pages: res.meta.last_page,
           total_results: res.meta.total,
         });
-        this.recentScans = scans;
+        this.recentScans = scans.map(
+          (scanCard: ScanCard) =>
+            new ScanResult({
+              id: scanCard.id,
+              image: scanCard.user_correction?.image || scanCard.result.image,
+            })
+        );
         this.loaderService.clearItemLoading('getScans');
       });
   }

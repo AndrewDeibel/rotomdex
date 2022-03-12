@@ -32,11 +32,7 @@
       >
         <img
           class="scanner-result-image"
-          [src]="
-            scan.user_correction
-              ? scan.user_correction.image
-              : scan.result.image
-          "
+          [src]="scan.image"
           onerror="this.src='./assets/placeholder.png';"
         />
       </div>
