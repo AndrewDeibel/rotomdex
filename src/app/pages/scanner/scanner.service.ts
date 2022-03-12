@@ -42,6 +42,9 @@ export class ScannerService {
   totalScansObservable() {
     return this.totalScansSubject.asObservable();
   }
+  get totalScans() {
+    return this.totalScansSubject.value;
+  }
   set totalScans(total: number) {
     this.totalScansSubject.next(total);
   }
