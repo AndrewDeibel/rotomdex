@@ -2,7 +2,7 @@ import { Icons } from '@app/models/icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { AlertType } from '../alert/alert';
 
-export const defaultDuration = 3500;
+export const defaultDuration = 3000;
 
 export class Notification {
   id: number;

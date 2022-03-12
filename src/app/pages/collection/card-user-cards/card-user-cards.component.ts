@@ -173,7 +173,9 @@ export class CardUserCardsComponent implements OnInit {
             }),
           ]);
           if (this.card_id === res.data[0].card.id) {
-            this.userCards.push(new UserCard(res.data));
+            res.data.forEach((userCard: any) => {
+              this.userCards.push(new UserCard(userCard));
+            });
           }
         }
       }
