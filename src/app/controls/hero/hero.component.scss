@@ -3,6 +3,7 @@
 .hero {
   height: 80vh;
   max-height: 650px;
+  min-height: 500px;
   padding-top: $header-height;
   color: white;
   position: relative;
@@ -62,5 +63,16 @@
     background: linear-gradient(transparent 0%, $main-bg 100%);
     z-index: 2;
     pointer-events: none;
+  }
+}
+search {
+  &::ng-deep {
+    .textbox {
+      background: rgba(white, 0.2);
+      color: white;
+      &::placeholder {
+        color: rgba(white, 0.5);
+      }
+    }
   }
 }

@@ -28,7 +28,9 @@
     width: 86px;
     ::ng-deep {
       .textbox {
-        width: 30px;
+        width: 48px;
+        text-align: center;
+        padding: 0;
       }
     }
   }

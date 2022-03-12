@@ -57,7 +57,7 @@
     filter: drop-shadow($shadow);
     position: relative;
     z-index: 2;
-    padding: $spacing * 4;
+    padding: $spacing * 6;
     width: 400px;
     &.noEvolutionChain {
       margin-top: -$spacing * 2;

@@ -104,10 +104,10 @@ const routes: Routes = [
         path: 'group/:id',
         component: UserCardGroupComponent,
       },
-      {
-        path: 'import',
-        component: ImportCardsComponent,
-      },
+      // {
+      //   path: 'import',
+      //   component: ImportCardsComponent,
+      // },
     ],
   },
 

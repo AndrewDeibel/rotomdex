@@ -69,7 +69,7 @@ export class ScannerService {
     return this.recentScansSubject.asObservable();
   }
   set recentScans(scans: ScanResult[]) {
-    this.recentScansSubject.next(scans.slice(Math.max(scans.length - 12, 0)));
+    this.recentScansSubject.next(scans);
   }
   addScan(scan: ScanResult) {
     this.recentScans = [scan, ...this.recentScansSubject.value];

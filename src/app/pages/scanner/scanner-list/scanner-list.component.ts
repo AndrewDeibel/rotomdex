@@ -64,6 +64,12 @@ export class ScannerListComponent implements OnInit {
         menu: new Menu({
           items: [
             new MenuItem({
+              text: 'Add Scans',
+              icon: Icons.scanner,
+              route: '/scanner',
+              exactMatch: true,
+            }),
+            new MenuItem({
               menu: new Menu({
                 classes: 'anchor-right',
                 items: [

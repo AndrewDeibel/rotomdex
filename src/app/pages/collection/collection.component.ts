@@ -77,12 +77,12 @@ export class CollectionComponent implements OnInit {
           route: '/collection/dashboard',
           exactMatch: true,
         }),
-        new MenuItem({
-          text: 'Import',
-          icon: Icons.fileImport,
-          route: '/collection/import',
-          exactMatch: true,
-        }),
+        // new MenuItem({
+        //   text: 'Import',
+        //   icon: Icons.fileImport,
+        //   route: '/collection/import',
+        //   exactMatch: true,
+        // }),
         new MenuItem({
           text: 'Wishlist',
           icon: Icons.clipboardCheck,

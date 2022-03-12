@@ -121,14 +121,15 @@
     display: flex;
     align-items: center;
     border-radius: 999px;
+    margin-right: $spacing;
     img {
-      margin-right: $spacing;
       border-radius: 50%;
       width: 40px;
       height: 40px;
       max-width: none;
     }
     span {
+      margin-left: $spacing;
       display: none;
       font-size: 24px;
       text-transform: uppercase;
