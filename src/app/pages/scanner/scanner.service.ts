@@ -46,7 +46,7 @@ export class ScannerService {
     this.totalScansSubject.next(total);
   }
   addTotalScan() {
-    this.totalScans = this.totalScans++;
+    this.totalScans = this.totalScans + 1;
   }
 
   // Scan single card
