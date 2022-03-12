@@ -48,7 +48,6 @@ export class ScannerService {
           this.addScan(
             new ScanResult({
               ...res.data.results.card,
-              tempId: this.getTempId(),
             })
           );
         } else {
