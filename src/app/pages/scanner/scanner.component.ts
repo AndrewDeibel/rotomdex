@@ -9,12 +9,10 @@ import {
 } from '@app/controls';
 import { APIGetPaged, Icons } from '@app/models';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
-import { Card } from '@app/pages/cards/card';
 import { ScannerService } from '@app/pages/scanner/scanner.service';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { Observable, Subject } from 'rxjs';
-import { ScanCard } from '.';
 import { User } from '..';
 import { ScanResult } from './scan-card';
 
