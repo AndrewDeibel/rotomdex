@@ -114,6 +114,7 @@ export class ScannerService {
             })
         );
         this.loaderService.clearItemLoading('getScans');
+        this.totalScans = res.meta.total;
       });
   }
 

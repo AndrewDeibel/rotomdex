@@ -98,13 +98,6 @@ export class ScannerComponent implements OnInit {
   }
 
   setupSubscriptions() {
-    // Receive scans
-    this.scannerService.getScansObservable().subscribe((res) => {
-      if (res && res.scans) {
-        this.totalScans = res?.total_results;
-      }
-    });
-
     // Total scans
     this.scannerService.totalScansObservable().subscribe((totalScans) => {
       this.totalScans = totalScans;
