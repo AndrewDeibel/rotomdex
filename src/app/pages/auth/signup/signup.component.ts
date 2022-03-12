@@ -44,29 +44,34 @@ export class SignUpComponent implements OnInit {
       label: 'Beta Code',
       classes: 'width-12',
       wrapperClasses: 'width-12',
+      autoComplete: false,
     });
     this.textboxEmail = new Textbox({
       label: 'Email',
       type: 'email',
       classes: 'width-12',
       wrapperClasses: 'width-12',
+      autoComplete: false,
     });
     this.textboxUsername = new Textbox({
       label: 'Username',
       classes: 'width-12',
       wrapperClasses: 'width-12',
+      autoComplete: false,
     });
     this.textboxPassword = new Textbox({
       label: 'Password',
       classes: 'width-12',
       wrapperClasses: 'width-12',
       type: 'password',
+      autoComplete: false,
     });
     this.textboxConfirmPassword = new Textbox({
       label: 'Confirm Password',
       type: 'password',
       classes: 'width-12',
       wrapperClasses: 'width-12',
+      autoComplete: false,
     });
     this.buttonSubmit = new Button({
       text: 'Sign Up',

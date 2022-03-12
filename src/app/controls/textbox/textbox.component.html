@@ -32,7 +32,7 @@
       [attr.readOnly]="textbox.readOnly"
       [attr.min]="textbox.min"
       [attr.max]="textbox.max"
-      [attr.autocomplete]="textbox.autoComplete"
+      [attr.autocomplete]="textbox.autoComplete ? 'on' : 'off'"
       [attr.disabled]="textbox.disabled"
       [attr.placeholder]="textbox.placeholder"
       [attr.type]="textbox.type"
