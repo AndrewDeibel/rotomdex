@@ -37,6 +37,18 @@ export class ScannerService {
     return this.tempId++;
   }
 
+  // Total scans
+  private totalScansSubject = new BehaviorSubject<number>(0);
+  totalScansObservable() {
+    return this.totalScansSubject.asObservable();
+  }
+  set totalScans(total: number) {
+    this.totalScansSubject.next(total);
+  }
+  addTotalScan() {
+    this.totalScans = this.totalScans++;
+  }
+
   // Scan single card
   scan(image: string) {
     this.loaderService.addItemLoading('scan');
@@ -71,6 +83,7 @@ export class ScannerService {
     this.recentScansSubject.next(scans);
   }
   addScan(scan: ScanResult) {
+    this.addTotalScan();
     this.recentScans = [scan, ...this.recentScansSubject.value];
   }
 
