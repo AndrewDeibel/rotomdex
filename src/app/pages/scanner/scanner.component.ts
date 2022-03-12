@@ -107,7 +107,7 @@ export class ScannerComponent implements OnInit {
 
     // Receive recent scans
     this.scannerService.recentScansObservable().subscribe((scans) => {
-      this.recentScans = scans.slice(Math.max(scans.length - 12, 0));
+      this.recentScans = scans.slice(0, 12);
       if (this.recentScans.length > this.totalScans)
         this.totalScans = this.recentScans.length;
     });
