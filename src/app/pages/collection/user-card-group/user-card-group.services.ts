@@ -7,6 +7,7 @@ import {
   NotificationsService,
 } from '@app/controls';
 import { APIGetPaged, APIResponse, buildUrl } from '@app/models';
+import { AuthenticationService } from '@app/pages/auth';
 import { UserCardGroup } from '@app/pages/collection';
 import { BehaviorSubject } from 'rxjs';
 
@@ -21,7 +22,8 @@ export class UserCardGroupService {
   constructor(
     private http: HttpClient,
     private notificationService: NotificationsService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private authenticationService: AuthenticationService
   ) {}
 
   // Get user card groups
@@ -32,6 +34,9 @@ export class UserCardGroupService {
   }
   getUserCardGroups(params: APIGetPaged) {
     this.loaderService.addItemLoading('getUserCardGroups');
+    if (!params.user_id && this.authenticationService.currentUserValue) {
+      params.user_id = this.authenticationService.currentUserValue?.id;
+    }
     this.http
       .get<APIResponse>(params.buildUrl('card-groups'))
       .subscribe((res) => {
