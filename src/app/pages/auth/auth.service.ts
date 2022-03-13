@@ -71,7 +71,8 @@ export class AuthenticationService {
     localStorage.removeItem('currentUser');
     if (this.currentUserSubject) {
       this.currentUserSubject?.next(null);
-      this.router.navigateByUrl('/');
+      //this.router.navigateByUrl('/');
+      document.location = '/';
     }
   }
 
