@@ -44,14 +44,14 @@ export function SetSortByScans(itemFilter: ItemsFilter) {
     options: [
       new SelectOption({
         text: 'Date Added',
-        value: 'created_at',
+        value: 'card_scans.created_at',
       }),
       new SelectOption({
         text: 'Name',
-        value: 'name',
+        value: 'cards.name',
       }),
     ],
   });
-  itemFilter.selectSortBy.value = 'created_at';
+  itemFilter.selectSortBy.value = 'card_scans.created_at';
   itemFilter.selectSortDirection.value = 'desc';
 }
