@@ -51,6 +51,12 @@ export class CardUserCardComponent implements OnInit {
     this.selectCondition = new Select({
       label: 'Condition',
       classes: 'square-right',
+      options: [
+        new SelectOption({
+          value: '',
+          text: '-',
+        }),
+      ],
       optionGroups: [
         new SelectOptionGroup({
           label: 'Condition',
@@ -99,6 +105,12 @@ export class CardUserCardComponent implements OnInit {
       optionGroups: [
         new SelectOptionGroup({
           label: 'Graded By',
+          options: [
+            new SelectOption({
+              value: '',
+              text: '-',
+            }),
+          ],
         }),
       ],
       change: (value) => {
@@ -129,6 +141,12 @@ export class CardUserCardComponent implements OnInit {
       optionGroups: [
         new SelectOptionGroup({
           label: 'Printing',
+          options: [
+            new SelectOption({
+              value: '',
+              text: '-',
+            }),
+          ],
         }),
       ],
       change: (value) => {

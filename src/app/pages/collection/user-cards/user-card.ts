@@ -9,7 +9,7 @@ export class UserCard {
   user_card_id: number;
   card_id: number;
   card_groups: number[] | UserCard[] = [];
-  condition: string = Condition.Mint;
+  condition: string;
   graded_by: string;
   printing: string;
   notes: string;
