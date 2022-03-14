@@ -13,7 +13,7 @@ import { ProcessScan } from '..';
   selector: 'scan-dialog',
   template: `<div
     class="flex vertical padded"
-    style="width: 340px; max-width: 100%;"
+    style="min-width: 340px; max-width: 100%;"
     *ngIf="this.card"
   >
     <div class="flex justify-center">

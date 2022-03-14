@@ -19,18 +19,18 @@
   }
   &.warning {
     color: $font-color;
-    background: rgba($warning, 0.2) !important;
+    background: mix($warning, $main-bg, 20%) !important;
   }
   &.error {
     color: $font-color;
-    background: rgba($error, 0.2) !important;
+    background: mix($error, $main-bg, 20%) !important;
   }
   &.success {
     color: $font-color;
-    background: rgba($success, 0.2) !important;
+    background: mix($success, $main-bg, 20%) !important;
   }
   &.info {
     color: $font-color;
-    background: rgba($info, 0.2) !important;
+    background: mix($info, $main-bg, 20%) !important;
   }
 }

@@ -54,7 +54,7 @@ export class ScannerListComponent implements OnInit {
     // Initialize cards
     this.items = new Items({
       buttonNoResults: new Button({
-        text: 'Scan Cards',
+        text: 'Add Scans',
         icon: Icons.scanner,
         route: '/scanner',
       }),
@@ -111,6 +111,8 @@ export class ScannerListComponent implements OnInit {
           ],
         }),
       }),
+      noResults: 'No scans',
+      noResultsIcon: Icons.scanner,
     });
     this.items.filter.textboxSearch.placeholder = 'Search scans...';
     SetSortByScans(this.items.filter);

@@ -14,7 +14,7 @@ import { APIGetPaged } from '@app/models';
     <div><alert [alert]="alert"></alert></div>
     <div><textbox [textbox]="textboxSearch"></textbox></div>
     <div>
-      <div style="max-height: calc(100vh - 320px); overflow-y: auto;">
+      <div style="max-height: calc(100vh - 220px); overflow-y: auto;">
         <div class="flex padded">
           <div class="width-3 medium-4 small-6" *ngFor="let card of results">
             <card-item-grid
@@ -55,6 +55,7 @@ export class CustomResultDialogComponent implements OnInit {
       placeholder: 'Search cards...',
       fullWidth: true,
       icon: Icons.search,
+      type: 'search',
       keydownEnter: (value) => {
         this.searchCards(value);
       },
