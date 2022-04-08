@@ -1,0 +1,8 @@
+@import "settings";
+
+::ng-deep {
+  .card-detail {
+    border-bottom-left-radius: $border-radius-small;
+    border-bottom-right-radius: $border-radius-small;
+  }
+}

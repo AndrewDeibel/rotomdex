@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { AppSettings } from '@app/app';
-import { Button, DialogConfig, DialogService, Tag } from '@app/controls';
+import { Button, Tag } from '@app/controls';
 import '@app/helpers/string.extensions';
 import { ItemGroup, Items } from '@app/layout/main';
 import { APIGetPaged } from '@app/models';
@@ -14,7 +14,6 @@ import { PokemonService } from '@app/pages/pokemons';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { CardsService, SetSortByGlobal } from '..';
 import { Card } from './card';
-import { CardImageDialogComponent } from './card-image-dialog.component';
 import { CardService } from './card.service';
 
 @AutoUnsubscribe()
@@ -28,15 +27,6 @@ export class CardComponent implements OnInit {
   userCards: UserCard[] = [];
   relatedCards: Items = new Items();
   expansionCards: Items = new Items();
-  cardImageHover: boolean = false;
-  tagRarity: Tag;
-  tagArtist: Tag;
-  tagNumber: Tag;
-  tagShiny: Tag;
-  buttonTCGPlayer: Button;
-  buttonEbay: Button;
-  buttonAdmin: Button;
-  hasAdminAccess: boolean;
   gfx: boolean;
 
   constructor(
@@ -45,7 +35,6 @@ export class CardComponent implements OnInit {
     private cardsService: CardsService,
     private route: ActivatedRoute,
     private expansionService: ExpansionService,
-    private dialogService: DialogService,
     private pokemonService: PokemonService,
     private userCardsService: UserCardsService,
     private authenticationService: AuthenticationService
@@ -82,25 +71,6 @@ export class CardComponent implements OnInit {
     this.expansionCards.initialLoad = false;
   }
 
-  getTypeImage(type: string) {
-    return `/assets/symbols/${type.toLowerCase()}.svg`;
-  }
-
-  createDialogCardImage() {
-    if (this.card) {
-      this.dialogService.open(
-        CardImageDialogComponent,
-        new DialogConfig({
-          title: `${this.card.name} - ${this.card.expansion.name}`,
-          data: {
-            image: this.card.image_high_res,
-            gfx: this.card.gfx,
-          },
-        })
-      );
-    }
-  }
-
   setupSubscriptions() {
     // Response get card
     this.cardService.getCardObservable().subscribe((card) => {
@@ -126,83 +96,11 @@ export class CardComponent implements OnInit {
           this.relatedCards.header.title = `${this.card.super_type} Cards`;
         }
 
-        // Admin button
-        this.hasAdminAccess =
-          this.authenticationService.currentUserValue?.hasNovaAccess || false;
-        if (this.hasAdminAccess) {
-          this.buttonAdmin = new Button({
-            icon: Icons.signIn,
-            text: 'Edit in Admin',
-            classes: 'small width-12',
-            align: 'left',
-            target: '_blank',
-            href: this.card.nova_edit_url,
-          });
-        }
-
-        // Rarity
-        if (this.card.expansion.name.toLowerCase().includes('promo')) {
-          this.tagRarity = new Tag({
-            text: 'Promo',
-            classes: 'promo card-rarity',
-          });
-        } else if (this.card.rarity) {
-          this.tagRarity = new Tag({
-            text: this.card.rarity.name,
-            classes: 'card-rarity ' + this.card.rarity.slug,
-          });
-        }
-
-        // Artist
-        if (this.card.artist)
-          this.tagArtist = new Tag({
-            classes: 'artist-tag',
-            text: this.card.artist,
-            icon: Icons.paintBrush,
-          });
-
-        // Card number
-        this.tagNumber = new Tag({
-          text: this.card.number,
-        });
-
-        // Shiny
-        if (this.card.is_shiny)
-          this.tagShiny = new Tag({
-            classes: 'shiny-tag',
-            text: 'Shiny',
-            icon: Icons.stars,
-          });
-
-        // Buttons
-        if (this.card.tcgplayer_url)
-          this.buttonTCGPlayer = new Button({
-            icon: Icons.externalLink,
-            text: 'TCGPlayer',
-            classes: 'small width-12',
-            align: 'left',
-            href: this.card.tcgplayer_url,
-            target: '_blank',
-          });
-        if (this.card.ebay_url)
-          this.buttonEbay = new Button({
-            icon: Icons.externalLink,
-            text: 'eBay',
-            classes: 'small width-12',
-            align: 'left',
-          });
-
         // Expansion name
         this.expansionCards.header.title = `${this.card.expansion.name} Cards`;
         this.expansionCards.noResults =
           'No ' + this.card.expansion.name + ' cards found';
         this.expansionCards.header.titleRoute = this.card.expansion.route;
-
-        // Prices
-        if (this.card.last_prices && this.card.last_prices.length) {
-          this.buttonTCGPlayer.price = this.card.last_prices[0].market_price;
-          //this.buttonEbay.price = this.card.last_prices[0].market_price;
-        }
 
         // Related cards
         this.getRelatedCards();

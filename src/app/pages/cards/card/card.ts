@@ -126,6 +126,12 @@ export class Card {
         r === 'rare holo ex' ||
         r === 'rare holo gx';
     }
+
+    if (init?.other_results) {
+      this.other_results = init.other_results
+        .filter((result) => result)
+        .map((result) => new Card(result));
+    }
   }
 }
 

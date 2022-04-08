@@ -8,56 +8,34 @@ import { Component, OnInit } from '@angular/core';
 import { Button, Select, SelectOption } from '@app/controls';
 import { APIGetPaged, Icons } from '@app/models';
 import { ProcessScan } from '..';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'scan-dialog',
-  template: `<div
-    class="flex vertical padded"
-    style="min-width: 340px; max-width: 100%;"
-    *ngIf="this.card"
-  >
-    <div class="flex justify-center">
-      <div class="card-image {{ this.card.gfx ? 'gfx' : '' }}">
-        <img
-          src="{{ this.card.image }}"
-          class="image-card-image
-          border-radius-card shadow transition"
-          onerror="this.src='./assets/placeholder.png';"
-        />
+  template: `<div style="min-width: 340px; max-width: 100%;" *ngIf="this.card">
+    <div class="flex vertical padded">
+      <div>
+        <app-select [select]="selectResults"></app-select>
+        <card-details [card]="this.card"></card-details>
       </div>
-    </div>
-    <div>
-      <div class="box ellipsis">
-        <div class="card-number subheading">
-          {{ this.card.number }} -
-          {{ this.card.expansion.name }}
-        </div>
-        <div class="card-name ellipsis">
-          {{ this.card.name }}
-        </div>
+      <div></div>
+      <div>
+        <app-select [select]="selectGroups"></app-select>
       </div>
-    </div>
-    <div>
-      <hr />
-    </div>
-    <div>
-      <app-select [select]="selectResults"></app-select>
-    </div>
-    <div>
-      <app-select [select]="selectGroups"></app-select>
-    </div>
-    <div><hr /></div>
-    <div>
-      <div class="flex padded">
-        <div class="box">
-          <app-button [button]="buttonMoveToCollection"></app-button>
-        </div>
-        <div>
-          <app-button [button]="buttonRemove"></app-button>
+      <div><hr /></div>
+      <div>
+        <div class="flex padded">
+          <div class="box">
+            <app-button [button]="buttonMoveToCollection"></app-button>
+          </div>
+          <div>
+            <app-button [button]="buttonRemove"></app-button>
+          </div>
         </div>
       </div>
     </div>
   </div>`,
+  styleUrls: ['./scan-dialog.component.scss'],
 })
 export class ScanDialogComponent implements OnInit {
   selectResults: Select;
@@ -66,12 +44,14 @@ export class ScanDialogComponent implements OnInit {
   buttonRemove: Button;
   card: Card;
   customResultDialog: DialogRef;
+  previousValue: string;
   constructor(
     public config: DialogConfig,
     public dialog: DialogRef,
     private userCardGroupService: UserCardGroupService,
     private scannerService: ScannerService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private router: Router
   ) {
     this.card = this.config.data.card;
   }
@@ -89,12 +69,13 @@ export class ScanDialogComponent implements OnInit {
 
   setupControls() {
     // Select result
+    this.previousValue = this.card.id.toString();
     this.selectResults = new Select({
-      label: 'Possible Results',
+      classes: 'square-bottom',
       options: [
         // Current card
         new SelectOption({
-          text: `${this.card.name} - ${this.card.expansion.name}`,
+          text: `${this.card.name} - ${this.card.expansion.name} - ${this.card.number}`,
           value: this.card.id.toString(),
         }),
 
@@ -103,7 +84,7 @@ export class ScanDialogComponent implements OnInit {
           ? this.card.other_results.map(
               (otherCard: Card) =>
                 new SelectOption({
-                  text: `${otherCard.name} - ${otherCard.expansion.name}`,
+                  text: `${otherCard.name} - ${otherCard.expansion.name} - ${otherCard.number}`,
                   value: otherCard.id.toString(),
                 })
             )
@@ -124,13 +105,15 @@ export class ScanDialogComponent implements OnInit {
             })
           );
           this.customResultDialog.afterClosed.subscribe((res) => {
-            if (res.card) {
+            if (res && res.card) {
               this.scannerService.updateScan(
                 new ScanCard({
                   scan_id: this.card.scan_id,
                   user_correction_id: res.card.id,
                 })
               );
+            } else if (this.previousValue) {
+              this.selectResults.value = this.previousValue;
             }
           });
         } else {
@@ -146,6 +129,7 @@ export class ScanDialogComponent implements OnInit {
               })
             );
           }
+          this.previousValue = value;
         }
       },
     });
@@ -162,8 +146,8 @@ export class ScanDialogComponent implements OnInit {
 
     // Move to collection
     this.buttonMoveToCollection = new Button({
-      text: 'Move to Collection',
-      icon: Icons.arrowRight,
+      text: 'Add to Collection',
+      icon: Icons.plus,
       click: () => {
         this.scannerService.processScans([
           new ProcessScan({
@@ -179,7 +163,7 @@ export class ScanDialogComponent implements OnInit {
     // Remove
     this.buttonRemove = new Button({
       icon: Icons.trash,
-      text: 'Remove',
+      text: 'Remove Scan',
       classes: 'error',
       click: () => {
         this.scannerService.updateScan(
@@ -229,6 +213,13 @@ export class ScanDialogComponent implements OnInit {
           });
           this.setupControls();
         }
+      }
+    });
+
+    // Close when route changes
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.dialog.close();
       }
     });
   }

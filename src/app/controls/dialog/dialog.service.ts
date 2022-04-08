@@ -75,4 +75,11 @@ export class DialogService {
   public closeAll(): void {
     this.removeDialogComponentFromBody();
   }
+
+  public forceCloseAll(): void {
+    this.closeAll();
+    document.querySelectorAll('.dialog-overlay').forEach((el) => {
+      el.closest('ng-component')?.remove();
+    });
+  }
 }

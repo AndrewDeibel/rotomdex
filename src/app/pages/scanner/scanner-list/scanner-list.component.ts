@@ -195,6 +195,7 @@ export class ScannerListComponent implements OnInit {
     );
     this.dialog.afterClosed.subscribe((res) => {
       this.getScans();
+      this.dialogService.forceCloseAll();
     });
   }
 }
