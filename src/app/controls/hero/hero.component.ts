@@ -1,6 +1,8 @@
 import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'hero',
   templateUrl: 'hero.component.html',
@@ -20,4 +22,5 @@ export class HeroComponent implements OnInit {
           'Rotomdex is a Pokemon card management app. Sign up today, and start managing your collection!';
     });
   }
+  ngOnDestroy() {}
 }

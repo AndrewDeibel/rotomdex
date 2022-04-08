@@ -1,15 +1,16 @@
-import { NotificationsService } from './../../../../controls/notifications/notifications.service';
-import { LoaderService } from './../../../../controls/loader/loader.service';
-import { Tag } from './../../../../controls/tag/tag';
-import { UserCardsService } from '@app/pages/collection';
-// Angular
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AlertType, Notification, Textbox } from '@app/controls';
-import { UserCard } from '@app/pages';
-import { Card } from '../../card/card';
-import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
-import { Subscription } from 'rxjs';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  AlertType,
+  Notification,
+  Textbox,
+  Tag,
+  LoaderService,
+  NotificationsService,
+} from '@app/controls';
 import { Size } from '@app/models';
+import { UserCard, Card } from '@app/pages';
+import { UserCardsService } from '@app/pages/collection';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
 @AutoUnsubscribe()
 @Component({

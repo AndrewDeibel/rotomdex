@@ -9,7 +9,9 @@ import { APIGetPaged } from '@app/models';
 import { CardsComponent, SetSortByExpansionCards } from '@app/pages/cards';
 import { ExpansionService } from '@app/pages/expansions/expansion/expansion.service';
 import { SetPageSize, SetSortByExpansion } from './expansion';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'expansion',
   templateUrl: './expansion.component.html',
@@ -27,7 +29,6 @@ export class ExpansionComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnDestroy() {}
   ngOnInit() {
     this.subscribeExpansion();
     this.subscribeExpansionCards();
@@ -36,6 +37,7 @@ export class ExpansionComponent implements OnInit {
     SetSortByExpansion(this.items.filter);
     SetPageSize(this.items.footer);
   }
+  ngOnDestroy() {}
 
   subscribeExpansion() {
     this.expansionService.getExpansionObservable().subscribe((expansion) => {

@@ -11,7 +11,9 @@ import {
   AlertType,
   ButtonType,
 } from '@app/controls';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'change-password-dialog',
   template: `<form
@@ -48,6 +50,7 @@ export class ChangePasswordDialogComponent implements OnInit {
   textboxConfirmNewPassword: Textbox;
   buttonSubmit: Button;
   form: FormGroup;
+
   constructor(
     public config: DialogConfig,
     public dialog: DialogRef,
@@ -55,9 +58,12 @@ export class ChangePasswordDialogComponent implements OnInit {
     private notificationService: NotificationsService,
     private formBuilder: FormBuilder
   ) {}
+
   ngOnInit(): void {
     this.buildControls();
   }
+  ngOnDestroy() {}
+
   buildControls() {
     this.form = this.formBuilder.group({
       currentPasswordControl: ['', Validators.required],

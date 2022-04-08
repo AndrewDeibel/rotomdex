@@ -1,23 +1,27 @@
-import { AuthenticationService } from './../../auth/auth.service';
 import { ItemGroup, Items } from '@app/layout';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WishlistService } from '.';
 import { APIGetPaged } from '@app/models';
-import { ResCards } from '@app/pages';
+import { ResCards, AuthenticationService } from '@app/pages';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'wishlist',
   templateUrl: './wishlist.component.html',
 })
-export class WishlistComponent {
+export class WishlistComponent implements OnInit {
   items: Items = new Items();
   constructor(
     private wishlistService: WishlistService,
     private authenticationService: AuthenticationService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.setupSubscriptions();
     this.setupControls();
   }
+  ngOnDestroy() {}
 
   setupSubscriptions() {
     this.wishlistService

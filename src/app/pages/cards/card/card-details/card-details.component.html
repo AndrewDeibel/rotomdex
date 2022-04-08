@@ -35,7 +35,10 @@
             <div class="card-header">
               <div class="flex flex-center flex-nowrap padded">
                 <div class="card-name ellipsis box">
-                  <h2>{{ card.name }}</h2>
+                  <h2 *ngIf="!linkTitle">{{ card.name }}</h2>
+                  <h2 *ngIf="linkTitle">
+                    <a [href]="card.route">{{ card.name }}</a>
+                  </h2>
                 </div>
                 <div
                   class="flex padded flex-center flex-nowrap"

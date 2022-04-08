@@ -4,7 +4,9 @@ import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Textbox, Button, ButtonType } from '@app/controls';
 import { Component, OnInit } from '@angular/core';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'reset',
   templateUrl: './reset.component.html',
@@ -60,6 +62,7 @@ export class ResetComponent implements OnInit {
       type: ButtonType.submit,
     });
   }
+  ngOnDestroy() {}
 
   submit() {
     if (this.form.invalid) {

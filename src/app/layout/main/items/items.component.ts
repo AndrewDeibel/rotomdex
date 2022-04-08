@@ -8,7 +8,9 @@ import { Title } from '@angular/platform-browser';
 import { AppSettings } from '@app/app';
 import { Empty } from '@app/controls';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'items',
   templateUrl: 'items.component.html',
@@ -67,6 +69,7 @@ export class ItemsComponent implements OnInit {
       image: this.items.noResultsImage,
     });
   }
+  ngOnDestroy() {}
 
   updateQueryParams() {
     this.router.navigate([], {

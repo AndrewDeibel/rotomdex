@@ -21,6 +21,7 @@ export class CardDetailsComponent implements OnInit {
   buttonAdmin: Button;
   cardImageHover: boolean;
   hasAdminAccess: boolean;
+  @Input() linkTitle: boolean;
 
   constructor(
     private dialogService: DialogService,

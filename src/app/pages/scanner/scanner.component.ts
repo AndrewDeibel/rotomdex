@@ -48,13 +48,12 @@ export class ScannerComponent implements OnInit {
   alertInstructions: Alert;
   showAlert: boolean;
 
-  ngOnDestroy() {}
-
   ngOnInit() {
     this.setupControls();
     this.setupSubscriptions();
     this.getInitData();
   }
+  ngOnDestroy() {}
 
   getInitData() {
     this.scannerService.getScans(

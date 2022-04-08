@@ -5,7 +5,9 @@ import { Menu, MenuItem } from '@app/controls/menu';
 import { Icons, Symbols } from '@app/models/icons';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { User } from '@app/pages/user';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -59,11 +61,12 @@ export class HeaderComponent implements OnInit {
     this.buildMenuItems();
 
     if (!this.authenticationService.currentUserValue) {
-      this.authenticationService.currentUserObservable().subscribe((user) => {
+      this.authenticationService.currentUserObservable().subscribe(() => {
         this.buildMenuItems();
       });
     }
   }
+  ngOnDestroy() {}
 
   buildMenuItems() {
     this.menu.items = [

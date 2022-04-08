@@ -1,23 +1,28 @@
-import { AuthenticationService } from './../../auth/auth.service';
 import { ItemGroup, Items } from '@app/layout';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FavoritesService } from '.';
 import { APIGetPaged } from '@app/models';
-import { ResCards } from '@app/pages';
+import { ResCards, AuthenticationService } from '@app/pages';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'favorites',
   templateUrl: './favorites.component.html',
 })
-export class FavoritesComponent {
+export class FavoritesComponent implements OnInit {
   items: Items = new Items();
+
   constructor(
     private favoritesService: FavoritesService,
     private authenticationService: AuthenticationService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.setupSubscriptions();
     this.setupControls();
   }
+  ngOnDestroy() {}
 
   setupSubscriptions() {
     this.favoritesService

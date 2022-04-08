@@ -16,7 +16,9 @@ import { APIGetPaged } from '@app/models';
 import { PokemonsService, User } from '@app/pages';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { ChangePasswordDialogComponent } from './change-password-dialog.component';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'edit-user',
   templateUrl: './edit-user.component.html',
@@ -51,6 +53,7 @@ export class EditUserComponent implements OnInit {
     this.setupSubscriptions();
     //this.getPokemonVariants();
   }
+  ngOnDestroy() {}
 
   setupControls() {
     const user = this.authenticationService.currentUserValue;

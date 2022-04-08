@@ -1,22 +1,29 @@
 import { CustomResultDialogComponent } from './custom-result-dialog.component';
-import { DialogService } from './../../../controls/dialog/dialog.service';
 import { ScannerService } from '@app/pages/scanner/scanner.service';
 import { UserCardGroupService } from './../../collection/user-card-group/user-card-group.services';
 import { Card, ScanCard } from '@app/pages';
-import { DialogConfig, DialogRef } from '@app/controls/dialog';
+import {
+  DialogConfig,
+  DialogRef,
+  DialogService,
+  Button,
+  Select,
+  SelectOption,
+} from '@app/controls';
 import { Component, OnInit } from '@angular/core';
-import { Button, Select, SelectOption } from '@app/controls';
 import { APIGetPaged, Icons } from '@app/models';
 import { ProcessScan } from '..';
 import { NavigationEnd, Router } from '@angular/router';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'scan-dialog',
   template: `<div style="min-width: 340px; max-width: 100%;" *ngIf="this.card">
     <div class="flex vertical padded">
       <div>
         <app-select [select]="selectResults"></app-select>
-        <card-details [card]="this.card"></card-details>
+        <card-details [card]="this.card" [linkTitle]="true"></card-details>
       </div>
       <div></div>
       <div>
@@ -66,6 +73,7 @@ export class ScanDialogComponent implements OnInit {
       })
     );
   }
+  ngOnDestroy() {}
 
   setupControls() {
     // Select result

@@ -6,7 +6,9 @@ import { ItemGroup, Items } from '@app/layout/main';
 import { APIGetPaged, Symbols } from '@app/models';
 import { PokemonVariant, SetSortByPokemon } from './pokemon/pokemon';
 import { PokemonsService } from './pokemons.service';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'pokemons',
   templateUrl: 'pokemons.component.html',
@@ -25,6 +27,7 @@ export class PokemonsComponent implements OnInit {
     this.setupSubscriptions();
     this.setupControls();
   }
+  ngOnDestroy() {}
 
   setupSubscriptions() {
     // Get query params

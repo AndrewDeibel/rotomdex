@@ -1,14 +1,19 @@
+import { Component, OnInit } from '@angular/core';
+import {
+  Alert,
+  AlertType,
+  Button,
+  DialogConfig,
+  DialogRef,
+  Select,
+  SelectOption,
+} from '@app/controls';
+import { APIGetPaged, Icons } from '@app/models';
+import { UserCardGroupService } from '@app/pages';
 import { ScannerService } from '@app/pages/scanner/scanner.service';
-import { Icons } from './../../../models/icons';
-import { AlertType } from '@app/controls/alert/alert';
-import { Alert } from './../../../controls/alert/alert';
-import { UserCardGroupService } from './../../collection/user-card-group/user-card-group.services';
-import { Select, SelectOption } from './../../../controls/select/select';
-import { DialogConfig, DialogRef } from './../../../controls/dialog/dialog';
-import { OnInit, Component } from '@angular/core';
-import { APIGetPaged } from '@app/models';
-import { Button } from '@app/controls';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'add-to-collection-dialog',
   template: `<div class="flex justify-center">
@@ -27,12 +32,14 @@ export class AddToCollectionDialogComponent implements OnInit {
   selectGroups: Select;
   alertMoveAll: Alert;
   buttonMoveCards: Button;
+
   constructor(
     public config: DialogConfig,
     public dialog: DialogRef,
     private userCardGroupService: UserCardGroupService,
     private scannerService: ScannerService
   ) {}
+
   ngOnInit(): void {
     this.setupControls();
     this.setupSubscriptions();
@@ -43,6 +50,8 @@ export class AddToCollectionDialogComponent implements OnInit {
       })
     );
   }
+  ngOnDestroy() {}
+
   setupControls() {
     this.selectGroups = new Select({
       advancedSelect: true,
@@ -65,6 +74,7 @@ export class AddToCollectionDialogComponent implements OnInit {
       },
     });
   }
+
   setupSubscriptions() {
     // Received card groups
     this.userCardGroupService.getUserCardGroupsObservable().subscribe((res) => {

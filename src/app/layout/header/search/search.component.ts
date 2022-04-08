@@ -1,8 +1,10 @@
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Textbox } from '@app/controls';
 import { Icons } from '@app/models';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'search',
   templateUrl: './search.component.html',
@@ -26,7 +28,7 @@ export class SearchComponent implements OnInit {
       wrapperClasses: 'width-12',
       placeholder: 'Search Cards...',
       icon: Icons.search,
-      classes: 'color-dark width-12',
+      classes: 'width-12',
       keydownEnter: (value) => {
         this.query = value;
         this.search();
@@ -37,6 +39,7 @@ export class SearchComponent implements OnInit {
       },
     });
   }
+  ngOnDestroy() {}
 
   search() {
     if (this.query) {

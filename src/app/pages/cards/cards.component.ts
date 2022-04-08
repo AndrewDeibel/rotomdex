@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AppSettings } from '@app/app';
 import '@app/helpers/string.extensions';
 import { ItemGroup, Items } from '@app/layout/main';
 import { APIGetPaged, Symbols } from '@app/models';
 import { SetSortByGlobal } from '@app/pages/cards/';
 import { CardsService, ResCards } from './cards.service';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'cards',
   templateUrl: './cards.component.html',
@@ -25,8 +27,7 @@ export class CardsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private titleService: Title,
-    private cardsService: CardsService,
-    private router: Router
+    private cardsService: CardsService
   ) {}
 
   ngOnInit() {
@@ -41,6 +42,7 @@ export class CardsComponent implements OnInit {
     //   }
     // });
   }
+  ngOnDestroy() {}
 
   outputGetCards() {
     this.route.params.subscribe((params) => {

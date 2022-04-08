@@ -4,7 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { ItemGroup, Items } from '@app/layout';
 import { APIGetPaged } from '@app/models';
 import { SetSortByUserCards } from '.';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'user-cards',
   template: `<items [items]="items" (outputGetItems)="getUserCards()"></items>`,
@@ -21,6 +23,7 @@ export class UserCardsComponent implements OnInit {
     this.setupSubscriptions();
     this.setupControls();
   }
+  ngOnDestroy() {}
 
   setupSubscriptions() {
     this.userCardsService.getUserCardsObservable().subscribe((res: any) => {

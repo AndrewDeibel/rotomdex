@@ -4,7 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Button, ButtonType } from '@app/controls/button';
 import { Textbox } from '@app/controls/textbox/textbox';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'signup',
   templateUrl: './signup.component.html',
@@ -31,6 +33,7 @@ export class SignUpComponent implements OnInit {
     this.setupControls();
     this.setupSubscriptions();
   }
+  ngOnDestroy() {}
 
   setupControls() {
     this.form = this.formBuilder.group({

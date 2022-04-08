@@ -15,7 +15,9 @@ import { APIGetPaged, Icons } from '@app/models';
 import { UserCardGroup } from '@app/pages';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { UserCardGroupService } from '../user-card-group.services';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'add-edit-card-group',
   templateUrl: 'add-edit-card-group.component.html',
@@ -60,6 +62,7 @@ export class AddUserCardGroupComponent implements OnInit {
     this.setupSubscriptions();
     this.setupControls();
   }
+  ngOnDestroy() {}
 
   handleRoute() {
     this.activatedRoute.params.subscribe((params) => {

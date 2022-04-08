@@ -3,7 +3,9 @@ import { Alert, AlertType, Button } from '@app/controls';
 import { Icons } from '@app/models';
 import { Featured } from './featured';
 import { FeaturedService } from './featured.service';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
@@ -48,4 +50,5 @@ export class HomeComponent implements OnInit {
     });
     this.featuredService.getFeatured();
   }
+  ngOnDestroy() {}
 }

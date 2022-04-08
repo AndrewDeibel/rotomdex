@@ -4,7 +4,9 @@ import { Textbox, Button, ButtonType } from '@app/controls';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService, Notification, AlertType } from '@app/controls';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'forgot',
   templateUrl: './forgot.component.html',
@@ -37,6 +39,7 @@ export class ForgotComponent implements OnInit {
       type: ButtonType.submit,
     });
   }
+  ngOnDestroy() {}
 
   submit() {
     if (this.form.invalid) {

@@ -32,7 +32,8 @@ select {
   cursor: pointer;
   option,
   optgroup {
-    color: $font-color;
+    color: black;
+    background: white;
   }
   &:focus {
     box-shadow: $shadow-focus, $shadow-focus-inset;

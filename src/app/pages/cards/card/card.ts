@@ -67,7 +67,9 @@ export class Card {
   ebay_url: string;
 
   // Route
-  route: string;
+  get route() {
+    return this.slug && '/card/' + this.slug;
+  }
 
   // Admin
   nova_edit_url: string;
@@ -97,9 +99,6 @@ export class Card {
 
   constructor(init?: Partial<Card>) {
     Object.assign(this, init);
-
-    // Route
-    if (!this.scan) this.route = '/card/' + this.slug;
 
     // Number formatting
     this.number = this.getCardNumber();

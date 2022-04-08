@@ -14,10 +14,12 @@ import {
 } from '@app/controls';
 import { ItemGroup, Items } from '@app/layout/main';
 import { APIGetPaged, Size, Symbols } from '@app/models';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { PokedexEntryDialogComponent } from './pokedex-entry-dialog.component';
 import { PokemonVariant, SetSortByPokemon } from './pokemon';
 import { PokemonService } from './pokemon.service';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'pokemon',
   templateUrl: 'pokemon.component.html',
@@ -148,6 +150,7 @@ export class PokemonComponent implements OnInit {
       this.pokemonService.getPokemonVariant(this.slug);
     });
   }
+  ngOnDestroy() {}
 
   setupControls() {
     SetSortByPokemon(this.items.filter.selectSortBy);

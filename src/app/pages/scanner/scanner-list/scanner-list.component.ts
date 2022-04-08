@@ -1,17 +1,13 @@
-import { AddToCollectionDialogComponent } from './add-to-collection-dialog.component';
-import { DialogRef } from './../../../controls/dialog/dialog';
 import { Component, OnInit } from '@angular/core';
-import { DialogConfig, DialogService } from '@app/controls';
-import { Button } from '@app/controls/button';
-import { Menu, MenuItem } from '@app/controls/menu';
-import { Select } from '@app/controls/select';
-import { Textbox } from '@app/controls/textbox';
 import {
-  ItemGroup,
-  ItemsFilter,
-  ItemsFooter,
-  ItemsHeader,
-} from '@app/layout/main';
+  DialogConfig,
+  DialogService,
+  DialogRef,
+  Button,
+  Menu,
+  MenuItem,
+} from '@app/controls';
+import { ItemGroup, ItemsHeader } from '@app/layout/main';
 import { Items } from '@app/layout/main/items/items';
 import { APIGetPaged } from '@app/models';
 import { Icons } from '@app/models/icons';
@@ -19,6 +15,7 @@ import { Card } from '@app/pages/cards/card';
 import { ScannerService } from '@app/pages/scanner/scanner.service';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { ScanCard, SetSortByScans } from '..';
+import { AddToCollectionDialogComponent } from './add-to-collection-dialog.component';
 import { ScanDialogComponent } from './scan-dialog.component';
 
 @AutoUnsubscribe()
@@ -44,11 +41,11 @@ export class ScannerListComponent implements OnInit {
     private dialogService: DialogService
   ) {}
 
-  ngOnDestroy() {}
   ngOnInit() {
     this.setupControls();
     this.setupSubscriptions();
   }
+  ngOnDestroy() {}
 
   setupControls() {
     // Initialize cards

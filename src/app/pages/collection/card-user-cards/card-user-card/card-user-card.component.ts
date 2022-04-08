@@ -19,7 +19,9 @@ import {
   UserCard,
   UserCardGroup,
 } from '@app/pages';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'card-user-card',
   templateUrl: './card-user-card.component.html',
@@ -43,6 +45,7 @@ export class CardUserCardComponent implements OnInit {
   ngOnInit(): void {
     this.buildControls();
   }
+  ngOnDestroy() {}
 
   ngOnChanges(): void {}
 

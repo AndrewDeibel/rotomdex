@@ -5,7 +5,9 @@ import { Items } from '@app/layout';
 import { APIGetPaged, Icons } from '@app/models';
 import { Series, SetSortExpansions } from './expansion/expansion';
 import { ExpansionsService } from './expansions.service';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'expansions',
   templateUrl: './expansions.component.html',
@@ -22,6 +24,7 @@ export class ExpansionsComponent implements OnInit {
     this.setupControls();
     this.setupSubscriptions();
   }
+  ngOnDestroy() {}
 
   setupSubscriptions() {
     this.expansionsService.getExpansionsObservable().subscribe((series) => {

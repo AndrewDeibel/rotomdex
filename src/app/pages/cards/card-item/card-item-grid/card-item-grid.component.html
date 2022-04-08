@@ -1,6 +1,6 @@
 <a
   class="card-grid"
-  [routerLink]="card.route ? card.route : null"
+  [routerLink]="card.route && !card.scan ? card.route : null"
   (click)="click()"
 >
   <div class="card-image-wrapper" *ngIf="card.image">

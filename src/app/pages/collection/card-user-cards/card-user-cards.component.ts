@@ -1,7 +1,4 @@
-import { LoaderService } from './../../../controls/loader/loader.service';
-import { NotificationsService } from './../../../controls/notifications/notifications.service';
 import { Router } from '@angular/router';
-import { FavoritesService } from './../favorites/favorites.service';
 import { Component, Input, OnInit } from '@angular/core';
 import {
   AlertType,
@@ -9,6 +6,8 @@ import {
   Checkbox,
   Empty,
   Notification,
+  NotificationsService,
+  LoaderService,
 } from '@app/controls';
 import { APIGetPaged, Icons, Size } from '@app/models';
 import {
@@ -18,6 +17,7 @@ import {
   UserCardGroup,
   UserCard,
   UserCardsService,
+  FavoritesService,
 } from '@app/pages';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 

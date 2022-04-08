@@ -8,7 +8,9 @@ import {
   NotificationsService,
 } from '@app/controls';
 import { User } from '@app/models';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'verify',
   templateUrl: './verify.component.html',
@@ -66,4 +68,5 @@ export class VerifyComponent implements OnInit {
       }
     });
   }
+  ngOnDestroy() {}
 }

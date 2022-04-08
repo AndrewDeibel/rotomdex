@@ -5,7 +5,9 @@ import { Button, ButtonType } from '@app/controls/button';
 import { Checkbox } from '@app/controls/checkbox';
 import { Textbox } from '@app/controls/textbox/textbox';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'signin',
   templateUrl: './signin.component.html',
@@ -35,6 +37,7 @@ export class SignInComponent implements OnInit {
     this.setupControls();
     this.setupSubscriptions();
   }
+  ngOnDestroy() {}
 
   setupControls() {
     this.form = this.formBuilder.group({

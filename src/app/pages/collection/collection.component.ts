@@ -1,16 +1,17 @@
-import { User } from './../user/user';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Menu, MenuItem, ProgressBar } from '@app/controls';
 import { Items } from '@app/layout';
 import { APIGetPaged, Icons, Symbols } from '@app/models';
 import {
+  AuthenticationService,
   UserCardGroup,
   UserCardGroupService,
-  AuthenticationService,
 } from '@app/pages';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { getIcon } from '.';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'collection',
   templateUrl: 'collection.component.html',
@@ -39,6 +40,7 @@ export class CollectionComponent implements OnInit {
     this.setupControls();
     this.getUserCardGroups();
   }
+  ngOnDestroy() {}
 
   setupSubscriptions() {
     this.userCardGroupService.getUserCardGroupsObservable().subscribe((res) => {

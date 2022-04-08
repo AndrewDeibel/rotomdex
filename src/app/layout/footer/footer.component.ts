@@ -47,7 +47,7 @@ export class FooterComponent implements OnInit {
     this.menuCenter = new Menu({
       items: [
         new MenuItem({
-          href: 'https://discord.gg/AQFwQDVU',
+          href: 'https://discord.gg/FpPzMD2ZxP',
           text: 'Discord',
           symbol: Symbols.discord,
         }),

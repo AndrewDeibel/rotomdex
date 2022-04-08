@@ -1,13 +1,18 @@
-import { Button } from './../../../controls/button/button';
-import { Card } from './../../cards/card/card';
-import { CardsService } from './../../cards/cards.service';
-import { AlertType } from '@app/controls/alert/alert';
-import { Alert } from './../../../controls/alert/alert';
-import { Icons } from './../../../models/icons';
-import { Textbox } from './../../../controls/textbox/textbox';
-import { DialogConfig, DialogRef } from './../../../controls/dialog/dialog';
+import { CardsService, Card } from '@app/pages';
+import {
+  AlertType,
+  Button,
+  Alert,
+  Textbox,
+  DialogConfig,
+  DialogRef,
+} from '@app/controls';
+import { Icons } from '@app/models';
 import { Component, OnInit } from '@angular/core';
 import { APIGetPaged } from '@app/models';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+
+@AutoUnsubscribe()
 @Component({
   selector: 'custom-result-dialog',
   template: `<div class="flex vertical padded">
@@ -44,6 +49,7 @@ export class CustomResultDialogComponent implements OnInit {
     this.setupControls();
     this.setupSubscriptions();
   }
+  ngOnDestroy() {}
 
   setupControls() {
     this.alert = new Alert({
@@ -78,7 +84,6 @@ export class CustomResultDialogComponent implements OnInit {
   setupSubscriptions() {
     this.cardsService.getCardsObservable().subscribe((res) => {
       if (res && res.cards) {
-        res.cards.forEach((card) => (card.route = ''));
         this.results = res.cards;
       }
     });

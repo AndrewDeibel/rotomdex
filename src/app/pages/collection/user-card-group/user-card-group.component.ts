@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Menu, MenuItem } from '@app/controls';
 import { ItemGroup, Items } from '@app/layout';
-import { APIGetPaged } from '@app/models';
+import { APIGetPaged, Icons } from '@app/models';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { UserCardGroup, UserCardsService } from '@app/pages/collection';
 import { getIcon } from '.';
 import { SetSortByUserCards } from '../user-cards';
-import { Icons } from './../../../models/icons';
 import { UserCardGroupService } from './user-card-group.services';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'user-card-group',
   template: `<items
@@ -34,6 +35,7 @@ export class UserCardGroupComponent implements OnInit {
     this.setupControls();
     this.setupSubscriptions();
   }
+  ngOnDestroy() {}
 
   handleRoute() {
     this.activatedRoute.params.subscribe((params) => {
