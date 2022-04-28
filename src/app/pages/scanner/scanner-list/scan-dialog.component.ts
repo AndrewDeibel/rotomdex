@@ -27,14 +27,19 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
       </div>
       <div></div>
       <div>
-        <app-select [select]="selectGroups"></app-select>
+        <div class="flex padded flex-end">
+          <div class="box">
+            <app-select [select]="selectGroups"></app-select>
+          </div>
+          <div>
+            <app-button [button]="buttonMoveToCollection"></app-button>
+          </div>
+        </div>
       </div>
       <div><hr /></div>
       <div>
         <div class="flex padded">
-          <div class="box">
-            <app-button [button]="buttonMoveToCollection"></app-button>
-          </div>
+          <div class="box"></div>
           <div>
             <app-button [button]="buttonRemove"></app-button>
           </div>
@@ -145,7 +150,7 @@ export class ScanDialogComponent implements OnInit {
 
     // Select group
     this.selectGroups = new Select({
-      label: 'Groups',
+      label: 'Group(s)',
       multiple: true,
       advancedSelect: true,
       anchor: 'bottom',

@@ -1,4 +1,5 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Button } from '@app/controls/button';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Textbox } from '@app/controls';
 import { Icons, Size } from '@app/models';
@@ -16,8 +17,22 @@ import { Select, SelectOption } from './select';
     },
   ],
 })
-export class SelectComponent implements ControlValueAccessor {
+export class SelectComponent implements ControlValueAccessor, OnInit {
   constructor() {}
+
+  buttonAdd: Button;
+  ngOnInit(): void {
+    if (this.select.multiple && this.select.add) {
+      this.buttonAdd = new Button({
+        icon: Icons.plus,
+        classes: 'secondary square',
+        click: () => {
+          this.select.add();
+        },
+      });
+    }
+  }
+
   onChange: any = () => {};
   onTouched: any = () => {};
   registerOnChange(fn: any) {
@@ -88,7 +103,6 @@ export class SelectComponent implements ControlValueAccessor {
   }
 
   selectOption(option: SelectOption) {
-    //option.selected = true;
     if (this.select.multiple) {
       let values = this.value ? this.value.split(',') : [];
       if (!values.includes(option.value)) {
@@ -98,10 +112,11 @@ export class SelectComponent implements ControlValueAccessor {
     } else {
       this.value = option.value;
     }
+    this.select.updateValues();
+    this.select.setSelectedOptions();
   }
 
   unselectOption(option: SelectOption) {
-    //option.selected = false;
     let values = this.value ? this.value.split(',') : [];
     if (values.length && values.includes(option.value)) {
       values = values.filter((value) => value !== option.value);
@@ -109,5 +124,7 @@ export class SelectComponent implements ControlValueAccessor {
     } else {
       this.value = this.value;
     }
+    this.select.updateValues();
+    this.select.setSelectedOptions();
   }
 }

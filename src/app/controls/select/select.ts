@@ -20,6 +20,7 @@ export class Select {
   anchor: string;
   search: (search: string) => void;
   change: (value: string) => void;
+  add: () => void;
 
   getSelectedOptions = () => {
     const selectedOptions = this.options.filter((option) => option.selected);
@@ -47,6 +48,20 @@ export class Select {
             .toLocaleLowerCase()
             .includes(this.searchValue.toLocaleLowerCase()))
     );
+
+  setSelectedOptions = () => {
+    this.options.forEach((option) => {
+      option.selected = this.values.includes(option.value);
+    });
+  };
+
+  updateValues = () => {
+    if (this.value.length) {
+      this.values = this.value.split(',');
+    } else {
+      this.values = [];
+    }
+  };
 
   public constructor(init?: Partial<Select>) {
     this.placeholder = init?.multiple

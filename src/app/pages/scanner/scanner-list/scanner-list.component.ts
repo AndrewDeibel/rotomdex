@@ -183,7 +183,7 @@ export class ScannerListComponent implements OnInit {
     this.dialog = this.dialogService.open(
       ScanDialogComponent,
       new DialogConfig({
-        title: 'Edit Scan Result',
+        title: 'Edit Scan',
         data: {
           card: card,
           scan_id: card.scan_id,

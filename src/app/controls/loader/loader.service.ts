@@ -26,7 +26,7 @@ export class LoaderService {
   }
 
   addItemLoading(key: string) {
-    console.log(`Loading: ${key}`);
+    //console.log(`Loading: ${key}`);
     this._itemsLoading.push(key);
     this.update();
   }
@@ -36,7 +36,7 @@ export class LoaderService {
   }
 
   clearItemLoading(key: string) {
-    console.log(`Done Loading: ${key}`);
+    //console.log(`Done Loading: ${key}`);
     this._itemsLoading = this._itemsLoading.filter((item) => {
       return item !== key;
     });

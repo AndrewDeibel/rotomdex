@@ -1,3 +1,6 @@
+import { DialogRef } from './../../../../controls/dialog/dialog';
+import { AddUserCardGroupComponent } from './../../user-card-group/add-edit-card-group/add-edit-card-group.component';
+import { UserCardGroupComponent } from './../../user-card-group/user-card-group.component';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   Button,
@@ -20,6 +23,7 @@ import {
   UserCardGroup,
 } from '@app/pages';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+import { UserCardGroupService } from '../../user-card-group';
 
 @AutoUnsubscribe()
 @Component({
@@ -39,11 +43,16 @@ export class CardUserCardComponent implements OnInit {
   buttonNotes: Button;
   buttonAdd: Button;
   buttonRemove: Button;
+  dialogAddGroup: DialogRef;
 
-  constructor(private dialogService: DialogService) {}
+  constructor(
+    private dialogService: DialogService,
+    private userCardGroupService: UserCardGroupService
+  ) {}
 
   ngOnInit(): void {
     this.buildControls();
+    this.setupSubscriptions();
   }
   ngOnDestroy() {}
 
@@ -174,7 +183,7 @@ export class CardUserCardComponent implements OnInit {
     // Group
     this.selectGroup = new Select({
       label: 'Group',
-      placeholder: 'Select groups...',
+      placeholder: 'Select group(s)...',
       classes: 'square small-round-right',
       multiple: true,
       advancedSelect: true,
@@ -204,6 +213,14 @@ export class CardUserCardComponent implements OnInit {
           new UserCard({
             ...this.item,
             card_groups: groupIds,
+          })
+        );
+      },
+      add: () => {
+        this.dialogAddGroup = this.dialogService.open(
+          AddUserCardGroupComponent,
+          new DialogConfig({
+            title: 'Add Group',
           })
         );
       },
@@ -253,5 +270,16 @@ export class CardUserCardComponent implements OnInit {
         }
       },
     });
+  }
+
+  setupSubscriptions() {
+    // Add group
+    this.userCardGroupService
+      .addUserCardGroupObservable()
+      .subscribe((userCardGroup) => {
+        if (userCardGroup) {
+          this.dialogAddGroup.close();
+        }
+      });
   }
 }

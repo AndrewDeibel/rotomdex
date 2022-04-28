@@ -35,6 +35,7 @@ export class AddUserCardGroupComponent implements OnInit {
   id: number;
   userCardGroup: UserCardGroup;
   title: string = 'Add Group';
+  isPage: boolean;
   constructor(
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
@@ -46,6 +47,7 @@ export class AddUserCardGroupComponent implements OnInit {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigateByUrl('/');
     }
+    this.isPage = window.location.pathname.includes('group/add');
   }
 
   setupForm() {
@@ -80,8 +82,10 @@ export class AddUserCardGroupComponent implements OnInit {
       .addUserCardGroupObservable()
       .subscribe((userCardGroup) => {
         if (userCardGroup) {
-          this.router.navigateByUrl(`/collection/group/${userCardGroup.id}`);
-          this.getUserCardGroups();
+          if (this.isPage) {
+            this.router.navigateByUrl(`/collection/group/${userCardGroup.id}`);
+            this.getUserCardGroups();
+          }
         }
       });
 
@@ -200,13 +204,17 @@ export class AddUserCardGroupComponent implements OnInit {
       text: 'Save',
       type: ButtonType.submit,
     });
-    this.buttonCancel = new Button({
-      text: 'Cancel',
-      classes: 'secondary',
-      click: () => {
-        this.location.back();
-      },
-    });
+
+    // Only show cancel when on page (not dialog)
+    if (this.isPage) {
+      this.buttonCancel = new Button({
+        text: 'Cancel',
+        classes: 'secondary',
+        click: () => {
+          this.location.back();
+        },
+      });
+    }
   }
 
   submit() {

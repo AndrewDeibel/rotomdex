@@ -57,8 +57,13 @@
     </div>
   </div>
   <div class="available-options" *ngIf="select.open">
-    <div class="search-options">
-      <textbox [textbox]="textboxSearch"></textbox>
+    <div class="flex flex-center">
+      <div class="search-options box">
+        <textbox [textbox]="textboxSearch"></textbox>
+      </div>
+      <div class="add-option">
+        <app-button [button]="buttonAdd"></app-button>
+      </div>
     </div>
     <div class="available-options-inner">
       <div

@@ -1,12 +1,12 @@
 <div class="flex justify-center">
   <form
-    class="padding-4"
+    [class]="isPage && 'padding-4'"
     style="width: 500px; max-width: 100%"
     [formGroup]="form"
     (ngSubmit)="submit()"
   >
     <div class="flex vertical padded-2">
-      <div>
+      <div *ngIf="isPage">
         <h1>{{ title }}</h1>
       </div>
       <div>
