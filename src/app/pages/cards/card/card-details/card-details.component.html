@@ -13,137 +13,213 @@
   />
 
   <div class="max flex width-12 z-3 relative">
-    <div class="flex padded-2 box justify-center small-vertical">
+    <div class="flex padded-2 box justify-center small-vertical flex-nowrap">
       <!-- Card image -->
-      <div class="relative z-2 flex justify-center">
+      <div class="relative z-2 flex vertical box-0 gap-1">
         <figure class="card-image-wrapper" [class.active]="cardImageHover">
           <div class="card-image link {{ card.gfx ? 'gfx-mobile' : '' }}">
             <img
-              src="{{ card.image }}"
+              src="{{ activeVariation?.image || card.image }}"
               class="img-card-image border-radius-card shadow transition"
               (click)="createDialogCardImage()"
               onerror="this.src='./assets/placeholder.png';"
             />
           </div>
         </figure>
+        <div *ngIf="card.variations.length > 1">
+          <app-select [select]="selectVariations"></app-select>
+        </div>
+        <div>
+          <div class="flex padded-small justify-center">
+            <!-- TCG Player -->
+            <div *ngIf="buttonTCGPlayer">
+              <app-button [button]="buttonTCGPlayer"></app-button>
+            </div>
+
+            <!-- Ebay -->
+            <div *ngIf="buttonEbay && false">
+              <app-button [button]="buttonEbay"></app-button>
+            </div>
+
+            <!-- Admin -->
+            <div class="admin-access" *ngIf="hasAdminAccess">
+              <app-button [button]="buttonAdmin"></app-button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="relative z-1 flex medium-12 justify-center">
-        <div class="panel medium-12 medium-square" style="min-width: 320px">
-          <div class="flex padded-small vertical">
-            <!-- Card header -->
-            <div class="card-header">
-              <div class="flex flex-center flex-nowrap padded">
-                <div class="card-name ellipsis box">
-                  <h2 *ngIf="!linkTitle">{{ card.name }}</h2>
-                  <h2 *ngIf="linkTitle">
-                    <a [href]="card.route">{{ card.name }}</a>
-                  </h2>
-                </div>
-                <div
-                  class="flex padded flex-center flex-nowrap"
-                  *ngIf="card.hp"
-                >
-                  <div class="card-hp bold h2">
-                    <span class="subheading">HP</span>{{ card.hp }}
-                  </div>
-                  <div class="card-energies flex flex-nowrap padded">
-                    <div *ngFor="let type of card.types">
-                      <a
-                        class="card-energy {{ type.toLowerCase() }}"
-                        [routerLink]="
-                          '/cards/types/' + type.toLowerCase().replace(' ', '-')
-                        "
-                      >
-                        <div class="card-energy-inner">
-                          <img [src]="getTypeImage(type)" />
-                        </div>
-                      </a>
+      <div class="relative z-1 flex vertical medium-12 box-0">
+        <!-- Card header -->
+        <div class="card-header">
+          <div class="flex flex-center flex-nowrap padded">
+            <!-- Name -->
+            <div class="card-name ellipsis box">
+              <h2 *ngIf="!linkTitle">{{ card.name }}</h2>
+              <h2 *ngIf="linkTitle">
+                <a [href]="card.route">{{ card.name }}</a>
+              </h2>
+            </div>
+
+            <!-- HP -->
+            <div class="flex padded flex-center flex-nowrap" *ngIf="card.hp">
+              <div class="card-hp bold h2">
+                <span class="subheading">HP</span>{{ card.hp }}
+              </div>
+              <div class="card-energies flex flex-nowrap padded">
+                <div *ngFor="let type of card.types">
+                  <a
+                    class="card-energy {{ type.toLowerCase() }}"
+                    [routerLink]="
+                      '/cards/types/' + type.toLowerCase().replace(' ', '-')
+                    "
+                  >
+                    <div class="card-energy-inner">
+                      <img [src]="getTypeImage(type)" />
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="flex padded-small flex-nowrap">
-              <div class="min-6" *ngIf="card.pokemon">
-                <!-- Pokemon -->
-                <pokemon-item-grid
-                  size="small"
-                  [pokemonVariant]="card.pokemon.variant"
-                >
-                </pokemon-item-grid>
-              </div>
-              <div class="min-6">
-                <!-- Expansion -->
-                <expansion-item-grid size="small" [expansion]="card.expansion">
-                </expansion-item-grid>
-              </div>
-            </div>
-
-            <div class="flex flex-center padded-small">
-              <!-- Rarity -->
-              <div *ngIf="tagRarity">
-                <a
-                  class="block rounded"
-                  [routerLink]="
-                    card.rarity &&
-                    '/cards/rarity/' +
-                      card.rarity.name.toLowerCase().replace(' ', '-')
-                  "
-                >
-                  <tag [tag]="tagRarity"></tag>
-                </a>
-              </div>
-
-              <!-- Artist -->
-              <div *ngIf="tagArtist">
-                <a
-                  class="artist-link block rounded"
-                  [routerLink]="
-                    '/cards/artists/' +
-                    card.artist.toLowerCase().replace(' ', '-')
-                  "
-                >
-                  <tag [tag]="tagArtist"></tag>
-                </a>
-              </div>
-
-              <!-- Number -->
-              <div *ngIf="tagNumber">
-                <tag [tag]="tagNumber"></tag>
-              </div>
-
-              <!-- Number -->
-              <div *ngIf="tagShiny">
-                <a
-                  class="artist-link block rounded"
-                  [routerLink]="'/cards/shiny/'"
-                >
-                  <tag [tag]="tagShiny"></tag>
-                </a>
-              </div>
-            </div>
-
-            <div class="width-12">
-              <div class="flex padded-small">
-                <!-- TCG Player -->
-                <div *ngIf="buttonTCGPlayer">
-                  <app-button [button]="buttonTCGPlayer"></app-button>
-                </div>
-
-                <!-- Ebay -->
-                <div *ngIf="buttonEbay && false">
-                  <app-button [button]="buttonEbay"></app-button>
-                </div>
-
-                <!-- Admin -->
-                <div class="admin-access" *ngIf="hasAdminAccess">
-                  <app-button [button]="buttonAdmin"></app-button>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+
+        <div
+          class="panel width-12 medium-square padding-0 box-1"
+          style="min-width: 340px"
+        >
+          <!-- Tabs -->
+          <tabs>
+            <!-- Details -->
+            <tab title="Details">
+              <div class="flex gap-1 vertical">
+                <!-- Attacks -->
+                <div
+                  class="card-attack flex vertical gap-1"
+                  *ngIf="card.attacks"
+                >
+                  <!-- Attack -->
+                  <div
+                    *ngFor="let attack of card.attacks"
+                    class="flex vertical"
+                  >
+                    <!-- Attack meta -->
+                    <div class="flex gap-1 flex-center">
+                      <div class="attack-cost flex gap-small">
+                        <div
+                          *ngFor="let cost of attack.cost"
+                          class="flex vertical justify-center"
+                        >
+                          <img [src]="getTypeImage(cost)" style="width: 14px" />
+                        </div>
+                      </div>
+                      <div class="attack-name bold">
+                        {{ attack.name }}
+                      </div>
+                      <div class="attack-damage">
+                        {{ attack.damage }}
+                      </div>
+                    </div>
+
+                    <!-- Attack text -->
+                    <div class="attack-text">{{ attack.text }}</div>
+                  </div>
+                </div>
+
+                <!-- Expansion -->
+                <div class="flex gap-small flex-nowrap">
+                  <div class="width-6">
+                    <!-- Expansion -->
+                    <expansion-item-grid
+                      size="small"
+                      [expansion]="card.expansion"
+                    >
+                    </expansion-item-grid>
+                  </div>
+                  <!-- Pokemon -->
+                  <div
+                    class="width-6"
+                    *ngIf="card.primary_pokemon_variants.length === 1"
+                  >
+                    <!-- Pokemon -->
+                    <div
+                      class="box"
+                      *ngFor="let variant of card.primary_pokemon_variants"
+                    >
+                      <pokemon-item-grid
+                        size="small"
+                        [pokemonVariant]="variant"
+                      >
+                      </pokemon-item-grid>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex flex-center padded-small">
+                  <!-- Rarity -->
+                  <div *ngIf="tagRarity">
+                    <a
+                      class="block rounded"
+                      [routerLink]="
+                        card.rarity &&
+                        '/cards/rarity/' +
+                          card.rarity.name.toLowerCase().replace(' ', '-')
+                      "
+                    >
+                      <tag [tag]="tagRarity"></tag>
+                    </a>
+                  </div>
+
+                  <!-- Artist -->
+                  <div *ngIf="tagArtist">
+                    <a
+                      class="artist-link block rounded"
+                      [routerLink]="
+                        '/cards/artists/' +
+                        card.artist.toLowerCase().replace(' ', '-')
+                      "
+                    >
+                      <tag [tag]="tagArtist"></tag>
+                    </a>
+                  </div>
+
+                  <!-- Number -->
+                  <div *ngIf="tagNumber">
+                    <tag [tag]="tagNumber"></tag>
+                  </div>
+
+                  <!-- Number -->
+                  <div *ngIf="tagShiny">
+                    <a
+                      class="artist-link block rounded"
+                      [routerLink]="'/cards/shiny/'"
+                    >
+                      <tag [tag]="tagShiny"></tag>
+                    </a>
+                  </div>
+                </div></div
+            ></tab>
+
+            <!-- Pokemon -->
+            <tab
+              title="Pokemon"
+              *ngIf="card.primary_pokemon_variants.length > 1"
+            >
+              <div class="flex gap-1" *ngIf="card.primary_pokemon_variants">
+                <!-- Pokemon -->
+                <div
+                  class="box"
+                  *ngFor="let variant of card.primary_pokemon_variants"
+                >
+                  <pokemon-item-grid size="small" [pokemonVariant]="variant">
+                  </pokemon-item-grid>
+                </div>
+              </div>
+            </tab>
+
+            <!-- Prices -->
+            <tab title="Prices"> Coming soon... </tab>
+          </tabs>
         </div>
       </div>
     </div>

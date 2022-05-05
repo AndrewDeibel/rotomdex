@@ -81,10 +81,11 @@ export class CardComponent implements OnInit {
         this.card = card;
 
         // Related pokemon cards
-        if (this.card.pokemon) {
-          this.relatedCards.header.title = `${this.card.pokemon.variant.name} Cards`;
-          this.relatedCards.header.titleRoute = this.card.pokemon.variant.route;
-          this.relatedCards.noResults = `No ${this.card.pokemon.variant.name} cards found`;
+        if (this.card.primary_pokemon_variants) {
+          let pokemonVariant = this.card.primary_pokemon_variants[0];
+          this.relatedCards.header.title = `${pokemonVariant.name} Cards`;
+          this.relatedCards.header.titleRoute = pokemonVariant.route;
+          this.relatedCards.noResults = `No ${pokemonVariant.name} cards found`;
         }
         // Related sub type cards
         else if (this.card.sub_type) {
@@ -166,11 +167,11 @@ export class CardComponent implements OnInit {
   getRelatedCards() {
     if (this.card) {
       // Related pokemon cards
-      if (this.card.pokemon) {
+      if (this.card.primary_pokemon_variants) {
         this.pokemonService.getPokemonVariantCards(
           new APIGetPaged({
             page: this.relatedCards.footer.page,
-            slug: this.card.pokemon.variant.slug,
+            slug: this.card.primary_pokemon_variants[0].slug,
             page_size: this.relatedCards.footer.pageSize,
             sort_by: this.relatedCards.filter.selectSortBy.value,
             sort_direction: this.relatedCards.filter.selectSortDirection.value,

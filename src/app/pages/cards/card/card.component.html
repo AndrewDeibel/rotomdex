@@ -1,4 +1,5 @@
 <div *ngIf="card">
+  <!-- Details -->
   <card-details [card]="card"></card-details>
 
   <div class="relative z-1">
@@ -9,6 +10,7 @@
         [userCards]="userCards"
         [on_wishlist]="card.on_wishlist"
         [is_favorite]="card.is_favorite"
+        [variations]="card.variations"
       ></card-user-cards>
     </div>
 

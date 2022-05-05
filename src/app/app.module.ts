@@ -45,6 +45,8 @@ import {
   DialogModule,
   ButtonComponent,
   FileUploadComponent,
+  TabsComponent,
+  TabComponent,
 } from './controls';
 
 // Pages
@@ -279,6 +281,8 @@ import { environment } from '../environments/environment';
     HeroComponent,
     ButtonComponent,
     FileUploadComponent,
+    TabsComponent,
+    TabComponent,
 
     // Page
     // ====================

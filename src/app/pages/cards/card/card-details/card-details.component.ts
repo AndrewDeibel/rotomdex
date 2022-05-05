@@ -1,4 +1,11 @@
-import { Button, DialogConfig, DialogService, Tag } from '@app/controls';
+import {
+  Button,
+  DialogConfig,
+  DialogService,
+  Tag,
+  Select,
+  SelectOption,
+} from '@app/controls';
 import { Card } from '@app/pages';
 import { Component, Input, OnInit } from '@angular/core';
 import { CardImageDialogComponent } from '../card-image-dialog.component';
@@ -19,9 +26,11 @@ export class CardDetailsComponent implements OnInit {
   buttonTCGPlayer: Button;
   buttonEbay: Button;
   buttonAdmin: Button;
+  selectVariations: Select;
   cardImageHover: boolean;
   hasAdminAccess: boolean;
   @Input() linkTitle: boolean;
+  activeVariation?: Card;
 
   constructor(
     private dialogService: DialogService,
@@ -29,6 +38,10 @@ export class CardDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.setupControls();
+  }
+
+  setupControls() {
     // Admin button
     this.hasAdminAccess =
       this.authenticationService.currentUserValue?.hasNovaAccess || false;
@@ -100,6 +113,27 @@ export class CardDetailsComponent implements OnInit {
       this.buttonTCGPlayer.price = this.card.last_prices[0].market_price;
       //this.buttonEbay.price = this.card.last_prices[0].market_price;
     }
+
+    // Variations
+    if (this.card.variations.length > 1) {
+      this.selectVariations = new Select({
+        options: this.card.variations.map(
+          (variation) =>
+            new SelectOption({
+              text: variation.name,
+              value: variation.id.toString(),
+            })
+        ),
+        change: (_variation) => {
+          this.activeVariation = this.card.variations.find(
+            (variation) => variation.id === Number(_variation)
+          );
+        },
+      });
+    }
+    this.activeVariation = this.card.variations.find(
+      (variation) => variation.default
+    );
   }
 
   getTypeImage(type: string) {

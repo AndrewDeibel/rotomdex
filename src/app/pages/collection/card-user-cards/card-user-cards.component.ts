@@ -20,6 +20,7 @@ import {
   FavoritesService,
 } from '@app/pages';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+import { Card } from '@app/pages/cards';
 
 @AutoUnsubscribe()
 @Component({
@@ -32,6 +33,7 @@ export class CardUserCardsComponent implements OnInit {
   @Input() on_wishlist: boolean;
   @Input() is_favorite: boolean;
   @Input() userCards: UserCard[] = [];
+  @Input() variations: Card[] = [];
   buttonAdd: Button;
   checkboxWishlist: Checkbox;
   checkboxFavorite: Checkbox;

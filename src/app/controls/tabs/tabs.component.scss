@@ -1,0 +1,28 @@
+@import "settings";
+
+.tabs-header {
+  background: $main-bg;
+  ul {
+    display: flex;
+    li {
+      &.active {
+        button {
+          background: $panel-bg;
+        }
+      }
+      button {
+        border: 0;
+        background: none;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 $spacing * 2;
+        color: $font-color;
+        cursor: pointer;
+        transition: $transition;
+        &:hover {
+          background: rgba($panel-bg, 0.5);
+        }
+      }
+    }
+  }
+}

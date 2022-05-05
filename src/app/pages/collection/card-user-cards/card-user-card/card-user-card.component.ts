@@ -24,6 +24,7 @@ import {
 } from '@app/pages';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { UserCardGroupService } from '../../user-card-group';
+import { Card } from '@app/pages/cards';
 
 @AutoUnsubscribe()
 @Component({
@@ -36,6 +37,7 @@ export class CardUserCardComponent implements OnInit {
   @Input() userCardGroups: UserCardGroup[] = [];
   @Output() deleted: EventEmitter<boolean> = new EventEmitter();
   @Output() updated: EventEmitter<UserCard> = new EventEmitter();
+  @Input() variations: Card[] = [];
   selectCondition: Select;
   selectGradingCompany: Select;
   selectPrinting: Select;
@@ -165,17 +167,27 @@ export class CardUserCardComponent implements OnInit {
         this.updated.emit(
           new UserCard({
             ...this.item,
-            printing: (Printings as any)[value.replace(' ', '')],
+            printing: value,
           })
         );
       },
     });
-    for (let printVersion in Printings) {
+    // for (let printVersion in Printings) {
+    //   this.selectPrinting.optionGroups[0].options.push(
+    //     new SelectOption({
+    //       text: (Printings as any)[printVersion],
+    //       value: (Printings as any)[printVersion],
+    //       selected: (Printings as any)[printVersion] === this.item.printing,
+    //     })
+    //   );
+    // }
+    for (let variation in this.variations) {
       this.selectPrinting.optionGroups[0].options.push(
         new SelectOption({
-          text: (Printings as any)[printVersion],
-          value: (Printings as any)[printVersion],
-          selected: (Printings as any)[printVersion] === this.item.printing,
+          text: this.variations[variation].name,
+          value: this.variations[variation].id.toString(),
+          selected:
+            this.variations[variation].id === Number(this.item.printing),
         })
       );
     }

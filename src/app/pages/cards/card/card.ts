@@ -1,7 +1,7 @@
 import '@app/helpers/string.extensions';
 import { UserCard } from '@app/pages/collection';
 import { Expansion } from '@app/pages/expansions';
-import { Pokemon } from '@app/pages/pokemons/pokemon/pokemon';
+import { PokemonVariant } from '@app/pages/pokemons/pokemon/pokemon';
 
 export const DEFAULT_IMAGE = '/assets/back.jpg';
 
@@ -33,9 +33,11 @@ export class Card {
   card_id: number;
 
   // Data
+  default: boolean;
   name: string;
   slug: string;
-  pokemon: Pokemon;
+  primary_pokemon_variants: PokemonVariant[] = [];
+  secondary_pokemon_variants: PokemonVariant[] = [];
   expansion: Expansion;
   number: string;
   rarity: Rarity;
@@ -53,6 +55,7 @@ export class Card {
   is_favorite: boolean;
   types: string[] = [];
   gfx: boolean;
+  variations: Card[] = [];
 
   // Prices
   last_prices: CardLastPrices[] = [];
@@ -110,7 +113,15 @@ export class Card {
     if (init?.expansion) this.expansion = new Expansion(init.expansion);
 
     // Initalize pokemon
-    if (init?.pokemon) this.pokemon = new Pokemon(init.pokemon);
+    if (init?.primary_pokemon_variants)
+      this.primary_pokemon_variants = init.primary_pokemon_variants.map(
+        (pokemonVariant) => new PokemonVariant(pokemonVariant)
+      );
+
+    if (init?.secondary_pokemon_variants)
+      this.secondary_pokemon_variants = init.secondary_pokemon_variants.map(
+        (pokemonVariant) => new PokemonVariant(pokemonVariant)
+      );
 
     // GFX
     if (this.rarity) {

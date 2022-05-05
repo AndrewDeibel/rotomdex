@@ -231,6 +231,7 @@ img {
   padding: $spacing * 2;
   background: $panel-bg;
   position: relative;
+  overflow: hidden;
   &:after {
     content: "";
     border-radius: $border-radius-small;
