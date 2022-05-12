@@ -5,6 +5,9 @@
   margin-bottom: $spacing;
   text-shadow: 0 1px 6px rgba(black, 0.6);
 }
+.attack-name {
+  font-size: 1.2em;
+}
 .attack-damage {
   flex: 1 0 0;
   text-align: right;
@@ -48,11 +51,6 @@
       top: 25%;
     }
   }
-  @media (max-width: $screen-medium) {
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 0;
-  }
   @each $type, $color in $poke-types {
     &.#{$type} {
       background: linear-gradient(
@@ -75,6 +73,8 @@
       }
     }
     .card-image {
+      max-width: 240px;
+      margin: 0 auto;
       &:hover {
         transform: scale(1.1);
       }
@@ -150,4 +150,9 @@
 }
 .img-card-image {
   cursor: zoom-in !important;
+}
+
+.ability-type,
+.ability-name {
+  font-weight: bold;
 }

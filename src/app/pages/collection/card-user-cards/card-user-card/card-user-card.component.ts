@@ -167,7 +167,7 @@ export class CardUserCardComponent implements OnInit {
         this.updated.emit(
           new UserCard({
             ...this.item,
-            printing: value,
+            card_variation_id: Number(value),
           })
         );
       },
@@ -187,11 +187,14 @@ export class CardUserCardComponent implements OnInit {
           text: this.variations[variation].name,
           value: this.variations[variation].id.toString(),
           selected:
-            this.variations[variation].id === Number(this.item.printing),
+            this.item.card_variation &&
+            this.variations[variation].id ===
+              Number(this.item.card_variation.id),
         })
       );
     }
-    this.selectPrinting.value = this.item.printing;
+    if (this.item.card_variation)
+      this.selectPrinting.value = this.item.card_variation.id.toString();
     // Group
     this.selectGroup = new Select({
       label: 'Group',

@@ -11,7 +11,8 @@ export class UserCard {
   card_groups: number[] | UserCard[] = [];
   condition: string;
   graded_by: string;
-  printing: string;
+  card_variation: Card;
+  card_variation_id: number;
   notes: string;
   date_obtained: Date;
   purchase_price: number;

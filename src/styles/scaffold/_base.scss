@@ -17,6 +17,13 @@ body {
   &.dialog-open {
     overflow: hidden;
   }
+  &.screenshot-capture {
+    overflow: hidden;
+    height: initial;
+    .dialog-overlay {
+      display: none;
+    }
+  }
 }
 
 .section {

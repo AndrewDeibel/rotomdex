@@ -10,12 +10,23 @@ export class Weakness {
   value: string;
 }
 
+export class Resistance {
+  type: string;
+  value: string;
+}
+
 export class Attack {
   cost: string[] = [];
   name: string;
   text: string;
   damage: number;
   convertedEnergyCost: number;
+}
+
+export class Ability {
+  name: string;
+  text: string;
+  type: string;
 }
 
 export class Rarity {
@@ -48,7 +59,9 @@ export class Card {
   hp?: number;
   retreat_cost: string[] = [];
   weaknesses: Weakness[] = [];
+  resistances: Resistance[] = [];
   attacks: Attack[] = [];
+  abilities: Ability[] = [];
   artist: string;
   is_shiny: boolean;
   is_promo: boolean;
@@ -56,6 +69,7 @@ export class Card {
   types: string[] = [];
   gfx: boolean;
   variations: Card[] = [];
+  rules: string[] = [];
 
   // Prices
   last_prices: CardLastPrices[] = [];

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Menu, MenuItem } from '@app/controls/menu';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Icons } from '@app/models/icons';
+import { DialogConfig, DialogRef, DialogService } from '@app/controls';
+import { ReportIssueDialogComponent } from './report-issue-dialog/report-issue-dialog.component';
 
 @Component({
   selector: '[user-menu]',
@@ -9,10 +11,18 @@ import { Icons } from '@app/models/icons';
 })
 export class UserMenuComponent implements OnInit {
   menu: Menu;
+  dialogReportIssue: DialogRef;
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private dialogService: DialogService
+  ) {}
 
   ngOnInit(): void {
+    this.setupControls();
+  }
+
+  setupControls() {
     this.menu = new Menu({
       classes: 'round',
       clearActiveClickOutside: true,
@@ -37,6 +47,19 @@ export class UserMenuComponent implements OnInit {
                 route: '/profile/edit',
                 click: () => {
                   this.menu.clearActive();
+                },
+              }),
+              new MenuItem({
+                text: 'Report Issue',
+                icon: Icons.warning,
+                click: () => {
+                  this.menu.clearActive();
+                  this.dialogReportIssue = this.dialogService.open(
+                    ReportIssueDialogComponent,
+                    new DialogConfig({
+                      title: 'Report Issue',
+                    })
+                  );
                 },
               }),
               ...(this.authenticationService.currentUserValue?.hasNovaAccess ||

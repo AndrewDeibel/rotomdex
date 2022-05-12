@@ -60,10 +60,10 @@ export class AddToCollectionDialogComponent implements OnInit {
     this.alertMoveAll = new Alert({
       type: AlertType.warning,
       icon: Icons.warning,
-      message: `You are about to move <b>${this.config.data.totalScans}</b> scanned cards to your collection. You can also select the group(s) you would like to add them to below.`,
+      message: `You are about to move <b>${this.config.data.totalScans}</b> scanned card(s) to your collection. You can also select the group(s) you would like to add them to below.`,
     });
     this.buttonMoveCards = new Button({
-      text: 'Move All Cards',
+      text: `Move ${this.config.data.totalScans} Card(s)`,
       icon: Icons.arrowRight,
       click: () => {
         this.scannerService.processAllScans(

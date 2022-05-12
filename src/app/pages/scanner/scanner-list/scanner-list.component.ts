@@ -77,7 +77,7 @@ export class ScannerListComponent implements OnInit {
                       this.dialogMoveAll = this.dialogService.open(
                         AddToCollectionDialogComponent,
                         new DialogConfig({
-                          title: 'Move All Scans To Collection',
+                          title: `Move ${this.items.footer.totalItems} Scan(s) To Collection`,
                           overflow: false,
                           data: {
                             totalScans: this.items.footer.totalItems,

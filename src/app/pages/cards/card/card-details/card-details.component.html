@@ -26,7 +26,7 @@
             />
           </div>
         </figure>
-        <div *ngIf="card.variations.length > 1">
+        <div *ngIf="card.variations && card.variations.length > 1">
           <app-select [select]="selectVariations"></app-select>
         </div>
         <div>
@@ -84,48 +84,12 @@
           </div>
         </div>
 
-        <div
-          class="panel width-12 medium-square padding-0 box-1"
-          style="min-width: 340px"
-        >
+        <div class="panel width-12 padding-0 box-1" style="min-width: 340px">
           <!-- Tabs -->
           <tabs>
             <!-- Details -->
             <tab title="Details">
               <div class="flex gap-1 vertical">
-                <!-- Attacks -->
-                <div
-                  class="card-attack flex vertical gap-1"
-                  *ngIf="card.attacks"
-                >
-                  <!-- Attack -->
-                  <div
-                    *ngFor="let attack of card.attacks"
-                    class="flex vertical"
-                  >
-                    <!-- Attack meta -->
-                    <div class="flex gap-1 flex-center">
-                      <div class="attack-cost flex gap-small">
-                        <div
-                          *ngFor="let cost of attack.cost"
-                          class="flex vertical justify-center"
-                        >
-                          <img [src]="getTypeImage(cost)" style="width: 14px" />
-                        </div>
-                      </div>
-                      <div class="attack-name bold">
-                        {{ attack.name }}
-                      </div>
-                      <div class="attack-damage">
-                        {{ attack.damage }}
-                      </div>
-                    </div>
-
-                    <!-- Attack text -->
-                    <div class="attack-text">{{ attack.text }}</div>
-                  </div>
-                </div>
-
                 <!-- Expansion -->
                 <div class="flex gap-small flex-nowrap">
                   <div class="width-6">
@@ -139,7 +103,10 @@
                   <!-- Pokemon -->
                   <div
                     class="width-6"
-                    *ngIf="card.primary_pokemon_variants.length === 1"
+                    *ngIf="
+                      card.primary_pokemon_variants &&
+                      card.primary_pokemon_variants.length === 1
+                    "
                   >
                     <!-- Pokemon -->
                     <div
@@ -200,25 +167,199 @@
                 </div></div
             ></tab>
 
+            <!-- Text -->
+            <tab title="Text">
+              <div class="flex gap-1 vertical">
+                <!-- Abilities -->
+                <div class="card-abilities" *ngIf="card.abilities">
+                  <div
+                    class="card-ability"
+                    *ngFor="let ability of card.abilities"
+                  >
+                    <span class="ability-type">{{ ability.type }}:</span>&nbsp;
+                    <span class="ability-name">{{ ability.name }}</span
+                    >&nbsp;
+                    <span class="ability-text">{{ ability.text }}</span>
+                  </div>
+                </div>
+
+                <hr *ngIf="card.abilities" />
+
+                <!-- Attacks -->
+                <div
+                  class="card-attack flex vertical gap-1"
+                  *ngIf="card.attacks"
+                >
+                  <!-- Attack -->
+                  <div
+                    *ngFor="let attack of card.attacks"
+                    class="flex vertical"
+                  >
+                    <!-- Attack meta -->
+                    <div class="flex gap-1 flex-center">
+                      <div class="attack-cost flex gap-small">
+                        <div
+                          *ngFor="let cost of attack.cost"
+                          class="flex vertical justify-center"
+                        >
+                          <img [src]="getTypeImage(cost)" style="width: 14px" />
+                        </div>
+                      </div>
+                      <div class="attack-name bold">
+                        {{ attack.name }}
+                      </div>
+                      <div class="attack-damage">
+                        {{ attack.damage }}
+                      </div>
+                    </div>
+
+                    <!-- Attack text -->
+                    <div class="attack-text">{{ attack.text }}</div>
+                  </div>
+                </div>
+
+                <hr *ngIf="card.attacks" />
+
+                <!-- Weakness, Resistance, Retreat cost -->
+                <div
+                  class="flex card-weakness-resistance-retreat align-center"
+                  *ngIf="
+                    card.weaknesses || card.resistances || card.retreat_cost
+                  "
+                  style="max-height: 32px"
+                >
+                  <div class="width-4 flex vertical">
+                    <span class="subheading">weakness</span>
+                    <div
+                      *ngFor="let weakness of card.weaknesses"
+                      class="flex flex-center justify-center gap-small"
+                    >
+                      <img
+                        [src]="getTypeImage(weakness.type)"
+                        style="width: 14px"
+                      />
+                      <span>
+                        {{ weakness.value }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="width-4 flex vertical">
+                    <span class="subheading">resistance</span>
+                    <div
+                      *ngFor="let resistance of card.resistances"
+                      class="flex flex-center justify-center gap-small"
+                    >
+                      <img
+                        [src]="getTypeImage(resistance.type)"
+                        style="width: 14px"
+                      />
+                      <span>
+                        {{ resistance.value }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="width-4 flex vertical">
+                    <span class="subheading">retreat cost</span>
+                    <div class="flex gap-small justify-center">
+                      <div *ngFor="let cost of card.retreat_cost">
+                        <img [src]="getTypeImage(cost)" style="width: 14px" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <hr
+                  *ngIf="
+                    (card.weaknesses ||
+                      card.resistances ||
+                      card.retreat_cost) &&
+                    card.rules
+                  "
+                />
+
+                <!-- Rules -->
+                <div *ngIf="card.rules" class="flex vertical gap-1">
+                  <div *ngFor="let rule of card.rules">
+                    {{ rule }}
+                  </div>
+                </div>
+              </div>
+            </tab>
+
             <!-- Pokemon -->
             <tab
-              title="Pokemon"
-              *ngIf="card.primary_pokemon_variants.length > 1"
+              title="Pokémon"
+              *ngIf="
+                (card.primary_pokemon_variants &&
+                  card.primary_pokemon_variants.length > 1) ||
+                (card.secondary_pokemon_variants &&
+                  card.secondary_pokemon_variants.length)
+              "
             >
-              <div class="flex gap-1" *ngIf="card.primary_pokemon_variants">
-                <!-- Pokemon -->
+              <div class="flex vertical gap-1">
                 <div
-                  class="box"
-                  *ngFor="let variant of card.primary_pokemon_variants"
+                  *ngIf="
+                    card.primary_pokemon_variants &&
+                    card.primary_pokemon_variants.length
+                  "
                 >
-                  <pokemon-item-grid size="small" [pokemonVariant]="variant">
-                  </pokemon-item-grid>
+                  <h5
+                    *ngIf="
+                      card.secondary_pokemon_variants &&
+                      card.secondary_pokemon_variants.length
+                    "
+                  >
+                    Primary Pokémon
+                  </h5>
+                  <div class="flex gap-1">
+                    <!-- Pokemon -->
+                    <div
+                      class="box"
+                      *ngFor="let variant of card.primary_pokemon_variants"
+                    >
+                      <pokemon-item-grid
+                        size="small"
+                        [pokemonVariant]="variant"
+                      >
+                      </pokemon-item-grid>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  *ngIf="
+                    card.secondary_pokemon_variants &&
+                    card.secondary_pokemon_variants.length
+                  "
+                >
+                  <h5>Secondary Pokémon</h5>
+                  <div class="flex gap-1">
+                    <!-- Pokemon -->
+                    <div
+                      class="box"
+                      *ngFor="let variant of card.secondary_pokemon_variants"
+                    >
+                      <pokemon-item-grid
+                        size="small"
+                        [pokemonVariant]="variant"
+                      >
+                      </pokemon-item-grid>
+                    </div>
+                  </div>
                 </div>
               </div>
             </tab>
 
             <!-- Prices -->
-            <tab title="Prices"> Coming soon... </tab>
+            <tab title="Prices">
+              <canvas
+                baseChart
+                width="400"
+                height="400"
+                [data]="lineChartData"
+                [options]="lineChartOptions"
+                [type]="lineChartType"
+              ></canvas>
+            </tab>
           </tabs>
         </div>
       </div>
