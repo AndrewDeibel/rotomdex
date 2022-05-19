@@ -73,9 +73,6 @@ export class UserCardGroupService {
     null
   );
   addUserCardGroupObservable() {
-    this.addUserCardGroupSubject = new BehaviorSubject<UserCardGroup | null>(
-      null
-    );
     return this.addUserCardGroupSubject.asObservable();
   }
   addUserCardGroup(userCardGroup: UserCardGroup) {

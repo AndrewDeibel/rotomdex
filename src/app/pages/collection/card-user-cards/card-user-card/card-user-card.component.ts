@@ -11,6 +11,7 @@ import {
   SelectOptionGroup,
 } from '@app/controls';
 import {
+  APIGetPaged,
   Condition,
   ConditionGraded,
   GradingCompany,
@@ -25,6 +26,7 @@ import {
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { UserCardGroupService } from '../../user-card-group';
 import { Card } from '@app/pages/cards';
+import { AuthenticationService } from '@app/pages/auth';
 
 @AutoUnsubscribe()
 @Component({
@@ -49,7 +51,8 @@ export class CardUserCardComponent implements OnInit {
 
   constructor(
     private dialogService: DialogService,
-    private userCardGroupService: UserCardGroupService
+    private userCardGroupService: UserCardGroupService,
+    private authenticationService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
@@ -58,7 +61,9 @@ export class CardUserCardComponent implements OnInit {
   }
   ngOnDestroy() {}
 
-  ngOnChanges(): void {}
+  ngOnChanges(): void {
+    this.setupSelectGroupOptions();
+  }
 
   buildControls() {
     // Condition
@@ -202,25 +207,6 @@ export class CardUserCardComponent implements OnInit {
       classes: 'square small-round-right',
       multiple: true,
       advancedSelect: true,
-      options: this.userCardGroups
-        ? this.userCardGroups?.map((userCardGroup) =>
-            this.item.card_groups[0] instanceof Object
-              ? new SelectOption({
-                  text: userCardGroup.name,
-                  value: userCardGroup.id?.toString(),
-                  selected: this.item.card_groups
-                    .map((userCardGroup) => (userCardGroup as UserCard).id)
-                    .includes(userCardGroup.id),
-                })
-              : new SelectOption({
-                  text: userCardGroup.name,
-                  value: userCardGroup.id?.toString(),
-                  selected: this.item.card_groups
-                    .map((userCardGroup) => userCardGroup as Number)
-                    .includes(userCardGroup.id),
-                })
-          )
-        : [],
       change: (value) => {
         const groupIds = value.length ? value.split(',').map(Number) : [];
         //const groups = this.userCardGroups.filter(group => groupIds.includes(group.id);
@@ -240,6 +226,8 @@ export class CardUserCardComponent implements OnInit {
         );
       },
     });
+    this.setupSelectGroupOptions();
+
     this.selectGroup.value = this.item.card_groups
       ? this.item.card_groups[0] instanceof Object
         ? this.item.card_groups
@@ -294,7 +282,35 @@ export class CardUserCardComponent implements OnInit {
       .subscribe((userCardGroup) => {
         if (userCardGroup) {
           this.dialogAddGroup.close();
+          this.userCardGroupService.getUserCardGroups(
+            new APIGetPaged({
+              user_id: this.authenticationService.currentUserValue?.id,
+              page_size: 100,
+            })
+          );
         }
       });
+  }
+
+  setupSelectGroupOptions() {
+    this.selectGroup.options = this.userCardGroups
+      ? this.userCardGroups?.map((userCardGroup) =>
+          this.item.card_groups[0] instanceof Object
+            ? new SelectOption({
+                text: userCardGroup.name,
+                value: userCardGroup.id?.toString(),
+                selected: this.item.card_groups
+                  .map((userCardGroup) => (userCardGroup as UserCard).id)
+                  .includes(userCardGroup.id),
+              })
+            : new SelectOption({
+                text: userCardGroup.name,
+                value: userCardGroup.id?.toString(),
+                selected: this.item.card_groups
+                  .map((userCardGroup) => userCardGroup as Number)
+                  .includes(userCardGroup.id),
+              })
+        )
+      : [];
   }
 }
