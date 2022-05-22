@@ -72,7 +72,8 @@ export class Card {
   rules: string[] = [];
 
   // Prices
-  last_prices: CardLastPrices[] = [];
+  price: number;
+  prices: any;
 
   // Collection
   user_cards: UserCard[] = [];

@@ -58,6 +58,9 @@ export class UserMenuComponent implements OnInit {
                     ReportIssueDialogComponent,
                     new DialogConfig({
                       title: 'Report Issue',
+                      data: {
+                        width: '400px',
+                      },
                     })
                   );
                 },

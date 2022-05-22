@@ -55,15 +55,9 @@
               />
             </div>
             <!-- Price -->
-            <div
-              *ngIf="
-                card.last_prices &&
-                card.last_prices.length &&
-                card.last_prices[0].market_price
-              "
-            >
+            <div *ngIf="card.price">
               <div class="money-tag">
-                {{ card.last_prices[0].market_price | currency }}
+                {{ card.price | currency }}
               </div>
             </div>
           </div>

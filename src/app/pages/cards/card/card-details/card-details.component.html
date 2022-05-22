@@ -351,14 +351,13 @@
 
             <!-- Prices -->
             <tab title="Prices">
-              <canvas
-                baseChart
-                width="400"
-                height="400"
-                [data]="lineChartData"
-                [options]="lineChartOptions"
-                [type]="lineChartType"
-              ></canvas>
+              <div
+                id="chartdiv"
+                style="width: 500px; height: 400px; display: {{
+                  showCardPrices ? 'block' : 'none'
+                }};"
+              ></div>
+              <empty *ngIf="!showCardPrices" [empty]="empty"></empty>
             </tab>
           </tabs>
         </div>

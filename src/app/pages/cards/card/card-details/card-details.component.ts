@@ -5,14 +5,17 @@ import {
   Tag,
   Select,
   SelectOption,
+  Empty,
 } from '@app/controls';
 import { Card } from '@app/pages';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { CardImageDialogComponent } from '../card-image-dialog.component';
 import { AuthenticationService } from '@app/pages/auth';
-import { Icons } from '@app/models';
-import { ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
-import { BaseChartDirective } from 'ng2-charts';
+import { Icons, Size } from '@app/models';
+
+import * as am5 from '@amcharts/amcharts5';
+import * as am5xy from '@amcharts/amcharts5/xy';
+import am5themes_Dark from '@amcharts/amcharts5/themes/Dark';
 
 @Component({
   selector: 'card-details',
@@ -21,6 +24,9 @@ import { BaseChartDirective } from 'ng2-charts';
 })
 export class CardDetailsComponent implements OnInit {
   @Input() card: Card;
+
+  private root: am5.Root;
+
   tagRarity: Tag;
   tagArtist: Tag;
   tagNumber: Tag;
@@ -33,70 +39,8 @@ export class CardDetailsComponent implements OnInit {
   hasAdminAccess: boolean;
   @Input() linkTitle: boolean;
   activeVariation?: Card;
-
-  public lineChartData: ChartConfiguration['data'] = {
-    datasets: [
-      {
-        data: [65, 59, 80, 81, 56, 55, 40],
-        label: 'Series A',
-        backgroundColor: 'rgba(148,159,177,0.2)',
-        borderColor: 'rgba(148,159,177,1)',
-        pointBackgroundColor: 'rgba(148,159,177,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)',
-        fill: 'origin',
-      },
-      {
-        data: [28, 48, 40, 19, 86, 27, 90],
-        label: 'Series B',
-        backgroundColor: 'rgba(77,83,96,0.2)',
-        borderColor: 'rgba(77,83,96,1)',
-        pointBackgroundColor: 'rgba(77,83,96,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(77,83,96,1)',
-        fill: 'origin',
-      },
-      {
-        data: [180, 480, 770, 90, 1000, 270, 400],
-        label: 'Series C',
-        yAxisID: 'y-axis-1',
-        backgroundColor: 'rgba(255,0,0,0.3)',
-        borderColor: 'red',
-        pointBackgroundColor: 'rgba(148,159,177,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)',
-        fill: 'origin',
-      },
-    ],
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  };
-
-  public lineChartOptions: ChartConfiguration['options'] = {
-    elements: {
-      line: {
-        tension: 0.5,
-      },
-    },
-    scales: {
-      // We use this empty structure as a placeholder for dynamic theming.
-      x: {},
-      'y-axis-0': {
-        position: 'left',
-      },
-      'y-axis-1': {
-        position: 'right',
-      },
-    },
-
-    plugins: {
-      legend: { display: true },
-    },
-  };
-
-  public lineChartType: ChartType = 'line';
+  showCardPrices: boolean;
+  empty: Empty;
 
   constructor(
     private dialogService: DialogService,
@@ -105,9 +49,124 @@ export class CardDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.setupControls();
+    this.showCardPrices = this.card.variations.some(
+      (variation) => variation.prices.data.length
+    );
+  }
+
+  ngAfterViewInit() {
+    // Prices
+    let root = am5.Root.new('chartdiv');
+    root.setThemes([am5themes_Dark.new(root)]);
+
+    let chart = root.container.children.push(
+      am5xy.XYChart.new(root, {
+        layout: root.verticalLayout,
+        panX: true,
+        panY: true,
+        wheelX: 'panX',
+        wheelY: 'zoomX',
+        pinchZoomX: true,
+      })
+    );
+
+    let _data: any[] = [];
+    this.card.variations[0].prices.data.forEach((priceHistory: any) => {
+      _data.push({
+        category: priceHistory[0],
+      });
+    });
+    this.card.variations.forEach((variation: any) => {
+      variation.prices.data.forEach((priceHistory: any) => {
+        const category = _data.find(
+          (_priceHistory: any) => _priceHistory.category === priceHistory[0]
+        );
+        category[variation.name] = priceHistory[1];
+      });
+    });
+
+    // Create Y-axis
+    let yAxis = chart.yAxes.push(
+      am5xy.ValueAxis.new(root, {
+        renderer: am5xy.AxisRendererY.new(root, {}),
+      })
+    );
+
+    // Create X-Axis
+    let xAxis = chart.xAxes.push(
+      am5xy.CategoryAxis.new(root, {
+        renderer: am5xy.AxisRendererX.new(root, {}),
+        categoryField: 'category',
+        tooltip: am5.Tooltip.new(root, {}),
+      })
+    );
+    xAxis.data.setAll(_data);
+
+    const seriesColors = [
+      '#247abb',
+      '#bb6005',
+      '#119100',
+      '#b11d11',
+      '#5d1e89',
+      '#e6e6e6',
+    ];
+
+    // Create series
+    let seriesList: any[] = [];
+    this.card.variations.forEach((variation, i) => {
+      let series = chart.series.push(
+        am5xy.LineSeries.new(root, {
+          name: variation.name,
+          xAxis: xAxis,
+          yAxis: yAxis,
+          valueYField: variation.name,
+          categoryXField: 'category',
+          tooltip: am5.Tooltip.new(root, {
+            labelText: '${valueY}',
+          }),
+          stroke: am5.Color.fromString(seriesColors[i]),
+        })
+      );
+      series.data.setAll(_data);
+      seriesList.push(series);
+    });
+
+    // Add scrollbar
+    chart.set(
+      'scrollbarX',
+      am5.Scrollbar.new(root, {
+        orientation: 'horizontal',
+      })
+    );
+
+    // Add legend
+    let legend = chart.children.push(am5.Legend.new(root, {}));
+    legend.data.setAll(chart.series.values);
+
+    // Add cursor
+    let cursor = chart.set(
+      'cursor',
+      am5xy.XYCursor.new(root, {
+        behavior: 'none',
+      })
+    );
+    cursor.lineY.set('visible', false);
+
+    let delay = 100;
+    seriesList.forEach((series, i) => {
+      series.appear(1000, i * delay);
+    });
+
+    this.root = root;
   }
 
   setupControls() {
+    this.empty = new Empty({
+      size: Size.small,
+      text: 'No prices available',
+      icon: Icons.dollar,
+    });
+
     // Admin button
     this.hasAdminAccess =
       this.authenticationService.currentUserValue?.hasNovaAccess || false;
@@ -175,10 +234,8 @@ export class CardDetailsComponent implements OnInit {
       });
 
     // Prices
-    if (this.card.last_prices && this.card.last_prices.length) {
-      this.buttonTCGPlayer.price = this.card.last_prices[0].market_price;
-      //this.buttonEbay.price = this.card.last_prices[0].market_price;
-    }
+    this.buttonTCGPlayer.price = this.card.price;
+    //this.buttonEbay.price = this.card.last_prices[0].market_price;
 
     // Variations
     if (this.card.variations.length > 1) {
@@ -194,12 +251,19 @@ export class CardDetailsComponent implements OnInit {
           this.activeVariation = this.card.variations.find(
             (variation) => variation.id === Number(_variation)
           );
+          this.updateVariation();
         },
       });
     }
     this.activeVariation = this.card.variations.find(
       (variation) => variation.default
     );
+  }
+
+  updateVariation() {
+    if (this.activeVariation) {
+      this.buttonTCGPlayer.price = this.activeVariation.price;
+    }
   }
 
   getTypeImage(type: string) {

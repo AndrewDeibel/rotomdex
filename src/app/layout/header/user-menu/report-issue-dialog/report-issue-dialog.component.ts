@@ -16,7 +16,7 @@ import { ReportIssueService } from './report-issue.service';
   selector: 'report-issue-dialog',
   template: `<div
     class="flex vertical gap-1"
-    style="width: 400px; max-width: 100%;"
+    style="width: 100%; max-width: 100%;"
   >
     <div>
       <textbox [textbox]="textboxSubject"></textbox>

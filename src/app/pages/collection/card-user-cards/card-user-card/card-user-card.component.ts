@@ -293,24 +293,26 @@ export class CardUserCardComponent implements OnInit {
   }
 
   setupSelectGroupOptions() {
-    this.selectGroup.options = this.userCardGroups
-      ? this.userCardGroups?.map((userCardGroup) =>
-          this.item.card_groups[0] instanceof Object
-            ? new SelectOption({
-                text: userCardGroup.name,
-                value: userCardGroup.id?.toString(),
-                selected: this.item.card_groups
-                  .map((userCardGroup) => (userCardGroup as UserCard).id)
-                  .includes(userCardGroup.id),
-              })
-            : new SelectOption({
-                text: userCardGroup.name,
-                value: userCardGroup.id?.toString(),
-                selected: this.item.card_groups
-                  .map((userCardGroup) => userCardGroup as Number)
-                  .includes(userCardGroup.id),
-              })
-        )
-      : [];
+    if (this.selectGroup) {
+      this.selectGroup.options = this.userCardGroups
+        ? this.userCardGroups?.map((userCardGroup) =>
+            this.item.card_groups[0] instanceof Object
+              ? new SelectOption({
+                  text: userCardGroup.name,
+                  value: userCardGroup.id?.toString(),
+                  selected: this.item.card_groups
+                    .map((userCardGroup) => (userCardGroup as UserCard).id)
+                    .includes(userCardGroup.id),
+                })
+              : new SelectOption({
+                  text: userCardGroup.name,
+                  value: userCardGroup.id?.toString(),
+                  selected: this.item.card_groups
+                    .map((userCardGroup) => userCardGroup as Number)
+                    .includes(userCardGroup.id),
+                })
+          )
+        : [];
+    }
   }
 }

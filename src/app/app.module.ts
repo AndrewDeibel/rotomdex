@@ -17,7 +17,6 @@ import {
 import { InlineSVGModule } from 'ng-inline-svg-2';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { WebcamModule } from 'ngx-webcam';
-import { NgChartsModule } from 'ng2-charts';
 import { NgxCaptureModule } from 'ngx-capture';
 
 // App
@@ -366,7 +365,6 @@ import { environment } from '../environments/environment';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
-    NgChartsModule,
     NgxCaptureModule,
   ],
   providers: [

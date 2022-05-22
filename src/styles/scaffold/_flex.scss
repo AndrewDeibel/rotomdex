@@ -43,9 +43,11 @@
   align-items: flex-start;
 }
 
-.gap-1 {
-  row-gap: $spacing;
-  column-gap: $spacing;
+@for $i from 1 through 10 {
+  .gap-#{$i} {
+    row-gap: $spacing * $i;
+    column-gap: $spacing * $i;
+  }
 }
 .gap-small {
   row-gap: $spacing / 2;

@@ -2,7 +2,13 @@
   class="overlay dialog-overlay active pointer"
   (mousedown)="onOverlayClicked()"
 >
-  <div class="dialog" (mousedown)="onDialogClicked($event)">
+  <div
+    class="dialog"
+    (mousedown)="onDialogClicked($event)"
+    style="width: {{
+      config.data && config.data.width ? config.data.width : 'auto'
+    }}"
+  >
     <div class="dialog-header">
       <div class="flex padded flex-center">
         <div class="box min-0 ellipsis">
