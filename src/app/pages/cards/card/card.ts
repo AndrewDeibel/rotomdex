@@ -70,6 +70,8 @@ export class Card {
   gfx: boolean;
   variations: Card[] = [];
   rules: string[] = [];
+  previous_card: string;
+  next_card: string;
 
   // Prices
   price: number;

@@ -160,3 +160,28 @@
 #chartdiv {
   font-size: 12px;
 }
+
+.prev-pokemon,
+.next-pokemon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: $menu-bg;
+  padding: $spacing * 3;
+  color: white;
+  box-shadow: $shadow;
+  z-index: 3;
+  &:hover {
+    box-shadow: $shadow, $shadow-focus;
+  }
+}
+.prev-pokemon {
+  left: 0;
+  border-top-right-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+}
+.next-pokemon {
+  right: 0;
+  border-top-left-radius: $border-radius;
+  border-bottom-left-radius: $border-radius;
+}

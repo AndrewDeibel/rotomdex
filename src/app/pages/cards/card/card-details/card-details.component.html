@@ -5,6 +5,16 @@
   }} flex z-2 padding-y-4 padding-x-2 relative flex-wrap flex-start"
   *ngIf="card"
 >
+  <!-- Prev -->
+  <a class="prev-pokemon" [routerLink]="'/card/' + card.previous_card">
+    <fa-icon icon="arrow-left"></fa-icon>
+  </a>
+
+  <!-- Next -->
+  <a class="next-pokemon" [routerLink]="'/card/' + card.next_card">
+    <fa-icon icon="arrow-right"></fa-icon>
+  </a>
+
   <!-- Type bg -->
   <img
     *ngIf="card.types.length"

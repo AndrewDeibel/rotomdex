@@ -1,30 +1,33 @@
 <a
-	class="item-grid-expansion {{size}}"
-	[routerLink]="expansion.route ? expansion.route : []">
-	
-	<figure class="expansion-logo">
-		<div class="expansion-logo-inner">
-			<img *ngIf="expansion.name !== 'Base'" class="symbol" src="{{expansion.symbol}}" />
-			<img src="{{expansion.logo}}" />
-		</div>
-		<progress-bar
-			class="padding block padding-top-none"
-			[progressBar]="progressBar">
-		</progress-bar>
-	</figure>
+  class="item-grid-expansion {{ size }}"
+  [routerLink]="expansion.route ? expansion.route : []"
+>
+  <figure class="expansion-logo">
+    <div class="expansion-logo-inner">
+      <img
+        *ngIf="expansion.name !== 'Base'"
+        class="symbol"
+        src="{{ expansion.symbol }}"
+      />
+      <img src="{{ expansion.logo }}" />
+    </div>
+    <progress-bar
+      class="padding block padding-top-none"
+      [progressBar]="progressBar"
+    >
+    </progress-bar>
+  </figure>
 
-	<figcaption class="expansion-info flex vertical">
-		<div class="expansion-name ellipsis max-12">
-			{{expansion.name}}
-		</div>
-		<div class="flex">
-			<span class="subheading expansion-release-date">
-				{{expansion.release_date | date}} -
-			</span>
-			<span class="subheading expansion-total-cards">
-				{{expansion.total_cards}} Cards
-			</span>
-		</div>
-	</figcaption>
-
+  <figcaption class="expansion-info flex vertical">
+    <div class="expansion-name ellipsis max-12">
+      {{ expansion.name }}
+    </div>
+    <div class="flex">
+      <span class="subheading expansion-release-date">
+        {{ expansion.release_date | date }}&nbsp;-&nbsp;</span
+      ><span class="subheading expansion-total-cards">
+        {{ expansion.total_cards }} Cards
+      </span>
+    </div>
+  </figcaption>
 </a>
