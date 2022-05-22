@@ -109,9 +109,12 @@ select {
   }
   .available-options {
     position: absolute;
-    top: 100%;
     left: -1px;
     right: -1px;
+    top: 100%;
+    @media (max-width: $screen-medium) {
+      position: sticky;
+    }
     background: $main-bg;
     box-shadow: $shadow;
     border-radius: $border-radius;

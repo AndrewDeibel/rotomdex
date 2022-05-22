@@ -120,7 +120,7 @@ export class CardUserCardComponent implements OnInit {
     // Grading company
     this.selectGradingCompany = new Select({
       label: 'Graded By',
-      classes: 'square',
+      classes: 'square small-round-right',
       optionGroups: [
         new SelectOptionGroup({
           label: 'Graded By',
@@ -156,7 +156,7 @@ export class CardUserCardComponent implements OnInit {
     // Printing
     this.selectPrinting = new Select({
       label: 'Printing',
-      classes: 'square',
+      classes: 'square small-round-left',
       optionGroups: [
         new SelectOptionGroup({
           label: 'Printing',

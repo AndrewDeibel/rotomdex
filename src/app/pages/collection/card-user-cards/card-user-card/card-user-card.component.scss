@@ -1,7 +1,19 @@
+@import "settings";
+
 ::ng-deep {
   .label {
     font-size: 11px;
     text-transform: uppercase;
     font-weight: bold;
+  }
+}
+
+:host {
+  &:not(:last-child) {
+    .card-user-card {
+      padding-bottom: $spacing;
+      margin-bottom: $spacing;
+      border-bottom: $border;
+    }
   }
 }

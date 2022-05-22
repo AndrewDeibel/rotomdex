@@ -263,6 +263,8 @@ export class CardDetailsComponent implements OnInit {
   updateVariation() {
     if (this.activeVariation) {
       this.buttonTCGPlayer.price = this.activeVariation.price;
+      if (this.activeVariation.tcgplayer_url)
+        this.buttonTCGPlayer.href = this.activeVariation.tcgplayer_url;
     }
   }
 

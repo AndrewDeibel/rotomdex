@@ -170,9 +170,12 @@
   padding: $spacing * 3;
   color: white;
   box-shadow: $shadow;
-  z-index: 3;
+  z-index: 4;
   &:hover {
     box-shadow: $shadow, $shadow-focus;
+  }
+  @media (max-width: $screen-small) {
+    top: 165px;
   }
 }
 .prev-pokemon {
