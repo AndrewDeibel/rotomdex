@@ -72,6 +72,7 @@ export class Card {
   rules: string[] = [];
   previous_card: string;
   next_card: string;
+  flavor_text: string;
 
   // Prices
   price: number;

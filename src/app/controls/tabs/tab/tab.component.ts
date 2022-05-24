@@ -4,7 +4,7 @@ import { TabsComponent } from '../tabs.component';
 @Component({
   selector: 'tab',
   template: `
-    <div [hidden]="!active" class="tab-content">
+    <div [hidden]="!active" class="tab-content {{ noPadding && 'padding-0' }}">
       <ng-content></ng-content>
     </div>
   `,
@@ -13,6 +13,7 @@ import { TabsComponent } from '../tabs.component';
 export class TabComponent {
   @Input() title: string;
   @Input() active: boolean;
+  @Input() noPadding: boolean;
 
   constructor(tabs: TabsComponent) {
     tabs.addTab(this);

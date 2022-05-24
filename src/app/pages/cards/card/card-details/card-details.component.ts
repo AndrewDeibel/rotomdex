@@ -89,6 +89,10 @@ export class CardDetailsComponent implements OnInit {
     let yAxis = chart.yAxes.push(
       am5xy.ValueAxis.new(root, {
         renderer: am5xy.AxisRendererY.new(root, {}),
+        x: -4,
+        numberFormatter: am5.NumberFormatter.new(root, {
+          numberFormat: '$#,##0.00',
+        }),
       })
     );
 
@@ -98,6 +102,7 @@ export class CardDetailsComponent implements OnInit {
         renderer: am5xy.AxisRendererX.new(root, {}),
         categoryField: 'category',
         tooltip: am5.Tooltip.new(root, {}),
+        y: 4,
       })
     );
     xAxis.data.setAll(_data);
@@ -114,33 +119,66 @@ export class CardDetailsComponent implements OnInit {
     // Create series
     let seriesList: any[] = [];
     this.card.variations.forEach((variation, i) => {
-      let series = chart.series.push(
-        am5xy.LineSeries.new(root, {
-          name: variation.name,
-          xAxis: xAxis,
-          yAxis: yAxis,
-          valueYField: variation.name,
-          categoryXField: 'category',
-          tooltip: am5.Tooltip.new(root, {
-            labelText: '${valueY}',
-          }),
-          stroke: am5.Color.fromString(seriesColors[i]),
-        })
-      );
+      let variationSeries = am5xy.SmoothedXYLineSeries.new(root, {
+        name: variation.name,
+        xAxis: xAxis,
+        yAxis: yAxis,
+        valueYField: variation.name,
+        categoryXField: 'category',
+        tooltip: am5.Tooltip.new(root, {
+          labelText: '${valueY}',
+        }),
+        stroke: am5.Color.fromString(seriesColors[i]),
+        tension: 0.1,
+        fill: am5.Color.fromString(seriesColors[i]),
+      });
+      variationSeries.fills.template.setAll({
+        visible: true,
+        fillOpacity: 0.4,
+      });
+      // variationSeries.bullets.push(function () {
+      //   return am5.Bullet.new(root, {
+      //     locationY: 0,
+      //     sprite: am5.Circle.new(root, {
+      //       radius: 3,
+      //       stroke: series.get('fill'),
+      //       strokeWidth: 1,
+      //       fill: series.get('fill'),
+      //     }),
+      //   });
+      // });
+      let series = chart.series.push(variationSeries);
       series.data.setAll(_data);
       seriesList.push(series);
     });
 
     // Add scrollbar
-    chart.set(
+    const priceHistoryRatio = 100 / this.card.variations[0].prices.data.length;
+    const dotsShown = 30;
+    const priceHistoryStartOffset = (100 - priceHistoryRatio * dotsShown) / 100;
+    let scrollbarX = chart.set(
       'scrollbarX',
       am5.Scrollbar.new(root, {
         orientation: 'horizontal',
+        y: -2,
+        start: priceHistoryStartOffset,
       })
     );
 
     // Add legend
-    let legend = chart.children.push(am5.Legend.new(root, {}));
+    let legend = chart.children.push(
+      am5.Legend.new(root, {
+        layout: am5.GridLayout.new(root, {
+          maxColumns: 1,
+          fixedWidthGrid: true,
+        }),
+        width: am5.percent(100),
+        centerX: am5.percent(100),
+        x: am5.percent(100),
+        paddingBottom: 8,
+        paddingTop: 8,
+      })
+    );
     legend.data.setAll(chart.series.values);
 
     // Add cursor
