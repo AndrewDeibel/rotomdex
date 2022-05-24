@@ -24,13 +24,13 @@ import { ReportIssueService } from './report-issue.service';
     <div>
       <app-textarea [textarea]="textareaMessage"></app-textarea>
     </div>
-    <div>
+    <!-- <div>
       <label class="label">Screenshot</label>
       <app-button [button]="buttonScreenshot" *ngIf="!screenshot"></app-button>
       <div style="max-height: 200px; overflow-y: auto;" class="round">
         <img [src]="screenshot" *ngIf="screenshot" />
       </div>
-    </div>
+    </div> -->
     <hr />
     <div class="flex">
       <div class="box">
