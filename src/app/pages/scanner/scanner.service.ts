@@ -100,7 +100,9 @@ export class ScannerService {
     this.http
       .get<APIResponse>(params.buildUrl('scanner/scans'))
       .subscribe((res) => {
-        const scans = res.data.map((scan: any) => new ScanCard(scan));
+        const scans = res.data
+          .map((scan: any) => new ScanCard(scan))
+          .filter((scan: ScanCard) => scan.result);
         this.getScansSubject.next({
           scans,
           total_pages: res.meta.last_page,
