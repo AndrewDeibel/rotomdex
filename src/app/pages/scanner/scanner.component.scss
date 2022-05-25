@@ -90,6 +90,13 @@
     }
   }
 }
+.scanner-remove-last-item {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
 // .scanner-overlay {
 //   position: absolute;
 //   top: 50%;

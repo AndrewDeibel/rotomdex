@@ -4,6 +4,7 @@ import { AppSettings } from '@app/app';
 import {
   Alert,
   AlertType,
+  Button,
   Notification,
   NotificationsService,
 } from '@app/controls';
@@ -47,6 +48,7 @@ export class ScannerComponent implements OnInit {
   soundEffect: HTMLAudioElement;
   alertInstructions: Alert;
   showAlert: boolean;
+  buttonRemoveLastScanned: Button;
 
   ngOnInit() {
     this.setupControls();
@@ -92,7 +94,19 @@ export class ScannerComponent implements OnInit {
 
     // Page title
     this.titleService.setTitle(AppSettings.titlePrefix + 'Scanner');
+
+    // Remove last scan button
+    this.buttonRemoveLastScanned = new Button({
+      icon: Icons.trash,
+      text: 'Last Scan',
+      classes: 'xsmall round-small width-12',
+      click: () => {
+        this.removeLastScanned();
+      },
+    });
   }
+
+  removeLastScanned() {}
 
   setupSubscriptions() {
     // Total scans
