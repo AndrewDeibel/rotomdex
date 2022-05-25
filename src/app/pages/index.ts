@@ -7,3 +7,4 @@ export * from './expansions';
 export * from './pokemons';
 export * from './collection';
 export * from './user';
+export * from './subscription';

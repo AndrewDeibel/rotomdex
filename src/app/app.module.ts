@@ -48,6 +48,7 @@ import {
   FileUploadComponent,
   TabsComponent,
   TabComponent,
+  RadioComponent,
 } from './controls';
 
 // Pages
@@ -90,6 +91,8 @@ import {
   ScanDialogComponent,
   AddToCollectionDialogComponent,
   CustomResultDialogComponent,
+  SubscriptionsTableComponent,
+  SubscriptionTierComponent,
 } from './pages';
 
 // Page
@@ -254,6 +257,8 @@ import {
   faDownload,
   faClipboardCheck,
   faStars,
+  faBadgePercent,
+  faAward,
 } from '@fortawesome/pro-duotone-svg-icons';
 import { environment } from '../environments/environment';
 
@@ -285,6 +290,7 @@ import { environment } from '../environments/environment';
     FileUploadComponent,
     TabsComponent,
     TabComponent,
+    RadioComponent,
 
     // Page
     // ====================
@@ -342,6 +348,8 @@ import { environment } from '../environments/environment';
     ScanDialogComponent,
     AddToCollectionDialogComponent,
     CustomResultDialogComponent,
+    SubscriptionsTableComponent,
+    SubscriptionTierComponent,
 
     // Helpers
     ClickOutsideDirective,
@@ -530,7 +538,9 @@ export class AppModule {
       faDownload,
       faUpload,
       faClipboardCheck,
-      faStars
+      faStars,
+      faBadgePercent,
+      faAward
     );
     faConfig.defaultPrefix = 'fad';
   }

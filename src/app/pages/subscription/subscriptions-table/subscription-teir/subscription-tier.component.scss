@@ -1,0 +1,56 @@
+@import "settings";
+
+:host {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+}
+
+.subscription-tier {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  background: $header-bg;
+  border-radius: $border-radius;
+  border: $border;
+  .tier-header {
+    padding: 16px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    row-gap: $spacing;
+    border-bottom: $border;
+    .tier-icon {
+      width: 40px;
+      height: 40px;
+      padding: 8px;
+    }
+    .tier-name {
+      font-size: 24px;
+      line-height: 1;
+    }
+    .tier-price {
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 1;
+    }
+  }
+  .tier-features {
+    border-bottom: $border;
+    padding: 16px;
+    flex: 1 0 0;
+    ul {
+      padding-left: 1rem;
+      li {
+        list-style: disc;
+      }
+    }
+  }
+  .tier-footer {
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+  }
+}
