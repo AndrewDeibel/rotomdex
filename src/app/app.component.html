@@ -19,3 +19,13 @@
 <a class="scrollTop" *ngIf="showScrollToTop" (click)="scrollToTop()">
   <fa-icon icon="arrow-up"></fa-icon>
 </a>
+
+<div *ngIf="hasUpdate" class="overlay dialog-overlay">
+  <div class="dialog">
+    <div class="dialog-content">
+      <h2>Software Update Available</h2>
+      <p>Please refresh the page to get the latest version.</p>
+      <app-button [button]="buttonUpdate"></app-button>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,5 @@
+import { Icons } from './models/icons';
+import { Button } from './controls/button/button';
 import {
   ChangeDetectorRef,
   Component,
@@ -5,8 +7,10 @@ import {
   OnInit,
 } from '@angular/core';
 import { NavigationEnd, Router, RoutesRecognized } from '@angular/router';
+import { SwUpdate } from '@angular/service-worker';
 import { DialogService } from '@app/controls/dialog';
 import { MenuItem } from '@app/controls/menu';
+import { interval } from 'rxjs';
 import { LoaderService } from './controls';
 
 @Component({
@@ -21,15 +25,33 @@ export class AppComponent implements OnInit {
   menuItemTools: MenuItem;
   transparentHeader: boolean;
   showScrollToTop: boolean;
+  hasUpdate: boolean;
+  buttonUpdate: Button;
 
   constructor(
     private cdRef: ChangeDetectorRef,
     private router: Router,
     private loaderService: LoaderService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private swUpdate: SwUpdate
   ) {}
 
   ngOnInit() {
+    interval(60000).subscribe(() =>
+      this.swUpdate.checkForUpdate().then(() => {
+        // Checking for updates
+        console.log('checking for updates...');
+      })
+    );
+    this.swUpdate.versionUpdates.subscribe(() => {
+      this.buttonUpdate = new Button({
+        icon: Icons.sync,
+        text: 'Refresh',
+        click: () => window.location.reload(),
+      });
+      this.hasUpdate = true;
+    });
+
     // Loader
     this.loaderService.loading.asObservable().subscribe((loading: boolean) => {
       if (this.loading != loading) {
