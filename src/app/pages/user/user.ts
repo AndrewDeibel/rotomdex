@@ -10,6 +10,7 @@ export class User {
   public: boolean;
   avatar: string;
   favorite_pokemon_variant_id: string;
+  favorite_pokemon: any;
 
   // Authentication
   token?: string;

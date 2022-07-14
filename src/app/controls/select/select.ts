@@ -21,6 +21,7 @@ export class Select {
   search: (search: string) => void;
   change: (value: string) => void;
   add: () => void;
+  showEmptySearch: boolean;
 
   getSelectedOptions = () => {
     const selectedOptions = this.options.filter((option) => option.selected);
@@ -50,6 +51,7 @@ export class Select {
     );
 
   setSelectedOptions = () => {
+    this.updateValues();
     this.options.forEach((option) => {
       option.selected = this.values.includes(option.value);
     });

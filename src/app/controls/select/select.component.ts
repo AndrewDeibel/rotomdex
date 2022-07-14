@@ -84,11 +84,15 @@ export class SelectComponent implements ControlValueAccessor, OnInit {
 
   click() {
     if (
+      // Not open
+      !this.select.open &&
+      // No value or multiple values allowed
       (this.select.multiple ||
         !this.select.value ||
-        !this.select.value?.length) &&
-      !this.select.open &&
-      this.select.getUnselectedOptions().length > 0
+        !this.select.value?.length ||
+        // Or available options or show empty search
+        this.select.getUnselectedOptions().length > 0 ||
+        (this.select.multiple && this.select.showEmptySearch))
     )
       this.select.open = true;
     else this.select.open = false;

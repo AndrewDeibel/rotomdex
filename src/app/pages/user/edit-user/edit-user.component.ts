@@ -51,7 +51,6 @@ export class EditUserComponent implements OnInit {
   ngOnInit(): void {
     this.setupControls();
     this.setupSubscriptions();
-    //this.getPokemonVariants();
   }
   ngOnDestroy() {}
 
@@ -91,13 +90,13 @@ export class EditUserComponent implements OnInit {
       options: [],
       label: 'Favorite Pokemon',
       placeholder: 'Select favorite pokemon...',
-      value: user?.favorite_pokemon_variant_id,
       search: (search) => {
         this.getPokemonVariants(search);
       },
     });
     if (user?.favorite_pokemon_variant_id) {
-      this.getPokemonVariants();
+      if (user.favorite_pokemon)
+        this.getPokemonVariants(user?.favorite_pokemon.name);
     }
     this.togglePublic = new Toggle({
       label: 'Visibility',
@@ -143,6 +142,13 @@ export class EditUserComponent implements OnInit {
                 image: pokemonVariant.sprites.official,
               })
           ) || [];
+
+        const user = this.authenticationService.currentUserValue;
+        if (user?.favorite_pokemon_variant_id) {
+          this.selectFavoritePokemon.value =
+            user.favorite_pokemon_variant_id.toString();
+          this.selectFavoritePokemon.setSelectedOptions();
+        }
       }
     });
   }

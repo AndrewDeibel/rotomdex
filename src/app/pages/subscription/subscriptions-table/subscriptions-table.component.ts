@@ -18,15 +18,15 @@ export class SubscriptionsTableComponent {
       color: '#3a9c3a',
       icon: 'badge-percent',
       price: 'Free',
-      features: ['# Scans Per Month', '# Cards', '# Groups'],
+      features: ['100 Scans/Month', 'Up to 1000 Cards', 'Up to 10 Groups'],
     },
     {
       name: 'Basic',
       color: '#247abb',
       icon: 'list',
-      price: '$#/month',
+      price: '$3/month',
       features: [
-        '# Scans Per Month',
+        '1000 Scans/Month',
         'Unlimited Cards',
         'Unlimited Groups',
         'Collection Dashboard',
@@ -36,25 +36,25 @@ export class SubscriptionsTableComponent {
       name: 'Premium',
       color: '#f68603',
       icon: 'star',
-      price: '$#/month',
+      price: '$5/month',
       features: [
-        '# Scans Per Month',
+        '3000 Scans/Month',
         'Unlimited Cards',
         'Unlimited Groups',
         'Collection Dashboard',
       ],
     },
-    {
-      name: 'Pro',
-      color: '#8936b7',
-      icon: 'award',
-      price: '$#/month',
-      features: [
-        '# Scans Per Month',
-        'Unlimited Cards',
-        'Unlimited Groups',
-        'Collection Dashboard',
-      ],
-    },
+    // {
+    //   name: 'Pro',
+    //   color: '#8936b7',
+    //   icon: 'award',
+    //   price: '$#/month',
+    //   features: [
+    //     '# Scans Per Month',
+    //     'Unlimited Cards',
+    //     'Unlimited Groups',
+    //     'Collection Dashboard',
+    //   ],
+    // },
   ];
 }

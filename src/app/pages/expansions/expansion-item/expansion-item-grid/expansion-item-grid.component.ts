@@ -18,7 +18,7 @@ export class ExpansionItemGridComponent implements OnInit {
   ngOnInit() {
     this.progressBar = new ProgressBar({
       value: this.expansion.total_cards_owned,
-      total: this.expansion.total_cards,
+      total: this.expansion.total_cards_with_secrets,
     });
   }
 }

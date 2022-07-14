@@ -15,6 +15,7 @@ export class Expansion {
   symbol: string;
   logo: string;
   total_cards_owned: number;
+  total_cards_with_secrets: number;
 
   route: string;
   cards: Card[] = [];
