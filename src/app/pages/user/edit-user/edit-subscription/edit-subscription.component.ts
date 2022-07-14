@@ -1,10 +1,11 @@
+import { AlertType } from './../../../../controls/alert/alert';
 import { buildUrl } from './../../../../models/api';
 import { APIResponse } from '@app/models';
 import { HttpClient } from '@angular/common/http';
 import { Icons } from './../../../../models/icons';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Button } from '@app/controls';
+import { Button, Notification, NotificationsService } from '@app/controls';
 import { AuthenticationService } from '@app/pages/auth';
 
 @Component({
@@ -15,7 +16,8 @@ export class EditSubscriptionComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private notificationService: NotificationsService
   ) {}
   user_level: string;
   buttonManageSubscription: Button;
@@ -37,14 +39,19 @@ export class EditSubscriptionComponent implements OnInit {
       },
     });
 
-    this.route.queryParams.subscribe((params) => {
-      if (params['fromstripe'] === '1') {
-        this.authenticationService.getUser();
-      }
-    });
-
     this.authenticationService.getUserObservable().subscribe((user) => {
       if (user?.account_level) this.user_level = user.account_level;
+      this.route.queryParams.subscribe((params) => {
+        if (params['fromstripe'] === '1') {
+          this.notificationService.addNotifications([
+            new Notification({
+              message: 'Subscription updated',
+              alertType: AlertType.success,
+            }),
+          ]);
+        }
+      });
     });
+    this.authenticationService.getUser();
   }
 }

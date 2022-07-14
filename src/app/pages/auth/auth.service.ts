@@ -197,12 +197,6 @@ export class AuthenticationService {
         });
         this.getUserSubject.next(user);
         this.currentUserSubject.next(user);
-        this.notificationService.addNotifications([
-          new Notification({
-            message: 'Subscription updated',
-            alertType: AlertType.success,
-          }),
-        ]);
       }
     });
   }
