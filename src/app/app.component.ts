@@ -37,12 +37,14 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    interval(60000).subscribe(() =>
-      this.swUpdate.checkForUpdate().then(() => {
-        // Checking for updates
-        console.log('checking for updates...');
-      })
-    );
+    if (this.swUpdate.isEnabled) {
+      interval(60000).subscribe(() =>
+        this.swUpdate.checkForUpdate().then(() => {
+          // Checking for updates
+          console.log('checking for updates...');
+        })
+      );
+    }
     this.swUpdate.versionUpdates.subscribe(() => {
       this.buttonUpdate = new Button({
         icon: Icons.sync,
