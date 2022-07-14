@@ -23,35 +23,42 @@ export class EditSubscriptionComponent implements OnInit {
   buttonManageSubscription: Button;
 
   ngOnInit(): void {
-    this.authenticationService.getUserObservable().subscribe((user) => {
-      if (user?.account_level) this.user_level = user.account_level;
-      this.route.queryParams.subscribe((params) => {
-        if (params['fromstripe'] === '1') {
-          this.notificationService.addNotifications([
-            new Notification({
-              message: 'Subscription updated',
-              alertType: AlertType.success,
-            }),
-          ]);
-        }
-      });
-
-      if (this.authenticationService.currentUserValue?.account_level)
-        this.user_level =
-          this.authenticationService.currentUserValue.account_level;
-
-      this.buttonManageSubscription = new Button({
-        text: 'Manage Subscription',
-        icon: Icons.externalLink,
-        click: () => {
-          this.http
-            .get<APIResponse>(buildUrl('subscriptions/billing-portal'))
-            .subscribe((res) => {
-              if (res?.data?.url) window.location = res.data.url;
-            });
-        },
-      });
-    });
     this.authenticationService.getUser();
+    this.authenticationService.getUserObservable().subscribe((user) => {
+      if (user) {
+        if (user?.account_level) this.user_level = user.account_level;
+        this.route.queryParams.subscribe((params) => {
+          if (params['fromstripe'] === '1') {
+            this.notificationService.addNotifications([
+              new Notification({
+                message: 'Subscription updated',
+                alertType: AlertType.success,
+              }),
+            ]);
+          }
+        });
+
+        if (
+          this.authenticationService.currentUserValue?.account_level &&
+          this.authenticationService.currentUserValue?.account_level !==
+            this.user_level
+        ) {
+          this.user_level =
+            this.authenticationService.currentUserValue.account_level;
+        }
+
+        this.buttonManageSubscription = new Button({
+          text: 'Manage Subscription',
+          icon: Icons.externalLink,
+          click: () => {
+            this.http
+              .get<APIResponse>(buildUrl('subscriptions/billing-portal'))
+              .subscribe((res) => {
+                if (res?.data?.url) window.location = res.data.url;
+              });
+          },
+        });
+      }
+    });
   }
 }

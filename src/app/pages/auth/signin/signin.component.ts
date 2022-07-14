@@ -75,11 +75,14 @@ export class SignInComponent implements OnInit {
   }
 
   setupSubscriptions() {
-    this.authenticationService.currentUserObservable().subscribe((user) => {
-      if (user) {
-        this.router.navigateByUrl(this.returnUrl);
-      }
-    });
+    const subscription = this.authenticationService
+      .currentUserObservable()
+      .subscribe((user) => {
+        if (user) {
+          subscription.unsubscribe();
+          this.router.navigateByUrl(this.returnUrl);
+        }
+      });
   }
 
   submit() {

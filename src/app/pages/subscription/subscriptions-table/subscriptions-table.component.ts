@@ -24,7 +24,7 @@ export class SubscriptionsTableComponent {
       name: 'Basic',
       id: 'basic',
       color: '#247abb',
-      price: '$3/month',
+      price: '$3.99/month',
       features: [
         '1000 Scans/Month',
         'Unlimited Cards',
@@ -36,7 +36,7 @@ export class SubscriptionsTableComponent {
       name: 'Premium',
       id: 'premium',
       color: '#f68603',
-      price: '$5/month',
+      price: '$12.99/month',
       features: [
         '3000 Scans/Month',
         'Unlimited Cards',
