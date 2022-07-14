@@ -41,6 +41,8 @@
     border-bottom: $border;
     padding: 16px;
     flex: 1 0 0;
+    justify-content: center;
+    display: flex;
     ul {
       padding-left: 1rem;
       li {

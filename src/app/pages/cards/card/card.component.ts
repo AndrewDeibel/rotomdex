@@ -46,10 +46,6 @@ export class CardComponent implements OnInit {
   }
   ngOnDestroy() {}
 
-  resetControls() {
-    this.card = null;
-  }
-
   setupControls() {
     // Related cards
     this.relatedCards.footer.pageSize = 12;
@@ -75,7 +71,6 @@ export class CardComponent implements OnInit {
     this.cardService.getCardObservable().subscribe((card) => {
       if (card) {
         this.titleService.setTitle(AppSettings.titlePrefix + card.name);
-        this.resetControls();
 
         // Data
         this.card = card;

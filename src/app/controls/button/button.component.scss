@@ -19,6 +19,7 @@
   white-space: nowrap;
   box-shadow: $shadow-sheen;
   justify-content: center;
+  user-select: none;
 
   &.xsmall {
     padding: 0px 8px;

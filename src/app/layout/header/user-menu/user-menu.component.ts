@@ -44,7 +44,7 @@ export class UserMenuComponent implements OnInit {
               new MenuItem({
                 text: 'Profile',
                 icon: Icons.user,
-                route: '/profile/edit',
+                route: '/profile',
                 click: () => {
                   this.menu.clearActive();
                 },
@@ -65,8 +65,8 @@ export class UserMenuComponent implements OnInit {
                   );
                 },
               }),
-              ...(this.authenticationService.currentUserValue?.hasNovaAccess ||
-              true
+              ...(this.authenticationService.currentUserValue
+                ?.has_nova_access || true
                 ? [
                     new MenuItem({
                       text: 'Admin Login',

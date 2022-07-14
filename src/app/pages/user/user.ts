@@ -11,13 +11,14 @@ export class User {
   avatar: string;
   favorite_pokemon_variant_id: string;
   favorite_pokemon: any;
+  account_level: string;
 
   // Authentication
   token?: string;
   expires_at?: Date;
   email_verified_at?: Date;
   email_verify_token: string;
-  hasNovaAccess: boolean;
+  has_nova_access: boolean;
 
   // Scanner
   device_id: string;

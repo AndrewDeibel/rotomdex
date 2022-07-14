@@ -47,7 +47,9 @@ export class AddUserCardGroupComponent implements OnInit {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigateByUrl('/');
     }
-    this.isPage = window.location.pathname.includes('group/add');
+    this.isPage =
+      window.location.pathname.includes('group/add') ||
+      window.location.pathname.includes('group/edit');
   }
 
   setupForm() {

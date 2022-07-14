@@ -79,7 +79,7 @@ export class AuthenticationService {
   // Register
   // ====================
   register(
-    code: string,
+    //code: string,
     email: string,
     username: string,
     password: string,
@@ -88,7 +88,7 @@ export class AuthenticationService {
     this.loaderService.addItemLoading('register');
     return this.http
       .post<any>(buildUrl('register'), {
-        code,
+        //code,
         email,
         name: username,
         password,
@@ -179,5 +179,31 @@ export class AuthenticationService {
           ]);
         }
       });
+  }
+
+  // Get
+  // ====================
+  private getUserSubject = new BehaviorSubject<User | null>(null);
+  getUserObservable() {
+    this.getUserSubject = new BehaviorSubject<User | null>(null);
+    return this.getUserSubject.asObservable();
+  }
+  getUser() {
+    this.http.get<APIResponse>(buildUrl('user')).subscribe((res) => {
+      if (res.success) {
+        const user = new User({
+          ...res.data,
+          token: this.currentUserValue?.token,
+        });
+        this.getUserSubject.next(user);
+        this.currentUserSubject.next(user);
+        this.notificationService.addNotifications([
+          new Notification({
+            message: 'Subscription updated',
+            alertType: AlertType.success,
+          }),
+        ]);
+      }
+    });
   }
 }

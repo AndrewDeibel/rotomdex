@@ -1,11 +1,15 @@
+import { Icons } from './../../../../models/icons';
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Button } from '@app/controls';
+import { buildUrl } from '@app/models';
 
 @Component({
   selector: 'subscription-tier',
   template: `<div class="subscription-tier">
     <div class="tier-header">
       <fa-icon
+        *ngIf="tier.icon"
         [icon]="tier.icon"
         class="tier-icon"
         style="color: {{ tier.color }}"
@@ -31,10 +35,24 @@ import { Button } from '@app/controls';
 export class SubscriptionTierComponent implements OnInit {
   buttonTier: Button;
   @Input() tier: any;
+  constructor(private http: HttpClient) {}
   ngOnInit(): void {
+    const free = this.tier.id === 'free';
     this.buttonTier = new Button({
-      text: `Choose ${this.tier.name}`,
-      classes: 'secondary',
+      text: free ? 'Current Plan' : `Choose ${this.tier.name}`,
+      classes: free ? 'secondary' : 'primary',
+      click: () => {
+        this.chooseTier();
+      },
+      disabled: free,
+      icon: free ? Icons.check : Icons.externalLink,
     });
+  }
+  chooseTier() {
+    this.http
+      .post<any>(buildUrl('subscriptions/manage'), { plan: this.tier.id })
+      .subscribe((res) => {
+        if (res?.data?.url) window.location = res.data.url;
+      });
   }
 }

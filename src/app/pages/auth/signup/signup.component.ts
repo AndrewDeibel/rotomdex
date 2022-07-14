@@ -19,7 +19,7 @@ export class SignUpComponent implements OnInit {
   textboxUsername: Textbox;
   textboxPassword: Textbox;
   textboxConfirmPassword: Textbox;
-  textboxCode: Textbox;
+  //textboxCode: Textbox;
   buttonSubmit: Button;
 
   constructor(
@@ -43,12 +43,12 @@ export class SignUpComponent implements OnInit {
       passwordControl: ['', Validators.required],
       passwordConfirmControl: ['', Validators.required],
     });
-    this.textboxCode = new Textbox({
-      label: 'Beta Code',
-      classes: 'width-12',
-      wrapperClasses: 'width-12',
-      autoComplete: false,
-    });
+    // this.textboxCode = new Textbox({
+    //   label: 'Beta Code',
+    //   classes: 'width-12',
+    //   wrapperClasses: 'width-12',
+    //   autoComplete: false,
+    // });
     this.textboxEmail = new Textbox({
       label: 'Email',
       type: 'email',
@@ -105,7 +105,7 @@ export class SignUpComponent implements OnInit {
       return;
     }
     this.authenticationService.register(
-      this.textboxCode.value,
+      //this.textboxCode.value,
       this.textboxEmail.value,
       this.textboxUsername.value,
       this.textboxPassword.value,

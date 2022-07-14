@@ -3,4 +3,8 @@
 .subscriptions-table {
   display: flex;
   column-gap: 16px;
+  row-gap: 16px;
+  @media (max-width: $screen-medium) {
+    flex-direction: column;
+  }
 }

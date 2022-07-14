@@ -1,6 +1,6 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NotificationsService } from './../../../controls/notifications/notifications.service';
-import { AuthenticationService } from './../../auth/auth.service';
+import { NotificationsService } from '../../../../controls/notifications/notifications.service';
+import { AuthenticationService } from '../../../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import {
   DialogConfig,

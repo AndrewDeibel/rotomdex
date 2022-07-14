@@ -15,15 +15,15 @@ export class SubscriptionsTableComponent {
   tiers: any = [
     {
       name: 'Free',
+      id: 'free',
       color: '#3a9c3a',
-      icon: 'badge-percent',
       price: 'Free',
       features: ['100 Scans/Month', 'Up to 1000 Cards', 'Up to 10 Groups'],
     },
     {
       name: 'Basic',
+      id: 'basic',
       color: '#247abb',
-      icon: 'list',
       price: '$3/month',
       features: [
         '1000 Scans/Month',
@@ -34,8 +34,8 @@ export class SubscriptionsTableComponent {
     },
     {
       name: 'Premium',
+      id: 'premium',
       color: '#f68603',
-      icon: 'star',
       price: '$5/month',
       features: [
         '3000 Scans/Month',

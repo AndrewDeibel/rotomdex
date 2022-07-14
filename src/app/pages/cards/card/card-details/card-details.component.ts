@@ -55,7 +55,17 @@ export class CardDetailsComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    this.setupPricesChart();
+  }
+
+  ngOnChanges(): void {
+    this.setupControls();
+    this.setupPricesChart();
+  }
+
+  setupPricesChart() {
     // Prices
+    if (this.root) this.root.dispose();
     let root = am5.Root.new('chartdiv');
     root.setThemes([am5themes_Dark.new(root)]);
 
@@ -207,7 +217,7 @@ export class CardDetailsComponent implements OnInit {
 
     // Admin button
     this.hasAdminAccess =
-      this.authenticationService.currentUserValue?.hasNovaAccess || false;
+      this.authenticationService.currentUserValue?.has_nova_access || false;
     if (this.hasAdminAccess) {
       this.buttonAdmin = new Button({
         icon: Icons.signIn,

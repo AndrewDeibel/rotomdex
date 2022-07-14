@@ -1,0 +1,44 @@
+<form
+  class="padding-8 flex justify-center"
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+>
+  <div class="max-100" style="width: 400px">
+    <div class="flex vertical padded">
+      <div>
+        <h1>Edit Profile</h1>
+      </div>
+      <div>
+        <textbox [textbox]="textboxEmail"></textbox>
+      </div>
+      <div>
+        <textbox [textbox]="textboxUsername"></textbox>
+      </div>
+      <div>
+        <app-select
+          [select]="selectUserAvatar"
+          formControlName="userAvatarControl"
+        ></app-select>
+      </div>
+      <div>
+        <app-select
+          [select]="selectFavoritePokemon"
+          formControlName="favoritePokemonControl"
+        ></app-select>
+      </div>
+      <div>
+        <toggle
+          [toggle]="togglePublic"
+          formControlName="publicControl"
+        ></toggle>
+      </div>
+      <div>
+        <app-button [button]="buttonChangePassword"></app-button>
+      </div>
+      <div class="flex padded">
+        <app-button [button]="buttonCancel" class="box"></app-button>
+        <app-button [button]="buttonSubmit"></app-button>
+      </div>
+    </div>
+  </div>
+</form>

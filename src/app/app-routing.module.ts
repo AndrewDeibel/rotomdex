@@ -6,6 +6,8 @@ import {
   CollectionComponent,
   DashboardComponent,
   EditUserComponent,
+  EditProfileComponent,
+  EditSubscriptionComponent,
   ExpansionComponent,
   ExpansionsComponent,
   ForgotComponent,
@@ -153,8 +155,22 @@ const routes: Routes = [
   //   component: ProfileComponent,
   // },
   {
-    path: 'profile/edit',
+    path: 'profile',
     component: EditUserComponent,
+    children: [
+      {
+        path: '',
+        component: EditProfileComponent,
+      },
+      {
+        path: 'change-password',
+        component: EditProfileComponent,
+      },
+      {
+        path: 'subscription',
+        component: EditSubscriptionComponent,
+      },
+    ],
   },
 
   // Expansions
