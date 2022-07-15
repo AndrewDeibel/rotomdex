@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  api: 'http://398e-2601-602-c800-6d90-28b3-c43-e5d6-6d69.ngrok.io/api/',
+  api: 'http://d15c-2601-602-c800-6d90-5de3-5091-a17-9215.ngrok.io/api/',
   images: 'https://images.rotomdex.app/',
 };

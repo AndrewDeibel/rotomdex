@@ -27,7 +27,9 @@ import { buildUrl } from '@app/models';
       </ul>
     </div>
     <div class="tier-footer">
-      <app-button [button]="buttonTier"></app-button>
+      <div style="{{ tier.price === 'Free' ? 'visibility: hidden' : '' }}">
+        <app-button [button]="buttonTier"></app-button>
+      </div>
     </div>
   </div>`,
   styleUrls: ['./subscription-tier.component.scss'],
