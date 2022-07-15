@@ -1,7 +1,4 @@
 <div class="max">
-  <div class="padding-2">
-    <subscriptions-table></subscriptions-table>
-  </div>
   <div class="padding-2" *ngIf="user_level && user_level !== 'free'">
     <div class="grid padded vertical">
       <div><h2>Current Subscription</h2></div>
@@ -12,5 +9,8 @@
         <app-button [button]="buttonManageSubscription"></app-button>
       </div>
     </div>
+  </div>
+  <div class="padding-2">
+    <subscriptions-table></subscriptions-table>
   </div>
 </div>
