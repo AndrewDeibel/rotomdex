@@ -37,7 +37,7 @@ export class SignUpComponent implements OnInit {
 
   setupControls() {
     this.form = this.formBuilder.group({
-      codeControl: ['', Validators.required],
+      // codeControl: ['', Validators.required],
       emailControl: ['', Validators.required],
       usernameControl: ['', Validators.required],
       passwordControl: ['', Validators.required],
