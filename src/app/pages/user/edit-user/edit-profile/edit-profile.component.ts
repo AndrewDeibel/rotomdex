@@ -58,7 +58,7 @@ export class EditProfileComponent implements OnInit {
     this.form = this.formBuilder.group({
       userAvatarControl: [user?.avatar],
       favoritePokemonControl: [user?.favorite_pokemon_variant_id],
-      publicControl: [user?.public],
+      publicControl: [user?.public || false],
     });
     this.textboxEmail = new Textbox({
       label: 'Email',

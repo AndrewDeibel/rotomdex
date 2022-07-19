@@ -49,7 +49,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit {
   }
   set value(value) {
     this.select.value = value;
-    if (value.length) {
+    if (value && value.length) {
       this.select.options.forEach((option) => {
         option.selected = option.value === value;
       });
