@@ -16,6 +16,9 @@
   }
   span {
     flex: 1;
+    + app-button {
+      margin-left: $spacing;
+    }
   }
   &.warning {
     color: $font-color;

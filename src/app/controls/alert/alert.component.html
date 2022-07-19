@@ -5,4 +5,5 @@
     (click)="alert.clickIcon && alert.clickIcon()"
   ></fa-icon>
   <span [innerHtml]="alert.message"></span>
+  <app-button *ngIf="alert.button" [button]="alert.button"></app-button>
 </div>

@@ -111,6 +111,7 @@ import {
   ItemsListComponent,
   ItemsGroupsComponent,
   ReportIssueDialogComponent,
+  UnverifiedComponent,
 } from './layout';
 
 // Helpers
@@ -313,6 +314,7 @@ import { environment } from '../environments/environment';
     CardUserCardNotesDialogComponent,
     ChangePasswordDialogComponent,
     ReportIssueDialogComponent,
+    UnverifiedComponent,
 
     // Pages
     // ====================
