@@ -10,7 +10,10 @@
       </div>
     </div>
   </div>
-  <div class="padding-2">
+  <div class="padding-2" *ngIf="verified">
     <subscriptions-table></subscriptions-table>
+  </div>
+  <div class="padding-2" *ngIf="!verified">
+    <p>You must verify your account to continue.</p>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   Alert,
   AlertType,
@@ -14,7 +14,8 @@ import { AuthenticationService } from '@app/pages';
   templateUrl: './unverified.component.html',
   styleUrls: ['./unverified.component.scss'],
 })
-export class UnverifiedComponent {
+export class UnverifiedComponent implements OnInit {
+  showAlert: boolean;
   alertUnverified: Alert = new Alert({
     type: AlertType.warning,
     message:
@@ -39,4 +40,14 @@ export class UnverifiedComponent {
     private authenticationService: AuthenticationService,
     private notificationService: NotificationsService
   ) {}
+
+  ngOnInit() {
+    this.authenticationService.currentUserObservable().subscribe((user) => {
+      if (user && user.email_verified_at === null) {
+        this.showAlert = true;
+      } else {
+        this.showAlert = false;
+      }
+    });
+  }
 }

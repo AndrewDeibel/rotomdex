@@ -1,4 +1,4 @@
-<div class="alert {{ alert.type }} {{ alert.classes }}">
+<div class="alert {{ alert.type }} {{ alert.classes }}" *ngIf="alert">
   <fa-icon
     *ngIf="alert.icon"
     [icon]="alert.icon"
