@@ -14,7 +14,10 @@
       </p>
     </div>
     <div>
-      <textbox [textbox]="textboxEmail"></textbox>
+      <textbox
+        [textbox]="textboxEmail"
+        formControlName="emailControl"
+      ></textbox>
     </div>
     <div>
       <app-button [button]="buttonSubmit"></app-button>
