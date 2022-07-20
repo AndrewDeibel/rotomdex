@@ -18,4 +18,11 @@
       <app-button [button]="buttonResend"></app-button>
     </div>
   </div>
+  <div
+    *ngIf="showSignIn"
+    style="display: flex; flex-direction: column; align-items: center"
+  >
+    <p>In order to verify your Rotomdex account you must first sign in.</p>
+    <app-button [button]="buttonSignIn"></app-button>
+  </div>
 </div>

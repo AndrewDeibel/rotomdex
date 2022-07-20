@@ -148,9 +148,7 @@ export class AuthenticationService {
   // Verify
   // ====================
   verify(token: string = '') {
-    let query = new HttpParams();
-    if (token && token.length) query = query.set('code', token);
-    return this.http.get<any>(buildUrl('verify', query.toString()));
+    return this.http.get<any>(buildUrl(`verify/${token}`));
   }
 
   // Update

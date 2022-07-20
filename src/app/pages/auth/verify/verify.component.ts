@@ -20,6 +20,11 @@ export class VerifyComponent implements OnInit {
   buttonResend: Button;
   token: string;
   showResend: boolean;
+  showSignIn: boolean;
+  buttonSignIn: Button = new Button({
+    text: 'Sign In',
+    route: '/signin',
+  });
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -53,18 +58,30 @@ export class VerifyComponent implements OnInit {
       }
       //
       else {
-        this.authenticationService.verify(this.token).subscribe((res) => {
-          if (res?.success) {
-            this.authenticationService.currentUserValue = new User(res.data);
-            this.notificationService.addNotifications([
-              new Notification({
-                message: 'Successfully verified',
-                alertType: AlertType.success,
-              }),
-            ]);
-            this.router.navigateByUrl('/');
-          }
-        });
+        const subscription = this.authenticationService
+          .currentUserObservable()
+          .subscribe((user) => {
+            if (user) {
+              this.showSignIn = false;
+              this.authenticationService.verify(this.token).subscribe((res) => {
+                if (res?.success) {
+                  subscription.unsubscribe();
+                  this.authenticationService.currentUserValue = new User(
+                    res.data
+                  );
+                  this.notificationService.addNotifications([
+                    new Notification({
+                      message: 'Successfully verified',
+                      alertType: AlertType.success,
+                    }),
+                  ]);
+                  this.router.navigateByUrl('/');
+                }
+              });
+            } else {
+              this.showSignIn = true;
+            }
+          });
       }
     });
   }
