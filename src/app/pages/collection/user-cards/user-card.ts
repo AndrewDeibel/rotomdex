@@ -46,5 +46,22 @@ export function SetSortByUserCards(itemFilter: ItemsFilter) {
     ],
   });
   itemFilter.selectSortBy.value = 'user_cards.created_at';
+
+  itemFilter.selectSortDirection.optionGroups = [
+    new SelectOptionGroup({
+      label: 'Sort Direction',
+      options: [
+        new SelectOption({
+          text: 'Asc',
+          value: 'asc',
+        }),
+        new SelectOption({
+          text: 'Desc',
+          value: 'desc',
+          selected: true,
+        }),
+      ],
+    }),
+  ];
   itemFilter.selectSortDirection.value = 'desc';
 }

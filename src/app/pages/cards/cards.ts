@@ -78,10 +78,6 @@ export function SetSortByGlobal(itemFilter: ItemsFilter) {
         text: 'Release Date',
         value: 'release_date',
       }),
-      new SelectOption({
-        text: 'Rarity',
-        value: 'rarity',
-      }),
     ],
   });
   itemFilter.selectSortBy.value = 'release_date';

@@ -1,8 +1,11 @@
 .pokemon-image {
-	width: 64px;
-	height: 64px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.pokemon-name {
+  color: white;
 }
