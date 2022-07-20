@@ -100,8 +100,7 @@ export class AuthenticationService {
             ...res.data.user,
             token: res.data.token,
           });
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
+          this.currentUserValue = user;
           this.loaderService.clearItemLoading('register');
         }
       });
@@ -168,7 +167,7 @@ export class AuthenticationService {
             token: this.currentUserValue?.token,
           });
           this.updateUserSubject.next(updatedUser);
-          this.currentUserSubject.next(updatedUser);
+          this.currentUserValue = updatedUser;
           this.notificationService.addNotifications([
             new Notification({
               message: 'User updated',
@@ -181,11 +180,6 @@ export class AuthenticationService {
 
   // Get
   // ====================
-  private getUserSubject = new BehaviorSubject<User | null>(null);
-  getUserObservable() {
-    this.getUserSubject = new BehaviorSubject<User | null>(null);
-    return this.getUserSubject.asObservable();
-  }
   getUser() {
     this.http.get<APIResponse>(buildUrl('user')).subscribe((res) => {
       if (res.success) {
@@ -193,8 +187,7 @@ export class AuthenticationService {
           ...res.data,
           token: this.currentUserValue?.token,
         });
-        this.getUserSubject.next(user);
-        this.currentUserSubject.next(user);
+        this.currentUserValue = user;
       }
     });
   }

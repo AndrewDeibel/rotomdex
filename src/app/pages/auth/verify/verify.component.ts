@@ -66,9 +66,10 @@ export class VerifyComponent implements OnInit {
               this.authenticationService.verify(this.token).subscribe((res) => {
                 if (res?.success) {
                   subscription.unsubscribe();
-                  this.authenticationService.currentUserValue = new User(
-                    res.data
-                  );
+                  this.authenticationService.currentUserValue = new User({
+                    ...res.data,
+                    token: this.authenticationService.currentUserValue?.token,
+                  });
                   this.notificationService.addNotifications([
                     new Notification({
                       message: 'Successfully verified',

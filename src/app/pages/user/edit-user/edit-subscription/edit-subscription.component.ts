@@ -25,13 +25,12 @@ export class EditSubscriptionComponent implements OnInit {
 
   ngOnInit(): void {
     this.authenticationService.getUser();
-    this.authenticationService.getUserObservable().subscribe((user) => {
+    this.authenticationService.currentUserObservable().subscribe((user) => {
       if (user) {
         if (user?.account_level) this.user_level = user.account_level;
+        this.verified = user?.email_verified_at !== null;
       }
     });
-    this.verified =
-      this.authenticationService.currentUserValue?.email_verified_at !== null;
 
     this.buttonManageSubscription = new Button({
       text: 'Manage Subscription',
