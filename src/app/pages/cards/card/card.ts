@@ -152,6 +152,7 @@ export class Card {
         r === 'rare secret' ||
         r === 'rare rainbow' ||
         r === 'rare holo ex' ||
+        r === 'rare radiant' ||
         r === 'rare holo gx';
     }
 

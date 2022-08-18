@@ -77,7 +77,7 @@ export class SignUpComponent implements OnInit {
       autoComplete: false,
     });
     this.buttonSubmit = new Button({
-      text: 'Sign Up',
+      text: 'Register',
       type: ButtonType.submit,
     });
 

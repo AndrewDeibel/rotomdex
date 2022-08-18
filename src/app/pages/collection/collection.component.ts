@@ -31,7 +31,7 @@ export class CollectionComponent implements OnInit {
     private router: Router
   ) {
     if (!this.authenticationService.currentUserValue) {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/signin');
     }
   }
 

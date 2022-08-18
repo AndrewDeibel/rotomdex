@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../../auth/auth.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   AlertType,
@@ -11,6 +12,7 @@ import { Size } from '@app/models';
 import { UserCard, Card } from '@app/pages';
 import { UserCardsService } from '@app/pages/collection';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+import { Router } from '@angular/router';
 
 @AutoUnsubscribe()
 @Component({
@@ -30,7 +32,9 @@ export class CardItemGridComponent implements OnInit {
   constructor(
     private userCardsService: UserCardsService,
     private loaderService: LoaderService,
-    private notificationService: NotificationsService
+    private notificationService: NotificationsService,
+    private authenticationService: AuthenticationService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -74,31 +78,35 @@ export class CardItemGridComponent implements OnInit {
 
   addItem(quantity: number) {
     this.loaderService.addItemLoading('addUserCard');
-    this.userCardsService
-      .addUserCards(
-        new UserCard({
-          card_id: this.card.id,
-          quantity,
-        })
-      )
-      ?.subscribe((res) => {
-        if (res) {
-          this.loaderService.clearItemLoading('addUserCard');
-          if (res.success) {
-            this.notificationService.addNotifications([
-              new Notification({
-                message: 'Card added to collection',
-                alertType: AlertType.success,
-              }),
-            ]);
-            if (this.card.id === res.data[0].card.id) {
-              this.card.total_cards_owned++;
-              this.textbox.min = this.card.total_cards_owned;
-              this.textbox.value = this.card.total_cards_owned.toString();
+    if (this.authenticationService.currentUserValue) {
+      this.userCardsService
+        .addUserCards(
+          new UserCard({
+            card_id: this.card.id,
+            quantity,
+          })
+        )
+        ?.subscribe((res) => {
+          if (res) {
+            this.loaderService.clearItemLoading('addUserCard');
+            if (res.success) {
+              this.notificationService.addNotifications([
+                new Notification({
+                  message: 'Card added to collection',
+                  alertType: AlertType.success,
+                }),
+              ]);
+              if (this.card.id === res.data[0].card.id) {
+                this.card.total_cards_owned++;
+                this.textbox.min = this.card.total_cards_owned;
+                this.textbox.value = this.card.total_cards_owned.toString();
+              }
             }
           }
-        }
-      });
+        });
+    } else {
+      this.router.navigateByUrl('/signin');
+    }
   }
 
   onLoad() {
