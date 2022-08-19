@@ -55,10 +55,11 @@ export class ScannerComponent implements OnInit {
   ngOnInit() {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigateByUrl('/signin');
+    } else {
+      this.setupControls();
+      this.setupSubscriptions();
+      this.getInitData();
     }
-    this.setupControls();
-    this.setupSubscriptions();
-    this.getInitData();
   }
   ngOnDestroy() {}
 
