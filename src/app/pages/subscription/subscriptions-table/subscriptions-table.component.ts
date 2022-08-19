@@ -4,11 +4,15 @@ import { Radio } from '@app/controls';
 @Component({
   selector: 'subscriptions-table',
   template: `<div class="subscriptions-table">
-    <subscription-tier
-      *ngFor="let tier of tiers"
-      [tier]="tier"
-    ></subscription-tier>
-  </div>`,
+      <subscription-tier
+        *ngFor="let tier of tiers"
+        [tier]="tier"
+      ></subscription-tier>
+    </div>
+    <small class="align-center width-12 block padding margin">
+      *After canceling and switching back to a free account, you collection will
+      remain, but adding addition collection cards will require a reactivation.*
+    </small>`,
   styleUrls: ['./subscriptions-table.component.scss'],
 })
 export class SubscriptionsTableComponent {
