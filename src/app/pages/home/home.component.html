@@ -47,6 +47,7 @@
         </div>
       </div>
       <div class="width-6 small-12 small-order-1">
+        <fa-icon icon="box" style="width: 72px"></fa-icon>
         <h2>Expansions</h2>
         <p>
           Explore the most recent expansions, vintage expansions, and everything
@@ -64,6 +65,10 @@
   <div class="max">
     <div class="flex flex-center padded-8">
       <div class="width-6 small-12">
+        <img
+          src="assets/symbols/cards.svg"
+          style="width: 80px; filter: invert(1)"
+        />
         <h2>Cards</h2>
         <p>
           View every Pokemon card printed! Sort by artist, release date,
@@ -118,6 +123,10 @@
         </div>
       </div>
       <div class="width-6 small-12 small-order-1">
+        <img
+          src="assets/symbols/pokeball.svg"
+          style="width: 80px; filter: invert(1)"
+        />
         <h2>Pokemon</h2>
         <p>
           View the cards featuring your favorite Pokemon and explore the
@@ -129,31 +138,46 @@
   </div>
 </div>
 
+<!-- Scanner -->
+<div class="section dark">
+  <div class="max">
+    <div class="flex flex-center padded-8">
+      <div class="width-7 small-12">
+        <fa-icon icon="crosshairs" style="width: 72px"></fa-icon>
+        <h2>Card Scanner</h2>
+        <p>
+          Entering card manually is a slow and tedious process. We've developed
+          a custom card scanner that helps speed up data entry and provides
+          quick insight into your collection.
+        </p>
+        <p>
+          Built using Google AI Vision, our scanner continues to improve over
+          time. Wether you're scanning vintage cards or new cards we've got you
+          covered.
+        </p>
+      </div>
+      <div class="width-5 small-12 flex">
+        <div class="flex padded-4 justify-center flex-center">
+          <img src="assets/android.png" class="block width-6" />
+          <div class="width-6">
+            <h3>iOS</h3>
+            <h3>Android</h3>
+            <h3>Mac</h3>
+            <h3>PC</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Collection -->
 <div class="section dark">
   <div class="max">
     <div class="flex flex-center padded-8">
-      <div class="width-6 small-12 small-order-1">
-        <h2>Collection</h2>
-        <p>
-          Manage your entire Pokemon card collection! Organize cards using
-          binders, decks, and other grouping categories. View and share your
-          collection stats and history. Included card metadata:
-        </p>
-        <ul class="unordered-list">
-          <li>Condition (mint, near mint, graded 10, graded 9.5, etc)</li>
-          <li>Grading company (PSA, BGS, CGC, etc)</li>
-          <li>Unique printings (1st edition, reverse foil, etc)</li>
-          <li>Price (acquired price, market price)</li>
-          <li>Notes (memories, history, misc)</li>
-          <li>Group (binder, deck, box)</li>
-          <li>Wishlist</li>
-        </ul>
-        <app-button [button]="collectionButton"></app-button>
-      </div>
       <div class="width-6 small-12 small-order-2">
         <div id="collection">
-          <div class="flex padded-large relative justify-center">
+          <div class="flex padded-8 relative justify-center">
             <div class="width-4 flex justify-center">
               <fa-icon icon="book-open"></fa-icon>
             </div>
@@ -171,6 +195,24 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="width-6 small-12 small-order-1">
+        <h2>Collection</h2>
+        <p>
+          Manage your entire Pokemon card collection! Organize cards using
+          binders, decks, and other grouping categories. View and share your
+          collection stats and history. Included card metadata:
+        </p>
+        <ul class="unordered-list">
+          <li>Condition (mint, near mint, graded 10, graded 9.5, etc)</li>
+          <li>Grading company (PSA, BGS, CGC, etc)</li>
+          <li>Unique printings (1st edition, reverse foil, etc)</li>
+          <li>Price (acquired price, market price)</li>
+          <li>Notes (memories, history, misc)</li>
+          <li>Group (binder, deck, box)</li>
+          <li>Wishlist</li>
+        </ul>
+        <app-button [button]="collectionButton"></app-button>
       </div>
     </div>
   </div>
