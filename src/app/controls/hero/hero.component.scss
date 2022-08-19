@@ -2,7 +2,7 @@
 
 .hero {
   height: 80vh;
-  max-height: 650px;
+  //max-height: 650px;
   min-height: 500px;
   padding-top: $header-height;
   color: white;
@@ -29,6 +29,7 @@
   }
   .logo {
     margin-bottom: 32px;
+    margin: 0 auto;
     h1 {
       color: white;
       margin-bottom: 8px;

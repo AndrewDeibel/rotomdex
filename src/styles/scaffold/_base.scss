@@ -26,6 +26,21 @@ body {
   }
 }
 
+.responsive-iframe {
+  max-width: 100%;
+  padding-top: 56.25%;
+  position: relative;
+  width: 100%;
+}
+
+.responsive-iframe iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .section {
   padding: $spacing * 8 $spacing * 2;
   background: $main-bg;
