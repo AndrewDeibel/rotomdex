@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { AppSettings } from '@app/app';
 import {
   Alert,
@@ -28,7 +29,8 @@ export class ScannerComponent implements OnInit {
     private titleService: Title,
     private scannerService: ScannerService,
     private notificationService: NotificationsService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router: Router
   ) {}
 
   // Webcam options
@@ -51,6 +53,9 @@ export class ScannerComponent implements OnInit {
   buttonRemoveLastScanned: Button;
 
   ngOnInit() {
+    if (!this.authenticationService.currentUserValue) {
+      this.router.navigateByUrl('/signin');
+    }
     this.setupControls();
     this.setupSubscriptions();
     this.getInitData();
