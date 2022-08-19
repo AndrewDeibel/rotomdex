@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Alert, AlertType, Button } from '@app/controls';
 import { Icons } from '@app/models';
@@ -24,6 +25,16 @@ export class HomeComponent implements OnInit {
     icon: Icons.externalLink,
     route: '/cards',
   });
+  signupButton: Button = new Button({
+    text: 'Sign Up',
+    icon: Icons.signIn,
+    route: '/signup',
+  });
+  subscriptionButton: Button = new Button({
+    text: 'View Subscription Options',
+    icon: Icons.externalLink,
+    route: '/profile/subscription',
+  });
   pokemonButton: Button = new Button({
     text: 'View All Pokémon',
     icon: Icons.externalLink,
@@ -35,7 +46,10 @@ export class HomeComponent implements OnInit {
     route: '/collection',
   });
 
-  constructor(private featuredService: FeaturedService) {}
+  constructor(
+    private featuredService: FeaturedService,
+    private authenticationService: AuthenticationService
+  ) {}
 
   ngOnInit(): void {
     this.alert = new Alert({
@@ -51,4 +65,8 @@ export class HomeComponent implements OnInit {
     this.featuredService.getFeatured();
   }
   ngOnDestroy() {}
+
+  get signedIn(): boolean {
+    return this.authenticationService.currentUserValue != null;
+  }
 }

@@ -1,8 +1,29 @@
 <!-- Hero -->
 <hero></hero>
 
-<!-- Under development -->
-<alert [alert]="alert" id="dev-alert" *ngIf="false"></alert>
+<div class="section dark">
+  <div class="max">
+    <div class="flex justify-center padded-8">
+      <div class="width-6 small-12">
+        <h2>Open Beta</h2>
+        <p>
+          Rotomdex is currently in <b>open beta</b>, create a free account today
+          and help improve stability during this stage. Please consider
+          reporting issues through
+          <a target="_blank" href="https://discord.gg/FpPzMD2ZxP">discord</a>.
+        </p>
+        <p>
+          A <b>free account</b> does have <b>limited scanning capacity</b> and
+          collection features. Additional features can be unlocked by signing up
+          for our <b>premium subscription</b> (Profile > Subscription) that
+          includes additional scanning capacity and unlimited collection size.
+        </p>
+        <app-button *ngIf="!signedIn" [button]="signupButton"></app-button>
+        <app-button *ngIf="signedIn" [button]="subscriptionButton"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Expansions -->
 <div class="section dark" *ngIf="featured && featured.expansions">
