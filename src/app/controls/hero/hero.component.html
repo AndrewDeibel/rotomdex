@@ -12,6 +12,12 @@
           {{ message }}
         </h5>
       </div>
+      <div
+        *ngIf="showButton"
+        class="padding-top margin-top flex justify-center"
+      >
+        <app-button [button]="installButton"></app-button>
+      </div>
       <div class="padding-top margin-top">
         <search></search>
       </div>
