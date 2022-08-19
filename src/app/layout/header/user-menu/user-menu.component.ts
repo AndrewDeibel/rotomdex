@@ -65,8 +65,7 @@ export class UserMenuComponent implements OnInit {
                   );
                 },
               }),
-              ...(this.authenticationService.currentUserValue
-                ?.has_nova_access || true
+              ...(this.authenticationService.currentUserValue?.has_nova_access
                 ? [
                     new MenuItem({
                       text: 'Admin Login',
