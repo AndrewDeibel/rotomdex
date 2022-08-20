@@ -42,7 +42,7 @@ export class SubscriptionsTableComponent {
       color: '#f68603',
       price: '$12.99/month',
       features: [
-        '3000 Scans/Month',
+        '4000 Scans/Month',
         'Unlimited Cards',
         'Unlimited Groups',
         'Collection Dashboard',
