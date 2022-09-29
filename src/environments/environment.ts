@@ -1,12 +1,12 @@
 // Default
-import { environment as prod } from './environment.prod';
+import { environment as local } from './environment.local';
 
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  ...prod,
+  ...local,
 };
 
 /*

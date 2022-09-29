@@ -18,7 +18,7 @@ export class ResetComponent implements OnInit {
   textboxPassword: Textbox;
   textboxConfirmPassword: Textbox;
   buttonSubmit: Button;
-  token: string;
+  token: string | null;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -34,9 +34,7 @@ export class ResetComponent implements OnInit {
 
   ngOnInit(): void {
     // Get token
-    this.activatedRoute.queryParams.subscribe((params) => {
-      this.token = params['token'];
-    });
+    this.token = this.activatedRoute.snapshot.paramMap.get('token');
 
     // Build form
     this.form = this.formBuilder.group({
@@ -66,6 +64,16 @@ export class ResetComponent implements OnInit {
 
   submit() {
     if (this.form.invalid) {
+      return;
+    }
+
+    if (!this.token || this.token.length === 0) {
+      this.notificationService.addNotifications([
+        new Notification({
+          alertType: AlertType.error,
+          message: 'Invalid token',
+        }),
+      ]);
       return;
     }
 
