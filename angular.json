@@ -119,7 +119,6 @@
       }
     }
   },
-  "defaultProject": "rotomdex",
   "cli": {
     "analytics": false
   }

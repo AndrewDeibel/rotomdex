@@ -1,11 +1,11 @@
 import { Button } from '@app/controls';
 import { FormControlGroup } from './form-group/form-group';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 export class Form {
   title: string;
   groups: FormControlGroup[];
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
   cancel: () => void;
   save: () => void;
   buttons: Button[] = [

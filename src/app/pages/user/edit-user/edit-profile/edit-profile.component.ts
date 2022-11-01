@@ -1,7 +1,7 @@
 import { getUserAvatars } from '../../user';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   DialogConfig,
@@ -24,7 +24,7 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
   templateUrl: './edit-profile.component.html',
 })
 export class EditProfileComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
   textboxUsername: Textbox;
   textboxEmail: Textbox;
   togglePublic: Toggle;
@@ -35,7 +35,7 @@ export class EditProfileComponent implements OnInit {
   buttonChangePassword: Button;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
     private dialogService: DialogService,

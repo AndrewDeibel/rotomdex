@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   Button,
@@ -24,7 +24,7 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
   styleUrls: ['./add-edit-card-group.component.scss'],
 })
 export class AddUserCardGroupComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
   textboxName: Textbox;
   selectType: Select;
   textareaDescription: Textarea;
@@ -37,7 +37,7 @@ export class AddUserCardGroupComponent implements OnInit {
   title: string = 'Add Group';
   isPage: boolean;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private authenticationService: AuthenticationService,
     private router: Router,
     private userCardGroupService: UserCardGroupService,
