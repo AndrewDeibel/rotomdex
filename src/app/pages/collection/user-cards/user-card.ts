@@ -35,6 +35,10 @@ export function SetSortByUserCards(itemFilter: ItemsFilter) {
         value: 'cards.name',
       }),
       new SelectOption({
+        text: 'Price',
+        value: 'price',
+      }),
+      new SelectOption({
         text: 'Release Date',
         value: 'expansions.release_date',
       }),

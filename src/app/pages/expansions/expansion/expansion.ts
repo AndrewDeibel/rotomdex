@@ -93,6 +93,10 @@ export function SetSortByExpansion(itemFilter: ItemsFilter) {
         text: 'Name',
         value: 'name',
       }),
+      new SelectOption({
+        text: 'Price',
+        value: 'price',
+      }),
     ],
   });
   itemFilter.selectSortBy.value = 'number';

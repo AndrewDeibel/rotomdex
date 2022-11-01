@@ -14,6 +14,7 @@ import {
 } from '@app/controls';
 import { ItemGroup, Items } from '@app/layout/main';
 import { APIGetPaged, Size, Symbols } from '@app/models';
+import { SetSortByCards } from '@app/pages/cards';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { PokedexEntryDialogComponent } from './pokedex-entry-dialog.component';
 import { PokemonVariant, SetSortByPokemon } from './pokemon';
@@ -153,7 +154,7 @@ export class PokemonComponent implements OnInit {
   ngOnDestroy() {}
 
   setupControls() {
-    SetSortByPokemon(this.items.filter.selectSortBy);
+    SetSortByCards(this.items.filter);
     this.items.showHeader = false;
     this.items.footer.pageSize = 24;
     this.items.footer.selectPageSize.value =

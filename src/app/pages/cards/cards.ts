@@ -36,6 +36,10 @@ export function SetSortByCards(itemFilter: ItemsFilter) {
         text: 'Rarity',
         value: 'rarity',
       }),
+      new SelectOption({
+        text: 'Price',
+        value: 'price',
+      }),
     ],
   });
   itemFilter.selectSortBy.value = 'cards.release_date';
@@ -57,6 +61,10 @@ export function SetSortByExpansionCards(itemFilter: ItemsFilter) {
         text: 'Rarity',
         value: 'rarity',
       }),
+      new SelectOption({
+        text: 'Price',
+        value: 'price',
+      }),
     ],
   });
   itemFilter.selectSortBy.value = 'number';
@@ -77,6 +85,10 @@ export function SetSortByGlobal(itemFilter: ItemsFilter) {
       new SelectOption({
         text: 'Release Date',
         value: 'release_date',
+      }),
+      new SelectOption({
+        text: 'Price',
+        value: 'price',
       }),
     ],
   });
