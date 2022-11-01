@@ -27,7 +27,6 @@
     "@ckeditor/ckeditor5-build-classic": "^31.1.0",
     "angular-http-server": "^1.10.0",
     "chart.js": "^3.7.1",
-    "ng-inline-svg-2": "^14.0.1",
     "ngx-auto-unsubscribe": "^3.0.1",
     "ngx-capture": "^0.12.2",
     "ngx-color-picker": "^11.0.0",
