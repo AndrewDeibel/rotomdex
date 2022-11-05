@@ -1,7 +1,7 @@
 import { NotificationsService, Notification, AlertType } from '@app/controls';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Textbox, Button, ButtonType } from '@app/controls';
 import { Component, OnInit } from '@angular/core';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
@@ -13,7 +13,7 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
   styleUrls: ['./reset.component.scss'],
 })
 export class ResetComponent implements OnInit {
-  form: UntypedFormGroup;
+  form: FormGroup;
   textboxEmail: Textbox;
   textboxPassword: Textbox;
   textboxConfirmPassword: Textbox;
@@ -22,7 +22,7 @@ export class ResetComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private notificationService: NotificationsService

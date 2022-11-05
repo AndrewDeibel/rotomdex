@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Button, ButtonType } from '@app/controls/button';
 import { Textbox } from '@app/controls/textbox/textbox';
@@ -14,7 +14,7 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 })
 export class SignUpComponent implements OnInit {
   returnUrl: string;
-  form: UntypedFormGroup;
+  form: FormGroup;
   textboxEmail: Textbox;
   textboxUsername: Textbox;
   textboxPassword: Textbox;
@@ -23,7 +23,7 @@ export class SignUpComponent implements OnInit {
   buttonSubmit: Button;
 
   constructor(
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private authenticationService: AuthenticationService

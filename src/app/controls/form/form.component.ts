@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Form } from './form';
-import { UntypedFormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -13,7 +13,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSubmit(formGroup: UntypedFormGroup) {
+  onSubmit(formGroup: FormGroup) {
     window.alert('Valid: ' + formGroup.valid);
   }
 }

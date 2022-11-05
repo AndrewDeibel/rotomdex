@@ -1,4 +1,4 @@
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationsService } from '../../../../controls/notifications/notifications.service';
 import { AuthenticationService } from '../../../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -49,14 +49,14 @@ export class ChangePasswordDialogComponent implements OnInit {
   textboxNewPassword: Textbox;
   textboxConfirmNewPassword: Textbox;
   buttonSubmit: Button;
-  form: UntypedFormGroup;
+  form: FormGroup;
 
   constructor(
     public config: DialogConfig,
     public dialog: DialogRef,
     private authenticationService: AuthenticationService,
     private notificationService: NotificationsService,
-    private formBuilder: UntypedFormBuilder
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {

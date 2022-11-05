@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/pages/auth/auth.service';
 import { Textbox, Button, ButtonType } from '@app/controls';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService, Notification, AlertType } from '@app/controls';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
@@ -13,14 +13,14 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
   styleUrls: ['./forgot.component.scss'],
 })
 export class ForgotComponent implements OnInit {
-  form: UntypedFormGroup;
+  form: FormGroup;
   textboxEmail: Textbox;
   buttonSubmit: Button;
 
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: FormBuilder,
     private notificationService: NotificationsService
   ) {
     if (this.authenticationService.currentUserValue)
