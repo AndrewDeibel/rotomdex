@@ -1,5 +1,5 @@
 // Default
-import { environment as prod } from './environment.stage';
+import { environment as prod } from './environment.prod';
 
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
